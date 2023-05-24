@@ -72,4 +72,4 @@ Based on time constraints, additional functionality that can be considered inclu
 
 ## Prototypes
 
-Rough sketch prototypes of key tasks in the app can be found in the [prototypes folder](./prototypes).
+A rough sketch prototype of the app UI can be found [here](./455_mock.png).
