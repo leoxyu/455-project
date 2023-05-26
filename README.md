@@ -73,3 +73,25 @@ Based on time constraints, additional functionality that can be considered inclu
 ## Prototypes
 
 A rough sketch prototype of the app UI can be found [here](./455_mock.png).
+
+(Updated mar 26)
+
+### html pages required:
+
+## basic features
+- login
+- user login homepage (+ list of playlists, including own and saved playlists) (+ list of friends)
+  (+ login feed with playlist suggestions)
+- playlist homepage
+- song list homepage
+- page to search and import new songs
+
+## community features
+- search page for other users & playlists (use / commands to filter search results)
+- page to view other user's profile
+
+
+## UI feature suggestions:
+- collapsing sidebar menu with options to switch between the different pages
+(user home, search, songs, playlists)
+
