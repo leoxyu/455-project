@@ -27,7 +27,7 @@ Based on time constraints, additional functionality that can be considered inclu
 - Integration with other music streaming services like Apple Music
 - Building Spotify profile features and providing stat pages
 - Applying machine learning models for tasks such as sentiment analysis, hashtag analysis, artist recommendations, etc.
-- Support for pirating (if legal and within ethical boundaries)
+- Support for offline listening (looking into ethics)
 
 ## Project Task Requirements
 
