@@ -79,27 +79,32 @@ A rough sketch prototype of the app UI can be found [here](./455_mock.png).
 ### html pages required:
 
 ## Basic features
-###Login
+### Login
 Page for user to create/log in to 
 - [UI]()
 - [Backend]()
-###User login homepage
+- 
+### User login homepage
 This is the page the user sees with the list of all songs and playlists
 - [UI]()
 - [Backend]()
-###Song list homepage
+- 
+### Song list homepage
 List of all songs a user has. Includes songs imported from playlists
 - [UI]()
 - [Backend]()
-###Playlist homepage
+- 
+### Playlist homepage
 List of playlists
 - [UI]()
 - [Backend]()
-###Playlist page
+- 
+### Playlist page
 UI for the playlist that contains the list of songs 
 - [UI]()
 - [Backend]()
-###Page to search and import new songs/playlists
+- 
+### Page to search and import new songs/playlists
 Be able to add songs through search, or direct song/playlist link
 - [UI]()
 - [Backend]()
