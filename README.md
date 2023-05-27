@@ -1,4 +1,4 @@
-# 455-project
+# Uni.fi
 
 ## Project Description
 
@@ -78,13 +78,37 @@ A rough sketch prototype of the app UI can be found [here](./455_mock.png).
 
 ### html pages required:
 
-## basic features
-- login
-- user login homepage (+ list of playlists, including own and saved playlists) (+ list of friends)
-  (+ login feed with playlist suggestions)
-- playlist homepage
-- song list homepage
-- page to search and import new songs
+## Basic features
+### Login
+Page for user to create/log in to 
+- [UI]()
+- [Backend]()
+- 
+### User login homepage
+This is the page the user sees with the list of all songs and playlists
+- [UI]()
+- [Backend]()
+- 
+### Song list homepage
+List of all songs a user has. Includes songs imported from playlists
+- [UI]()
+- [Backend]()
+- 
+### Playlist homepage
+List of playlists
+- [UI]()
+- [Backend]()
+- 
+### Playlist page
+UI for the playlist that contains the list of songs 
+- [UI]()
+- [Backend]()
+- 
+### Page to search and import new songs/playlists
+Be able to add songs through search, or direct song/playlist link
+- [UI]()
+- [Backend]()
+
 
 ## community features
 - search page for other users & playlists (use / commands to filter search results)
