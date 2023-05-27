@@ -1,4 +1,4 @@
-# 455-project
+# Uni.fi
 
 ## Project Description
 
