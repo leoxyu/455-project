@@ -7,16 +7,17 @@
 # It automates the protection of your JavaScript Applications, so you can run it whenever a new version of your application is built.
 # A Jscrambler account is required to use this Workflow.
 #
-# More info can be found here : https://docs.jscrambler.com/latest/code-integrity/documentation/github-ci-integration
+# More info can be found here: https://docs.jscrambler.com/latest/code-integrity/documentation/github-ci-integration
 
 name: Jscrambler Code Integrity
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -30,26 +31,25 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14
       - name: Install dependencies
         run: |
           if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
+            yarn install --frozen-lockfile
           elif [ -e package-lock.json ]; then
-          npm ci
+            npm ci
           else
-          npm i
-          fi- run: npm ci
+            npm install
+          fi
       - run: npm run build
       - name: Jscrambler Code Integrity
         id: jscrambler
         # the complete list of inputs can be found here: https://github.com/marketplace/actions/jscrambler#inputs
-        uses: jscrambler/code-integrity-actions/protect@ab65962a2ecffcc362b75a997e24a181d0bde5fb
+        uses: jscrambler/code-integrity-actions@ab65962a2ecffcc362b75a997e24a181d0bde5fb
         with:
           application-id: ${{ secrets.JSCRAMBLER_APPLICATION_ID }}  # This value should be created within your Jscrambler account
           secret-key: ${{ secrets.JSCRAMBLER_SECRET_KEY }}          # This value can be found in your Jscrambler account
           access-key: ${{ secrets.JSCRAMBLER_ACCESS_KEY }}          # This value can be found in your Jscrambler account
           jscrambler-config-path: jscrambler.json                   # Download from your Jscrambler account
           files-src: |                                              # List of Files to be protected
-            dist/**/*
-          files-dest: .
+            dist/**
