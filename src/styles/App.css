@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #78d3ca;
   font: "Abadi";
   font-size: 20px;
 }
@@ -44,11 +44,11 @@
 
 /* For website background */
 .website-highlight1 {
-  background-color: #8429DF;
+  background-color: #78d3ca;
 }
 
 .website-highlight2 {
-  background-color: #7030A0;
+  background-color: #65a29c;
 }
 
 .website-background1 {
@@ -68,32 +68,33 @@
   background-color: #7F7F7F;
 }
 
-/* For text boxes */
-.website-background2 {
-  background-color: #1A2028;
-}
-
-
 /* For fonts and headers */
 .website-header1 {
   font-family: "Abadi", sans-serif;
   font-weight: bold;
   font-size: 40px;
-  color: whitesmoke;
+  color: rgba(35, 33, 33, 0.678);
 }
 
 .website-header2 {
   font-family: "Abadi", sans-serif;
   font-weight: normal;
   font-size: 28px;
-  color: whitesmoke;
+  color: rgba(245, 245, 245, 0.827);
 }
 
 .website-text1 {
   font-family: "Abadi", sans-serif;
   font-weight: normal;
   font-size: 18px;
-  color: whitesmoke;
+  color: rgba(236, 236, 236, 0.829);
+}
+
+.website-text2 {
+  font-family: "Abadi", sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  color: rgba(236, 236, 236, 0.829);
 }
 
 
