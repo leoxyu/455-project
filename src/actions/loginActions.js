@@ -2,6 +2,9 @@
 export const LOGIN = 'LOGIN';
 export const SIGNUP = 'SIGNUP';
 
+
+
+
 // Action creators
 export const login = (username) => ({
   type: LOGIN,

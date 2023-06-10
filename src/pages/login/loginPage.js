@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login, signup } from '../../actions/loginActions'
+import { login, signup } from '../../actions/loginActions';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/LoginPage.css'; // Import the LoginPage.css file
+
+import spotifyLogo from '../../images/spotify.svg';
 
 const LoginPage = () => {
   let navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showCreateAccount, setShowCreateAccount] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
 
   const handleLogin = () => {
@@ -19,21 +23,27 @@ const LoginPage = () => {
       setShowCreateAccount(false);
       // go to home page here
       navigate("/home");
-
     } else {
       if (!accountExists(username)) {
         setShowCreateAccount(true);
       } else {
-        // show error msg or something
+        setErrorMessage('Invalid username or password.');
       }
     }
   };
+
+  function accountExists(username) {
+    return false;
+  }
+  
+  function authenticateUser(username, password) {
+    return (username === 'admin' && password === 'password')
+  }
 
   const handleCreateAccount = () => {
     dispatch(signup(username));
     // go to home page here
     navigate("/home");
-
   };
 
   const handleCancelCreateAccount = () => {
@@ -42,20 +52,29 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="login-page">
+      <h1><img
+      src={spotifyLogo}
+      alt="Spotify Logo"
+      className="logo-icon"
+    />Uni.Fi</h1>
       <input
         type="text"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        className="login-input"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className="login-input"
       />
-      <button onClick={handleLogin}>Login/Sign up</button>
+      <button onClick={handleLogin} className="login-button">Login/Sign up</button>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {showCreateAccount && (
         <CreateAccount
@@ -69,12 +88,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-
-function accountExists(username) {
-  return false;
-}
-
-function authenticateUser(username, password) {
-  return (username === 'admin' && password === 'password')
-}
