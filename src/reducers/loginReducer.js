@@ -1,20 +1,20 @@
-import { LOGIN, SIGNUP } from '../actions/loginActions';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  id: null,
-};
+const loginSlice = createSlice({
+  name: 'login',
+  initialState: {
+    id: null,
+  },
+  reducers: {
+    login: (state, action) => {
+      state.id = action.payload.userId;
+    },
+    signup: (state, action) => {
+      state.id = action.payload.userId;
+    },
+  },
+});
 
-const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOGIN:
-    case SIGNUP:
-      return {
-        ...state,
-        id: action.payload.userId,
-      };
-    default:
-      return state;
-  }
-};
+export const { login, signup } = loginSlice.actions;
 
-export default loginReducer;
+export default loginSlice.reducer;
