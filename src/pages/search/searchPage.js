@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 // import { searchSpotifySongs, searchSpotifyPlaylists } from './spotifyAPI';
 // import { searchYouTubeVideos, searchYouTubePlaylists } from './youtubeAPI';
+import '../../styles/variables.css';
+
 import '../../styles/searchPage.css';
+import SearchBar from './components/SearchBar';
+import SongResult from './components/SongResult';
 
 
 const SearchPage = () => {
+
+  useEffect(() => {
+    document.title = "Uni.fi - Search"; // Change the webpage title
+
+    // Clean up the effect
+    
+  }, []);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [spotifySongs, setSpotifySongs] = useState(generateRandomSongs(5));
   const [spotifyPlaylists, setSpotifyPlaylists] = useState(generateRandomPlaylists(5));
@@ -32,10 +44,86 @@ const SearchPage = () => {
     setYouTubePlaylists(youtubePlaylistsResult);
   };
 
-  return (
-    <div className='container'>
 
-      <div className='search-bar'>
+  const spotifySongList = [
+    {
+      thumbnailUrl: 'https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e',
+      songName: 'Haegeum',
+      artistName: 'Agust D',
+      views: '123456',
+      duration: '1:53',
+      songLink: 'https://open.spotify.com/track/4bjN59DRXFRxBE1g5ne6B1?si=d40939f4f897437d'
+    },
+    {
+      thumbnailUrl: 'https://i1.sndcdn.com/artworks-Vi8kWdDLyiHb-0-t500x500.jpg',
+      songName: 'One Dance',
+      artistName: 'Drake',
+      views: '6942000',
+      duration: '2:53',
+      songLink: 'https://open.spotify.com/track/1zi7xx7UVEFkmKfv06H8x0?si=d0226490edb4470b'
+    },
+    {
+      thumbnailUrl: 'https://static.wikia.nocookie.net/the-bangtan-boys/images/f/fb/Love_Yourself_%27Tear%27_album_cover.jpg',
+      songName: 'FAKE LOVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE',
+      artistName: 'BTS',
+      views: '34100000',
+      duration: '4:02',
+      songLink: 'https://open.spotify.com/track/6m1TWFMeon7ai9XLOzdbiR?si=85e1028488b9479c'
+    },
+    {
+      thumbnailUrl: 'https://i.ytimg.com/vi/MAihF124EbE/maxresdefault.jpg',
+      songName: 'Sugar',
+      artistName: 'Maroon 5',
+      views: '20001000',
+      duration: '3:55',
+      songLink: 'https://open.spotify.com/track/2iuZJX9X9P0GKaE93xcPjk?si=3a866fb1a7ec4062'
+    }
+  ]
+
+
+
+  return (
+    <div className='search-page'>
+      {/* <h1> search page is here</h1> */}
+      <SearchBar />
+      <div className='spotify-songs'>
+        <h2 className='heading'>Spotify Songs</h2>
+        {spotifySongList.map((song) => (
+          <SongResult
+            className='spotify-preview'
+            key={song.songName}
+            thumbnailUrl={song.thumbnailUrl}
+            songName={song.songName}
+            artistName={song.artistName}
+            views={song.views + ' streams'}
+            duration={song.duration}
+            songLink={song.songLink}
+          />
+        ))}
+      </div>
+      <div className='youtube-videos'>
+        <h2 className='heading'>Youtube Videos</h2>
+        {spotifySongList.map((song) => (
+          <SongResult
+            className={'youtube-preview'}
+            key={song.songName}
+            thumbnailUrl={song.thumbnailUrl}
+            songName={song.songName}
+            artistName={song.artistName}
+            views={song.views + ' views'}
+            duration={song.duration}
+            songLink={song.songLink}
+          />
+        ))}
+      </div>
+      {/* <SongResult 
+      thumbnailUrl='https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e'
+       songName='Haegeum' 
+       artistName='Agust D' 
+       views='123456' 
+       duration='1:53'
+       songLink='https://open.spotify.com/track/4bjN59DRXFRxBE1g5ne6B1?si=d40939f4f897437d'/> */}
+      {/* <div className='search-bar'>
         <input
           className='input'
           type="text"
@@ -43,9 +131,9 @@ const SearchPage = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button className='button' onClick={handleSearch}>Search</button>
-      </div>
+      </div> */}
 
-
+{/* 
       <div className='results'>
         <h2 className='heading'>Search Results</h2>
 
@@ -107,7 +195,7 @@ const SearchPage = () => {
             ))}
           </div>
         </div>
-      </div> 
+      </div>  */}
     </div>
   );
 };
