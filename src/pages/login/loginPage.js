@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login, signup } from '../../actions/loginActions';
+import { login, signup } from '../../reducers/loginReducer';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/LoginPage.css'; // Import the LoginPage.css file
