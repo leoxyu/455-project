@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAsync, registerAsync } from '../pages/login/redux/thunks';
+import { loginAsync, registerAsync } from './thunks';
 
 const loginSlice = createSlice({
   name: 'login',

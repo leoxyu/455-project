@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import loginReducer from './reducers/loginReducer';
+import loginReducer from './pages/login/redux/loginReducer';
 import { configureStore } from '@reduxjs/toolkit'
 import App from './App';
 
