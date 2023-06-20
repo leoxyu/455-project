@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { login, signup } from '../../reducers/loginReducer';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/LoginPage.css'; // Import the LoginPage.css file
+import '../../styles/LoginPage.css';
+import { loginAsync, registerAsync } from './/redux/thunks'
+
 
 import spotifyLogo from '../../images/spotify.svg';
 
@@ -12,38 +14,19 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showCreateAccount, setShowCreateAccount] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
 
   const handleLogin = () => {
-    const isAuthenticated = authenticateUser(username, password);
-
-    if (isAuthenticated) {
-      dispatch(login(username));
-      setShowCreateAccount(false);
-      // go to home page here
-      navigate("/home");
-    } else {
-      if (!accountExists(username)) {
-        setShowCreateAccount(true);
-      } else {
-        setErrorMessage('Invalid username or password.');
-      }
-    }
+    console.log("handle login");
+    dispatch(loginAsync({ username, password }))
+    // show error message or authenticate hook
   };
 
-  function accountExists(username) {
-    return false;
-  }
-  
-  function authenticateUser(username, password) {
-    return (username === 'admin' && password === 'password')
-  }
-
   const handleCreateAccount = () => {
-    dispatch(signup(username));
-    // go to home page here
-    navigate("/home");
+    console.log("handle register");
+    dispatch(registerAsync({ username, password }))
+    // show error message or authenticate hook
   };
 
   const handleCancelCreateAccount = () => {
@@ -73,8 +56,6 @@ const LoginPage = () => {
         className="login-input"
       />
       <button onClick={handleLogin} className="login-button">Login/Sign up</button>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {showCreateAccount && (
         <CreateAccount
