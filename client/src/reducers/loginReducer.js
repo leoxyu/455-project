@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loginAsync, registerAsync } from '../pages/login/redux/thunks';
 
 const loginSlice = createSlice({
   name: 'login',
@@ -13,6 +14,15 @@ const loginSlice = createSlice({
       state.id = action.payload.userId;
     },
   },
+  extraReducers: (builder) => {
+		builder.addCase(loginAsync.fulfilled, (state, action) => {
+			state.id = null;
+		})
+		builder.addCase(registerAsync.fulfilled, (state, action) => {
+			state.id = null;
+		})
+		
+	}
 });
 
 export const { login, signup } = loginSlice.actions;
