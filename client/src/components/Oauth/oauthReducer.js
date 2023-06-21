@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { spotifyGetAccessTokenThunk, spotifyFetchProfile, spotifyRedirectToAuthCodeFlowThunk } from './Spotify OAuth/spotifyOauthThunks'; 
+import { spotifyGetAccessTokenThunk, spotifyFetchProfile, spotifyRedirectToAuthCodeFlowThunk } from './Spotify OAuth/spotifyOauthThunks';
 
 // =================================================================================>
 // parameters for spotify OAuth
@@ -29,17 +29,17 @@ const oauthSlice = createSlice({
         });
 
         builder.addCase(spotifyGetAccessTokenThunk.fulfilled, (state, action) => {
-              console.log(state);
+            console.log(state);
 
         });
 
         builder.addCase(spotifyFetchProfile.fulfilled, (state, action) => {
             console.log(state);
-      });
-      }
-  });
-  
-  export const { } = oauthSlice.actions;
-  
-  export default oauthSlice.reducer;
+        });
+    }
+});
+
+export const { } = oauthSlice.actions;
+
+export default oauthSlice.reducer;
 

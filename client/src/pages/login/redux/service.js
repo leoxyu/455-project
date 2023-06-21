@@ -5,7 +5,7 @@ const login = async (username, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-          },
+        },
         body: JSON.stringify({
             user: username,
             pass: password,
@@ -19,7 +19,7 @@ const register = async (username, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-          },
+        },
         body: JSON.stringify({
             user: username,
             pass: password,
