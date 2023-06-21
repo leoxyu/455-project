@@ -20,7 +20,7 @@ const HomePage = () => {
     if (!code) {
       dispatch(spotifyRedirectToAuthCodeFlowThunk(clientId));
     } else {
-      const accessTokenPromise = dispatch(spotifyGetAccessTokenThunk({clientId, code}));
+      const accessTokenPromise = dispatch(spotifyGetAccessTokenThunk({ clientId, code }));
       console.log(accessTokenPromise);
       // const profile = dispatch(spotifyFetchProfile(accessToken));
       // populateUI(profile);
@@ -37,7 +37,7 @@ const HomePage = () => {
       )}
     </div>
   );
-  
+
 }
 
 export default HomePage;

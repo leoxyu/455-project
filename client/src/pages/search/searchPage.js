@@ -51,7 +51,7 @@ const SearchPage = () => {
 
 
         <div className='spotify'>
-        <h3 className='spotify-heading'>Spotify</h3>
+          <h3 className='spotify-heading'>Spotify</h3>
           <div className='section'>
             <h3 className='section-heading'>Songs</h3>
             {spotifySongs.map((song) => (
@@ -107,7 +107,7 @@ const SearchPage = () => {
             ))}
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

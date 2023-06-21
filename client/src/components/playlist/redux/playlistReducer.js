@@ -16,7 +16,7 @@ const initialState = [
             4415,
             1151
         ]
-    }, 
+    },
     {
         playlistID: 1005,
         name: 'more songs',

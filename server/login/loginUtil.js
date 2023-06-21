@@ -1,11 +1,11 @@
 const { LOGINS } = require('./loginValues');
 
 const LOGIN_STATUS = {
-	LogInSuccess: "logInSuccess",
-	LogInFailed: "logInFailed",
+    LogInSuccess: "logInSuccess",
+    LogInFailed: "logInFailed",
     TryRegister: "tryRegister",
-	RegisterSuccess: "registerSuccess",
-	RegisterFailed: "registerFailed",
+    RegisterSuccess: "registerSuccess",
+    RegisterFailed: "registerFailed",
     UnknownStatus: "unknownStatus"
 }
 

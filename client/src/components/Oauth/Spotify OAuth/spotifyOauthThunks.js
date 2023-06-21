@@ -11,23 +11,23 @@ import { fetchProfile } from "./spotifyApiActions.js";
 // );
 
 export const spotifyGetAccessTokenThunk = createAsyncThunk(
-    'GET_SPOTIFY_ACCESS_TOKEN',
-    async ({clientId, code}) => {
-      return await getAccessToken({clientId, code});
-    }
+  'GET_SPOTIFY_ACCESS_TOKEN',
+  async ({ clientId, code }) => {
+    return await getAccessToken({ clientId, code });
+  }
 );
 
 export const spotifyRedirectToAuthCodeFlowThunk = createAsyncThunk(
-    'SPOTIFY_REDIRECT_OAUTH',
-    async (clientId) => {
-      return await redirectToAuthCodeFlow(clientId);
-    }
+  'SPOTIFY_REDIRECT_OAUTH',
+  async (clientId) => {
+    return await redirectToAuthCodeFlow(clientId);
+  }
 );
 
 export const spotifyFetchProfile = createAsyncThunk(
-    'SPOTIFY_FETCH_PROFILE',
-    async (accessToken) => {
-      return await fetchProfile(accessToken);
-    }
+  'SPOTIFY_FETCH_PROFILE',
+  async (accessToken) => {
+    return await fetchProfile(accessToken);
+  }
 );
 

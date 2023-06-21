@@ -30,10 +30,10 @@ router.post('/', function (req, res, next) {
                 status: LOGIN_STATUS.TryRegister
             });
         default:
-          return res.status(400).send({
-            message: 'Unknown status when trying to authenticate credentials.',
-        });
-      }
+            return res.status(400).send({
+                message: 'Unknown status when trying to authenticate credentials.',
+            });
+    }
 
 });
 
