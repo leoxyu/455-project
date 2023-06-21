@@ -28,11 +28,13 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     console.log("handle login");
-    dispatch(loginAsync({ username, password }))
-      .then((response) => {
+    const reply = dispatch(loginAsync({ username, password }));
+
+    reply.then((response) => {
         const status = response.payload.status;
 
         console.log(status)
+        console.log(response.payload)
 
         switch (status) {
           case LOGIN_STATUS.LogInSuccess:

@@ -14,7 +14,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <Menu />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route

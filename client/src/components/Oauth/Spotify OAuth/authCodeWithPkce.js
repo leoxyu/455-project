@@ -12,7 +12,25 @@ export async function redirectToAuthCodeFlow(clientId) {
   params.append("code_challenge_method", "S256")
   params.append("code_challenge", challenge)
 
-  document.location = `https://accounts.spotify.com/authorize?${params.toString()}`
+  const oAuthURL = `https://accounts.spotify.com/authorize?${params.toString()}`;
+
+  window.addEventListener('message', (event) => {
+    // Check if the message is from the OAuth popup window
+    if (event.origin === 'http://localhost:3000') {
+      // Close the popup window
+      if (event.data === 'authentication_complete') {
+        popup.close();
+      }
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    // Send a message to the parent window indicating authentication is complete
+    window.opener.postMessage('authentication_complete', 'http://localhost:3000');
+  });
+
+  const popup = window.open(oAuthURL, "popup", "popup=true");
+
 }
 
 export async function getAccessToken({ clientId, code }) {

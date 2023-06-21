@@ -32,9 +32,8 @@ const HomePage = () => {
     <div className={`App-header ${theme}`}>
       <h1 className="website-header1">THIS IS THE HOME PAGE</h1>
       <Link to="/search" className="App-link">Go to Search Page</Link>
-      {signedIn && (
-        <h1>Signed in as {userId}</h1>
-      )}
+      {signedIn && (<h1>Signed in as {userId}</h1>)}
+      <button onClick={spotifyOauth} className="login-button">Verify Spotify Account</button>
     </div>
   );
 
