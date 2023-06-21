@@ -15,14 +15,16 @@ const loginSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-		builder.addCase(loginAsync.fulfilled, (state, action) => {
-			state.id = null;
-		})
-		builder.addCase(registerAsync.fulfilled, (state, action) => {
-			state.id = null;
-		})
-		
-	}
+    builder.addCase(loginAsync.fulfilled, (state, action) => {
+      console.log(action);
+      state.id = action.payload.id;
+    })
+    builder.addCase(registerAsync.fulfilled, (state, action) => {
+      state.id = null;
+      console.log('REGISTERED');
+    })
+
+  }
 });
 
 export const { login, signup } = loginSlice.actions;

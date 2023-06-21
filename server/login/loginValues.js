@@ -1,4 +1,4 @@
-const LOGINS = [
+var LOGINS = [
     {
         user: "admin",
         pass: "password"
