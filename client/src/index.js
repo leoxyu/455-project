@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import loginReducer from './reducers/loginReducer';
-import { configureStore } from '@reduxjs/toolkit'
+
+import {store} from './store.js';
+
 import App from './App';
 
-const store = configureStore({
-  reducer: loginReducer
-});
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
