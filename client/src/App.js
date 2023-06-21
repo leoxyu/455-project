@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';
 import { useSelector } from 'react-redux';
+
+import Menu from './components/nav/navBar';
 
 const App = () => {
   const userId = useSelector(state => state.login.id);
@@ -11,7 +13,8 @@ const App = () => {
   console.log(userId);
 
   return (
-    <Router>
+    <BrowserRouter>
+    <Menu />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route
@@ -28,7 +31,7 @@ const App = () => {
         />
         <Route path="/*" element={<Navigate to="/login" replace={true} />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
