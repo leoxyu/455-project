@@ -11,6 +11,8 @@ const HomePage = () => {
   const code = useSelector(state => state.oauth.code);
   const clientId = useSelector(state => state.oauth.clientId);
   const accessToken = useSelector(state => state.oauth.accessToken);
+  const userId = useSelector(state => state.login.id);
+  let signedIn = userId;
 
   const dispatch = useDispatch();
 
@@ -29,8 +31,10 @@ const HomePage = () => {
   return (
     <div className={`App-header ${theme}`}>
       <h1 className="website-header1">THIS IS THE HOME PAGE</h1>
-      <Link to="/about" className="App-link">Go to About Page</Link>
-      <button onClick={spotifyOauth} className="login-button">Verify Spotify Account</button>
+      <Link to="/search" className="App-link">Go to Search Page</Link>
+      {signedIn && (
+        <h1>Signed in as {userId}</h1>
+      )}
     </div>
   );
   
