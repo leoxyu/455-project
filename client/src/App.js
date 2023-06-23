@@ -6,10 +6,10 @@ import SearchPage from './pages/search/searchPage';
 import { useSelector } from 'react-redux';
 
 const App = () => {
-  const userId = useSelector(state => state.login.id);
+  var userId = useSelector(state => state.login.id);
 
   console.log(userId);
-
+  userId = 'deeznuts'
   return (
     <Router>
       <Routes>

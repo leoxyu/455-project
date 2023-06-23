@@ -7,7 +7,8 @@ import '../../styles/searchPage.css';
 import SearchBar from './components/SearchBar';
 import SongResult from './components/SongResult';
 
-
+//  look here later: https://github.com/dermasmid/scrapetube
+// also here: https://github.com/paulomcnally/youtube-node
 const SearchPage = () => {
 
   useEffect(() => {
@@ -209,11 +210,7 @@ const SearchPage = () => {
             ))}
           </div>
         </div>
-<<<<<<< HEAD:src/pages/search/searchPage.js
       </div>  */}
-=======
-      </div>
->>>>>>> main:client/src/pages/search/searchPage.js
     </div>
   );
 };
