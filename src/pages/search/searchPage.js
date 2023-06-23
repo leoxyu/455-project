@@ -103,6 +103,7 @@ const SearchPage = () => {
       </div>
       <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
+        <div className='youtube-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
         {spotifySongList.map((song) => (
           <SongResult
             className={'youtube-preview'}
@@ -115,6 +116,19 @@ const SearchPage = () => {
             songLink={song.songLink}
           />
         ))}
+        {spotifySongList.map((song) => (
+          <SongResult
+            className={'youtube-preview'}
+            key={song.songName}
+            thumbnailUrl={song.thumbnailUrl}
+            songName={song.songName}
+            artistName={song.artistName}
+            views={song.views + ' views'}
+            duration={song.duration}
+            songLink={song.songLink}
+          />
+        ))}
+        </div>
       </div>
       {/* <SongResult 
       thumbnailUrl='https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e'
