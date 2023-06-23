@@ -13,6 +13,15 @@
     color: blueviolet;
 }
 
+.react-icon:hover {
+    cursor: pointer;
+    color: rgb(105, 105, 105);
+}
+
 .player-container {
     display: flex;
+    background-color: black;
+    height: 3rem;
+    width: 100%;
+    align-items: center;
 }

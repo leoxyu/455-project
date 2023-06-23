@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
-import PlaySvg from '../../images/play.svg';
-import PauseSvg from '../../images/pause.svg';
-import SkipSvg from '../../images/skip.svg';
+import { Player } from './Player';
 
 export class YoutubePlayer extends React.Component {
   state = {
-    // url: "https://www.youtube.com/watch?v=8SPtkjMUkGk",
-    // playing: false,
     url: this.props.song,
     playing: this.props.playOnLoad,
     controls: false,
     volume: 1,
     played: 0,
-    loaded: 0
+    loop: false
   }
 
   load = url => {
@@ -60,12 +56,16 @@ export class YoutubePlayer extends React.Component {
     this.player.seekTo(parseFloat(e.target.value))
   }
 
+  handleToggleLoop = () => {
+    this.setState({ loop: !this.state.loop })
+  }
+
   handleEnded = () => {
     this.props.nextSong();
   }
 
   render() {
-    const { url, playing, controls, volume, played, loaded} = this.state;
+    const { url, playing, controls, volume, played, loop} = this.state;
 
     return (
       <div>
@@ -80,36 +80,24 @@ export class YoutubePlayer extends React.Component {
           height={0}
           onProgress={this.handleProgress}
           onEnded={this.handleEnded}
+          loop={loop}
         />
-        <div className="player-container">
-          {/* {!playing && <button onClick={this.handlePlay}>Play</button>} */}
-          <div onClick={this.props.prevSong} className="player-button">
-            <img alt="alt" src={SkipSvg} className="icon"/>
-          </div>
-          {!playing &&
-            <div onClick={this.handlePlay} className="player-button">
-              <img alt="alt" src={PlaySvg} className="icon"/>
-            </div>
-          }
-          {playing &&
-            <div onClick={this.handlePause} className="player-button">
-              <img alt="alt" src={PauseSvg} className="icon"/>
-            </div>
-          }
-          <div onClick={this.props.nextSong} className="player-button">
-            <img alt="alt" src={SkipSvg} className="icon"/>
-          </div>
-          {/* {playing && <button onClick={this.handlePause}>Pause</button>} */}
-          <input type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange} />
-          {/* <button onClick={this.handleStop}>Stop</button> */}
-          <input
-            type='range' min={0} max={0.999999} step='any'
-            value={played}
-            onMouseDown={this.handleSeekMouseDown}
-            onChange={this.handleSeekChange}
-            onMouseUp={this.handleSeekMouseUp}
-          />
-        </div>
+        <Player
+          playing={playing}
+          played={played}
+          loop={loop}
+          volume={volume}
+          onPrev={this.props.prevSong}
+          onNext={this.props.nextSong}
+          onPlay={this.handlePlay}
+          onPause={this.handlePause}
+          onLoop={this.handleToggleLoop}
+          onSeekMouseDown={this.handleSeekMouseDown}
+          onSeekMouseUp={this.handleSeekMouseUp}
+          onSeekChange={this.handleSeekChange}
+          onVolumeChange={this.handleVolumeChange}
+          type="youtube"
+        />
       </div>
     );
   }

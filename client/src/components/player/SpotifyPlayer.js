@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Player } from "./Player";
 
 export default function SpotifyPlayer(props) {
   const controller = useRef(null);
@@ -8,6 +9,7 @@ export default function SpotifyPlayer(props) {
   const [truePosition, setTruePosition] = useState(0);
   const [position, setPosition] = useState(0);
   const [seeking, setSeeking] = useState(false);
+  const [loop, setLoop] = useState(false);
 
   const iframeApi = window.SpotifyIframeApi;
 
@@ -34,42 +36,29 @@ export default function SpotifyPlayer(props) {
         const wrapper = document.getElementById('spotify-player');
         wrapper.appendChild(embed);
       }
-      console.log("has iframe api");
-      console.log(iframeApi);
-      const element = document.getElementById('embed-iframe');
-      console.log(element);
-      const options = {
-          width: 0,
-          height: 0,
-          // uri: "https://open.spotify.com/track/1MFpRGNHyNqOlwQO7zAayP?si=130eb2a425224216"
-          uri: props.song
-          };
-      const callback = (EmbedController) => {
-          controller.current = EmbedController;
 
-          if (props.playOnLoad) {
-          EmbedController.play();
-          setIsStopped(false);
-          setIsPlaying(true);
-          }
-
-          EmbedController.addListener('playback_update', e => {
-          handleProgress(e.data);
-
-          if (e.data.duration && e.data.position && e.data.duration === e.data.position) {
-              props.callback();
-          }
-          });
-      };
-      iframeApi.createController(element, options, callback);
+      initializeIframe(iframeApi);
     }
   }, []);
 
   useEffect(() => {
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
-      console.log(IFrameAPI);
-      console.log(window);
-      const element = document.getElementById('embed-iframe');
+      initializeIframe(IFrameAPI);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!seeking) {
+      setPosition(truePosition);
+    }
+
+    if (truePosition === duration) {
+      handleEnded();
+    }
+  }, [truePosition]);
+
+  const initializeIframe = (IFrameAPI) => {
+    const element = document.getElementById('embed-iframe');
       const options = {
           width: 0,
           height: 0,
@@ -87,28 +76,10 @@ export default function SpotifyPlayer(props) {
 
         EmbedController.addListener('playback_update', e => {
           handleProgress(e.data);
-
-          if (e.data.duration && e.data.position && e.data.duration === e.data.position) {
-            // handleStop();
-            // setPosition(0);
-            // setDuration(1.1);
-            // EmbedController.loadUri('https://open.spotify.com/track/3M2BZA3QOwe9kdVPWkjJcX?si=002697998f4d4fc4');
-
-            // console.log("destroy callback");
-            // EmbedController.destroy();
-            props.callback();
-          }
         });
       };
       IFrameAPI.createController(element, options, callback);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!seeking) {
-      setPosition(truePosition);
-    }
-  }, [truePosition]);
+  };
 
   const handleProgress = (data) => {
     setTruePosition(data.position);
@@ -135,11 +106,11 @@ export default function SpotifyPlayer(props) {
 
   const handleSeekMouseDown = () => {
     setSeeking(true);
-  }
+  };
 
   const handleSeekChange = (e) => {
     setPosition(parseInt(e.target.value));
-  }
+  };
 
   const handleSeekMouseUp = (e) => {
     const seconds = parseInt(e.target.value / 1000, 10);
@@ -159,7 +130,24 @@ export default function SpotifyPlayer(props) {
       setSeeking(false);
       controller.current.seek(seconds);
     }
-  }
+  };
+
+  const toggleLoop = () => {
+    setLoop(!loop);
+  };
+
+  const handleEnded = () => {
+    if (loop) {
+      handleStop();
+      controller.current.play();
+      setTruePosition(0);
+      setPosition(0);
+      setIsPlaying(true);
+      setIsStopped(false);
+    } else {
+      props.nextSong();
+    }
+  };
 
   const handleStop = () => {
     if (isPlaying) {
@@ -173,17 +161,23 @@ export default function SpotifyPlayer(props) {
   return (
     <div id="spotify-player">
       <div id="embed-iframe"></div>
-      <input
-        type='range' min={0} max={duration} step='any'
-        value={position}
-        onChange={handleSeekChange}
-        onMouseDown={handleSeekMouseDown}
-        onMouseUp={handleSeekMouseUp}
+      <Player
+        playing={isPlaying}
+        played={position}
+        loop={loop}
+        volume={1}
+        onPrev={props.prevSong}
+        onNext={props.nextSong}
+        onPlay={handlePlay}
+        onPause={handlePause}
+        onLoop={toggleLoop}
+        onSeekMouseDown={handleSeekMouseDown}
+        onSeekMouseUp={handleSeekMouseUp}
+        onSeekChange={handleSeekChange}
+        onVolumeChange={() => null}
+        type="spotify"
+        duration={duration}
       />
-      <button onClick={handlePlay}>Play</button>
-      <button onClick={handlePause}>Pause</button>
-      <input type='range' min={0} max={1} step='any' value={1} onChange={() => null} />
-      <button onClick={handleStop}>Stop</button>
     </div>
   );
 }

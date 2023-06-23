@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
-import '../../styles/VideoPlayer.css';
 
 export default function GeneralPlayer() {
   const songs = [
@@ -42,7 +41,7 @@ export default function GeneralPlayer() {
     if (!playOnLoad.current) {
       playOnLoad.current = true;
     }
-    if (currentSongIndex < songs.length - 2) {
+    if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
     }
   };
@@ -60,6 +59,7 @@ export default function GeneralPlayer() {
     <>
       {songs[currentSongIndex].type === "youtube" &&
         <YoutubePlayer
+          key={currentSongIndex}
           song={songs[currentSongIndex].link}
           prevSong={prevSong}
           nextSong={nextSong}
@@ -68,13 +68,13 @@ export default function GeneralPlayer() {
       }
       {songs[currentSongIndex].type === "spotify" &&
         <SpotifyPlayer
+          key={currentSongIndex}
           song={songs[currentSongIndex].link}
-          callback={nextSong}
+          prevSong={prevSong}
+          nextSong={nextSong}
           playOnLoad={playOnLoad.current}
         />
       }
-      {/* <button onClick={prevSong}>Prev</button>
-      <button onClick={nextSong}>Next</button> */}
     </>
   );
 }
