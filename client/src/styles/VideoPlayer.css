@@ -1,0 +1,18 @@
+.react-player {
+    display: none;
+}
+
+.player-button:hover {
+    cursor: pointer;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    fill: currentColor;
+    color: blueviolet;
+}
+
+.player-container {
+    display: flex;
+}

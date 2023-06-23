@@ -9,6 +9,8 @@ export default function SpotifyPlayer(props) {
   const [position, setPosition] = useState(0);
   const [seeking, setSeeking] = useState(false);
 
+  const iframeApi = window.SpotifyIframeApi;
+
   useEffect(() => {
     const script = document.createElement('script');
 
@@ -24,7 +26,49 @@ export default function SpotifyPlayer(props) {
   }, []);
 
   useEffect(() => {
+    if (iframeApi) {
+      // this is because react strict mode renders stuff twice which for whatever reason cases embed-iframe element to disappear
+      if (controller.current) {
+        const embed = document.createElement('div');
+        embed.setAttribute("id", "embed-iframe");
+        const wrapper = document.getElementById('spotify-player');
+        wrapper.appendChild(embed);
+      }
+      console.log("has iframe api");
+      console.log(iframeApi);
+      const element = document.getElementById('embed-iframe');
+      console.log(element);
+      const options = {
+          width: 0,
+          height: 0,
+          // uri: "https://open.spotify.com/track/1MFpRGNHyNqOlwQO7zAayP?si=130eb2a425224216"
+          uri: props.song
+          };
+      const callback = (EmbedController) => {
+          controller.current = EmbedController;
+
+          if (props.playOnLoad) {
+          EmbedController.play();
+          setIsStopped(false);
+          setIsPlaying(true);
+          }
+
+          EmbedController.addListener('playback_update', e => {
+          handleProgress(e.data);
+
+          if (e.data.duration && e.data.position && e.data.duration === e.data.position) {
+              props.callback();
+          }
+          });
+      };
+      iframeApi.createController(element, options, callback);
+    }
+  }, []);
+
+  useEffect(() => {
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
+      console.log(IFrameAPI);
+      console.log(window);
       const element = document.getElementById('embed-iframe');
       const options = {
           width: 0,
@@ -127,7 +171,7 @@ export default function SpotifyPlayer(props) {
   };
 
   return (
-    <div>
+    <div id="spotify-player">
       <div id="embed-iframe"></div>
       <input
         type='range' min={0} max={duration} step='any'

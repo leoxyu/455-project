@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
+import '../../styles/VideoPlayer.css';
 
 export default function GeneralPlayer() {
   const songs = [
