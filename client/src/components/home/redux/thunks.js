@@ -26,7 +26,7 @@ export const createPlaylistAsync = createAsyncThunk(
 
 export const deletePlaylistAsync = createAsyncThunk(
     actionTypes.DELETE_PLAYLIST,
-    async ({ playlistID }) => {
+    async (playlistID) => {
         return await PlaylistsService.deletePlaylist(playlistID);
     }
 );

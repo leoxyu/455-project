@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {createPlaylistAsync} from '../../../components/home/redux/thunks';
 
 const PlaylistCreator = () => {
   const [playlistName, setPlaylistName] = useState('');
+  const author = useSelector((state) => state.login.id);
+
   const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
@@ -15,7 +17,8 @@ const PlaylistCreator = () => {
     // console.log(`Creating playlist: ${playlistName}`);
     const data = {
         name: playlistName,
-        songs: []
+        songs: [],
+        author: author
     }
     dispatch(createPlaylistAsync(data));
     setPlaylistName('');

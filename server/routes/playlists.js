@@ -67,11 +67,12 @@ var playlists= [
 function addPlaylist(action) {
     action.playlistID = uuid();
     //  TODO make these customizable to users later via client
-    action.dateCreated= '2023-06-09';
-    action.description= 'bla bla';
-    action.author= 'Ning Ning';
+    const currentISODate = new Date().toISOString().split('T')[0];
+    action.dateCreated= currentISODate;
+    action.description= 'This is a playlist';
+    action.author= action.author;
     action.isFavorited= false;
-    action.coverImageURL= 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg'
+    action.coverImageURL= 'https://zerojackerzz.com/wp-content/uploads/2019/10/album-placeholder.png'
 
     // end of TOOD
     playlists.push(action);
@@ -84,7 +85,7 @@ function resetDeck() {
 
 
 function deletePlaylist(action) {
-  const index = playlists.findIndex((playlist) => playlist.id === action);
+  const index = playlists.findIndex((playlist) => playlist.playlistID === action);
   if (index === -1) {
     throw new Error("Playlist not found in inventory");
   }
@@ -175,7 +176,7 @@ playlistsRouter.put('/', (req, res, next) => {
 
 
 playlistsRouter.post('/:playlistId', (req, res, next) => {
-    console.log(req);
+    // console.log(req);
     const { playlistId } = req.params;
     const { source, URI } = req.body;
   

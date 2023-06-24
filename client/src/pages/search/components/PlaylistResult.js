@@ -9,7 +9,7 @@ import '../styles/SpAlbumPreview.css';
 import '../styles/SpPlaylistPreview.css';
 import '../styles/YtPlaylistPreview.css';
 
-const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink }) => {
+const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
   const handlePlay = () => {
     // Handle play button click
   };
@@ -20,6 +20,7 @@ const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, dat
 
   const handleOptions = () => {
     // Handle options button click
+    optionsOnClick();
   };
 
   return (

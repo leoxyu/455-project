@@ -1,9 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {addSongAsync, getPlaylistsAsync, createPlaylistAsync} from '../../../components/home/redux/thunks';
+import {addSongAsync, getPlaylistsAsync} from '../../../components/home/redux/thunks';
 
 const Options = ({ songLink, onClose, platform }) => {
   const playlists = useSelector((state) => state.playlists.playlists);
+  
   const dispatch = useDispatch();
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
