@@ -7,9 +7,6 @@ import { useSelector } from 'react-redux';
 
 const App = () => {
   const userId = useSelector(state => state.login.id);
-
-  console.log(userId);
-
   return (
     <Router>
       <Routes>

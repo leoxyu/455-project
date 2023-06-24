@@ -6,22 +6,13 @@ const loginSlice = createSlice({
   initialState: {
     id: null,
   },
-  reducers: {
-    login: (state, action) => {
-      state.id = action.payload.userId;
-    },
-    signup: (state, action) => {
-      state.id = action.payload.userId;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginAsync.fulfilled, (state, action) => {
-      console.log(action);
       state.id = action.payload.id;
     })
     builder.addCase(registerAsync.fulfilled, (state, action) => {
-      state.id = null;
-      console.log('REGISTERED');
+      state.id = action.payload.id;
     })
 
   }
