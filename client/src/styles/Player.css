@@ -10,16 +10,22 @@
     cursor: pointer;
 }
 
-.icon {
-    width: 2rem;
-    height: 2rem;
-    fill: currentColor;
-    color: blueviolet;
+.react-icon {
+    color: white;
 }
 
 .react-icon:hover {
     cursor: pointer;
     color: rgb(105, 105, 105);
+}
+
+.react-icon-mute {
+    color: rgb(105, 105, 105);
+}
+
+.react-icon-mute:hover {
+    cursor: pointer;
+    color: white;
 }
 
 .player-container {

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import '../../styles/HomePage.css'; // Create a new CSS file for homepage styles
 
 import { spotifyFetchProfile, spotifyGetAccessTokenThunk, spotifyRedirectToAuthCodeFlowThunk } from '../../components/Oauth/Spotify OAuth/spotifyOauthThunks';
-import GeneralPlayer from '../../components/player/VideoPlayer';
 
 const HomePage = () => {
   const theme = useSelector(state => state.oauth.theme); // Assuming you have a theme state in Redux
@@ -36,7 +35,6 @@ const HomePage = () => {
       {signedIn && (
         <h1>Signed in as {userId}</h1>
       )}
-      <GeneralPlayer/>
     </div>
   );
 

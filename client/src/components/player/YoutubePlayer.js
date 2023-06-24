@@ -8,8 +8,10 @@ export class YoutubePlayer extends React.Component {
     playing: this.props.playOnLoad,
     controls: false,
     volume: 1,
+    muted: false,
     played: 0,
-    loop: false
+    loop: false,
+    shuffle: this.props.shuffle
   }
 
   load = url => {
@@ -33,7 +35,17 @@ export class YoutubePlayer extends React.Component {
   }
 
   handleVolumeChange = e => {
-    this.setState({ volume: parseFloat(e.target.value) });
+    this.setState({ volume: parseFloat(e.target.value), muted: false });
+  }
+
+  handleToggleMute = () => {
+    if (this.state.volume === 0) {
+      this.setState({ volume: 0.999, muted: false });
+    } else if (this.state.muted) {
+      this.setState({ muted: false });
+    } else {
+      this.setState({ muted: true });
+    }
   }
 
   handleProgress = state => {
@@ -59,12 +71,20 @@ export class YoutubePlayer extends React.Component {
     this.setState({ loop: !this.state.loop })
   }
 
-  handleEnded = () => {
-    this.props.nextSong();
-  }
+  handleToggleShuffle = () => {
+    this.setState({ shuffle: !this.state.shuffle })
+  };
+
+  handleNextSong = () => {
+    if (this.state.shuffle) {
+      this.props.randomSong();
+    } else {
+      this.props.nextSong();
+    }
+  };
 
   render() {
-    const { url, playing, controls, volume, played, loop} = this.state;
+    const { url, playing, controls, volume, muted, played, loop, shuffle} = this.state;
 
     return (
       <div  className="song-player">
@@ -75,26 +95,31 @@ export class YoutubePlayer extends React.Component {
           playing={playing}
           controls={controls}
           volume={volume}
+          muted={muted}
           width={0}
           height={0}
           onProgress={this.handleProgress}
-          onEnded={this.handleEnded}
+          onEnded={this.handleNextSong}
           loop={loop}
         />
         <Player
           playing={playing}
           played={played}
           loop={loop}
+          shuffle={shuffle}
           volume={volume}
+          muted={muted}
           onPrev={this.props.prevSong}
-          onNext={this.props.nextSong}
+          onNext={this.handleNextSong}
           onPlay={this.handlePlay}
           onPause={this.handlePause}
-          onLoop={this.handleToggleLoop}
+          onToggleLoop={this.handleToggleLoop}
+          onToggleShuffle={this.handleToggleShuffle}
           onSeekMouseDown={this.handleSeekMouseDown}
           onSeekMouseUp={this.handleSeekMouseUp}
           onSeekChange={this.handleSeekChange}
           onVolumeChange={this.handleVolumeChange}
+          onToggleMute={this.handleToggleMute}
           type="youtube"
         />
       </div>

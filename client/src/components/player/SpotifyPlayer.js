@@ -10,6 +10,7 @@ export default function SpotifyPlayer(props) {
   const [position, setPosition] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [loop, setLoop] = useState(false);
+  const [shuffle, setShuffle] = useState(props.shuffle);
 
   const iframeApi = window.SpotifyIframeApi;
 
@@ -136,6 +137,18 @@ export default function SpotifyPlayer(props) {
     setLoop(!loop);
   };
 
+  const toggleShuffle = () => {
+    setShuffle(!shuffle);
+  };
+
+  const handleNextSong = () => {
+    if (shuffle) {
+      props.randomSong();
+    } else {
+      props.nextSong();
+    }
+  };
+
   const handleEnded = () => {
     if (loop) {
       handleStop();
@@ -145,7 +158,7 @@ export default function SpotifyPlayer(props) {
       setIsPlaying(true);
       setIsStopped(false);
     } else {
-      props.nextSong();
+      handleNextSong();
     }
   };
 
@@ -165,16 +178,20 @@ export default function SpotifyPlayer(props) {
         playing={isPlaying}
         played={position}
         loop={loop}
+        shuffle={shuffle}
         volume={1}
+        muted={false}
         onPrev={props.prevSong}
-        onNext={props.nextSong}
+        onNext={handleNextSong}
         onPlay={handlePlay}
         onPause={handlePause}
-        onLoop={toggleLoop}
+        onToggleLoop={toggleLoop}
+        onToggleShuffle={toggleShuffle}
         onSeekMouseDown={handleSeekMouseDown}
         onSeekMouseUp={handleSeekMouseUp}
         onSeekChange={handleSeekChange}
         onVolumeChange={() => null}
+        onToggleMute={() => null}
         type="spotify"
         duration={duration}
       />

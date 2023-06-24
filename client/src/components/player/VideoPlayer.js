@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
 
+// this isn't the actual component so don't use it. i just have it here as an example of how to use the 2 other components and once i don't need this anymore i'll remove it
 export default function GeneralPlayer() {
   const songs = [
     {
@@ -36,6 +37,7 @@ export default function GeneralPlayer() {
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const playOnLoad = useRef(false);
+  const shuffle = useRef(false);
 
   const nextSong = () => {
     if (!playOnLoad.current) {
@@ -44,6 +46,7 @@ export default function GeneralPlayer() {
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
     }
+    shuffle.current = false;
   };
 
   const prevSong = () => {
@@ -55,6 +58,21 @@ export default function GeneralPlayer() {
     }
   };
 
+  const randomSong = () => {
+    if (!playOnLoad.current) {
+      playOnLoad.current = true;
+    }
+
+    let index;
+
+    do {
+      index = Math.floor(Math.random() * songs.length);
+    } while (index === currentSongIndex);
+
+    setCurrentSongIndex(index);
+    shuffle.current = true;
+  };
+
   return (
     <>
       {songs[currentSongIndex].type === "youtube" &&
@@ -63,7 +81,9 @@ export default function GeneralPlayer() {
           song={songs[currentSongIndex].link}
           prevSong={prevSong}
           nextSong={nextSong}
+          randomSong={randomSong}
           playOnLoad={playOnLoad.current}
+          shuffle={shuffle.current}
         />
       }
       {songs[currentSongIndex].type === "spotify" &&
@@ -72,7 +92,9 @@ export default function GeneralPlayer() {
           song={songs[currentSongIndex].link}
           prevSong={prevSong}
           nextSong={nextSong}
+          randomSong={randomSong}
           playOnLoad={playOnLoad.current}
+          shuffle={shuffle.current}
         />
       }
     </>
