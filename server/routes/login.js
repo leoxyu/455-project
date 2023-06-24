@@ -3,6 +3,8 @@ var router = express.Router();
 const { authenticateLogin, LOGIN_STATUS } = require('../login/loginUtil');
 
 router.post('/', function (req, res, next) {
+    console.log("In regular login");
+
     if (!req.body) {
         return res.status(400).send({ message: 'Missing call body!' })
     }

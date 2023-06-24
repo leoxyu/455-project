@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login, signup } from './redux/loginReducer';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/LoginPage.css';
 import { loginAsync, registerAsync } from './/redux/thunks'
 import spotifyLogo from '../../images/spotify.svg';
+
+// Spotify API shit
+import { getHashParams } from '../../components/Oauth/Spotify/spotifyUtil';
+import { spotifyLoginThunk } from '../../components/Oauth/Spotify/spotifyOauthThunks';
+
 
 const LOGIN_STATUS = {
   LogInSuccess: "logInSuccess",
@@ -23,6 +28,11 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [showCreateAccount, setShowCreateAccount] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
+
+  // Spotify API shit
+  let access_token = useSelector((state) => state.oauth.access_token);
+  let refresh_token = useSelector((state) => state.oauth.refresh_token);
+  let error = useSelector((state) => state.oauth.error);
 
   const dispatch = useDispatch();
 
@@ -67,6 +77,16 @@ const LoginPage = () => {
 
   };
 
+
+  const spotifyLogin = () => {
+    const response = dispatch(spotifyLoginThunk());
+
+    response.then((reply) => {
+      console.log(reply);
+      console.log(reply.payload);
+    });
+  };
+
   const handleCreateAccount = () => {
     console.log("handle register");
     dispatch(registerAsync({ username, password }))
@@ -100,6 +120,8 @@ const LoginPage = () => {
         className="login-input"
       />
       <button onClick={handleLogin} className="login-button">Login/Sign up</button>
+      <br></br>
+      <button onClick={spotifyLogin} className="login-button">Verify Spotify Account</button>
 
       {showCreateAccount && (
         <CreateAccount

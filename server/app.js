@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var spotifyRouter = require('./routes/spotify');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 
@@ -19,7 +19,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+// API
+app.use('/spotify', spotifyRouter);
 
 // login
 app.use('/login', loginRouter);

@@ -1,19 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getHashParams } from './Spotify/spotifyUtil';
 
-import { spotifyGetAccessTokenThunk, spotifyFetchProfile, spotifyRedirectToAuthCodeFlowThunk } from './Spotify OAuth/spotifyOauthThunks';
+import { spotifyGetAccessTokenThunk, spotifyFetchProfileThunk, spotifyRedirectToAuthCodeFlowThunk } from './Spotify/spotifyOauthThunks';
 
 // =================================================================================>
 // parameters for spotify OAuth
-// clientId should not be hard-coded on client side, move to server side later on
 // =================================================================================>
-const clientId = "a1205770b15144e0a77fff7882931779"
-const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
+
+let params = getHashParams();
+
+let access_token = params.access_token;
+let refresh_token = params.refresh_token;
+let error = params.error;
+
+
 
 const initialState = {
-    clientId: clientId,
-    code: code,          // I don't really know what this parameter is for, but OAuth needs it to check if we've already finished OAuth or not
-    accessToken: null,
+    access_token: access_token,
+    refresh_token: refresh_token,
+    error: error,
     profile: null
 };
 
@@ -23,19 +28,10 @@ const oauthSlice = createSlice({
     reducers: {
     },
     extraReducers: (builder) => {
-        builder.addCase(spotifyRedirectToAuthCodeFlowThunk.fulfilled, (state, action) => {
-            // I don't think we need to do anything special for this case
-            console.log(state);
-        });
+        // builder.addCase(spotifyRedirectToAuthCodeFlowThunk.fulfilled, (state, action) => {
+        //     // I don't think we need to do anything special for this case
 
-        builder.addCase(spotifyGetAccessTokenThunk.fulfilled, (state, action) => {
-            console.log(state);
-
-        });
-
-        builder.addCase(spotifyFetchProfile.fulfilled, (state, action) => {
-            console.log(state);
-        });
+        // });
     }
 });
 
