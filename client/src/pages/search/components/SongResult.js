@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
@@ -9,6 +10,9 @@ import '../styles/SpSongPreview.css';
 
 
 const SongResult = ({ className, thumbnailUrl, songName, artistName, views, duration, songLink }) => {
+  const [showOptionsDialog, setShowOptionsDialog] = useState(false);
+  const [showIcons, setShowIcons] = useState(true);
+
   const handlePlay = () => {
     // Handle play button click
   };
@@ -18,7 +22,13 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, views, dura
   };
 
   const handleOptions = () => {
-    // Handle options button click
+    setShowOptionsDialog(true);
+    setShowIcons(false);
+  };
+
+  const closeOptionsDialog = () => {
+    setShowOptionsDialog(false);
+    setShowIcons(true);
   };
 
   return (
@@ -26,6 +36,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, views, dura
         <div className='essential-info'>
             <div className="thumbnail-container">
                 <img className="thumbnail" src={thumbnailUrl} alt="Album Thumbnail" />
+                
                 <PlayIcon className="play-icon" onClick={handlePlay}/>
             </div>
             <div className="details">
@@ -35,11 +46,17 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, views, dura
             </div>
         </div>
         <div className="views">{views}</div>
-        <div className="stats">
-            <HeartIcon className="heart-icon" onClick={handleFavorite}/>
-            <div className="duration">{duration}</div>
-            <OptionsIcon className="options-icon" onClick={handleOptions}/>
-        </div>
+            {showIcons && (
+              <div className="stats">
+              <HeartIcon className="heart-icon" onClick={handleFavorite}/>
+              <div className="duration">{duration}</div>
+              <OptionsIcon className="options-icon" onClick={handleOptions}/>
+              </div>
+            )}
+        
+        {showOptionsDialog && (
+          <Options songLink={songLink} onClose={closeOptionsDialog} />
+        )}
     </div>
   );
 };

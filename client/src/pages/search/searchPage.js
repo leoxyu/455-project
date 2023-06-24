@@ -8,6 +8,8 @@ import SearchBar from './components/SearchBar';
 import SongResult from './components/SongResult';
 import PlaylistResult from './components/PlaylistResult';
 import Filters from './components/Filters';
+import PlaylistCreator from './components/PlaylistCreator';
+import Options from './components/Options';
 
 
 //  look here later: https://github.com/dermasmid/scrapetube
@@ -91,6 +93,9 @@ const SearchPage = () => {
       
       <SearchBar />
       <Filters />
+      <PlaylistCreator />
+      {/* <Options /> */}
+      
 
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
