@@ -6,7 +6,13 @@ const loginSlice = createSlice({
   initialState: {
     id: null,
   },
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      console.log('inside reducer')
+      console.log(state)
+      state.id = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loginAsync.fulfilled, (state, action) => {
       state.id = action.payload.id;
@@ -18,6 +24,6 @@ const loginSlice = createSlice({
   }
 });
 
-export const { login, signup } = loginSlice.actions;
+export const { logout } = loginSlice.actions;
 
 export default loginSlice.reducer;

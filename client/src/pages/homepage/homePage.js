@@ -30,11 +30,7 @@ const HomePage = () => {
 
   return (
     <div className={`App-header ${theme}`}>
-      <h1 className="website-header1">THIS IS THE HOME PAGE</h1>
-      <Link to="/search" className="App-link">Go to Search Page</Link>
-      {signedIn && (
-        <h1>Signed in as {userId}</h1>
-      )}
+      <h1 className="website-header1">HOME</h1>
     </div>
   );
 
