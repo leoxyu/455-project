@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
 import { Player } from "./Player";
 
@@ -63,7 +64,6 @@ export default function SpotifyPlayer(props) {
       const options = {
           width: 0,
           height: 0,
-          // uri: "https://open.spotify.com/track/1MFpRGNHyNqOlwQO7zAayP?si=130eb2a425224216"
           uri: props.song
         };
       const callback = (EmbedController) => {
