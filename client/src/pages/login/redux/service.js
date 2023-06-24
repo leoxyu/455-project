@@ -7,7 +7,7 @@ const login = async (username, password) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            user: username,
+            user: username.toLowerCase(),
             pass: password,
         })
     });
@@ -21,7 +21,7 @@ const register = async (username, password) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            user: username,
+            user: username.toLowerCase(),
             pass: password,
         })
     });
