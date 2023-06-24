@@ -8,7 +8,7 @@
     border-radius: 20px;
     border: 1px solid var(--background-elevated-base); /* Set initial border color */
     transition: border-color 0.3s; /* Add transition for smooth effect */
-    width: 20rem;
+    max-width: 20rem;
   }
   
   .search-bar:hover {

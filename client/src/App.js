@@ -9,7 +9,7 @@ const App = () => {
   var userId = useSelector(state => state.login.id);
 
   console.log(userId);
-  userId = 'deeznuts'
+  
   return (
     <Router>
       <Routes>
