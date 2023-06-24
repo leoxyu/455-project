@@ -18,14 +18,26 @@ export const Player = ({ playing, played, loop, volume, onPrev, onNext, onPlay, 
           <MdShuffle size="1.5rem" className="react-icon"/>
 
           <input
-            type='range' min={0} max={type === "youtube" ? 0.999999 : duration} step='any'
+            className="player-slider"
+            type='range'
+            min={0}
+            max={type === "youtube" ? 0.999999 : duration}
+            step='any'
             value={played}
             onMouseDown={onSeekMouseDown}
             onChange={onSeekChange}
             onMouseUp={onSeekMouseUp}
           />
           <BiSolidVolumeFull size="1.5rem" className="react-icon"/>
-          <input type='range' min={0} max={1} step='any' value={volume} onChange={onVolumeChange}/>
+          <input
+            className="player-slider"
+            type='range'
+            min={0}
+            max={1}
+            step='any'
+            value={volume}
+            onChange={onVolumeChange}
+          />
         </div>
     );
 };

@@ -16,7 +16,6 @@ export class YoutubePlayer extends React.Component {
     this.setState({
       url,
       played: 0,
-      loaded: 0
     })
   }
 
