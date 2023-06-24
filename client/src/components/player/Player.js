@@ -14,11 +14,11 @@ export const Player = ({ playing, played, loop, volume, onPrev, onNext, onPlay, 
             <AiFillPauseCircle size="2rem" className="react-icon" onClick={onPause}/>
           }
           <BiSkipNext size="2rem" className="react-icon" onClick={onNext}/>
-          <MdLoop size="1.5rem" className="react-icon" color={loop ? "rgb(105, 105, 105)" : "white"} onClick={onLoop}/>
-          <MdShuffle size="1.5rem" className="react-icon"/>
+          <MdLoop size="1.25rem" className="react-icon" color={loop ? "#1db954" : undefined} onClick={onLoop}/>
+          <MdShuffle size="1.25rem" className="react-icon"/>
 
           <input
-            className="player-slider"
+            className="song-slider"
             type='range'
             min={0}
             max={type === "youtube" ? 0.999999 : duration}
@@ -30,7 +30,7 @@ export const Player = ({ playing, played, loop, volume, onPrev, onNext, onPlay, 
           />
           <BiSolidVolumeFull size="1.5rem" className="react-icon"/>
           <input
-            className="player-slider"
+            className="volume-slider"
             type='range'
             min={0}
             max={1}

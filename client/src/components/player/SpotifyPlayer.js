@@ -159,7 +159,7 @@ export default function SpotifyPlayer(props) {
   };
 
   return (
-    <div id="spotify-player">
+    <div id="spotify-player" className="song-player">
       <div id="embed-iframe"></div>
       <Player
         playing={isPlaying}

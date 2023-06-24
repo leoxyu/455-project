@@ -67,7 +67,7 @@ export class YoutubePlayer extends React.Component {
     const { url, playing, controls, volume, played, loop} = this.state;
 
     return (
-      <div>
+      <div  className="song-player">
         <ReactPlayer
           ref={player => { this.player = player }}
           className="react-player"
