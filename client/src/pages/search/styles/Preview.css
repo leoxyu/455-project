@@ -1,0 +1,20 @@
+  
+[class$="-preview"]:hover {
+    background-color: var(--background-elevated-base);
+    .essential-info .thumbnail-container .play-icon {
+        opacity: 1;
+        fill:var(--text-base);
+    }
+    .stats .heart-icon {
+      opacity: 1;
+      fill:var(--text-subdued);
+    }
+    .essential-info .thumbnail-container .thumbnail {
+      opacity: 0.6;
+    }
+    .stats .options-icon {
+        opacity: 1;
+        fill:var(--text-base);
+    }
+}
+  

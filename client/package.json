@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.4.0",
+    "gatsby-plugin-react-svg": "^3.3.0",
     "cors": "^2.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

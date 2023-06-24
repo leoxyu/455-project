@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';
+import PlaylistsPage from './pages/playlists/playlistsPage';
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
 
@@ -24,6 +25,7 @@ const App = () => {
                 <Routes>
                   <Route path="/home" element={<HomePage />} />
                   <Route path="/search" element={<SearchPage />} />
+                  <Route path="/playlists" element={<PlaylistsPage />} />
                 </Routes>
               </>
             ) : (

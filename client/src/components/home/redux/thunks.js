@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import PlaylistsService from "./service";
+import { actionTypes } from "./actionTypes";
 
 /*
 ACTIONS:
@@ -17,49 +18,49 @@ toggleFavoriteSong:     {type: ..., payload: {songID}}
 */
 
 export const createPlaylistAsync = createAsyncThunk(
-    'createPlaylist',
+    actionTypes.CREATE_PLAYLIST,
     async (body) => {
         return await PlaylistsService.createPlaylist(body);
     }
 )
 
 export const deletePlaylistAsync = createAsyncThunk(
-    'deletePlaylist',
-    async ({ playlistID }) => {
+    actionTypes.DELETE_PLAYLIST,
+    async (playlistID) => {
         return await PlaylistsService.deletePlaylist(playlistID);
     }
 );
 
 export const editPlaylistAsync = createAsyncThunk(
-    'editPlaylist',
-    async ({ playlistID, newBody }) => {
+    actionTypes.EDIT_PLAYLIST,
+    async (playlistID, newBody) => {
         return await PlaylistsService.editPlaylist(playlistID, newBody);
     }
 );
 
 export const getPlaylistsAsync = createAsyncThunk(
-    'getPlaylists',
+    actionTypes.GET_PLAYLISTS,
     async () => {
         return await PlaylistsService.getPlaylists();
     }
 );
 
 export const addSongAsync = createAsyncThunk(
-    'addSong',
-    async ({ playlistID, songBody }) => {
+    actionTypes.ADD_SONG,
+    async (playlistID, songBody) => {
         return await PlaylistsService.addSong(playlistID, songBody);
     }
 );
 
 export const removeSongAsync = createAsyncThunk(
-    'removeSong',
+    actionTypes.REMOVE_SONG,
     async ({ playlistID, songID }) => {
         return await PlaylistsService.removeSong(playlistID, songID);
     }
 );
 
 export const getSongsAsync = createAsyncThunk(
-    'getSongs',
+    actionTypes.GET_SONGS,
     async ({ playlistID }) => {
         return await PlaylistsService.getSongs(playlistID);
     }
