@@ -38,7 +38,20 @@ const PlaylistsService = {
     },
     editPlaylist: async (playlistID, newBody) => {
         //  TODO implement
-        return newBody;
+        const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
+        method: 'PATCH',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newBody)
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      const errorMsg = data?.message;
+      throw new Error(errorMsg)
+    }
+    return data;
     },
     getPlaylists: async (searchParam) => {
         // return [

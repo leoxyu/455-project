@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import '../../../styles/variables.css';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
@@ -8,8 +9,29 @@ import '../styles/Preview.css';
 import '../styles/SpAlbumPreview.css';
 import '../styles/SpPlaylistPreview.css';
 import '../styles/YtPlaylistPreview.css';
+import {editPlaylistAsync} from '../../../components/home/redux/thunks';
 
-const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
+
+const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick, isEditable=false}) => {
+  const [ioplaylistName, setPlaylistName] = useState(playlistName);
+  const dispatch = useDispatch();
+
+  const handleInputChange = (event) => {
+    setPlaylistName(event.target.value);
+  };
+
+  const editPlaylist = () => {
+    // Replace this with your logic to create a new playlist
+    // console.log(`Creating playlist: ${playlistName}`);
+    const data = {
+        name: ioplaylistName,
+        songs: songs,
+        author: artistName
+    }
+    dispatch(editPlaylistAsync(playlistID, data));
+    // setPlaylistName('');
+  };
+  
   const handlePlay = () => {
     // Handle play button click
   };
@@ -23,7 +45,10 @@ const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, dat
     optionsOnClick();
   };
 
+  //  TODO avoid rendering if we use none in css
+
   return (
+    <div>
     <div className={className}>
         <div className='essential-info'>
             <div className="thumbnail-container">
@@ -31,7 +56,15 @@ const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, dat
                 <PlayIcon className="play-icon" onClick={handlePlay}/>
             </div>
             <div className="details">
+              {isEditable ? 
+              <input
+              type="text"
+              value={ioplaylistName}
+              onChange={handleInputChange}
+              placeholder="Enter a new playlist name"
+            /> :
                 <div className="name">{playlistName}</div>
+              }
                 <div className="secondary-details">
                 <div className="date">{date}</div>
                 <div className="artist-name">{artistName}</div>
@@ -48,7 +81,11 @@ const PlaylistResult = ({ className, playlistId, thumbnailUrl, playlistName, dat
             <div className="duration">{duration}</div>
             <OptionsIcon className="options-icon" onClick={handleOptions}/>
         </div>
-    </div>
+      </div>
+      {isEditable &&
+        <button onClick={editPlaylist}>Save Changes</button>
+      }
+        </div>
   );
 };
 

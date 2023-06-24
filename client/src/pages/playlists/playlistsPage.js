@@ -49,7 +49,7 @@ const PlaylistPage = () => {
         {playlists.map((playlist) => (
           <PlaylistResult
             className={'spotify-playlist-preview'}
-            key={playlist.playlistID}
+            playlistID={playlist.playlistID}
             thumbnailUrl={playlist.coverImageURL}
             playlistName={playlist.name}
             artistName={playlist.author}
@@ -57,6 +57,7 @@ const PlaylistPage = () => {
             // views={song.views + ' views'}
             // duration={song.duration}
             optionsOnClick={() => optionsOnClick(playlist.playlistID)}
+            isEditable={true}
           />
         ))}
           </div> 

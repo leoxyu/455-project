@@ -33,7 +33,7 @@ export const deletePlaylistAsync = createAsyncThunk(
 
 export const editPlaylistAsync = createAsyncThunk(
     actionTypes.EDIT_PLAYLIST,
-    async ({ playlistID, newBody }) => {
+    async (playlistID, newBody) => {
         return await PlaylistsService.editPlaylist(playlistID, newBody);
     }
 );

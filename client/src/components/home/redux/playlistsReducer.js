@@ -93,10 +93,8 @@ const playlistsSlice = createSlice({
     })
     builder.addCase(editPlaylistAsync.fulfilled, (state, action) => {
       // Find the edited playlist in the state and update its properties
-      const playlistIndex = state.playlists.findIndex((playlist) => playlist.id === action.payload);
-      if (playlistIndex !== -1) {
-        state.playlists[playlistIndex] = { ...state.playlists[playlistIndex], ...action.payload };
-      }
+      const idx = state.playlists.findIndex((playlist) => playlist.playlistID === action.payload.id);
+      state.playlists[idx] = action.payload;
     });
     builder.addCase(getPlaylistsAsync.fulfilled, (state, action) => {
       state.playlists = action.payload;
