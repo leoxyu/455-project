@@ -27,7 +27,7 @@ const PlaylistCreator = () => {
         type="text"
         value={playlistName}
         onChange={handleInputChange}
-        placeholder="Enter playlist name"
+        placeholder="Enter a new playlist name"
       />
       <button onClick={createPlaylist}>+</button>
     </div>

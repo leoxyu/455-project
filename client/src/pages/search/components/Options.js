@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {addSongAsync} from '../../../components/home/redux/thunks';
 
-const Options = ({ songLink, onClose }) => {
+const Options = ({ songLink, onClose, platform }) => {
   const playlists = useSelector((state) => state.playlists.playlists);
   const dispatch = useDispatch();
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
@@ -14,7 +14,11 @@ const Options = ({ songLink, onClose }) => {
   const handleSelection = () => {
     // Handle playlist selection
     // console.log(`Selected playlist: ${selectedPlaylist}`);
-    dispatch(addSongAsync(selectedPlaylist, songLink));
+    const data = {
+        URI: songLink,
+        source: platform
+    }
+    dispatch(addSongAsync(selectedPlaylist, data));
     onClose(); // Trigger the onClose callback
   };
 

@@ -9,7 +9,7 @@ import '../styles/YtVideoPreview.css';
 import '../styles/SpSongPreview.css';
 
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, views, duration, songLink }) => {
+const SongResult = ({ className, thumbnailUrl, songName, artistName, views, duration, songLink, platform }) => {
   const [showOptionsDialog, setShowOptionsDialog] = useState(false);
   const [showIcons, setShowIcons] = useState(true);
 
@@ -55,7 +55,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, views, dura
             )}
         
         {showOptionsDialog && (
-          <Options songLink={songLink} onClose={closeOptionsDialog} />
+          <Options songLink={songLink} platform={platform} onClose={closeOptionsDialog} />
         )}
     </div>
   );

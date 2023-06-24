@@ -109,6 +109,7 @@ const SearchPage = () => {
             views={song.views + ' streams'}
             duration={song.duration}
             songLink={song.songLink}
+            platform='Spotify'
           />
         ))}
       </div>
@@ -125,6 +126,7 @@ const SearchPage = () => {
             views={song.views + ' views'}
             duration={song.duration}
             songLink={song.songLink}
+            platform='Youtube'
           />
         ))}
         
