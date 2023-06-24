@@ -1,0 +1,121 @@
+.spotify-preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-base);
+    justify-content: space-between;
+    padding: 0.5rem;
+    transition: border-color 0.3s; /* Add transition for smooth effect */
+    font-size: 1.1rem;
+    min-width: 280px;  
+    /* max-width: 40rem; */
+    max-height: 5rem;
+    flex-grow: 1;
+    font-size: 17px;
+    flex:1;
+
+
+    .essential-info{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .thumbnail-container {
+            position: relative;
+            margin-right: 1rem;
+            .thumbnail {
+                max-width: 3rem;
+                max-height: 3rem;
+                object-fit: cover;
+            }
+            .play-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 1.5rem;
+                max-height: 1.5rem;
+                cursor: pointer;
+                margin: 0;
+                opacity: 0;
+            }
+        }
+        
+        .details {
+            display: grid;
+            align-items: column;
+            justify-content: space-between;
+            /* max-width: 40em;
+             */
+             max-width: 30vw;
+            .name {
+                color: var(--text-base);
+            }
+            .artist-name {
+                color: var(--text-subdued);
+            }
+            .views {
+                display: none;
+            }
+            overflow: hidden; 
+            text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
+            white-space: nowrap;
+        }
+    }
+    
+
+    .views {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+        text-align: center;
+        color: var(--text-subdued)
+    }
+    
+    
+    @media (max-width: 599px) {
+        .views {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 359px) {
+        .heart-icon{
+            display: none;
+        }
+    }
+    
+    
+    .stats {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .heart-icon {
+            max-width: 1.1rem;
+            max-height: 1.1rem;
+            cursor: pointer;
+            opacity: 0;
+        }
+    
+        .duration {
+            text-align: center;
+            color: var(--text-subdued);
+            margin: 0 1.5rem;
+        }
+        
+        .options-icon {
+            max-width: 1.15rem;
+            max-height: 1.15rem;
+            cursor: pointer;
+            margin-right: 0.5rem; 
+            margin-left: 0;
+            opacity: 0;
+            rotate: 90deg;
+        }
+    }
+}
+
+

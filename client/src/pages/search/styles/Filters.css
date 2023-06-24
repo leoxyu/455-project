@@ -1,0 +1,45 @@
+/* SearchBar.css */
+
+.filters {
+    display: flex;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    justify-content: left;
+    background-color: transparent;
+}
+
+.filter-button {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-elevated-base);
+    margin: 0.1rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--background-elevated-base); /* Set initial border color */
+    transition: border-color 0.3s; /* Add transition for smooth effect */
+    
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: var(--text-subdued-elevated);
+  }
+  
+  .filter-button:hover {
+    border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
+    background-color: var(--background-elevated-highlight);
+  }
+
+  
+  .filter-button:text-content {
+    width: 100%;
+    border: none;
+    outline: none;
+    
+    background-color: transparent;
+    color: var(--text-base);
+  }
+  
+
+  .filter-button[data-selected="true"] {
+    background-color: var(--text-base);
+    color: var(--decorative-subdued);
+  }
