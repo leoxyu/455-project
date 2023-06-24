@@ -4,29 +4,33 @@ import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';
 import { useSelector } from 'react-redux';
+import Navbar from './components/nav/nav';
 
 const App = () => {
   const userId = useSelector(state => state.login.id);
-
-  console.log(userId);
-
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/home"
-          element={
-            userId ? <HomePage /> : <Navigate to="/login" replace={true} />
-          }
+          path="/login"
+          element={<LoginPage />}
         />
         <Route
-          path="/search"
+          path="/*"
           element={
-            userId ? <SearchPage /> : <Navigate to="/login" replace={true} />
+            userId ? (
+              <>
+                <Navbar />
+                <Routes>
+                  <Route path="/home" element={<HomePage />} />
+                  <Route path="/search" element={<SearchPage />} />
+                </Routes>
+              </>
+            ) : (
+              <Navigate to="/login" replace={true} />
+            )
           }
         />
-        <Route path="/*" element={<Navigate to="/login" replace={true} />} />
       </Routes>
     </Router>
   );

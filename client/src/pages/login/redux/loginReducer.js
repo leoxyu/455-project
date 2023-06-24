@@ -7,26 +7,23 @@ const loginSlice = createSlice({
     id: null,
   },
   reducers: {
-    login: (state, action) => {
-      state.id = action.payload.userId;
-    },
-    signup: (state, action) => {
-      state.id = action.payload.userId;
+    logout: (state) => {
+      console.log('inside reducer')
+      console.log(state)
+      state.id = null;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(loginAsync.fulfilled, (state, action) => {
-      console.log(action);
       state.id = action.payload.id;
     })
     builder.addCase(registerAsync.fulfilled, (state, action) => {
-      state.id = null;
-      console.log('REGISTERED');
+      state.id = action.payload.id;
     })
 
   }
 });
 
-export const { login, signup } = loginSlice.actions;
+export const { logout } = loginSlice.actions;
 
 export default loginSlice.reducer;
