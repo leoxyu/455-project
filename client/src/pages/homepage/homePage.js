@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/HomePage.css'; // Create a new CSS file for homepage styles
 
 import { spotifyFetchProfile, spotifyGetAccessTokenThunk, spotifyRedirectToAuthCodeFlowThunk } from '../../components/Oauth/Spotify OAuth/spotifyOauthThunks';
+import PlaylistGrid from '../../components/home/PlaylistGrid';
 
 const HomePage = () => {
   const theme = useSelector(state => state.oauth.theme); // Assuming you have a theme state in Redux
@@ -30,7 +31,8 @@ const HomePage = () => {
 
   return (
     <div className={`App-header ${theme}`}>
-      <h1 className="website-header1">THIS IS THE HOME PAGE</h1>
+      <h1 className="website-header1">HOME</h1>
+      <PlaylistGrid/>
       <Link to="/search" className="App-link">Go to Search Page</Link>
       {signedIn && (
         <h1>Signed in as {userId}</h1>
