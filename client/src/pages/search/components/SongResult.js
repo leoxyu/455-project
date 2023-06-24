@@ -3,7 +3,10 @@ import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
-import '../styles/SongResult.css';
+import '../styles/Preview.css'
+import '../styles/YtVideoPreview.css';
+import '../styles/SpSongPreview.css';
+
 
 const SongResult = ({ className, thumbnailUrl, songName, artistName, views, duration, songLink }) => {
   const handlePlay = () => {
@@ -25,14 +28,14 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, views, dura
                 <img className="thumbnail" src={thumbnailUrl} alt="Album Thumbnail" />
                 <PlayIcon className="play-icon" onClick={handlePlay}/>
             </div>
-            <div className="song-details">
-                <div className="song-name">{songName}</div>
+            <div className="details">
+                <div className="name">{songName}</div>
                 <div className="views">{views}</div>
                 <div className="artist-name">{artistName}</div>
             </div>
         </div>
         <div className="views">{views}</div>
-        <div className="song-stats">
+        <div className="stats">
             <HeartIcon className="heart-icon" onClick={handleFavorite}/>
             <div className="duration">{duration}</div>
             <OptionsIcon className="options-icon" onClick={handleOptions}/>
