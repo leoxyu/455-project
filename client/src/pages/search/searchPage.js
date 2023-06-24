@@ -70,7 +70,7 @@ const SearchPage = () => {
     },
     {
       thumbnailUrl: 'https://static.wikia.nocookie.net/the-bangtan-boys/images/f/fb/Love_Yourself_%27Tear%27_album_cover.jpg',
-      songName: 'FAKE LOVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE',
+      songName: 'FAKE LOVE',
       artistName: 'BTS',
       views: '34100000',
       duration: '4:02',

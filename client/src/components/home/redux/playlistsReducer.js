@@ -26,58 +26,58 @@ const playlistsSlice = createSlice({
   name: 'playlists',
   initialState: {
     playlists: [
-        {
-            playlistID: '1',
-            name: 'Playlist 1',
-            dateCreated: '2023-06-09',
-            description: 'bla bla',
-            author: 'Ning Leng',
-            isFavorited: false,
-            coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',
-            songs: [
-                {
-                    source: 'Spotify',
-                    URI: '0upq5GkOZ25DoExIOyWHkE'
-                },
-                {
-                    source: 'Spotify',
-                    URI: '2k76aPyqAiGhTm68fjB2u8'
-                },
-                {
-                    source: 'Youtube',
-                    URI: 'DLzxrzFCyOs'
-                }
-            ]
-        },
-        {
-          playlistID: '2',
-          name: 'Playlist 2',
-          dateCreated: '2023-06-09',
-          description: 'bla bla',
-          author: 'Ning Ning',
-          isFavorited: false,
-          coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',
-          songs: [
-              {
-                  source: 'Spotify',
-                  URI: '0upq5GkOZ25DoExIOyWHkE'
-              },
-              {
-                  source: 'Spotify',
-                  URI: '2k76aPyqAiGhTm68fjB2u8'
-              },
-              {
-                  source: 'Youtube',
-                  URI: 'DLzxrzFCyOs'
-              }
-          ]
-        },
-        { playlistID: '2', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
-        { playlistID: '3', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
-        { playlistID: '4', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
-        { playlistID: '5', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
-        { playlistID: '6', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
-        { playlistID: '7', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
+        // {
+        //     playlistID: '1',
+        //     name: 'Playlist 1',
+        //     dateCreated: '2023-06-09',
+        //     description: 'bla bla',
+        //     author: 'Ning Leng',
+        //     isFavorited: false,
+        //     coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',
+        //     songs: [
+        //         {
+        //             source: 'Spotify',
+        //             URI: '0upq5GkOZ25DoExIOyWHkE'
+        //         },
+        //         {
+        //             source: 'Spotify',
+        //             URI: '2k76aPyqAiGhTm68fjB2u8'
+        //         },
+        //         {
+        //             source: 'Youtube',
+        //             URI: 'DLzxrzFCyOs'
+        //         }
+        //     ]
+        // },
+        // {
+        //   playlistID: '2',
+        //   name: 'Playlist 2',
+        //   dateCreated: '2023-06-09',
+        //   description: 'bla bla',
+        //   author: 'Ning Ning',
+        //   isFavorited: false,
+        //   coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',
+        //   songs: [
+        //       {
+        //           source: 'Spotify',
+        //           URI: '0upq5GkOZ25DoExIOyWHkE'
+        //       },
+        //       {
+        //           source: 'Spotify',
+        //           URI: '2k76aPyqAiGhTm68fjB2u8'
+        //       },
+        //       {
+        //           source: 'Youtube',
+        //           URI: 'DLzxrzFCyOs'
+        //       }
+        //   ]
+        // },
+        // { playlistID: '2', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
+        // { playlistID: '3', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
+        // { playlistID: '4', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
+        // { playlistID: '5', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
+        // { playlistID: '6', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
+        // { playlistID: '7', name: 'Playlist 3', author: 'Ning Ning', coverImageURL: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',},
     
     ]
   },
