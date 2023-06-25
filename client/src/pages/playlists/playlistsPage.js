@@ -6,11 +6,8 @@ import '../../styles/PlaylistsPage.css';
 import SearchBar from '../search/components/SearchBar';
 import PlaylistResult from '../search/components/PlaylistResult';
 import Filters from '../search/components/Filters';
-import PlaylistCreator from '../search/components/PlaylistCreator';
+import PlaylistCreator from './components/PlaylistCreator';
 
-
-//  look here later: https://github.com/dermasmid/scrapetube
-// also here: https://github.com/paulomcnally/youtube-node
 const PlaylistPage = () => {
 
   useEffect(() => {
@@ -54,8 +51,6 @@ const PlaylistPage = () => {
             playlistName={playlist.name}
             artistName={playlist.author}
             songs={playlist.songs}
-            // views={song.views + ' views'}
-            // duration={song.duration}
             optionsOnClick={() => optionsOnClick(playlist.playlistID)}
             isEditable={true}
           />
