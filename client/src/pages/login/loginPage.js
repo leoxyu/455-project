@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, signup } from './redux/loginReducer';
 import CreateAccount from './createAccount';
@@ -7,9 +7,11 @@ import '../../styles/LoginPage.css';
 import { loginAsync, registerAsync } from './/redux/thunks'
 import spotifyLogo from '../../images/spotify.svg';
 
+
 // Spotify API shit
 import { getHashParams } from '../../components/Oauth/Spotify/spotifyUtil';
 import { spotifyLoginThunk } from '../../components/Oauth/Spotify/spotifyOauthThunks';
+import { setAccessToken, setRefreshToken, setSpotifyProfile } from '../../components/Oauth/oauthReducer';
 
 
 const LOGIN_STATUS = {
@@ -27,12 +29,37 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showCreateAccount, setShowCreateAccount] = useState(false);
+  const [spotifyLoggedIn, setSpotifyLoggedIn] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
 
   // Spotify API shit
-  let access_token = useSelector((state) => state.oauth.access_token);
-  let refresh_token = useSelector((state) => state.oauth.refresh_token);
-  let error = useSelector((state) => state.oauth.error);
+  const urlParams = new URLSearchParams(window.location.search);
+
+  useEffect(() => {
+    const error = urlParams.get('error');
+    const access_token = urlParams.get('access_token');
+    const refresh_token = urlParams.get('refresh_token');
+    const state = urlParams.get('state'); // currently not working.
+
+    if (!error) {
+      // do nothing,
+      console.log("not logged in yet.");
+    } else if (error === "ERROR_INVALID_TOKEN") {
+      console.log("invalid token recieved during OAuth");
+    } else {
+      setAccessToken(access_token);
+      setRefreshToken(refresh_token);
+      setSpotifyLoggedIn(error);
+      console.log(state);
+      setSpotifyLoggedIn(true);
+    }
+
+
+  }, []);
+
+  // let access_token = useSelector((state) => state.oauth.access_token);
+  // let refresh_token = useSelector((state) => state.oauth.refresh_token);
+  // let error = useSelector((state) => state.oauth.error);
 
   const dispatch = useDispatch();
 
@@ -82,8 +109,8 @@ const LoginPage = () => {
     const response = dispatch(spotifyLoginThunk());
 
     response.then((reply) => {
-      console.log(reply);
       console.log(reply.payload);
+      window.location.href = reply.payload.redirect_url;
     });
   };
 

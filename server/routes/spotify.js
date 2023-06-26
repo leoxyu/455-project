@@ -21,8 +21,6 @@ const generateRandomString = function (length) { // generate random string to us
 
 let stateKey = 'spotify_auth_state'; // name of the cookie
 
-let app = express();
-
 // app.use(express.static(__dirname + '/public'))
 router.use(cors())
       .use(cookieParser());
@@ -33,16 +31,22 @@ router.get('/login', function (req, res) { // handle login request from the hype
   let state = generateRandomString(16);
   res.cookie(stateKey, state); // set cookie to travel with request
 
+  console.log("\nstate before sending query: ", state);
+
   // request authorization - automatically redirects to callback
   const scope = 'user-read-private user-read-email';
-  res.redirect('https://accounts.spotify.com/authorize?' +
-      querystring.stringify({
-          response_type: 'code',
-          client_id: client_id,
-          scope: scope,
-          redirect_uri: redirect_uri,
-          state: state
-      }));
+  const redirect_url = 'https://accounts.spotify.com/authorize?' +
+  querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state
+  });
+
+//   console.log("\ncookies: ", res.cookies[stateKey]);
+
+  res.send({redirect_url});
 });
 
 router.get('/callback', function (req, res) {
@@ -51,49 +55,38 @@ router.get('/callback', function (req, res) {
 
   let code = req.query.code || null;
   let state = req.query.state || null;
-  let storedState = req.cookies ? req.cookies[stateKey] : null;
+  // let storedState = req.cookies ? req.cookies[stateKey] : null;
 
-  if (state === null || state !== storedState) {
-      res.redirect('/#' +
-          querystring.stringify({
-              error: 'state_mismatch'
-          }));
-  } else {
-      res.clearCookie(stateKey); // eat (clear) cookie
+  console.log("\ncode: ", code);
+  console.log("\nstate: ", state);
+  // console.log("\nstoredState: ", storedState);
 
-      const authOptions = {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
-          },
-          body: `code=${code}&redirect_uri=${redirect_uri}&grant_type=authorization_code`,
-          json: true
-      };
+  const authOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
+    },
+    body: `code=${code}&redirect_uri=${redirect_uri}&grant_type=authorization_code`,
+    json: true
+};
 
-      fetch('https://accounts.spotify.com/api/token', authOptions) // make request to token endpoint for our tokens
-          .then((response) => {
-              if (response.status === 200) {
-                  response.json().then((data) => {
-                      let access_token = data.access_token
-                      let refresh_token = data.refresh_token
-                      res.redirect('/#' +
-                          querystring.stringify({
-                              access_token: access_token,
-                              refresh_token: refresh_token
-                          }));
-                  });
-              } else {
-                  res.redirect('/#' +
-                      querystring.stringify({
-                          error: 'invalid_token'
-                      }));
-              };
-          })
-          .catch(error => {
-              console.error(error);
-          });
-  }
+fetch('https://accounts.spotify.com/api/token', authOptions) // make request to token endpoint for our tokens
+    .then((response) => {
+        if (response.status === 200) {
+            response.json().then((data) => {
+              console.log("token successfully retrieved");
+                let access_token = data.access_token
+                let refresh_token = data.refresh_token
+                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&state=${state}&error=${undefined}`);
+            });
+        } else {
+            res.redirect(`http://localhost:3000/login?&error=${"ERROR_INVALID_TOKEN"}`);;
+        };
+    })
+    .catch(error => {
+        console.error(error);
+    });
 });
 
 router.get('/refresh_token', function (req, res) {

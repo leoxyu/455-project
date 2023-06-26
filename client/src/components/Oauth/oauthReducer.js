@@ -26,6 +26,18 @@ const oauthSlice = createSlice({
     name: 'login',
     initialState: initialState,
     reducers: {
+        setAccessToken: (state, action) => {
+            state.access_token = action.payload;
+        },
+        setRefreshToken: (state, action) => {
+            state.refresh_token = action.payload;
+        },
+        setSpotifyProfile: (state, action) => {
+            state.profile = action.payload;
+        },
+        setSpotifyAuthError: (state, action) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         // builder.addCase(spotifyRedirectToAuthCodeFlowThunk.fulfilled, (state, action) => {
@@ -35,7 +47,7 @@ const oauthSlice = createSlice({
     }
 });
 
-export const { } = oauthSlice.actions;
+export const { setAccessToken, setRefreshToken, setSpotifyAuthError, setSpotifyProfile } = oauthSlice.actions;
 
 export default oauthSlice.reducer;
 
