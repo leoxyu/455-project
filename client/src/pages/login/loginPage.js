@@ -11,7 +11,7 @@ import spotifyLogo from '../../images/spotify.svg';
 // Spotify API shit
 import { getHashParams } from '../../components/Oauth/Spotify/spotifyUtil';
 import { spotifyLoginThunk } from '../../components/Oauth/Spotify/spotifyOauthThunks';
-import { setAccessToken, setRefreshToken, setSpotifyProfile } from '../../components/Oauth/oauthReducer';
+import { setAccessToken, setRefreshToken, setSpotifyAuthError, setSpotifyProfile } from '../../components/Oauth/spotifyApiReducer';
 
 
 const LOGIN_STATUS = {
@@ -39,7 +39,7 @@ const LoginPage = () => {
     const error = urlParams.get('error');
     const access_token = urlParams.get('access_token');
     const refresh_token = urlParams.get('refresh_token');
-    const state = urlParams.get('state'); // currently not working.
+    // const state = urlParams.get('state'); // currently working, but needs to be decoded to be used (so not really working)
 
     if (!error) {
       // do nothing,
@@ -47,10 +47,9 @@ const LoginPage = () => {
     } else if (error === "ERROR_INVALID_TOKEN") {
       console.log("invalid token recieved during OAuth");
     } else {
-      setAccessToken(access_token);
-      setRefreshToken(refresh_token);
-      setSpotifyLoggedIn(error);
-      console.log(state);
+      dispatch(setAccessToken(access_token));
+      dispatch(setRefreshToken(refresh_token));
+      dispatch(setSpotifyAuthError(error));
       setSpotifyLoggedIn(true);
     }
 
@@ -148,7 +147,11 @@ const LoginPage = () => {
       />
       <button onClick={handleLogin} className="login-button">Login/Sign up</button>
       <br></br>
-      <button onClick={spotifyLogin} className="login-button">Verify Spotify Account</button>
+      {!spotifyLoggedIn ? (
+        <button onClick={spotifyLogin} className="login-button">Verify Spotify Account</button>
+      ) : (
+        <p>Spotify connected</p>
+      )}
 
       {showCreateAccount && (
         <CreateAccount

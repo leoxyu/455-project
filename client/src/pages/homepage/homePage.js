@@ -1,6 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../styles/HomePage.css'; // Create a new CSS file for homepage styles
 
@@ -9,9 +8,16 @@ import { spotifyFetchProfileThunk, spotifyGetAccessTokenThunk, spotifyRedirectTo
 const HomePage = () => {
   const theme = useSelector(state => state.oauth.theme); // Assuming you have a theme state in Redux
   const userId = useSelector(state => state.login.id);
+  let access_token = useSelector(state => state.oauth.access_token);
   let signedIn = userId;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (access_token) {
+      // fetch profile info...
+    }
+  }, [access_token]);
 
   const spotifyOauth = () => {
 

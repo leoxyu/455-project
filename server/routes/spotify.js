@@ -9,6 +9,10 @@ const client_id = 'e44db89e494a47529355c4401180f251';
 const client_secret = '4b1f65eda5464bfabb44593e87284d9f'; // important to protect this one
 const redirect_uri = 'http://localhost:3001/spotify/callback';
 
+let access_token = null;
+let refresh_token = null;
+let spotify_profile = null;
+
 const generateRandomString = function (length) { // generate random string to use as a state
   let text = '';
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -46,7 +50,7 @@ router.get('/login', function (req, res) { // handle login request from the hype
 
 //   console.log("\ncookies: ", res.cookies[stateKey]);
 
-  res.send({redirect_url});
+  return res.send({redirect_url});
 });
 
 router.get('/callback', function (req, res) {
@@ -76,9 +80,9 @@ fetch('https://accounts.spotify.com/api/token', authOptions) // make request to 
         if (response.status === 200) {
             response.json().then((data) => {
               console.log("token successfully retrieved");
-                let access_token = data.access_token
-                let refresh_token = data.refresh_token
-                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&state=${state}&error=${undefined}`);
+                access_token = data.access_token
+                refresh_token = data.refresh_token
+                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&state=${state}&error=${"NO_ERROR"}`);
             });
         } else {
             res.redirect(`http://localhost:3000/login?&error=${"ERROR_INVALID_TOKEN"}`);;
@@ -86,6 +90,7 @@ fetch('https://accounts.spotify.com/api/token', authOptions) // make request to 
     })
     .catch(error => {
         console.error(error);
+        return res.send(error);
     });
 });
 
@@ -101,7 +106,7 @@ router.get('/refresh_token', function (req, res) {
   const authOptions = {
       method: 'POST',
       headers: {
-          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')), 
           'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: `grant_type=refresh_token&refresh_token=${refresh_token}`,
@@ -111,15 +116,36 @@ router.get('/refresh_token', function (req, res) {
       .then(response => {
           if (response.status === 200) {
               response.json().then((data) => {
-                  const access_token = data.access_token;
-                  res.send({ access_token });
+                  access_token = data.access_token;
+                  return res.send({ access_token });
               });
           };
       })
       .catch(error => {
           console.error(error);
-          res.send(error);
+          return res.send(error);
       });
+});
+
+router.get('/spotify_profile', function (req, res) {
+    if (!access_token) {
+        res.status(400);
+        res.send({error: "access_token not found, request it and then try again"});
+    } else {
+        fetch("https://api.spotify.com/v1/me", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+            if (response.status === 200) {
+                spotify_profile = response.payload;
+                return res.send(spotify_profile);
+            }
+        }).catch(error => {
+            console.log(error);
+            return res.send(error);
+        });
+    }
+
 });
 
 module.exports = router;

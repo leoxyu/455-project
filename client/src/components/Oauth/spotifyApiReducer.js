@@ -7,11 +7,11 @@ import { spotifyGetAccessTokenThunk, spotifyFetchProfileThunk, spotifyRedirectTo
 // parameters for spotify OAuth
 // =================================================================================>
 
-let params = getHashParams();
+// let params = getHashParams();
 
-let access_token = params.access_token;
-let refresh_token = params.refresh_token;
-let error = params.error;
+let access_token = null;
+let refresh_token = null;
+let error = null;
 
 
 
@@ -22,7 +22,7 @@ const initialState = {
     profile: null
 };
 
-const oauthSlice = createSlice({
+const spotifyApiSlice = createSlice({
     name: 'login',
     initialState: initialState,
     reducers: {
@@ -47,7 +47,7 @@ const oauthSlice = createSlice({
     }
 });
 
-export const { setAccessToken, setRefreshToken, setSpotifyAuthError, setSpotifyProfile } = oauthSlice.actions;
+export const { setAccessToken, setRefreshToken, setSpotifyAuthError, setSpotifyProfile } = spotifyApiSlice.actions;
 
-export default oauthSlice.reducer;
+export default spotifyApiSlice.reducer;
 
