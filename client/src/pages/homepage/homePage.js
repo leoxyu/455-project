@@ -3,25 +3,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../styles/HomePage.css'; // Create a new CSS file for homepage styles
 
-import { spotifyFetchProfileThunk, spotifyGetAccessTokenThunk, spotifyRedirectToAuthCodeFlowThunk } from '../../components/Oauth/Spotify/spotifyOauthThunks';
+// Spotify
+import { spotifyProfileThunk } from '../../components/Oauth/Spotify/spotifyOauthThunks';
+import { setSpotifyProfile } from '../../components/Oauth/spotifyApiReducer';
 
 const HomePage = () => {
-  const theme = useSelector(state => state.oauth.theme); // Assuming you have a theme state in Redux
+  const theme = useSelector(state => state.spotify.theme); // WTF is this??? a "theme" state doesn't exist in this reducer
   const userId = useSelector(state => state.login.id);
-  let access_token = useSelector(state => state.oauth.access_token);
   let signedIn = userId;
+
+  // Spotify
+  let access_token = useSelector(state => state.spotify.access_token);
+  let spotify_profile = useSelector(state => state.spotify.profile);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (access_token) {
       // fetch profile info...
+      const response = dispatch(spotifyProfileThunk());
+      response.then((contents) => {
+        dispatch(setSpotifyProfile(contents.payload));
+      });
     }
   }, [access_token]);
-
-  const spotifyOauth = () => {
-
-  };
 
 
   return (

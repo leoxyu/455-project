@@ -10,6 +10,10 @@ var LOGINS = [
     {
         user: "david25",
         pass: "skybluefour"
+    },
+    {
+        user: "1",
+        pass: "1"
     }
 ]
 

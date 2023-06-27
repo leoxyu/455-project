@@ -56,9 +56,6 @@ const LoginPage = () => {
 
   }, []);
 
-  // let access_token = useSelector((state) => state.oauth.access_token);
-  // let refresh_token = useSelector((state) => state.oauth.refresh_token);
-  // let error = useSelector((state) => state.oauth.error);
 
   const dispatch = useDispatch();
 

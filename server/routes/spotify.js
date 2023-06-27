@@ -35,7 +35,7 @@ router.get('/login', function (req, res) { // handle login request from the hype
   let state = generateRandomString(16);
   res.cookie(stateKey, state); // set cookie to travel with request
 
-  console.log("\nstate before sending query: ", state);
+  // console.log("\nstate before sending query: ", state);
 
   // request authorization - automatically redirects to callback
   const scope = 'user-read-private user-read-email';
@@ -61,8 +61,8 @@ router.get('/callback', function (req, res) {
   let state = req.query.state || null;
   // let storedState = req.cookies ? req.cookies[stateKey] : null;
 
-  console.log("\ncode: ", code);
-  console.log("\nstate: ", state);
+  // console.log("\ncode: ", code);
+  // console.log("\nstate: ", state);
   // console.log("\nstoredState: ", storedState);
 
   const authOptions = {
@@ -127,18 +127,21 @@ router.get('/refresh_token', function (req, res) {
       });
 });
 
-router.get('/spotify_profile', function (req, res) {
+router.get('/profile', function (req, res) {
     if (!access_token) {
         res.status(400);
         res.send({error: "access_token not found, request it and then try again"});
     } else {
         fetch("https://api.spotify.com/v1/me", {
             method: "GET",
-            headers: { Authorization: `Bearer ${accessToken}` }
+            headers: { Authorization: `Bearer ${access_token}` }
         }).then(response => {
             if (response.status === 200) {
-                spotify_profile = response.payload;
-                return res.send(spotify_profile);
+                response.json().then((data) => {
+                    console.log("Profile successfully retrieved");
+                    spotify_profile = data;
+                    res.send(spotify_profile);
+                  });
             }
         }).catch(error => {
             console.log(error);
