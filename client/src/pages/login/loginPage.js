@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, signup } from './redux/loginReducer';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/LoginPage.css';
