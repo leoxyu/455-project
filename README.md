@@ -34,11 +34,12 @@ Based on time constraints, additional functionality that can be considered inclu
 ### Minimal Requirements
 
 1. Importing songs & playlists from Spotify and YouTube
+   - Allow user to sign in/sign out
    - Implement authentication with Spotify and YouTube APIs
    - Develop functionality to fetch songs and playlists from the APIs
    - Store the imported data in the application's database
 
-2. Creating custom playlists of songs
+3. Creating custom playlists of songs
    - Design and implement a user-friendly interface for creating playlists
    - Allow users to add songs from the imported data or search for new songs
    - Enable saving and managing custom playlists

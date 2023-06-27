@@ -1,0 +1,107 @@
+.playlists-page {
+    background-color: var(--background-base);
+    min-height: 100vh;
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-items: center;
+    /* justify-content: center; */
+    padding: 20px;
+    font-size: calc(10px + 2vmin);
+    color: var(--text-base);
+    padding-left: 250px;
+  }
+
+
+  .playlists-page .adder {
+    position: relative;
+    /* display: flex; */
+    align-items: center;
+    background-color: var(--background-base);
+    justify-content: space-between;
+    padding: 0.5rem;
+    transition: border-color 0.3s; /* Add transition for smooth effect */
+    font-size: 1.1rem;
+    min-width: 11rem;  
+    max-width: 11rem;
+    /* max-width: 40rem; */
+    max-height: 15rem;
+    flex-grow: 1;
+    font-size: 17px;
+    flex:1;
+    flex-basis: 25%;
+    margin-left: 0.20rem;
+  }
+  .playlists-page .add-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-tinted-base);
+    width: 10em;
+    height: 10em; /* Set the desired height for the adder container */
+    border-radius: 10px;
+  }
+
+  .playlists-page .add-text {
+    color: var(--text-base);
+    font-size: 22px;
+    overflow: hidden; /* Hide any overflowing content */
+    text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
+    position: absolute;
+    bottom: 0.4em; /* Set the desired distance from the bottom */
+    left: 1.4em;
+    /* top: 6em; */
+  }
+
+  .adder:hover {
+    background-color: var(--background-elevated-base);
+    .essential-info .thumbnail-container .play-icon {
+        opacity: 1;
+        fill:var(--text-base);
+    }
+  }
+  
+  
+
+/*  
+  .playlists-page .add-icon {
+    position:relative;
+    align-content: center;
+    width: 3rem;
+    fill: var(--text-base);
+    stroke: var(--text-subdued);
+    font-size: 1.5em;
+    margin-right: 0.5em;
+    left: 50%;
+  }
+ */
+
+  
+  .playlists-page .add-icon {
+    fill: var(--text-base);
+    stroke: var(--text-subdued);
+    font-size: 1.5em;
+    width: 1.5em;
+    margin-right: 0.5em;
+    transform: translateX(.25em); /* Move the add icon to the horizontal center */
+  }
+
+
+  .creator-dialog-overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+/* 
+.playlist-creator {
+  
+  background-color: var(--background-base);
+  opacity: 1;
+} */

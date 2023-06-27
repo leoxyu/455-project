@@ -1,5 +1,9 @@
 var LOGINS = [
     {
+        user: "1",
+        pass: "1"
+    },
+    {
         user: "admin",
         pass: "password"
     },
