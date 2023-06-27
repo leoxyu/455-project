@@ -1,8 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {addSongAsync, getPlaylistsAsync} from '../../../components/home/redux/thunks';
+import '../../../styles/variables.css';
+import '../styles/Options.css';
+import SearchBar from './SearchBar';
 
-const Options = ({ songLink, onClose, platform }) => {
+
+const Options = ({ songLink, onClose=()=>{}, platform }) => {
   const playlists = useSelector((state) => state.playlists.playlists);
   
   const dispatch = useDispatch();
@@ -16,7 +20,7 @@ const Options = ({ songLink, onClose, platform }) => {
     // setSelectedPlaylist('wtf');
   };
 
-  const handleSelection = () => {
+  const handleSelection = (event) => {
     // Handle playlist selection
     // console.log(`Selected playlist: ${selectedPlaylist}`);
     const data = {
@@ -31,21 +35,29 @@ const Options = ({ songLink, onClose, platform }) => {
 
     // dispatch(createPlaylistAsync(fakedata));
     //  so selected playlist works ....
-    dispatch(addSongAsync(selectedPlaylist, data));
+    dispatch(addSongAsync(event.target.value, data));
     onClose(); // Trigger the onClose callback
   };
 
   return (
-    <div>
-      <p style={{fontSize:'10px'}}>Add to playlist:</p>
-      <select onChange={handlePlaylistChange}>
+    <div className='options-dialog'>
+      <p className='options-title'>Add to playlist:</p>
+      <SearchBar />
+        <div className="options-playlist-input">
+          New playlist
+        </div>
+      <div className="options-dropdown">
+        {/* add search bar here*/}
         {playlists.map((playlist) => (
-          <option key={playlist.playlistID} value={playlist.playlistID}>
-            {playlist.name}
-          </option>
+          <div
+          className="options-playlist-input"
+          value={playlist.playlistID}
+          onClick={handleSelection}>
+          {playlist.name}
+          </div>
         ))}
-      </select>
-      <button onClick={handleSelection}>Add</button>
+      </div>
+      {/* <button onClick={handleSelection}>Add</button> */}
     </div>
   );
 };

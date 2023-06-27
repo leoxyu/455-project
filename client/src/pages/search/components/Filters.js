@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../../styles/variables.css';
 import '../styles/Filters.css';
 
-function Filters() {
+function Filters({filters=['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists']}) {
     const [selectedFilter, setSelectedFilter] = useState('All');
 
     const handlePress = (event) => {
@@ -11,7 +11,7 @@ function Filters() {
       // dispatch filter to redux store
     };
 
-  const filters = ['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists'];
+  // const filters = ['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists'];
 
   return (
     <div className="filters">

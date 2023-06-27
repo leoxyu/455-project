@@ -94,7 +94,7 @@ const SearchPage = () => {
       <SearchBar />
       <Filters />
       {/* <PlaylistCreator /> */}
-      {/* <Options /> */}
+      <Options />
       
 
       <div className='spotify-songs'>

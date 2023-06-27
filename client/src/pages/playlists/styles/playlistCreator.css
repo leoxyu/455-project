@@ -6,7 +6,7 @@
     min-height: 20em;
     width: 35%;
     border-color: var(--background-tinted-highlight);
-    background-color: var(--background-tinted-base);
+    background-color: var(--background-elevated-base);
     padding: 2em;
     border-radius: 1em;
 }

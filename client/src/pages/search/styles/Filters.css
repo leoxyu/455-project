@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     justify-content: left;
     background-color: transparent;
+    padding-top: 0.5rem;
 }
 
 .filter-button {

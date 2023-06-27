@@ -5,7 +5,7 @@ import '../../../styles/variables.css';
 import '../styles/playlistCreator.css'
 
 
-const PlaylistCreator = () => {
+const PlaylistCreator = ({onClose=()=>{}}) => {
   const [playlistName, setPlaylistName] = useState('');
   const [playlistDescription, setPlaylistDescription] = useState('');
   const author = useSelector((state) => state.login.id);
@@ -31,6 +31,7 @@ const PlaylistCreator = () => {
     }
     dispatch(createPlaylistAsync(data));
     setPlaylistName('');
+    onClose();
     //  redirect to the playlist view page
   };
 
@@ -82,7 +83,7 @@ const PlaylistCreator = () => {
       />
       </div>
       <div className='playlist-creator-buttons'>
-      <button className='creator-button' onClick={createPlaylist}>Cancel</button>
+      <button className='creator-button' onClick={onClose}>Cancel</button>
       <button className='creator-button' onClick={createPlaylist}>Create</button>
       </div>
       </div>
