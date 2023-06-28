@@ -1,0 +1,82 @@
+.options-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* min-height: 20em; */
+    /* width: 35%; */
+    border-color: var(--background-tinted-highlight);
+    background-color: var(--background-tinted-base);
+    padding: 0.5em;
+    width: 7em;
+    /* border-radius: 1em; */
+}
+
+
+.options-title {
+    font-size: 0.55em;
+    font-weight: bold;
+    color: var(--text-base);
+}
+
+.options-dropdown{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  overflow: auto;  /* Enable scrolling when content overflows */
+  max-height: 5em; /* Set a maximum height to limit the scrolling area */
+}
+
+
+.options-dropdown::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
+  }
+  
+  .options-dropdown::-webkit-scrollbar-track {
+    /* background-color: #333; 
+     */
+     background-color: var(--background-tinted-base);
+   }
+  
+  .options-dropdown::-webkit-scrollbar-thumb {
+    /* background-color: #666;
+     */
+     background-color: var(--background-tinted-highlight);
+  }
+
+
+.options-playlist-input{
+  font-size: 0.55em;
+  padding: 0.5em;
+}
+  
+.options-playlist-input:hover {
+    border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
+    background-color: var(--background-tinted-base);
+  }
+
+
+  .options-dialog .search-bar{
+    background-color: var(--background-tinted-base);
+    border-radius: 0rem;
+  }
+
+  .options-dialog .search-bar input {
+    font-size: 0.5em;
+    height: 1.3em;
+    padding: 0em;
+  }
+
+  .options-dialog .search-bar .search-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .options-dialog .search-bar .clear-button {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .options-dialog .search-bar:hover{
+    background-color: var(--background-tinted-highlight);
+  }

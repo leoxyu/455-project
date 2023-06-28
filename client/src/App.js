@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';
@@ -8,10 +8,12 @@ import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
 import SongPlayer from './components/player/SongPlayer';
 
+import Menu from './components/nav/navBar';
+
 const App = () => {
   const userId = useSelector(state => state.login.id);
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route
           path="/login"
@@ -42,7 +44,7 @@ const App = () => {
           }
         />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 

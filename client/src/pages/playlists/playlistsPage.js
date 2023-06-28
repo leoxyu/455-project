@@ -6,12 +6,14 @@ import '../../styles/PlaylistsPage.css';
 import SearchBar from '../search/components/SearchBar';
 import PlaylistResult from '../search/components/PlaylistResult';
 import Filters from '../search/components/Filters';
-import PlaylistCreator from '../search/components/PlaylistCreator';
+import PlaylistCreator from './components/PlaylistCreator';
+import { ReactComponent as AddIcon } from '../../images/add.svg';
+import '../search/styles/Preview.css';
 
 
-//  look here later: https://github.com/dermasmid/scrapetube
-// also here: https://github.com/paulomcnally/youtube-node
 const PlaylistPage = () => {
+
+  const [creatorVisible, setCreatorVisible] = useState(false);
 
   useEffect(() => {
     document.title = "Uni.fi - Playlists"; // Change the webpage title
@@ -25,6 +27,15 @@ const PlaylistPage = () => {
   useEffect(() => {
     dispatch(getPlaylistsAsync());
   }, []);
+
+
+  const handleAddClick = () => {
+    setCreatorVisible(true);
+  }
+
+  const closeCreator = () => {
+    setCreatorVisible(false);
+  }
 
 
   const handleSearch = async () => {
@@ -41,11 +52,22 @@ const PlaylistPage = () => {
   return (
     <div className='playlists-page'>
       
-      <SearchBar />
-      <Filters />
-       <PlaylistCreator />
-        <h2 className='heading'>Your Playlists</h2>
+      <SearchBar placeholder='Search for playlist'/>
+      <Filters filters={['All', 'Uni.fi', 'Spotify', 'YouTube']}/>
+      
+       {creatorVisible && 
+       <div className='creator-dialog-overlay'>
+       <PlaylistCreator onClose={closeCreator}/>
+       </div>
+       }
+        <h2 className='playlists-heading'>Your Playlists</h2>
         <div className='unifi-playlists-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='adder' onClick={handleAddClick}>
+        <div className='add-icon-container'>
+        <AddIcon className='add-icon'/>
+        </div>
+        <p className='add-text'>New Playlist</p>
+        </div>
         {playlists.map((playlist) => (
           <PlaylistResult
             className={'spotify-playlist-preview'}
@@ -54,10 +76,8 @@ const PlaylistPage = () => {
             playlistName={playlist.name}
             artistName={playlist.author}
             songs={playlist.songs}
-            // views={song.views + ' views'}
-            // duration={song.duration}
             optionsOnClick={() => optionsOnClick(playlist.playlistID)}
-            isEditable={true}
+            isEditable={false}
           />
         ))}
           </div> 

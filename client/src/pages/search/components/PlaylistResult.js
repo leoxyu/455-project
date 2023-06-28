@@ -12,24 +12,12 @@ import '../styles/YtPlaylistPreview.css';
 import {editPlaylistAsync} from '../../../components/home/redux/thunks';
 
 
-const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick, isEditable=false}) => {
+const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
   const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     setPlaylistName(event.target.value);
-  };
-
-  const editPlaylist = () => {
-    // Replace this with your logic to create a new playlist
-    // console.log(`Creating playlist: ${playlistName}`);
-    const data = {
-        name: ioplaylistName,
-        songs: songs,
-        author: artistName
-    }
-    dispatch(editPlaylistAsync(playlistID, data));
-    // setPlaylistName('');
   };
   
   const handlePlay = () => {
@@ -56,15 +44,7 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
                 <PlayIcon className="play-icon" onClick={handlePlay}/>
             </div>
             <div className="details">
-              {isEditable ? 
-              <input
-              type="text"
-              value={ioplaylistName}
-              onChange={handleInputChange}
-              placeholder="Enter a new playlist name"
-            /> :
                 <div className="name">{playlistName}</div>
-              }
                 <div className="secondary-details">
                 <div className="date">{date}</div>
                 <div className="artist-name">{artistName}</div>
@@ -82,9 +62,6 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
             <OptionsIcon className="options-icon" onClick={handleOptions}/>
         </div>
       </div>
-      {isEditable &&
-        <button onClick={editPlaylist}>Save Changes</button>
-      }
         </div>
   );
 };

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { spotifyOauthThunk } from '../../../components/Oauth/Spotify OAuth/spotifyOauthThunks';
+import { spotifyOauthThunk } from '../../../components/Oauth/Spotify/spotifyOauthThunks';
 
 
 const initialState = {};

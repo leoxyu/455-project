@@ -17,7 +17,7 @@ var playlists= [
         songs: [
             {
                 source: 'Spotify',
-                URI: '0upq5GkOZ25DoExIOyWHkE'
+                URI: 'http://'
             },
             {
                 source: 'Spotify',
