@@ -29,6 +29,10 @@ body {
   }
 }
 
+.page-container {
+  display: flex;
+}
+
 .main-container {
   width: calc(100% - 240px);
   display: flex;

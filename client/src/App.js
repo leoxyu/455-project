@@ -23,7 +23,7 @@ const App = () => {
           path="/*"
           element={
             userId ? (
-              <div style={{display: "flex"}}>
+              <div className="page-container">
                 <Navbar />
                 <div className="main-container">
                   <main>
