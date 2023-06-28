@@ -9,7 +9,6 @@ import { setSpotifyProfile } from '../../components/Oauth/spotifyApiReducer';
 import PlaylistGrid from '../../components/home/PlaylistGrid';
 
 const HomePage = () => {
-  const theme = useSelector(state => state.spotify.theme); // WTF is this??? a "theme" state doesn't exist in this reducer
   const userId = useSelector(state => state.login.id);
   let signedIn = userId;
 
@@ -31,12 +30,10 @@ const HomePage = () => {
 
 
   return (
-    <div className={`App-header ${theme}`}>
-      <h1 className="website-header1">HOME</h1>
+    <div className={`App-header`}>
+      <h1>Welcome {userId}!</h1>
+      <h3>Playlists</h3>
       <PlaylistGrid/>
-      <Link to="/search" className="App-link">Go to Search Page</Link>
-      {signedIn && (<h1>Signed in as {userId}</h1>)}
-      {/* <button onClick={spotifyOauth} className="login-button">Verify Spotify Account</button> */}
     </div>
   );
 
