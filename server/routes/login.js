@@ -1,6 +1,33 @@
 var express = require('express');
 var router = express.Router();
-const { authenticateLogin, LOGIN_STATUS } = require('../login/loginUtil');
+const { MongoClient } = require('mongodb');
+const { LOGIN_STATUS } = require('../login/loginConstants');
+const { URI, DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoConstants');
+
+const client = new MongoClient(URI);
+
+async function authenticateLogin(username, password) {
+    let status = LOGIN_STATUS.UnknownStatus;
+
+    await client.connect();
+
+    const database = client.db(DATABASE_NAME);
+    const collection = database.collection(USER_COLLECTION);
+
+    const foundUser = await collection.findOne({ user: username });
+
+    if (foundUser) {
+        if (foundUser.pass === password) {
+            status = LOGIN_STATUS.LogInSuccess;
+        } else {
+            status = LOGIN_STATUS.LogInFailed;
+        }
+    } else {
+        status = LOGIN_STATUS.TryRegister;
+    }
+
+    return status;
+}
 
 router.post('/', function (req, res, next) {
     if (!req.body) {
@@ -10,31 +37,37 @@ router.post('/', function (req, res, next) {
     const username = req.body.user;
     const password = req.body.pass;
 
-    let status = authenticateLogin(username, password);
-
-    switch (status) {
-        case LOGIN_STATUS.LogInSuccess:
-            return res.status(200).send({
-                message: 'Successfully signed into account ' + username,
-                id: username,
-                status: LOGIN_STATUS.LogInSuccess
+    authenticateLogin(username, password)
+        .then((status) => {
+            switch (status) {
+                case LOGIN_STATUS.LogInSuccess:
+                    return res.status(200).send({
+                        message: 'Successfully signed into account ' + username,
+                        id: username,
+                        status: LOGIN_STATUS.LogInSuccess
+                    });
+                case LOGIN_STATUS.LogInFailed:
+                    return res.status(400).send({
+                        message: 'Login failed',
+                        status: LOGIN_STATUS.LogInFailed
+                    });
+                case LOGIN_STATUS.TryRegister:
+                    return res.status(300).send({
+                        message: 'User not found. Redirecting to register prompt.',
+                        status: LOGIN_STATUS.TryRegister
+                    });
+                default:
+                    return res.status(400).send({
+                        message: 'Unknown status when trying to authenticate credentials.',
+                    });
+            }
+        })
+        .catch((error) => {
+            return res.status(500).send({
+                message: 'Error occurred while authenticating credentials.',
+                error: error.message
             });
-        case LOGIN_STATUS.LogInFailed:
-            return res.status(400).send({
-                message: 'Login failed',
-                status: LOGIN_STATUS.LogInFailed
-            });
-        case LOGIN_STATUS.TryRegister:
-            return res.status(300).send({
-                message: 'User not found. Redirecting to register prompt.',
-                status: LOGIN_STATUS.TryRegister
-            });
-        default:
-            return res.status(400).send({
-                message: 'Unknown status when trying to authenticate credentials.',
-            });
-    }
-
+        });
 });
 
 module.exports = router;

@@ -8,7 +8,6 @@ import { spotifyFetchProfile, spotifyGetAccessTokenThunk, spotifyRedirectToAuthC
 import PlaylistGrid from '../../components/home/PlaylistGrid';
 
 const HomePage = () => {
-  const theme = useSelector(state => state.oauth.theme); // Assuming you have a theme state in Redux
   const code = useSelector(state => state.oauth.code);
   const clientId = useSelector(state => state.oauth.clientId);
   const accessToken = useSelector(state => state.oauth.accessToken);
@@ -30,13 +29,10 @@ const HomePage = () => {
 
 
   return (
-    <div className={`App-header ${theme}`}>
-      <h1 className="website-header1">HOME</h1>
+    <div className={`App-header`}>
+      <h1>Welcome {userId}!</h1>
+      <h3>Playlists</h3>
       <PlaylistGrid/>
-      <Link to="/search" className="App-link">Go to Search Page</Link>
-      {signedIn && (
-        <h1>Signed in as {userId}</h1>
-      )}
     </div>
   );
 
