@@ -21,11 +21,6 @@ export class YoutubePlayer extends React.Component {
     })
   }
 
-  handleStop = () => {
-    this.setState({ playing: false });
-    this.player.seekTo(0);
-  }
-
   handlePlay = () => {
     this.setState({ playing: true });
   }

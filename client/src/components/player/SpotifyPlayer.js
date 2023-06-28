@@ -5,7 +5,6 @@ import { Player } from "./Player";
 export default function SpotifyPlayer(props) {
   const controller = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isStopped, setIsStopped] = useState(true);
   const [duration, setDuration] = useState(1.1);
   const [truePosition, setTruePosition] = useState(0);
   const [position, setPosition] = useState(0);
@@ -35,8 +34,8 @@ export default function SpotifyPlayer(props) {
       if (controller.current) {
         const embed = document.createElement('div');
         embed.setAttribute("id", "embed-iframe");
-        const wrapper = document.getElementById('spotify-player');
-        wrapper.appendChild(embed);
+        const container = document.getElementById('iframe-container');
+        container.appendChild(embed);
       }
 
       initializeIframe(iframeApi);
@@ -71,7 +70,6 @@ export default function SpotifyPlayer(props) {
 
         if (props.playOnLoad) {
           EmbedController.play();
-          setIsStopped(false);
           setIsPlaying(true);
         }
 
@@ -88,9 +86,8 @@ export default function SpotifyPlayer(props) {
   };
 
   const handlePlay = () => {
-    if (isStopped) {
+    if (truePosition === 0) {
       controller.current.play();
-      setIsStopped(false);
     } else if (!isPlaying) {
       controller.current.togglePlay();
     }
@@ -116,13 +113,12 @@ export default function SpotifyPlayer(props) {
   const handleSeekMouseUp = (e) => {
     const seconds = parseInt(e.target.value / 1000, 10);
 
-    // need this because for some reason sekking to 0 doesn't work
+    // need this because for some reason seeking to 0 doesn't work
     if (seconds === 0) {
-      controller.current.play();
       setTruePosition(0);
       setPosition(0);
 
-      if (isStopped || !isPlaying) {
+      if (isPlaying) {
         controller.current.play();
       }
 
@@ -151,29 +147,20 @@ export default function SpotifyPlayer(props) {
 
   const handleEnded = () => {
     if (loop) {
-      handleStop();
       controller.current.play();
       setTruePosition(0);
       setPosition(0);
       setIsPlaying(true);
-      setIsStopped(false);
     } else {
       handleNextSong();
     }
   };
 
-  const handleStop = () => {
-    if (isPlaying) {
-      controller.current.togglePlay();
-    }
-
-    setIsPlaying(false);
-    setIsStopped(true);
-  };
-
   return (
     <div id="spotify-player" className="song-player">
-      <div id="embed-iframe"></div>
+      <div className="iframe-container" id="iframe-container">
+        <div id="embed-iframe"></div>
+      </div>
       <Player
         playing={isPlaying}
         played={position}

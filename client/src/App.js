@@ -6,6 +6,7 @@ import SearchPage from './pages/search/searchPage';
 import PlaylistsPage from './pages/playlists/playlistsPage';
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
+import SongPlayer from './components/player/SongPlayer';
 
 import Menu from './components/nav/navBar';
 
@@ -22,14 +23,21 @@ const App = () => {
           path="/*"
           element={
             userId ? (
-              <>
+              <div className="page-container">
                 <Navbar />
-                <Routes>
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/search" element={<SearchPage />} />
-                  <Route path="/playlists" element={<PlaylistsPage />} />
-                </Routes>
-              </>
+                <div className="main-container">
+                  <main>
+                    <Routes>
+                      <Route path="/home" element={<HomePage />} />
+                      <Route path="/search" element={<SearchPage />} />
+                      <Route path="/playlists" element={<PlaylistsPage />} />
+                    </Routes>
+                  </main>
+                  <footer className="general-player">
+                    <SongPlayer/>
+                  </footer>
+                </div>
+              </div>
             ) : (
               <Navigate to="/login" replace={true} />
             )
