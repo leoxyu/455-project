@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import '../../styles/HomePage.css'; // Create a new CSS file for homepage styles
 
 import { spotifyFetchProfile, spotifyGetAccessTokenThunk, spotifyRedirectToAuthCodeFlowThunk } from '../../components/Oauth/Spotify OAuth/spotifyOauthThunks';
+import PlaylistGrid from '../../components/home/PlaylistGrid';
 
 const HomePage = () => {
-  const theme = useSelector(state => state.oauth.theme); // Assuming you have a theme state in Redux
   const code = useSelector(state => state.oauth.code);
   const clientId = useSelector(state => state.oauth.clientId);
   const accessToken = useSelector(state => state.oauth.accessToken);
@@ -29,11 +29,10 @@ const HomePage = () => {
 
 
   return (
-    <div className={`App-header ${theme}`}>
-      <h1 className="website-header1">THIS IS THE HOME PAGE</h1>
-      <Link to="/search" className="App-link">Go to Search Page</Link>
-      {signedIn && (<h1>Signed in as {userId}</h1>)}
-      <button onClick={spotifyOauth} className="login-button">Verify Spotify Account</button>
+    <div className={`App-header`}>
+      <h1>Welcome {userId}!</h1>
+      <h3>Playlists</h3>
+      <PlaylistGrid/>
     </div>
   );
 
