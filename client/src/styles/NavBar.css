@@ -6,8 +6,10 @@
     background-color: #65a29c;
     color: rgba(236, 236, 236, 0.829);
     padding: 20px;
-    height: 100vh;
     position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .navbar-top {
@@ -49,13 +51,19 @@
     margin-left: 18px;
 }
 
-.navbar-menu li {
-    margin-bottom: 10px;
+.navbar-menu ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 .navbar-menu a {
     text-decoration: none;
     color: rgba(236, 236, 236, 0.829);
+}
+
+.navbar-bottom {
+    margin-top: auto;
+    align-items: center;
 }
 
 .signout-button {
@@ -65,5 +73,4 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-top: 30px;
 }

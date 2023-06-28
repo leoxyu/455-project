@@ -39,9 +39,11 @@ const Navbar = () => {
                 </h1>
             </ul>
 
-            <button className="signout-button" onClick={handleSignOut}>
-                Sign Out
-            </button>
+            <div className="navbar-bottom">
+                <button className="signout-button" onClick={handleSignOut}>
+                    Sign Out
+                </button>
+            </div>
         </nav>
     );
 };
