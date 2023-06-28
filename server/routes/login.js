@@ -1,16 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const { MongoClient } = require('mongodb');
-const { URI, DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoValues');
-
-const LOGIN_STATUS = {
-    LogInSuccess: "logInSuccess",
-    LogInFailed: "logInFailed",
-    TryRegister: "tryRegister",
-    RegisterSuccess: "registerSuccess",
-    RegisterFailed: "registerFailed",
-    UnknownStatus: "unknownStatus"
-};
+const { LOGIN_STATUS } = require('../login/loginConstants');
+const { URI, DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoConstants');
 
 const client = new MongoClient(URI);
 
@@ -23,8 +15,6 @@ async function authenticateLogin(username, password) {
     const collection = database.collection(USER_COLLECTION);
 
     const foundUser = await collection.findOne({ user: username });
-
-    console.log({ foundUser });
 
     if (foundUser) {
         if (foundUser.pass === password) {
@@ -40,7 +30,6 @@ async function authenticateLogin(username, password) {
 }
 
 router.post('/', function (req, res, next) {
-    console.log('in post');
     if (!req.body) {
         return res.status(400).send({ message: 'Missing call body!' })
     }
