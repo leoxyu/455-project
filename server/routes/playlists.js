@@ -146,7 +146,7 @@ playlistsRouter.delete('/:playlistId', (req, res, next) => {
 playlistsRouter.patch('/:playlistID', (req, res,next) => {
     console.log(req.body);
     console.log(req.params);
-    const index = playlists.findIndex((playlist) => playlist.id === req.params.playlistID);
+    const index = playlists.findIndex((playlist) => playlist.playlistID === req.params.playlistID);
     try {
         modifyPlaylist(req.body, index);
     }
