@@ -151,6 +151,10 @@ export default function SpotifyPlayer(props) {
       setTruePosition(0);
       setPosition(0);
       setIsPlaying(true);
+    } else if (props.isLastSong) {
+      setTruePosition(0);
+      setPosition(0);
+      setIsPlaying(false);
     } else {
       handleNextSong();
     }

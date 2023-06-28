@@ -77,6 +77,7 @@ export default function SongPlayer() {
           randomSong={randomSong}
           playOnLoad={playOnLoad.current}
           shuffle={shuffle.current}
+          isLastSong={currentSongIndex === songs.length - 1}
         />
       }
       {songs.length !== 0 && songs[currentSongIndex].type === "spotify" &&
@@ -88,6 +89,7 @@ export default function SongPlayer() {
           randomSong={randomSong}
           playOnLoad={playOnLoad.current}
           shuffle={shuffle.current}
+          isLastSong={currentSongIndex === songs.length - 1}
         />
       }
     </>
