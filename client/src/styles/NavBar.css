@@ -47,13 +47,13 @@
     margin-bottom: 10px;
 }
 
-.navbar-menu {
-    margin-left: 18px;
-}
-
 .navbar-menu ul {
     list-style-type: none;
     padding: 0;
+}
+
+.navbar-menu li {
+    margin-bottom: 10px;
 }
 
 .navbar-menu a {
