@@ -33,6 +33,8 @@
     padding: 0.5rem;
     background-color: transparent;
     color: var(--text-base);
+    height: 1.5rem; /* Adjust the height to scale the icon */
+    box-sizing: border-box;
   }
   
   .search-bar .search-icon {

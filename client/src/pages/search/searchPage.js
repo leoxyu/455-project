@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar';
 import SongResult from './components/SongResult';
 import PlaylistResult from './components/PlaylistResult';
 import Filters from './components/Filters';
-import PlaylistCreator from './components/PlaylistCreator';
+// import PlaylistCreator from './components/PlaylistCreator';
 import Options from './components/Options';
 
 
@@ -93,8 +93,8 @@ const SearchPage = () => {
       
       <SearchBar />
       <Filters />
-      <PlaylistCreator />
-      {/* <Options /> */}
+      {/* <PlaylistCreator /> */}
+      <Options />
       
 
       <div className='spotify-songs'>

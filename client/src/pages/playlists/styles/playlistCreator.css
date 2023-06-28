@@ -1,0 +1,105 @@
+
+.playlist-creator {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 20em;
+    width: 35%;
+    border-color: var(--background-tinted-highlight);
+    background-color: var(--background-elevated-base);
+    padding: 2em;
+    border-radius: 1em;
+}
+
+.playlist-creator-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--text-base);
+}
+
+.playlist-creator-input {
+    width: 100%;
+    min-height: 3em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+    border: none;
+    background-color: var(--background-elevated-base);
+    color: var(--text-base);
+    padding-left: 0.5em;
+    resize: none;
+    font-family: 'Roboto', sans-serif;
+    /* resize: vertical; */
+}
+
+.description {
+    padding-top: 12px; /* Adjust the padding values as needed */
+}
+
+.playlist-creator-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+
+.playlist-creator-buttons {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: right;
+    /* width: 100%; */
+    /* margin-top: 1em; */
+    /* margin-bottom: 1em; */
+
+}
+
+
+.creator-button {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-elevated-base);
+    margin: 0.1rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--background-elevated-base); /* Set initial border color */
+    transition: border-color 0.3s; /* Add transition for smooth effect */
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    color: var(--text-base);
+  }
+  
+  .creator-button:hover {
+    border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
+    background-color: var(--background-elevated-highlight);
+  }
+
+  
+  .creator-button:text-content {
+    width: 100%;
+    border: none;
+    outline: none;
+    
+    background-color: transparent;
+    color: var(--text-base);
+  }
+  
+
+  .placeholder {
+    position: relative;
+    top: 45px;
+    left: 5px;
+    transform: translateY(-50%);
+    transition: all 0.3s;
+    pointer-events: none;
+    /* color: #999; */
+    /* display: none; */
+  }
+  
+  .placeholder.active {
+    top: 5px;
+    font-size: 12px;
+    /* display: flex; */
+    /* color: #555; */
+  }

@@ -4,7 +4,7 @@ import '../styles/SearchBar.css';
 import { ReactComponent as SearchIcon } from '../../../images/search.svg';
 import { ReactComponent as ClearIcon } from '../../../images/clear.svg';
 
-function SearchBar() {
+function SearchBar({placeholder='Search for songs, albums, artists...'}) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (event) => {
@@ -24,7 +24,7 @@ function SearchBar() {
         type="text"
         value={searchTerm}
         onChange={handleSearch}
-        placeholder="Search for songs, albums, artists..."
+        placeholder={placeholder}
       />
       {searchTerm && (
         <button className="clear-button" onClick={clearSearch}>
