@@ -6,16 +6,16 @@ import "../../styles/Player.css";
 export const Player = ({ playing, played, loop, shuffle, volume, muted, onPrev, onNext, onPlay, onPause, onToggleLoop, onToggleShuffle, onSeekMouseDown, onSeekMouseUp, onSeekChange, onVolumeChange, onToggleMute, type, duration }) => {
     return (
         <div className="player-container">
-          <BiSkipPrevious size="2rem" className="react-icon" onClick={onPrev}/>
+          <BiSkipPrevious size="32px" className="react-icon" onClick={onPrev}/>
           {!playing &&
-            <AiFillPlayCircle size="2rem" className="react-icon" onClick={onPlay}/>
+            <AiFillPlayCircle size="32px" className="react-icon" onClick={onPlay}/>
           }
           {playing &&
-            <AiFillPauseCircle size="2rem" className="react-icon" onClick={onPause}/>
+            <AiFillPauseCircle size="32px" className="react-icon" onClick={onPause}/>
           }
-          <BiSkipNext size="2rem" className="react-icon" onClick={onNext}/>
-          <MdLoop size="1.25rem" className="react-icon" color={loop ? "#1db954" : undefined} onClick={onToggleLoop}/>
-          <MdShuffle size="1.25rem" className="react-icon" color={shuffle ? "#1db954" : undefined} onClick={onToggleShuffle}/>
+          <BiSkipNext size="32px" className="react-icon" onClick={onNext}/>
+          <MdLoop size="20px" className="react-icon" color={loop ? "#1db954" : undefined} onClick={onToggleLoop}/>
+          <MdShuffle size="20px" className="react-icon" color={shuffle ? "#1db954" : undefined} onClick={onToggleShuffle}/>
 
           <input
             className="song-slider"
@@ -28,10 +28,10 @@ export const Player = ({ playing, played, loop, shuffle, volume, muted, onPrev, 
             onChange={onSeekChange}
             onMouseUp={onSeekMouseUp}
           />
-          {!muted && volume > 0.6 && <BiSolidVolumeFull size="1.5rem" className="react-icon" onClick={onToggleMute}/>}
-          {!muted && volume > 0.2 && volume <= 0.6 && <BiSolidVolumeLow size="1.5rem" className="react-icon" onClick={onToggleMute}/>}
-          {!muted && (volume <= 0.2 && volume > 0) && <BiSolidVolume size="1.5rem" className="react-icon" onClick={onToggleMute}/>}
-          {(muted || volume === 0) && <BiSolidVolumeMute size="1.5rem" className="react-icon-mute" onClick={onToggleMute}/>}
+          {!muted && volume > 0.6 && <BiSolidVolumeFull size="24px" className="react-icon" onClick={onToggleMute}/>}
+          {!muted && volume > 0.2 && volume <= 0.6 && <BiSolidVolumeLow size="24px" className="react-icon" onClick={onToggleMute}/>}
+          {!muted && (volume <= 0.2 && volume > 0) && <BiSolidVolume size="24px" className="react-icon" onClick={onToggleMute}/>}
+          {(muted || volume === 0) && <BiSolidVolumeMute size="24px" className="react-icon-mute" onClick={onToggleMute}/>}
           <input
             className="volume-slider"
             type='range'

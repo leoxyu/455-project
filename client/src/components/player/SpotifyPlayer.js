@@ -35,8 +35,8 @@ export default function SpotifyPlayer(props) {
       if (controller.current) {
         const embed = document.createElement('div');
         embed.setAttribute("id", "embed-iframe");
-        const wrapper = document.getElementById('spotify-player');
-        wrapper.appendChild(embed);
+        const container = document.getElementById('iframe-container');
+        container.appendChild(embed);
       }
 
       initializeIframe(iframeApi);
@@ -173,7 +173,9 @@ export default function SpotifyPlayer(props) {
 
   return (
     <div id="spotify-player" className="song-player">
-      <div id="embed-iframe"></div>
+      <div className="iframe-container" id="iframe-container">
+        <div id="embed-iframe"></div>
+      </div>
       <Player
         playing={isPlaying}
         played={position}

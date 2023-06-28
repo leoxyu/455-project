@@ -6,6 +6,11 @@
     display: none;
 }
 
+.iframe-container {
+    width: 0;
+    height: 0;
+}
+
 .player-button:hover {
     cursor: pointer;
 }
@@ -31,18 +36,21 @@
 .player-container {
     display: flex;
     background-color: black;
-    height: 3rem;
+    height: 50px;
+    justify-content: center;
     align-items: center;
-    padding: 0 5rem;
+    min-width: 550px;
 }
 
 .song-slider {
-    flex: 1;
     margin: 0 1.5rem;
+    width: 350px;
+    max-width: 400px;
+    min-width: 220px;
 }
 
 .volume-slider {
-    width: 7rem;
+    width: 100px;
 }
 
 input[type=range] {

@@ -6,6 +6,7 @@ import SearchPage from './pages/search/searchPage';
 import PlaylistsPage from './pages/playlists/playlistsPage';
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
+import GeneralPlayer from './components/player/VideoPlayer';
 
 const App = () => {
   const userId = useSelector(state => state.login.id);
@@ -20,14 +21,21 @@ const App = () => {
           path="/*"
           element={
             userId ? (
-              <>
+              <div style={{display: "flex"}}>
                 <Navbar />
-                <Routes>
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/search" element={<SearchPage />} />
-                  <Route path="/playlists" element={<PlaylistsPage />} />
-                </Routes>
-              </>
+                <div className="main-container">
+                  <main>
+                    <Routes>
+                      <Route path="/home" element={<HomePage />} />
+                      <Route path="/search" element={<SearchPage />} />
+                      <Route path="/playlists" element={<PlaylistsPage />} />
+                    </Routes>
+                  </main>
+                  <footer className="general-player">
+                    <GeneralPlayer/>
+                  </footer>
+                </div>
+              </div>
             ) : (
               <Navigate to="/login" replace={true} />
             )
