@@ -6,7 +6,7 @@ import SearchPage from './pages/search/searchPage';
 import PlaylistsPage from './pages/playlists/playlistsPage';
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
-import GeneralPlayer from './components/player/VideoPlayer';
+import SongPlayer from './components/player/SongPlayer';
 
 const App = () => {
   const userId = useSelector(state => state.login.id);
@@ -32,7 +32,7 @@ const App = () => {
                     </Routes>
                   </main>
                   <footer className="general-player">
-                    <GeneralPlayer/>
+                    <SongPlayer/>
                   </footer>
                 </div>
               </div>

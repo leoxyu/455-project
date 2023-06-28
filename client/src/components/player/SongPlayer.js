@@ -1,39 +1,10 @@
 import React, { useRef, useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
+import { Player } from "./Player";
 
-// this isn't the actual component so don't use it. i just have it here as an example of how to use the 2 other components and once i don't need this anymore i'll remove it
-export default function GeneralPlayer() {
-  const songs = [
-    {
-      link: "https://www.youtube.com/watch?v=8SPtkjMUkGk",
-      type: "youtube"
-    },
-    {
-      link: "https://open.spotify.com/track/1MFpRGNHyNqOlwQO7zAayP?si=130eb2a425224216",
-      type: "spotify"
-    },
-    {
-      link: "https://www.youtube.com/watch?v=jPoqpNmf8DM",
-      type: "youtube"
-    },
-    {
-      link: "https://open.spotify.com/track/3M2BZA3QOwe9kdVPWkjJcX?si=002697998f4d4fc4",
-      type: "spotify"
-    },
-    {
-      link: "https://open.spotify.com/track/1MFpRGNHyNqOlwQO7zAayP?si=130eb2a425224216",
-      type: "spotify"
-    },
-    {
-      link: "https://www.youtube.com/watch?v=8SPtkjMUkGk",
-      type: "youtube"
-    },
-    {
-      link: "https://www.youtube.com/watch?v=jPoqpNmf8DM",
-      type: "youtube"
-    },
-  ];
+export default function SongPlayer() {
+  const songs = [];
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const playOnLoad = useRef(false);
@@ -75,7 +46,29 @@ export default function GeneralPlayer() {
 
   return (
     <>
-      {songs[currentSongIndex].type === "youtube" &&
+      {songs.length === 0 &&
+        <Player
+          playing={false}
+          played={0}
+          loop={false}
+          shuffle={false}
+          volume={1}
+          muted={false}
+          onPrev={() => null}
+          onNext={() => null}
+          onPlay={() => null}
+          onPause={() => null}
+          onToggleLoop={() => null}
+          onToggleShuffle={() => null}
+          onSeekMouseDown={() => null}
+          onSeekMouseUp={() => null}
+          onSeekChange={() => null}
+          onVolumeChange={() => null}
+          onToggleMute={() => null}
+          type="none"
+        />
+      }
+      {songs.length !== 0 && songs[currentSongIndex].type === "youtube" &&
         <YoutubePlayer
           key={currentSongIndex}
           song={songs[currentSongIndex].link}
@@ -86,7 +79,7 @@ export default function GeneralPlayer() {
           shuffle={shuffle.current}
         />
       }
-      {songs[currentSongIndex].type === "spotify" &&
+      {songs.length !== 0 && songs[currentSongIndex].type === "spotify" &&
         <SpotifyPlayer
           key={currentSongIndex}
           song={songs[currentSongIndex].link}
