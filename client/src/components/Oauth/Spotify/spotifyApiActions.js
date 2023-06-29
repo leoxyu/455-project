@@ -1,5 +1,3 @@
-// Because this is a literal single page application
-// we detect a callback from Spotify by checking for the hash fragment
 
 
 export async function spotifyLogin() {
