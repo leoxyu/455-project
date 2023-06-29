@@ -5,6 +5,7 @@ import { Player } from "./Player";
 import { useSelector } from "react-redux";
 
 export default function SongPlayer() {
+
   const playlist = useSelector(state => state.player.playlist);
   const songs = playlist.songs;
 

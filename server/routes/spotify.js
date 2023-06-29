@@ -59,11 +59,14 @@ router.get('/callback', function (req, res) {
 
   let code = req.query.code || null;
   let state = req.query.state || null;
-  // let storedState = req.cookies ? req.cookies[stateKey] : null;
+  if (req.cookies) {
+
+  }
+  let storedState = req.cookies ? req.cookies[stateKey] : null;
 
   // console.log("\ncode: ", code);
-  // console.log("\nstate: ", state);
-  // console.log("\nstoredState: ", storedState);
+  console.log("\nstate: ", state);
+  console.log("\nstoredState: ", storedState);
 
   const authOptions = {
     method: 'POST',
@@ -82,7 +85,7 @@ fetch('https://accounts.spotify.com/api/token', authOptions) // make request to 
               console.log("token successfully retrieved");
                 access_token = data.access_token
                 refresh_token = data.refresh_token
-                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&state=${state}&error=${"NO_ERROR"}`);
+                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&type=${"spotify"}&error=${"NO_ERROR"}`);
             });
         } else {
             res.redirect(`http://localhost:3000/login?&error=${"ERROR_INVALID_TOKEN"}`);;

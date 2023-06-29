@@ -32,29 +32,35 @@ const LoginPage = () => {
   const [spotifyLoggedIn, setSpotifyLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Spotify API shit
+  // Spotify OAuth stuff
   const urlParams = new URLSearchParams(window.location.search);
 
   useEffect(() => {
     const error = urlParams.get('error');
     const access_token = urlParams.get('access_token');
     const refresh_token = urlParams.get('refresh_token');
-    // const state = urlParams.get('state'); // currently working, but needs to be decoded to be used (so not really working)
+    const type = urlParams.get('type');
+    // const state = urlParams.get('state');
 
     if (!error) {
       // do nothing,
       console.log("not logged in yet.");
-    } else if (error === "ERROR_INVALID_TOKEN") {
-      console.log("invalid token recieved during OAuth");
-    } else {
+    } else if (error === "ERROR_INVALID_TOKEN" && type === "spotify") {
+      console.log("invalid spotify token recieved during OAuth");
+    } else if (type === "spotify") {
       dispatch(setAccessToken(access_token));
       dispatch(setRefreshToken(refresh_token));
       dispatch(setSpotifyAuthError(error));
       setSpotifyLoggedIn(true);
+    } else {
+      console.log("Something went wrong with spotify OAuth and retrieving tokens from URl");
     }
 
 
   }, []);
+
+  // Youtube OAuth stuff
+  // TODO...
 
 
   const dispatch = useDispatch();
