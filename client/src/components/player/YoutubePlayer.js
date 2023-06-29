@@ -5,6 +5,9 @@ import { Player } from './Player';
 export class YoutubePlayer extends React.Component {
   state = {
     url: this.props.song,
+    name: this.props.name,
+    artist: this.props.artist,
+    image: this.props.image,
     playing: this.props.playOnLoad,
     controls: false,
     volume: 1,
@@ -92,7 +95,7 @@ export class YoutubePlayer extends React.Component {
   };
 
   render() {
-    const { url, playing, controls, volume, muted, played, loop, shuffle} = this.state;
+    const { url, name, artist, image, playing, controls, volume, muted, played, loop, shuffle} = this.state;
 
     return (
       <div  className="song-player">
@@ -111,6 +114,9 @@ export class YoutubePlayer extends React.Component {
           loop={loop}
         />
         <Player
+          name={name}
+          artist={artist}
+          image={image}
           playing={playing}
           played={played}
           loop={loop}

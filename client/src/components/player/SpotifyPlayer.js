@@ -166,6 +166,9 @@ export default function SpotifyPlayer(props) {
         <div id="embed-iframe"></div>
       </div>
       <Player
+        name={props.name}
+        artist={props.artist}
+        image={props.image}
         playing={isPlaying}
         played={position}
         loop={loop}

@@ -10,6 +10,8 @@ import '../styles/SpAlbumPreview.css';
 import '../styles/SpPlaylistPreview.css';
 import '../styles/YtPlaylistPreview.css';
 import {editPlaylistAsync} from '../../../components/home/redux/thunks';
+import { setPlaylist } from '../../../components/player/PlayerReducer';
+const { v4: uuid } = require('uuid');
 
 
 const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
@@ -19,9 +21,36 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
   const handleInputChange = (event) => {
     setPlaylistName(event.target.value);
   };
-  
+
   const handlePlay = () => {
-    // Handle play button click
+    // example of how you can load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
+
+    dispatch(setPlaylist({
+      id: uuid(),
+      songs: [
+        {
+          link: "https://www.youtube.com/watch?v=C9K2b9yxjXg",
+          type: "youtube",
+          name: "Fuego",
+          artist: "Eleni Foureira",
+          image: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
+        },
+        {
+          link: "https://open.spotify.com/track/4bjN59DRXFRxBE1g5ne6B1?si=d40939f4f897437d",
+          type: "spotify",
+          name: "Haegeum",
+          artist: "Agust D",
+          image: "https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e"
+        },
+        {
+          link: 'https://open.spotify.com/track/1zi7xx7UVEFkmKfv06H8x0?si=d0226490edb4470b',
+          type: "spotify",
+          name: 'One Dance',
+          artist: "Drake",
+          image: "https://i1.sndcdn.com/artworks-Vi8kWdDLyiHb-0-t500x500.jpg",
+        },
+      ]
+    }));
   };
 
   const handleFavorite = () => {
@@ -80,6 +109,3 @@ export default PlaylistResult;
 //             4415,
 //             1151
 //         ]
-
-
-

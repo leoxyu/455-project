@@ -3,7 +3,7 @@ import { MdLoop, MdShuffle } from 'react-icons/md'
 import { BiSkipNext, BiSkipPrevious, BiSolidVolumeFull, BiSolidVolumeLow, BiSolidVolume, BiSolidVolumeMute } from 'react-icons/bi';
 import "../../styles/Player.css";
 
-export const Player = ({ playing, played, loop, shuffle, volume, muted, onPrev, onNext, onPlay, onPause, onToggleLoop, onToggleShuffle, onSeekMouseDown, onSeekMouseUp, onSeekChange, onVolumeChange, onToggleMute, type, duration }) => {
+export const Player = ({ name, artist, image, playing, played, loop, shuffle, volume, muted, onPrev, onNext, onPlay, onPause, onToggleLoop, onToggleShuffle, onSeekMouseDown, onSeekMouseUp, onSeekChange, onVolumeChange, onToggleMute, type, duration }) => {
     return (
       <>
         {type === "none" &&
@@ -41,10 +41,10 @@ export const Player = ({ playing, played, loop, shuffle, volume, muted, onPrev, 
         {type !== "none" &&
           <div className="player-container">
             <div className="song-info-container">
-              <img src="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228" alt="" width="48px" height="48px"/>
+              <img src={image} alt="Cover Art" width="48px" height="48px"/>
               <div className="song-info">
-                <div className="song-title">Song Title</div>
-                <div className="song-artist">John Doe</div>
+                <div className="song-title">{name}</div>
+                <div className="song-artist">{artist}</div>
               </div>
             </div>
             <div className="player-main">
