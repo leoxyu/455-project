@@ -1,31 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
 import { Player } from "./Player";
+import { useSelector } from "react-redux";
 
 export default function SongPlayer() {
-  const songs = [
-    {
-      link: "https://open.spotify.com/track/4Anip7bDkwKk4HacAIwvEl",
-      type: "spotify"
-    },
-    {
-      link: "https://open.spotify.com/track/0NksLiIx5lbWzFTYTCx4z7",
-      type: "spotify"
-    },
-    {
-      link: "https://www.youtube.com/watch?v=HMGetv40FkI",
-      type: "youtube"
-    },
-    {
-      link: "https://www.youtube.com/watch?v=CjUVTEExfBg",
-      type: "youtube"
-    },
-  ];
+
+  const playlist = useSelector(state => state.player.playlist);
+  const songs = playlist.songs;
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const playOnLoad = useRef(false);
+  const playOnLoad = useRef(true);
   const shuffle = useRef(false);
+
+  useEffect(() => {
+    setCurrentSongIndex(0);
+    playOnLoad.current = true;
+    shuffle.current = false;
+  }, [playlist.id]);
 
   const nextSong = () => {
     if (!playOnLoad.current) {
@@ -87,24 +79,32 @@ export default function SongPlayer() {
       }
       {songs.length !== 0 && songs[currentSongIndex].type === "youtube" &&
         <YoutubePlayer
-          key={currentSongIndex}
+          key={playlist.id.concat(currentSongIndex)}
           song={songs[currentSongIndex].link}
+          name={songs[currentSongIndex].name}
+          artist={songs[currentSongIndex].artist}
+          image={songs[currentSongIndex].image}
           prevSong={prevSong}
           nextSong={nextSong}
           randomSong={randomSong}
           playOnLoad={playOnLoad.current}
           shuffle={shuffle.current}
+          isLastSong={currentSongIndex === songs.length - 1}
         />
       }
       {songs.length !== 0 && songs[currentSongIndex].type === "spotify" &&
         <SpotifyPlayer
-          key={currentSongIndex}
+          key={playlist.id.concat(currentSongIndex)}
           song={songs[currentSongIndex].link}
+          name={songs[currentSongIndex].name}
+          artist={songs[currentSongIndex].artist}
+          image={songs[currentSongIndex].image}
           prevSong={prevSong}
           nextSong={nextSong}
           randomSong={randomSong}
           playOnLoad={playOnLoad.current}
           shuffle={shuffle.current}
+          isLastSong={currentSongIndex === songs.length - 1}
         />
       }
     </>
