@@ -151,6 +151,10 @@ export default function SpotifyPlayer(props) {
       setTruePosition(0);
       setPosition(0);
       setIsPlaying(true);
+    } else if (props.isLastSong) {
+      setTruePosition(0);
+      setPosition(0);
+      setIsPlaying(false);
     } else {
       handleNextSong();
     }
@@ -162,6 +166,9 @@ export default function SpotifyPlayer(props) {
         <div id="embed-iframe"></div>
       </div>
       <Player
+        name={props.name}
+        artist={props.artist}
+        image={props.image}
         playing={isPlaying}
         played={position}
         loop={loop}

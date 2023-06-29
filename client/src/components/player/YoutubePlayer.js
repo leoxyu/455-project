@@ -5,24 +5,32 @@ import { Player } from './Player';
 export class YoutubePlayer extends React.Component {
   state = {
     url: this.props.song,
+    name: this.props.name,
+    artist: this.props.artist,
+    image: this.props.image,
     playing: this.props.playOnLoad,
     controls: false,
     volume: 1,
     muted: false,
     played: 0,
     loop: false,
-    shuffle: this.props.shuffle
+    shuffle: this.props.shuffle,
+    justEnded: false
   }
 
   load = url => {
     this.setState({
       url,
       played: 0,
-    })
+    });
   }
 
   handlePlay = () => {
-    this.setState({ playing: true });
+    if (this.state.justEnded) {
+      this.player.seekTo(0);
+    }
+
+    this.setState({ playing: true, justEnded: false });
   }
 
   handlePause = () => {
@@ -44,31 +52,39 @@ export class YoutubePlayer extends React.Component {
   }
 
   handleProgress = state => {
-    if (!this.state.seeking) {
+    if (!this.state.seeking && !this.state.justEnded) {
       this.setState(state);
     }
   }
 
   handleSeekMouseDown = e => {
-    this.setState({ seeking: true })
+    this.setState({ seeking: true });
   }
 
   handleSeekChange = e => {
-    this.setState({ played: parseFloat(e.target.value) })
+    this.setState({ played: parseFloat(e.target.value) });
   }
 
   handleSeekMouseUp = e => {
-    this.setState({ seeking: false })
-    this.player.seekTo(parseFloat(e.target.value))
+    this.setState({ seeking: false });
+    this.player.seekTo(parseFloat(e.target.value));
   }
 
   handleToggleLoop = () => {
-    this.setState({ loop: !this.state.loop })
+    this.setState({ loop: !this.state.loop });
   }
 
   handleToggleShuffle = () => {
-    this.setState({ shuffle: !this.state.shuffle })
+    this.setState({ shuffle: !this.state.shuffle });
   };
+
+  handleEnded = () => {
+    if (this.props.isLastSong) {
+      this.setState({ playing: false, played: 0, justEnded: true });
+    } else {
+      this.handleNextSong();
+    }
+  }
 
   handleNextSong = () => {
     if (this.state.shuffle) {
@@ -79,7 +95,7 @@ export class YoutubePlayer extends React.Component {
   };
 
   render() {
-    const { url, playing, controls, volume, muted, played, loop, shuffle} = this.state;
+    const { url, name, artist, image, playing, controls, volume, muted, played, loop, shuffle} = this.state;
 
     return (
       <div  className="song-player">
@@ -94,10 +110,13 @@ export class YoutubePlayer extends React.Component {
           width={0}
           height={0}
           onProgress={this.handleProgress}
-          onEnded={this.handleNextSong}
+          onEnded={this.handleEnded}
           loop={loop}
         />
         <Player
+          name={name}
+          artist={artist}
+          image={image}
           playing={playing}
           played={played}
           loop={loop}
