@@ -4,7 +4,24 @@ import SpotifyPlayer from "./SpotifyPlayer";
 import { Player } from "./Player";
 
 export default function SongPlayer() {
-  const songs = [];
+  const songs = [
+    {
+      link: "https://open.spotify.com/track/4Anip7bDkwKk4HacAIwvEl",
+      type: "spotify"
+    },
+    {
+      link: "https://open.spotify.com/track/0NksLiIx5lbWzFTYTCx4z7",
+      type: "spotify"
+    },
+    {
+      link: "https://www.youtube.com/watch?v=HMGetv40FkI",
+      type: "youtube"
+    },
+    {
+      link: "https://www.youtube.com/watch?v=CjUVTEExfBg",
+      type: "youtube"
+    },
+  ];
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const playOnLoad = useRef(false);

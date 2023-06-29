@@ -18,8 +18,9 @@ const HomePage = () => {
 
   const dispatch = useDispatch();
 
+  // fetches profile
   useEffect(() => {
-    if (access_token) {
+    if (access_token && !spotify_profile) {
       // fetch profile info...
       const response = dispatch(spotifyProfileThunk());
       response.then((contents) => {
