@@ -1,13 +1,15 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {addSongAsync, getPlaylistsAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/Options.css';
 import SearchBar from './SearchBar';
 
-
-const Options = ({ songLink, onClose=()=>{}, platform }) => {
+const Options = ({ songLink, onClose=()=>{}, platform, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
+  const divRef = useRef(null);
+
+
   
   const dispatch = useDispatch();
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
@@ -15,11 +17,31 @@ const Options = ({ songLink, onClose=()=>{}, platform }) => {
     dispatch(getPlaylistsAsync());
   }, []);
 
+  useEffect(() => {
+
+    
+
+
+    const handleClickOutside = (event) => {
+
+      if (divRef.current && !divRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [divRef]);
+
+
+
   const handlePlaylistChange = (event) => {
     setSelectedPlaylist(event.target.value);
     // setSelectedPlaylist('wtf');
   };
 
+  
   const handleSelection = (event) => {
     // Handle playlist selection
     // console.log(`Selected playlist: ${selectedPlaylist}`);
@@ -28,22 +50,15 @@ const Options = ({ songLink, onClose=()=>{}, platform }) => {
         source: platform
     };
 
-    // const fakedata = {
-    //     name: selectedPlaylist + 'lol',
-    //     songs: []
-    // }
-
-    // dispatch(createPlaylistAsync(fakedata));
-    //  so selected playlist works ....
     dispatch(addSongAsync(event.target.value, data));
     onClose(); // Trigger the onClose callback
   };
 
   return (
-    <div className='options-dialog'>
+    <div className='options-dialog' ref={divRef}>
       <p className='options-title'>Add to playlist:</p>
       <SearchBar />
-        <div className="options-playlist-input">
+        <div className="options-playlist-input" onClick={handleAddClick}>
           New playlist
         </div>
       <div className="options-dropdown">

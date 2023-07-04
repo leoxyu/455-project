@@ -4,8 +4,8 @@
     justify-content: space-around;
     /* min-height: 20em; */
     /* width: 35%; */
-    border-color: var(--background-tinted-highlight);
-    background-color: var(--background-tinted-base);
+    border-color: var(--background-elevated-highlight);
+    background-color: var(--background-elevated-base);
     padding: 0.5em;
     width: 7em;
     /* border-radius: 1em; */
