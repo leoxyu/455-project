@@ -7,9 +7,9 @@
     padding: 0.5rem;
     transition: border-color 0.3s; /* Add transition for smooth effect */
     font-size: 1.1rem;
-    min-width: 280px;  
+    /* min-width: 280px;   */
     /* max-width: 40rem; */
-    max-height: 5rem;
+    height: 3.25rem;
     flex-grow: 1;
     font-size: 17px;
     flex:1;

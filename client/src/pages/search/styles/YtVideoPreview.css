@@ -7,13 +7,14 @@
     padding: 0.5rem;
     transition: border-color 0.3s; /* Add transition for smooth effect */
     font-size: 1.1rem;
-    min-width: 280px;  
-    /* max-width: 40rem; */
-    max-height: 15rem;
+    /* min-width: 250px;   */
+    max-width: 30em;
+    /* max-height: 15rem; */
+    height: 9rem;
     flex-grow: 1;
     font-size: 17px;
     flex:1;
-    max-width: 600px;
+    /* max-width: 600px; */
     flex-basis: 25%;
 
     .essential-info{

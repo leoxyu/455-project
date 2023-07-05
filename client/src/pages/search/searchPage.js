@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 // import { searchSpotifySongs, searchSpotifyPlaylists } from './spotifyAPI';
 // import { searchYouTubeVideos, searchYouTubePlaylists } from './youtubeAPI';
 import '../../styles/variables.css';
@@ -8,8 +8,10 @@ import SearchBar from './components/SearchBar';
 import SongResult from './components/SongResult';
 import PlaylistResult from './components/PlaylistResult';
 import Filters from './components/Filters';
-// import PlaylistCreator from './components/PlaylistCreator';
-import Options from './components/Options';
+import PlaylistCreator from '../playlists/components/PlaylistCreator';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSpotifyAsync } from './redux/thunks';
+import debounce from 'lodash.debounce';
 
 
 //  look here later: https://github.com/dermasmid/scrapetube
@@ -19,36 +21,57 @@ const SearchPage = () => {
   useEffect(() => {
     document.title = "Uni.fi - Search"; // Change the webpage title
 
-    // Clean up the effect
+    
     
   }, []);
 
+  const [creatorVisible, setCreatorVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [spotifySongs, setSpotifySongs] = useState(generateRandomSongs(5));
-  const [spotifyPlaylists, setSpotifyPlaylists] = useState(generateRandomPlaylists(5));
-  const [youtubeVideos, setYouTubeVideos] = useState(generateRandomVideos(5));
-  const [youtubePlaylists, setYouTubePlaylists] = useState(generateRandomPlaylists(5));
+
+  const accessToken = useSelector(state => state.spotify.access_token);
+  const spotifyTracks = useSelector(state => state.search.spotify.tracks);
+  const spotifyPlaylists = useSelector(state => state.search.spotify.playlists);
+  const spotifyAlbums = useSelector(state => state.search.spotify.albums);
+  const youtubeVideos = useSelector(state => state.search.youtube.videos);
+  const youtubePlaylists = useSelector(state => state.search.youtube.playlists);
+  // users
+  // artists
+
+
+
+
+
+
+  const dispatch = useDispatch();
+
+  const performSearch = debounce((searchTerm) => {
+    setSearchTerm(searchTerm);
+  }, 350);
+  
+  useEffect(() => {
+    console.log("calling it with " + searchTerm)
+    if (searchTerm === '') return; // make it load recommended songs from spotify
+    dispatch(getSpotifyAsync({accessToken:accessToken, query:searchTerm}));
+  }, [searchTerm]);
+
+
+
+
+  const playlistCreatorRef = useRef(null);
 
   const handleSearch = async () => {
     // Call APIs to search for songs and playlists
-    // const spotifySongsResult = await searchSpotifySongs(searchTerm);
-    // const spotifyPlaylistsResult = await searchSpotifyPlaylists(searchTerm);
-    // const youtubeVideosResult = await searchYouTubeVideos(searchTerm);
-    // const youtubePlaylistsResult = await searchYouTubePlaylists(searchTerm);
 
-
-    const spotifySongsResult = generateRandomSongs(5);
-    const spotifyPlaylistsResult = generateRandomPlaylists(5);
-    const youtubeVideosResult = generateRandomVideos(5);
-    const youtubePlaylistsResult = generateRandomPlaylists(5);
-
-
-    // Update the state with the search results
-    setSpotifySongs(spotifySongsResult);
-    setSpotifyPlaylists(spotifyPlaylistsResult);
-    setYouTubeVideos(youtubeVideosResult);
-    setYouTubePlaylists(youtubePlaylistsResult);
   };
+
+  const closeCreator = () => {
+    setCreatorVisible(false);
+  }
+
+  const handleAddClick = () => {
+    setCreatorVisible(true);
+  }
+  
 
 
   const spotifySongList = [
@@ -90,19 +113,20 @@ const SearchPage = () => {
 
   return (
     <div className='search-page'>
-      
-      <SearchBar />
+      <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input)=>{performSearch(input)}}/>
       <Filters />
-      {/* <PlaylistCreator /> */}
-      <Options />
+      {creatorVisible && 
+       <div className='creator-dialog-overlay'>
+       <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef}/>
+       </div>
+       }
       
-
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
-        {spotifySongList.map((song) => (
+        {spotifyTracks.map((song) => (
           <SongResult
             className='spotify-preview'
-            key={song.songName}
+            key={song.songLink}
             thumbnailUrl={song.thumbnailUrl}
             songName={song.songName}
             artistName={song.artistName}
@@ -110,6 +134,8 @@ const SearchPage = () => {
             duration={song.duration}
             songLink={song.songLink}
             platform='Spotify'
+            handleAddClick={handleAddClick}
+            playlistCreatorRef={playlistCreatorRef}
           />
         ))}
       </div>
