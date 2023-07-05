@@ -1,0 +1,1752 @@
+{
+    "albums": {
+      "href": "https://api.spotify.com/v1/search?query=lofi&type=album&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=5&limit=10",
+      "items": [
+        {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5uq0Z8ElRQOlg2Yavs3lVd"
+              },
+              "href": "https://api.spotify.com/v1/artists/5uq0Z8ElRQOlg2Yavs3lVd",
+              "id": "5uq0Z8ElRQOlg2Yavs3lVd",
+              "name": "LEON",
+              "type": "artist",
+              "uri": "spotify:artist:5uq0Z8ElRQOlg2Yavs3lVd"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/3b8aDB1fmyEuwayMCLQEcD"
+          },
+          "href": "https://api.spotify.com/v1/albums/3b8aDB1fmyEuwayMCLQEcD",
+          "id": "3b8aDB1fmyEuwayMCLQEcD",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273c25ecffc3ccc6eb364faf6fd",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02c25ecffc3ccc6eb364faf6fd",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851c25ecffc3ccc6eb364faf6fd",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "LOFI",
+          "release_date": "2021-05-12",
+          "release_date_precision": "day",
+          "total_tracks": 1,
+          "type": "album",
+          "uri": "spotify:album:3b8aDB1fmyEuwayMCLQEcD"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2ETOhMwFhRRTCH8M1ge17v"
+              },
+              "href": "https://api.spotify.com/v1/artists/2ETOhMwFhRRTCH8M1ge17v",
+              "id": "2ETOhMwFhRRTCH8M1ge17v",
+              "name": "Disney Lofi",
+              "type": "artist",
+              "uri": "spotify:artist:2ETOhMwFhRRTCH8M1ge17v"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/37Fq2lVxXUoEVOekYAo9Pm"
+          },
+          "href": "https://api.spotify.com/v1/albums/37Fq2lVxXUoEVOekYAo9Pm",
+          "id": "37Fq2lVxXUoEVOekYAo9Pm",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2731bff13330cd21ab181038ea2",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e021bff13330cd21ab181038ea2",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048511bff13330cd21ab181038ea2",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "Lofi Minnie: Chill",
+          "release_date": "2023-01-20",
+          "release_date_precision": "day",
+          "total_tracks": 16,
+          "type": "album",
+          "uri": "spotify:album:37Fq2lVxXUoEVOekYAo9Pm"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4QC0ZIhtfKdj6Y8YdXoy8x"
+              },
+              "href": "https://api.spotify.com/v1/artists/4QC0ZIhtfKdj6Y8YdXoy8x",
+              "id": "4QC0ZIhtfKdj6Y8YdXoy8x",
+              "name": "Lowfie",
+              "type": "artist",
+              "uri": "spotify:artist:4QC0ZIhtfKdj6Y8YdXoy8x"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/40zhLOEdwEdZr186U8M20J"
+          },
+          "href": "https://api.spotify.com/v1/albums/40zhLOEdwEdZr186U8M20J",
+          "id": "40zhLOEdwEdZr186U8M20J",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732aa71082749d4f0b5ce54b9b",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022aa71082749d4f0b5ce54b9b",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512aa71082749d4f0b5ce54b9b",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "lofi covers of popular songs 2022, vol.5",
+          "release_date": "2022-11-07",
+          "release_date_precision": "day",
+          "total_tracks": 8,
+          "type": "album",
+          "uri": "spotify:album:40zhLOEdwEdZr186U8M20J"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4QC0ZIhtfKdj6Y8YdXoy8x"
+              },
+              "href": "https://api.spotify.com/v1/artists/4QC0ZIhtfKdj6Y8YdXoy8x",
+              "id": "4QC0ZIhtfKdj6Y8YdXoy8x",
+              "name": "Lowfie",
+              "type": "artist",
+              "uri": "spotify:artist:4QC0ZIhtfKdj6Y8YdXoy8x"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5XlqQIvaAaeidLRBLvJlMZ"
+              },
+              "href": "https://api.spotify.com/v1/artists/5XlqQIvaAaeidLRBLvJlMZ",
+              "id": "5XlqQIvaAaeidLRBLvJlMZ",
+              "name": "floof",
+              "type": "artist",
+              "uri": "spotify:artist:5XlqQIvaAaeidLRBLvJlMZ"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1lPuaUdNF2HrgMZRSp9IFk"
+          },
+          "href": "https://api.spotify.com/v1/albums/1lPuaUdNF2HrgMZRSp9IFk",
+          "id": "1lPuaUdNF2HrgMZRSp9IFk",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273e647e232dc06f719fe355a2a",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02e647e232dc06f719fe355a2a",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851e647e232dc06f719fe355a2a",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "lofi covers of popular songs 2023, vol. 7",
+          "release_date": "2023-03-06",
+          "release_date_precision": "day",
+          "total_tracks": 8,
+          "type": "album",
+          "uri": "spotify:album:1lPuaUdNF2HrgMZRSp9IFk"
+        },
+        {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5apVcEELJhc2IUYWgklfsx"
+              },
+              "href": "https://api.spotify.com/v1/artists/5apVcEELJhc2IUYWgklfsx",
+              "id": "5apVcEELJhc2IUYWgklfsx",
+              "name": "Cadaver Ghoul",
+              "type": "artist",
+              "uri": "spotify:artist:5apVcEELJhc2IUYWgklfsx"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/4R5cBX51Z0hlQi5wzzFQKR"
+          },
+          "href": "https://api.spotify.com/v1/albums/4R5cBX51Z0hlQi5wzzFQKR",
+          "id": "4R5cBX51Z0hlQi5wzzFQKR",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2738386cc63cfe3dee74c7d1001",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e028386cc63cfe3dee74c7d1001",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048518386cc63cfe3dee74c7d1001",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "LOFI",
+          "release_date": "2019-05-21",
+          "release_date_precision": "day",
+          "total_tracks": 6,
+          "type": "album",
+          "uri": "spotify:album:4R5cBX51Z0hlQi5wzzFQKR"
+        },
+        {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0WZrXchGKwOH39DJHUPny3"
+              },
+              "href": "https://api.spotify.com/v1/artists/0WZrXchGKwOH39DJHUPny3",
+              "id": "0WZrXchGKwOH39DJHUPny3",
+              "name": "Wilmer Roberts",
+              "type": "artist",
+              "uri": "spotify:artist:0WZrXchGKwOH39DJHUPny3"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6lYSDSFhJyUV6CtNix2fBA"
+              },
+              "href": "https://api.spotify.com/v1/artists/6lYSDSFhJyUV6CtNix2fBA",
+              "id": "6lYSDSFhJyUV6CtNix2fBA",
+              "name": "Al2 El Aldeano",
+              "type": "artist",
+              "uri": "spotify:artist:6lYSDSFhJyUV6CtNix2fBA"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/6YTeUk5ZAd9tQHhUDStTVF"
+          },
+          "href": "https://api.spotify.com/v1/albums/6YTeUk5ZAd9tQHhUDStTVF",
+          "id": "6YTeUk5ZAd9tQHhUDStTVF",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b27318d190bbaab98ed2dbbe3d91",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e0218d190bbaab98ed2dbbe3d91",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d0000485118d190bbaab98ed2dbbe3d91",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "Lofi",
+          "release_date": "2023-03-24",
+          "release_date_precision": "day",
+          "total_tracks": 1,
+          "type": "album",
+          "uri": "spotify:album:6YTeUk5ZAd9tQHhUDStTVF"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1dABGukgZ8XKKOdd2rVSHM"
+              },
+              "href": "https://api.spotify.com/v1/artists/1dABGukgZ8XKKOdd2rVSHM",
+              "id": "1dABGukgZ8XKKOdd2rVSHM",
+              "name": "Lofi Fruits Music",
+              "type": "artist",
+              "uri": "spotify:artist:1dABGukgZ8XKKOdd2rVSHM"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/34b7j3TqM5ramjmt2mc8tB"
+              },
+              "href": "https://api.spotify.com/v1/artists/34b7j3TqM5ramjmt2mc8tB",
+              "id": "34b7j3TqM5ramjmt2mc8tB",
+              "name": "Chill Fruits Music",
+              "type": "artist",
+              "uri": "spotify:artist:34b7j3TqM5ramjmt2mc8tB"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/3rtRw0k5r4h2m16r9e9wQu"
+          },
+          "href": "https://api.spotify.com/v1/albums/3rtRw0k5r4h2m16r9e9wQu",
+          "id": "3rtRw0k5r4h2m16r9e9wQu",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273477d747909f23746fbd25e69",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02477d747909f23746fbd25e69",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851477d747909f23746fbd25e69",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "Lofi Fruits Remix, Vol. 1",
+          "release_date": "2022-06-24",
+          "release_date_precision": "day",
+          "total_tracks": 11,
+          "type": "album",
+          "uri": "spotify:album:3rtRw0k5r4h2m16r9e9wQu"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/30pF2pv50VXX6TgiMmKKjc"
+              },
+              "href": "https://api.spotify.com/v1/artists/30pF2pv50VXX6TgiMmKKjc",
+              "id": "30pF2pv50VXX6TgiMmKKjc",
+              "name": "lonelyboy",
+              "type": "artist",
+              "uri": "spotify:artist:30pF2pv50VXX6TgiMmKKjc"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1ZwdS5xdxEREPySFridCfh"
+              },
+              "href": "https://api.spotify.com/v1/artists/1ZwdS5xdxEREPySFridCfh",
+              "id": "1ZwdS5xdxEREPySFridCfh",
+              "name": "2Pac",
+              "type": "artist",
+              "uri": "spotify:artist:1ZwdS5xdxEREPySFridCfh"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/5W1jGRoH27AASKghzZmt4Q"
+          },
+          "href": "https://api.spotify.com/v1/albums/5W1jGRoH27AASKghzZmt4Q",
+          "id": "5W1jGRoH27AASKghzZmt4Q",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273ce28df1708a444eb29b759c1",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02ce28df1708a444eb29b759c1",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851ce28df1708a444eb29b759c1",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "lofi chill vibes with 2Pac",
+          "release_date": "2023-06-23",
+          "release_date_precision": "day",
+          "total_tracks": 16,
+          "type": "album",
+          "uri": "spotify:album:5W1jGRoH27AASKghzZmt4Q"
+        },
+        {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0SXZ0s0MoLOjw4Af6i3OGC"
+              },
+              "href": "https://api.spotify.com/v1/artists/0SXZ0s0MoLOjw4Af6i3OGC",
+              "id": "0SXZ0s0MoLOjw4Af6i3OGC",
+              "name": "Tsew The Kid",
+              "type": "artist",
+              "uri": "spotify:artist:0SXZ0s0MoLOjw4Af6i3OGC"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/25kKQy5kVU2c0G3z8Y96il"
+          },
+          "href": "https://api.spotify.com/v1/albums/25kKQy5kVU2c0G3z8Y96il",
+          "id": "25kKQy5kVU2c0G3z8Y96il",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273c5cd57d2e1b17cbeb96384aa",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02c5cd57d2e1b17cbeb96384aa",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851c5cd57d2e1b17cbeb96384aa",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "LOFI",
+          "release_date": "2020-07-17",
+          "release_date_precision": "day",
+          "total_tracks": 8,
+          "type": "album",
+          "uri": "spotify:album:25kKQy5kVU2c0G3z8Y96il"
+        },
+        {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2xu9gv0fhPIlrPJpkIVetP"
+              },
+              "href": "https://api.spotify.com/v1/artists/2xu9gv0fhPIlrPJpkIVetP",
+              "id": "2xu9gv0fhPIlrPJpkIVetP",
+              "name": "lofi weeb",
+              "type": "artist",
+              "uri": "spotify:artist:2xu9gv0fhPIlrPJpkIVetP"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/3PEsWhP5vx7OeuArgFiFwm"
+          },
+          "href": "https://api.spotify.com/v1/albums/3PEsWhP5vx7OeuArgFiFwm",
+          "id": "3PEsWhP5vx7OeuArgFiFwm",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2737bce5ea18c2d49cf0ef21cc1",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e027bce5ea18c2d49cf0ef21cc1",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048517bce5ea18c2d49cf0ef21cc1",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "lofi",
+          "release_date": "2021-03-29",
+          "release_date_precision": "day",
+          "total_tracks": 1,
+          "type": "album",
+          "uri": "spotify:album:3PEsWhP5vx7OeuArgFiFwm"
+        }
+      ],
+      "limit": 10,
+      "next": "https://api.spotify.com/v1/search?query=lofi&type=album&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=15&limit=10",
+      "offset": 5,
+      "previous": "https://api.spotify.com/v1/search?query=lofi&type=album&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=10",
+      "total": 390
+    },
+    "tracks": {
+      "href": "https://api.spotify.com/v1/search?query=lofi&type=track&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=5&limit=10",
+      "items": [
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/0UVopsGMhETTY8fkt3uHTs"
+                },
+                "href": "https://api.spotify.com/v1/artists/0UVopsGMhETTY8fkt3uHTs",
+                "id": "0UVopsGMhETTY8fkt3uHTs",
+                "name": "Kei Takebuchi",
+                "type": "artist",
+                "uri": "spotify:artist:0UVopsGMhETTY8fkt3uHTs"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5gGiYkSFmgwLhB4qFkVan5"
+            },
+            "href": "https://api.spotify.com/v1/albums/5gGiYkSFmgwLhB4qFkVan5",
+            "id": "5gGiYkSFmgwLhB4qFkVan5",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273b91274c59cd8931562e781b5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02b91274c59cd8931562e781b5",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851b91274c59cd8931562e781b5",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "OVERTONES",
+            "release_date": "2021-07-07",
+            "release_date_precision": "day",
+            "total_tracks": 11,
+            "type": "album",
+            "uri": "spotify:album:5gGiYkSFmgwLhB4qFkVan5"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0UVopsGMhETTY8fkt3uHTs"
+              },
+              "href": "https://api.spotify.com/v1/artists/0UVopsGMhETTY8fkt3uHTs",
+              "id": "0UVopsGMhETTY8fkt3uHTs",
+              "name": "Kei Takebuchi",
+              "type": "artist",
+              "uri": "spotify:artist:0UVopsGMhETTY8fkt3uHTs"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 150000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "JPB602075859"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/1U4qLKHTcUODO0NslAae7q"
+          },
+          "href": "https://api.spotify.com/v1/tracks/1U4qLKHTcUODO0NslAae7q",
+          "id": "1U4qLKHTcUODO0NslAae7q",
+          "is_local": false,
+          "is_playable": true,
+          "name": "lofi",
+          "popularity": 31,
+          "preview_url": "https://p.scdn.co/mp3-preview/e324d8de433f7c3252e0b0af47434c43a93c1687?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 6,
+          "type": "track",
+          "uri": "spotify:track:1U4qLKHTcUODO0NslAae7q"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/7n2ZWKASozEQEUkoH9cMYs"
+                },
+                "href": "https://api.spotify.com/v1/artists/7n2ZWKASozEQEUkoH9cMYs",
+                "id": "7n2ZWKASozEQEUkoH9cMYs",
+                "name": "Chill Hip-Hop Beats",
+                "type": "artist",
+                "uri": "spotify:artist:7n2ZWKASozEQEUkoH9cMYs"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/3zw9kN0i8eKIDbGhEiIIwo"
+                },
+                "href": "https://api.spotify.com/v1/artists/3zw9kN0i8eKIDbGhEiIIwo",
+                "id": "3zw9kN0i8eKIDbGhEiIIwo",
+                "name": "Lofi Hip-Hop Beats",
+                "type": "artist",
+                "uri": "spotify:artist:3zw9kN0i8eKIDbGhEiIIwo"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/5BQMZfKjZ9VUAy25OjA629"
+                },
+                "href": "https://api.spotify.com/v1/artists/5BQMZfKjZ9VUAy25OjA629",
+                "id": "5BQMZfKjZ9VUAy25OjA629",
+                "name": "ChillHop Beats",
+                "type": "artist",
+                "uri": "spotify:artist:5BQMZfKjZ9VUAy25OjA629"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1wQ71K2ZqhMApWFp8RYmaA"
+            },
+            "href": "https://api.spotify.com/v1/albums/1wQ71K2ZqhMApWFp8RYmaA",
+            "id": "1wQ71K2ZqhMApWFp8RYmaA",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273c484b6aec7aefcf19600d051",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02c484b6aec7aefcf19600d051",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851c484b6aec7aefcf19600d051",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "Lofi To Study & Sleep At Night",
+            "release_date": "2019-08-15",
+            "release_date_precision": "day",
+            "total_tracks": 10,
+            "type": "album",
+            "uri": "spotify:album:1wQ71K2ZqhMApWFp8RYmaA"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7n2ZWKASozEQEUkoH9cMYs"
+              },
+              "href": "https://api.spotify.com/v1/artists/7n2ZWKASozEQEUkoH9cMYs",
+              "id": "7n2ZWKASozEQEUkoH9cMYs",
+              "name": "Chill Hip-Hop Beats",
+              "type": "artist",
+              "uri": "spotify:artist:7n2ZWKASozEQEUkoH9cMYs"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3zw9kN0i8eKIDbGhEiIIwo"
+              },
+              "href": "https://api.spotify.com/v1/artists/3zw9kN0i8eKIDbGhEiIIwo",
+              "id": "3zw9kN0i8eKIDbGhEiIIwo",
+              "name": "Lofi Hip-Hop Beats",
+              "type": "artist",
+              "uri": "spotify:artist:3zw9kN0i8eKIDbGhEiIIwo"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5BQMZfKjZ9VUAy25OjA629"
+              },
+              "href": "https://api.spotify.com/v1/artists/5BQMZfKjZ9VUAy25OjA629",
+              "id": "5BQMZfKjZ9VUAy25OjA629",
+              "name": "ChillHop Beats",
+              "type": "artist",
+              "uri": "spotify:artist:5BQMZfKjZ9VUAy25OjA629"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7iUy9ctasMRtp5jwWs95Fm"
+              },
+              "href": "https://api.spotify.com/v1/artists/7iUy9ctasMRtp5jwWs95Fm",
+              "id": "7iUy9ctasMRtp5jwWs95Fm",
+              "name": "LO-FI BEATS",
+              "type": "artist",
+              "uri": "spotify:artist:7iUy9ctasMRtp5jwWs95Fm"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 151404,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "US3DF1993541"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0G3uQxxQxp08QHIMxKfEgO"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0G3uQxxQxp08QHIMxKfEgO",
+          "id": "0G3uQxxQxp08QHIMxKfEgO",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Lofi Relax",
+          "popularity": 34,
+          "preview_url": "https://p.scdn.co/mp3-preview/f627e4d693431961b99af6f6a6498189923e058f?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:0G3uQxxQxp08QHIMxKfEgO"
+        },
+        {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/0WZrXchGKwOH39DJHUPny3"
+                },
+                "href": "https://api.spotify.com/v1/artists/0WZrXchGKwOH39DJHUPny3",
+                "id": "0WZrXchGKwOH39DJHUPny3",
+                "name": "Wilmer Roberts",
+                "type": "artist",
+                "uri": "spotify:artist:0WZrXchGKwOH39DJHUPny3"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6lYSDSFhJyUV6CtNix2fBA"
+                },
+                "href": "https://api.spotify.com/v1/artists/6lYSDSFhJyUV6CtNix2fBA",
+                "id": "6lYSDSFhJyUV6CtNix2fBA",
+                "name": "Al2 El Aldeano",
+                "type": "artist",
+                "uri": "spotify:artist:6lYSDSFhJyUV6CtNix2fBA"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/6YTeUk5ZAd9tQHhUDStTVF"
+            },
+            "href": "https://api.spotify.com/v1/albums/6YTeUk5ZAd9tQHhUDStTVF",
+            "id": "6YTeUk5ZAd9tQHhUDStTVF",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27318d190bbaab98ed2dbbe3d91",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0218d190bbaab98ed2dbbe3d91",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485118d190bbaab98ed2dbbe3d91",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "Lofi",
+            "release_date": "2023-03-24",
+            "release_date_precision": "day",
+            "total_tracks": 1,
+            "type": "album",
+            "uri": "spotify:album:6YTeUk5ZAd9tQHhUDStTVF"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0WZrXchGKwOH39DJHUPny3"
+              },
+              "href": "https://api.spotify.com/v1/artists/0WZrXchGKwOH39DJHUPny3",
+              "id": "0WZrXchGKwOH39DJHUPny3",
+              "name": "Wilmer Roberts",
+              "type": "artist",
+              "uri": "spotify:artist:0WZrXchGKwOH39DJHUPny3"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6lYSDSFhJyUV6CtNix2fBA"
+              },
+              "href": "https://api.spotify.com/v1/artists/6lYSDSFhJyUV6CtNix2fBA",
+              "id": "6lYSDSFhJyUV6CtNix2fBA",
+              "name": "Al2 El Aldeano",
+              "type": "artist",
+              "uri": "spotify:artist:6lYSDSFhJyUV6CtNix2fBA"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 231263,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USLZJ2383621"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0iE24szoaXoC3SRQ07181N"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0iE24szoaXoC3SRQ07181N",
+          "id": "0iE24szoaXoC3SRQ07181N",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Lofi",
+          "popularity": 43,
+          "preview_url": "https://p.scdn.co/mp3-preview/f79fefba538603524dc8b510fadfa1f68e65c6d8?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:0iE24szoaXoC3SRQ07181N"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/3L6rzCT4HIwufAE9mJxgxo"
+                },
+                "href": "https://api.spotify.com/v1/artists/3L6rzCT4HIwufAE9mJxgxo",
+                "id": "3L6rzCT4HIwufAE9mJxgxo",
+                "name": "Acey",
+                "type": "artist",
+                "uri": "spotify:artist:3L6rzCT4HIwufAE9mJxgxo"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5cAIBxMJWFmgD1e0bNF9nM"
+            },
+            "href": "https://api.spotify.com/v1/albums/5cAIBxMJWFmgD1e0bNF9nM",
+            "id": "5cAIBxMJWFmgD1e0bNF9nM",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2735ca5a4fceb9a1f1e414d8d87",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e025ca5a4fceb9a1f1e414d8d87",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048515ca5a4fceb9a1f1e414d8d87",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "Acey's Lofi/Boom Bap Beat Tape",
+            "release_date": "2018-08-17",
+            "release_date_precision": "day",
+            "total_tracks": 10,
+            "type": "album",
+            "uri": "spotify:album:5cAIBxMJWFmgD1e0bNF9nM"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3L6rzCT4HIwufAE9mJxgxo"
+              },
+              "href": "https://api.spotify.com/v1/artists/3L6rzCT4HIwufAE9mJxgxo",
+              "id": "3L6rzCT4HIwufAE9mJxgxo",
+              "name": "Acey",
+              "type": "artist",
+              "uri": "spotify:artist:3L6rzCT4HIwufAE9mJxgxo"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 117256,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "QZFYW2098504"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7wNVHDo2amyrOIAAY3Hgoi"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7wNVHDo2amyrOIAAY3Hgoi",
+          "id": "7wNVHDo2amyrOIAAY3Hgoi",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Lofi",
+          "popularity": 36,
+          "preview_url": "https://p.scdn.co/mp3-preview/79e5c30a97f7d4a0245373f129ebed5ad0e45f82?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7wNVHDo2amyrOIAAY3Hgoi"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/1dABGukgZ8XKKOdd2rVSHM"
+                },
+                "href": "https://api.spotify.com/v1/artists/1dABGukgZ8XKKOdd2rVSHM",
+                "id": "1dABGukgZ8XKKOdd2rVSHM",
+                "name": "Lofi Fruits Music",
+                "type": "artist",
+                "uri": "spotify:artist:1dABGukgZ8XKKOdd2rVSHM"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/34b7j3TqM5ramjmt2mc8tB"
+                },
+                "href": "https://api.spotify.com/v1/artists/34b7j3TqM5ramjmt2mc8tB",
+                "id": "34b7j3TqM5ramjmt2mc8tB",
+                "name": "Chill Fruits Music",
+                "type": "artist",
+                "uri": "spotify:artist:34b7j3TqM5ramjmt2mc8tB"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1mhMLVaKuSRlOMRbmReeVX"
+            },
+            "href": "https://api.spotify.com/v1/albums/1mhMLVaKuSRlOMRbmReeVX",
+            "id": "1mhMLVaKuSRlOMRbmReeVX",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27304359497e2d912e87890d9ca",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0204359497e2d912e87890d9ca",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485104359497e2d912e87890d9ca",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "2AM Zone-Out Gaming",
+            "release_date": "2021-07-02",
+            "release_date_precision": "day",
+            "total_tracks": 7,
+            "type": "album",
+            "uri": "spotify:album:1mhMLVaKuSRlOMRbmReeVX"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1dABGukgZ8XKKOdd2rVSHM"
+              },
+              "href": "https://api.spotify.com/v1/artists/1dABGukgZ8XKKOdd2rVSHM",
+              "id": "1dABGukgZ8XKKOdd2rVSHM",
+              "name": "Lofi Fruits Music",
+              "type": "artist",
+              "uri": "spotify:artist:1dABGukgZ8XKKOdd2rVSHM"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/34b7j3TqM5ramjmt2mc8tB"
+              },
+              "href": "https://api.spotify.com/v1/artists/34b7j3TqM5ramjmt2mc8tB",
+              "id": "34b7j3TqM5ramjmt2mc8tB",
+              "name": "Chill Fruits Music",
+              "type": "artist",
+              "uri": "spotify:artist:34b7j3TqM5ramjmt2mc8tB"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 112575,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "ZZOPM2106092"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0dH3tMdmcOqWhZrZYJEG3K"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0dH3tMdmcOqWhZrZYJEG3K",
+          "id": "0dH3tMdmcOqWhZrZYJEG3K",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Lofi Background Chilling",
+          "popularity": 49,
+          "preview_url": "https://p.scdn.co/mp3-preview/be7cb953db52e48897b2805c5dc3206e3c7f5571?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 2,
+          "type": "track",
+          "uri": "spotify:track:0dH3tMdmcOqWhZrZYJEG3K"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/1dABGukgZ8XKKOdd2rVSHM"
+                },
+                "href": "https://api.spotify.com/v1/artists/1dABGukgZ8XKKOdd2rVSHM",
+                "id": "1dABGukgZ8XKKOdd2rVSHM",
+                "name": "Lofi Fruits Music",
+                "type": "artist",
+                "uri": "spotify:artist:1dABGukgZ8XKKOdd2rVSHM"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/34b7j3TqM5ramjmt2mc8tB"
+                },
+                "href": "https://api.spotify.com/v1/artists/34b7j3TqM5ramjmt2mc8tB",
+                "id": "34b7j3TqM5ramjmt2mc8tB",
+                "name": "Chill Fruits Music",
+                "type": "artist",
+                "uri": "spotify:artist:34b7j3TqM5ramjmt2mc8tB"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/4O9qTRxRHLL5DHDLlYxhwk"
+            },
+            "href": "https://api.spotify.com/v1/albums/4O9qTRxRHLL5DHDLlYxhwk",
+            "id": "4O9qTRxRHLL5DHDLlYxhwk",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2731638265ae92c6f36d969e5d8",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e021638265ae92c6f36d969e5d8",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048511638265ae92c6f36d969e5d8",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "Tokyo Early Morning Cafe",
+            "release_date": "2021-07-16",
+            "release_date_precision": "day",
+            "total_tracks": 7,
+            "type": "album",
+            "uri": "spotify:album:4O9qTRxRHLL5DHDLlYxhwk"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1dABGukgZ8XKKOdd2rVSHM"
+              },
+              "href": "https://api.spotify.com/v1/artists/1dABGukgZ8XKKOdd2rVSHM",
+              "id": "1dABGukgZ8XKKOdd2rVSHM",
+              "name": "Lofi Fruits Music",
+              "type": "artist",
+              "uri": "spotify:artist:1dABGukgZ8XKKOdd2rVSHM"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/34b7j3TqM5ramjmt2mc8tB"
+              },
+              "href": "https://api.spotify.com/v1/artists/34b7j3TqM5ramjmt2mc8tB",
+              "id": "34b7j3TqM5ramjmt2mc8tB",
+              "name": "Chill Fruits Music",
+              "type": "artist",
+              "uri": "spotify:artist:34b7j3TqM5ramjmt2mc8tB"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 126576,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "ZZOPM2106375"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7oT0CU6jfJXUAnZTc6wdNU"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7oT0CU6jfJXUAnZTc6wdNU",
+          "id": "7oT0CU6jfJXUAnZTc6wdNU",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Lofi For Travelling",
+          "popularity": 48,
+          "preview_url": "https://p.scdn.co/mp3-preview/58231f11f6f9846790af06fd2a586de4b2ad700a?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 5,
+          "type": "track",
+          "uri": "spotify:track:7oT0CU6jfJXUAnZTc6wdNU"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/503ArEUA5XIRmhJCk7fRdN"
+                },
+                "href": "https://api.spotify.com/v1/artists/503ArEUA5XIRmhJCk7fRdN",
+                "id": "503ArEUA5XIRmhJCk7fRdN",
+                "name": "Zleept",
+                "type": "artist",
+                "uri": "spotify:artist:503ArEUA5XIRmhJCk7fRdN"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/2Y1BZMzBKPuj6U6DunweXp"
+            },
+            "href": "https://api.spotify.com/v1/albums/2Y1BZMzBKPuj6U6DunweXp",
+            "id": "2Y1BZMzBKPuj6U6DunweXp",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2736df1b78c1192425b9c00e65d",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e026df1b78c1192425b9c00e65d",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048516df1b78c1192425b9c00e65d",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "Lofi Broken",
+            "release_date": "2021-03-18",
+            "release_date_precision": "day",
+            "total_tracks": 9,
+            "type": "album",
+            "uri": "spotify:album:2Y1BZMzBKPuj6U6DunweXp"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/503ArEUA5XIRmhJCk7fRdN"
+              },
+              "href": "https://api.spotify.com/v1/artists/503ArEUA5XIRmhJCk7fRdN",
+              "id": "503ArEUA5XIRmhJCk7fRdN",
+              "name": "Zleept",
+              "type": "artist",
+              "uri": "spotify:artist:503ArEUA5XIRmhJCk7fRdN"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 96375,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "QZDA72198190"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7gBIx2EA6bzSIMKFPw629x"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7gBIx2EA6bzSIMKFPw629x",
+          "id": "7gBIx2EA6bzSIMKFPw629x",
+          "is_local": false,
+          "is_playable": true,
+          "name": "LoFi",
+          "popularity": 33,
+          "preview_url": "https://p.scdn.co/mp3-preview/aa4cdb753ca1f8c297c20a866571358b6aa2f335?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 4,
+          "type": "track",
+          "uri": "spotify:track:7gBIx2EA6bzSIMKFPw629x"
+        },
+        {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/2xu9gv0fhPIlrPJpkIVetP"
+                },
+                "href": "https://api.spotify.com/v1/artists/2xu9gv0fhPIlrPJpkIVetP",
+                "id": "2xu9gv0fhPIlrPJpkIVetP",
+                "name": "lofi weeb",
+                "type": "artist",
+                "uri": "spotify:artist:2xu9gv0fhPIlrPJpkIVetP"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/3PEsWhP5vx7OeuArgFiFwm"
+            },
+            "href": "https://api.spotify.com/v1/albums/3PEsWhP5vx7OeuArgFiFwm",
+            "id": "3PEsWhP5vx7OeuArgFiFwm",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2737bce5ea18c2d49cf0ef21cc1",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e027bce5ea18c2d49cf0ef21cc1",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048517bce5ea18c2d49cf0ef21cc1",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "lofi",
+            "release_date": "2021-03-29",
+            "release_date_precision": "day",
+            "total_tracks": 1,
+            "type": "album",
+            "uri": "spotify:album:3PEsWhP5vx7OeuArgFiFwm"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2xu9gv0fhPIlrPJpkIVetP"
+              },
+              "href": "https://api.spotify.com/v1/artists/2xu9gv0fhPIlrPJpkIVetP",
+              "id": "2xu9gv0fhPIlrPJpkIVetP",
+              "name": "lofi weeb",
+              "type": "artist",
+              "uri": "spotify:artist:2xu9gv0fhPIlrPJpkIVetP"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 55842,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USLZJ2127930"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0A68HIrp4RkxapM9KDLhrv"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0A68HIrp4RkxapM9KDLhrv",
+          "id": "0A68HIrp4RkxapM9KDLhrv",
+          "is_local": false,
+          "is_playable": true,
+          "name": "lofi",
+          "popularity": 28,
+          "preview_url": "https://p.scdn.co/mp3-preview/6a81859b162406b6f2629f3222ba3379c30ce770?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:0A68HIrp4RkxapM9KDLhrv"
+        },
+        {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/5R18HPWho6b4BMhMlKHETL"
+                },
+                "href": "https://api.spotify.com/v1/artists/5R18HPWho6b4BMhMlKHETL",
+                "id": "5R18HPWho6b4BMhMlKHETL",
+                "name": "Single Friend",
+                "type": "artist",
+                "uri": "spotify:artist:5R18HPWho6b4BMhMlKHETL"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/3Gzp0nbhsYStm3wSTGmbS6"
+            },
+            "href": "https://api.spotify.com/v1/albums/3Gzp0nbhsYStm3wSTGmbS6",
+            "id": "3Gzp0nbhsYStm3wSTGmbS6",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273ae1569ce89fadbb3311c9922",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02ae1569ce89fadbb3311c9922",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851ae1569ce89fadbb3311c9922",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "Lofi Insignificant Other",
+            "release_date": "2023-03-10",
+            "release_date_precision": "day",
+            "total_tracks": 1,
+            "type": "album",
+            "uri": "spotify:album:3Gzp0nbhsYStm3wSTGmbS6"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5R18HPWho6b4BMhMlKHETL"
+              },
+              "href": "https://api.spotify.com/v1/artists/5R18HPWho6b4BMhMlKHETL",
+              "id": "5R18HPWho6b4BMhMlKHETL",
+              "name": "Single Friend",
+              "type": "artist",
+              "uri": "spotify:artist:5R18HPWho6b4BMhMlKHETL"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 114285,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USANG2261667"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2AXhArqLYYg9WLtMq6RdYb"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2AXhArqLYYg9WLtMq6RdYb",
+          "id": "2AXhArqLYYg9WLtMq6RdYb",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Lofi Insignificant Other",
+          "popularity": 47,
+          "preview_url": "https://p.scdn.co/mp3-preview/4797b7c2974c066b756f917f58066921e2e38f5b?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:2AXhArqLYYg9WLtMq6RdYb"
+        },
+        {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6tZYiudQKCGp6IUbo9vAer"
+                },
+                "href": "https://api.spotify.com/v1/artists/6tZYiudQKCGp6IUbo9vAer",
+                "id": "6tZYiudQKCGp6IUbo9vAer",
+                "name": "Nomadic Focus",
+                "type": "artist",
+                "uri": "spotify:artist:6tZYiudQKCGp6IUbo9vAer"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/6vtCDfFFFN8duHnt2hBqnE"
+            },
+            "href": "https://api.spotify.com/v1/albums/6vtCDfFFFN8duHnt2hBqnE",
+            "id": "6vtCDfFFFN8duHnt2hBqnE",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27379477b3217f597eff9e209ab",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0279477b3217f597eff9e209ab",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485179477b3217f597eff9e209ab",
+                "width": 64
+              }
+            ],
+            "is_playable": true,
+            "name": "LoFistory",
+            "release_date": "2023-03-17",
+            "release_date_precision": "day",
+            "total_tracks": 1,
+            "type": "album",
+            "uri": "spotify:album:6vtCDfFFFN8duHnt2hBqnE"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6tZYiudQKCGp6IUbo9vAer"
+              },
+              "href": "https://api.spotify.com/v1/artists/6tZYiudQKCGp6IUbo9vAer",
+              "id": "6tZYiudQKCGp6IUbo9vAer",
+              "name": "Nomadic Focus",
+              "type": "artist",
+              "uri": "spotify:artist:6tZYiudQKCGp6IUbo9vAer"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 220500,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "US66W2201926"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/3EHS4GucJsHj9zsryxZ4gp"
+          },
+          "href": "https://api.spotify.com/v1/tracks/3EHS4GucJsHj9zsryxZ4gp",
+          "id": "3EHS4GucJsHj9zsryxZ4gp",
+          "is_local": false,
+          "is_playable": true,
+          "name": "LoFistory",
+          "popularity": 49,
+          "preview_url": "https://p.scdn.co/mp3-preview/7cc0da86217348dad1258c78d901299f452068cd?cid=0b297fa8a249464ba34f5861d4140e58",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:3EHS4GucJsHj9zsryxZ4gp"
+        }
+      ],
+      "limit": 10,
+      "next": "https://api.spotify.com/v1/search?query=lofi&type=track&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=15&limit=10",
+      "offset": 5,
+      "previous": "https://api.spotify.com/v1/search?query=lofi&type=track&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=10",
+      "total": 448
+    },
+    "playlists": {
+      "href": "https://api.spotify.com/v1/search?query=lofi&type=playlist&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=5&limit=10",
+      "items": [
+        {
+          "collaborative": false,
+          "description": "best lo-fi versions &amp; remixes of famous pop, hip hop &amp; rnb music. chill instrumental beats &amp; lo fi remakes for study&#x2F;relax&#x2F;focus&#x2F;work&#x2F;sleep &lt;3",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/1HVP7E8RkpieiGSxvATJbU"
+          },
+          "href": "https://api.spotify.com/v1/playlists/1HVP7E8RkpieiGSxvATJbU",
+          "id": "1HVP7E8RkpieiGSxvATJbU",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebba27d4d78716fd535d97a3483",
+              "width": null
+            }
+          ],
+          "name": "lofi covers of popular songs 🌙 2023 ",
+          "owner": {
+            "display_name": "BeatTape",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/rx5bwbvv6wpfohd740imi1uzg"
+            },
+            "href": "https://api.spotify.com/v1/users/rx5bwbvv6wpfohd740imi1uzg",
+            "id": "rx5bwbvv6wpfohd740imi1uzg",
+            "type": "user",
+            "uri": "spotify:user:rx5bwbvv6wpfohd740imi1uzg"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTIwOCw3YjVlNzUyYWRlZGZhN2M0YTE1ZjVhNzE0NGRhMWZkMjM4NzExYmQ3",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/1HVP7E8RkpieiGSxvATJbU/tracks",
+            "total": 326
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:1HVP7E8RkpieiGSxvATJbU"
+        },
+        {
+          "collaborative": false,
+          "description": "lofi hip hop music, Beats, chill, lo-fi to relax, code, and focus during late night sessions. Playlist updated weekly ✨",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/3WLDIcG4Cx2UOPy0rbFhQn"
+          },
+          "href": "https://api.spotify.com/v1/playlists/3WLDIcG4Cx2UOPy0rbFhQn",
+          "id": "3WLDIcG4Cx2UOPy0rbFhQn",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb6f30e60fd10813a512810d38",
+              "width": null
+            }
+          ],
+          "name": "productive study lofi ☁️",
+          "owner": {
+            "display_name": "Etymology Lofi",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/j3qvzkp8lkuukg1whzvg8325l"
+            },
+            "href": "https://api.spotify.com/v1/users/j3qvzkp8lkuukg1whzvg8325l",
+            "id": "j3qvzkp8lkuukg1whzvg8325l",
+            "type": "user",
+            "uri": "spotify:user:j3qvzkp8lkuukg1whzvg8325l"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MzMyOCxmNThlNTA1YjU0MTMzNjkxZWIxYWU4MGQ3NjY1NTlkNTIwYTk0MTBj",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/3WLDIcG4Cx2UOPy0rbFhQn/tracks",
+            "total": 757
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:3WLDIcG4Cx2UOPy0rbFhQn"
+        },
+        {
+          "collaborative": false,
+          "description": "The best chill instrumental beats to accompany you on the open road....",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/5SDPei4m0IuABIYRsDJcBC"
+          },
+          "href": "https://api.spotify.com/v1/playlists/5SDPei4m0IuABIYRsDJcBC",
+          "id": "5SDPei4m0IuABIYRsDJcBC",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb13cc0baebce5e4b843dfdb6b",
+              "width": null
+            }
+          ],
+          "name": "Chill Drive - Stress Relief, Relaxing Music | Lofi Hip Hop Music",
+          "owner": {
+            "display_name": "Chilli",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/hyhpkdvqhkr1jkiwirf8hue1r"
+            },
+            "href": "https://api.spotify.com/v1/users/hyhpkdvqhkr1jkiwirf8hue1r",
+            "id": "hyhpkdvqhkr1jkiwirf8hue1r",
+            "type": "user",
+            "uri": "spotify:user:hyhpkdvqhkr1jkiwirf8hue1r"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTE1OCxjMDNkMjJiZWZiYWJlM2MxNzBjOTQyNjA0Yjc0Y2EyOGRhYWVmNWU0",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/5SDPei4m0IuABIYRsDJcBC/tracks",
+            "total": 151
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:5SDPei4m0IuABIYRsDJcBC"
+        },
+        {
+          "collaborative": false,
+          "description": "This playlist can transport you to a nostalgic and dreamy world, evoking a sense of calm and tranquility. 🧿",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/0ffnLxCftwLzmXDO7DJEXc"
+          },
+          "href": "https://api.spotify.com/v1/playlists/0ffnLxCftwLzmXDO7DJEXc",
+          "id": "0ffnLxCftwLzmXDO7DJEXc",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb40a6a9a8f39c112e8cf45e0b",
+              "width": null
+            }
+          ],
+          "name": "Lofi Songs (Bollywood ) 😌💜",
+          "owner": {
+            "display_name": "VARUN DAGAR",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/31rewo2oawcrvoel6qho7z23efmi"
+            },
+            "href": "https://api.spotify.com/v1/users/31rewo2oawcrvoel6qho7z23efmi",
+            "id": "31rewo2oawcrvoel6qho7z23efmi",
+            "type": "user",
+            "uri": "spotify:user:31rewo2oawcrvoel6qho7z23efmi"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "NDc4MiwwYmU3YjE3YmJhNjFhODIyYjEzYTI2NTlkY2MxZDYyODk1YWE0Y2Qx",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/0ffnLxCftwLzmXDO7DJEXc/tracks",
+            "total": 152
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:0ffnLxCftwLzmXDO7DJEXc"
+        },
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/4eWBwGl0c5wtp6k5Krp6My"
+          },
+          "href": "https://api.spotify.com/v1/playlists/4eWBwGl0c5wtp6k5Krp6My",
+          "id": "4eWBwGl0c5wtp6k5Krp6My",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb35a7753833b2daad5fd194e3",
+              "width": null
+            }
+          ],
+          "name": "🌧️ lofi rain 😴 lo-fi sleep",
+          "owner": {
+            "display_name": "Chillhop World",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/elpsycongroo95"
+            },
+            "href": "https://api.spotify.com/v1/users/elpsycongroo95",
+            "id": "elpsycongroo95",
+            "type": "user",
+            "uri": "spotify:user:elpsycongroo95"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTA1MTIsZmQ0NWIxZTcyNzU4YzA2ZmI3MTRlMzNmZjkyZjI5YjVlMzdmNGQwMQ==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/4eWBwGl0c5wtp6k5Krp6My/tracks",
+            "total": 210
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:4eWBwGl0c5wtp6k5Krp6My"
+        },
+        {
+          "collaborative": false,
+          "description": "Selection of the best relaxing lofi hip hop beats for the perfect chill session - best lofi cover playlist - best lofi songs - lofi hip hop playlist - best study music - lofi remix playlist - relaxing beats playlist - chill beats playlist - lofi covers playlist - lofi beats - lofi fruits music",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/3LFIBdP7eZXJKqf3guepZ1"
+          },
+          "href": "https://api.spotify.com/v1/playlists/3LFIBdP7eZXJKqf3guepZ1",
+          "id": "3LFIBdP7eZXJKqf3guepZ1",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebbbc777cc650ddc2876875dca5",
+              "width": null
+            }
+          ],
+          "name": "Lofi Fruits Music - lofi hip hop beats to study, relax & sleep to",
+          "owner": {
+            "display_name": "Fruits Music",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/a902190"
+            },
+            "href": "https://api.spotify.com/v1/users/a902190",
+            "id": "a902190",
+            "type": "user",
+            "uri": "spotify:user:a902190"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "NzYyNyxmMGFmYWRjN2RkYzQwOTZkYzQ1ZWI4MzQwZTc5OGU2ZDk1NjcwYmMx",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/3LFIBdP7eZXJKqf3guepZ1/tracks",
+            "total": 342
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:3LFIBdP7eZXJKqf3guepZ1"
+        },
+        {
+          "collaborative": false,
+          "description": "Lazy slow lofi beats for laid-back moments.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWYoYGBbGKurt"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYoYGBbGKurt",
+          "id": "37i9dQZF1DWYoYGBbGKurt",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000003cdaa68b0fb669ca7b6f2dea9",
+              "width": null
+            }
+          ],
+          "name": "lofi chill",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTY4NjkyMDc2MSwwMDAwMDAwMDc3NjJmNzc2YzQxODJjZTM1Yzk1NDYxMWZhZmE4MzY5",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYoYGBbGKurt/tracks",
+            "total": 536
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWYoYGBbGKurt"
+        },
+        {
+          "collaborative": false,
+          "description": "Wake up happy with easy going instrumental hiphop beats. Tap  ⊕ if you enjoy listening! Carefully selected for study, work or chill mode. Soothing, relaxing morning motivation at its best.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/43Q9LvUErcQvo4YzG2wd5k"
+          },
+          "href": "https://api.spotify.com/v1/playlists/43Q9LvUErcQvo4YzG2wd5k",
+          "id": "43Q9LvUErcQvo4YzG2wd5k",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebbde49b36e6f29fd07c3c4b590",
+              "width": null
+            }
+          ],
+          "name": "Lofi Morning | soft morning music to wake up | uplifting beats | chill morning | relaxing background",
+          "owner": {
+            "display_name": "Settle",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/ijrunlmpo50e1789iv6vx0odz"
+            },
+            "href": "https://api.spotify.com/v1/users/ijrunlmpo50e1789iv6vx0odz",
+            "id": "ijrunlmpo50e1789iv6vx0odz",
+            "type": "user",
+            "uri": "spotify:user:ijrunlmpo50e1789iv6vx0odz"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MzY0OCw3M2Q4ZTZiYjJiMzFhOTZiYjg5YjA5OTY4ODk4M2E2ODVmNTNiOGYw",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/43Q9LvUErcQvo4YzG2wd5k/tracks",
+            "total": 386
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:43Q9LvUErcQvo4YzG2wd5k"
+        },
+        {
+          "collaborative": false,
+          "description": "Sleep Tales weekly selection of the best peaceful &amp; quiet lo-fi beats for a perfect sleepy night 💤  <a href=\"https://solo.to/sleeptales\">Follow us</a> on your favourite social media 💤  helps with insomnia and stress 😴",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/35xI4hSJ8MdO1xkXwsd56a"
+          },
+          "href": "https://api.spotify.com/v1/playlists/35xI4hSJ8MdO1xkXwsd56a",
+          "id": "35xI4hSJ8MdO1xkXwsd56a",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebbeccc0b1a600abe5e55bf6eb1",
+              "width": null
+            }
+          ],
+          "name": "lofi sleep, lofi rain 💤",
+          "owner": {
+            "display_name": "Sleep Tales",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/danimau07"
+            },
+            "href": "https://api.spotify.com/v1/users/danimau07",
+            "id": "danimau07",
+            "type": "user",
+            "uri": "spotify:user:danimau07"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MjAwMCwzZTJlM2E1N2FkNmFiMjc3YWYyNDBmNmUzZjFjOTI0MTBjOGQ0MzEx",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/35xI4hSJ8MdO1xkXwsd56a/tracks",
+            "total": 202
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:35xI4hSJ8MdO1xkXwsd56a"
+        },
+        {
+          "collaborative": false,
+          "description": "chill beats for cool coffeehouse vibes.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX9RwfGbeGQwP"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX9RwfGbeGQwP",
+          "id": "37i9dQZF1DX9RwfGbeGQwP",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000003f9ad4061443b5652521d1035",
+              "width": null
+            }
+          ],
+          "name": "lofi cafe",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTY4NjkyMDgwMywwMDAwMDAwMDczNjM0MTJlZTg2NjkxMTM5OGYxNDUwN2RkNTdjMTg4",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX9RwfGbeGQwP/tracks",
+            "total": 509
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX9RwfGbeGQwP"
+        }
+      ],
+      "limit": 10,
+      "next": "https://api.spotify.com/v1/search?query=lofi&type=playlist&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=15&limit=10",
+      "offset": 5,
+      "previous": "https://api.spotify.com/v1/search?query=lofi&type=playlist&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=10",
+      "total": 20
+    }
+  }
