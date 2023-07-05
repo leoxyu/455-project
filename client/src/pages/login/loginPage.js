@@ -252,12 +252,12 @@ const LoginPage = () => {
       {!spotifyLoggedIn ? (
         <button onClick={spotifyLogin} className="login-button">Verify Spotify Account</button>
       ) : (
-        <p>Youtube connected</p>
+        <p>Spotify connected</p>
       )}
       {!youtubeLoggedIn ? (
         <button onClick={youtubeLogin} className="login-button">Verify Youtube Account</button>
       ) : (
-        <p>Spotify connected</p>
+        <p>Youtube connected</p>
       )}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
