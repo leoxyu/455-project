@@ -13,27 +13,24 @@ let access_token = null;
 let refresh_token = null;
 let spotify_profile = null;
 
-const generateRandomString = function (length) { // generate random string to use as a state
-  let text = '';
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+// const generateRandomString = function (length) { // generate random string to use as a state
+//   let text = '';
+//   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  for (let i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
-
-let stateKey = 'spotify_auth_state'; // name of the cookie
+//   for (let i = 0; i < length; i++) {
+//       text += possible.charAt(Math.floor(Math.random() * possible.length));
+//   }
+//   return text;
+// };
 
 // app.use(express.static(__dirname + '/public'))
-router.use(cors())
-      .use(cookieParser());
+router.use(cors());
 
 router.get('/login', function (req, res) { // handle login request from the hyperlink on html page
     console.log("In spotify login");
 
-  let state = generateRandomString(16);
-  res.cookie(stateKey, state); // set cookie to travel with request
+  // let state = generateRandomString(16);
+  // res.cookie(stateKey, state); // set cookie to travel with request
 
   // console.log("\nstate before sending query: ", state);
 
@@ -45,7 +42,6 @@ router.get('/login', function (req, res) { // handle login request from the hype
       client_id: client_id,
       scope: scope,
       redirect_uri: redirect_uri,
-      state: state
   });
 
 //   console.log("\ncookies: ", res.cookies[stateKey]);
@@ -59,14 +55,9 @@ router.get('/callback', function (req, res) {
 
   let code = req.query.code || null;
   let state = req.query.state || null;
-  if (req.cookies) {
-
-  }
-  let storedState = req.cookies ? req.cookies[stateKey] : null;
 
   // console.log("\ncode: ", code);
-  console.log("\nstate: ", state);
-  console.log("\nstoredState: ", storedState);
+  // console.log("\nstate: ", state);
 
   const authOptions = {
     method: 'POST',
