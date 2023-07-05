@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { spotifyProfileThunk } from './Spotify/spotifyOauthThunks';
+import { spotifyProfileThunk } from './Spotify/spotifyApiThunks';
 
 // =================================================================================>
 // parameters for spotify OAuth
@@ -25,10 +25,10 @@ const spotifyApiSlice = createSlice({
     name: 'login',
     initialState: initialState,
     reducers: {
-        setAccessToken: (state, action) => {
+        setAccessTokenSpotify: (state, action) => {
             state.access_token = action.payload;
         },
-        setRefreshToken: (state, action) => {
+        setRefreshTokenSpotify: (state, action) => {
             state.refresh_token = action.payload;
         },
         setSpotifyProfile: (state, action) => {
@@ -45,7 +45,7 @@ const spotifyApiSlice = createSlice({
     }
 });
 
-export const { setAccessToken, setRefreshToken, setSpotifyAuthError, setSpotifyProfile } = spotifyApiSlice.actions;
+export const { setAccessTokenSpotify, setRefreshTokenSpotify, setSpotifyAuthError, setSpotifyProfile } = spotifyApiSlice.actions;
 
 export default spotifyApiSlice.reducer;
 
