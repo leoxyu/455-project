@@ -35,7 +35,7 @@ router.get('/login', function (req, res) { // handle login request from the hype
   // console.log("\nstate before sending query: ", state);
 
   // request authorization - automatically redirects to callback
-  const scope = 'user-read-private user-read-email';
+  const scope = 'user-read-private user-read-email user-library-read user-top-read playlist-read-collaborative';
   const redirect_url = 'https://accounts.spotify.com/authorize?' +
   querystring.stringify({
       response_type: 'code',
