@@ -6,10 +6,16 @@ import { getSpotifyAsync } from './thunks';
 // because we get rate limited and have limited search results, we need to query for all possible data
 // then filter on server side, then return to client side due to filters
 const INITIAL_STATE = {
-    spotify: { 'tracks': [], 'albums': [], 'playlists': [] }, // TODO add artists
+    spotify: { 
+        'tracks': [],
+        'albums': [], 
+        'playlists': [],
+        'tracksNext': null,
+        'albumsNext': null,
+        'playlistsNext': null,
+    }, // TODO add artists
     youtube: { videos: [], playlists: [] }, // TODO add channels
     unifi: { playlists: [] }, // TODO: add users
-    nextPageLink: null,
     getSpotify: REQUEST_STATE.IDLE,
     getYoutube: REQUEST_STATE.IDLE,
     getUnifi: REQUEST_STATE.IDLE,
@@ -20,65 +26,6 @@ const INITIAL_STATE = {
 
 
 
-
-
-function formatDuration(milliseconds) {
-    const seconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-  
-    const formattedHours = hours > 0 ? String(hours) : '';
-    const formattedMinutes = minutes > 0 ? String(minutes % 60): '0';
-    const formattedSeconds = String(seconds % 60);
-  
-    const parts = [];
-    if (formattedHours !== '') {
-      parts.push(formattedHours);
-    }
-    parts.push(formattedMinutes);
-    parts.push(formattedSeconds.padStart(2, '0'));
-  
-    return parts.join(':');
-}
-  
-  
-
-
-// thumbnailUrl, songName,
-//  artistName, views, duration,
-//  songLink, platform,
-function parseSpotifyTracks(items) {
-    return items.map(track => {
-        return {
-            'songName': track.name,
-            'artists': track.artists.map(artist => artist.name),
-            'thumbnailUrl': track.album.images[0].url,
-            'views': track.popularity, // TODO: change to popularity
-            'releaseDate': track.album.release_date,
-            // 'albumName': track.album.name,
-            'genres': track.genresConcat, //and union with artist genre
-            'audioFeatures': track.audioFeatures,
-            'duration': formatDuration(track.duration_ms), // convert to min
-            'songLink': track.href
-        };
-});
-}
-
-function parseSpotifyAlbums(items) {
-    return items.map(album => {
-        return {
-
-            'playlistName': album.name,
-            'artistName': album.artists.map(artist => artist.name).join(','),
-            'thumbnailUrl': album.images[0].url,
-            'date': album.release_date,
-            'genres': album.genresConcat, //and union with artist genre
-            'songs': parseSpotifyTracks(album.tracks.items),
-            'duration': album.total_tracks, // convert to min
-            'playlistLink': album.href
-        };
-});
-}
 // https://developer.spotify.com/documentation/web-api/reference/get-recommendations
 // -> good initial query for recommendations on home page
 
@@ -95,11 +42,13 @@ const searchSlice = createSlice({
         });
         builder.addCase(getSpotifyAsync.fulfilled, (state, action) => {
             state.getSpotify = REQUEST_STATE.FULFILLED;
-            state.spotify.tracks = parseSpotifyTracks(action.payload.tracks.items);
+            state.spotify.tracks = action.payload.tracks.items;
+            state.spotify.tracksNext = action.payload.tracks.next;
             // state.nextPageLink = action.payload.tracks.next;
             
-
-            // state.spotify.albums=action.playload.albums.items;
+            // console.log(action.payload.albums)
+            state.spotify.albums=action.payload.albums.items;
+            state.spotify.albumsNext = action.payload.albums.next;
             // state.spotify.albums = parseSpotifyAlbums(action.payload.albums.items);
             // console.log(JSON.stringify(state.spotify.albums[0]));
 

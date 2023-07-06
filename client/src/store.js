@@ -15,7 +15,7 @@ export const store = configureStore({
     spotify: spotifyReducer,
     playlists: playlistsReducer,
     player: PlayerReducer,
-    search: searchReducer
+    search: searchReducer,
     youtube: youtubeApiReducer
   },
   devTools: true

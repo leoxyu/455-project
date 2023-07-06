@@ -46,7 +46,7 @@ const SearchPage = () => {
 
   const performSearch = debounce((searchTerm) => {
     setSearchTerm(searchTerm);
-  }, 350);
+  }, 400);
   
   useEffect(() => {
     console.log("calling it with " + searchTerm)
@@ -59,10 +59,6 @@ const SearchPage = () => {
 
   const playlistCreatorRef = useRef(null);
 
-  const handleSearch = async () => {
-    // Call APIs to search for songs and playlists
-
-  };
 
   const closeCreator = () => {
     setCreatorVisible(false);
@@ -163,7 +159,7 @@ const SearchPage = () => {
        <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
         <div className='spotify-album-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-          <PlaylistResult 
+          {/* <PlaylistResult 
           className={'spotify-album-preview'}
           thumbnailUrl={'https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e'}
           playlistName={'D-2'}
@@ -172,10 +168,10 @@ const SearchPage = () => {
           // duration={}
           playlistLink={'https://open.spotify.com/album/2OeWW05eH3qKcnaNRY0qR0?si=8e9e2e9e0b3e4e4a'}
           // songs={[]}
-          isFavorite={false}/>
+          isFavorite={false}/> */}
 
 
-          {spotifySongList.map((song) => (
+          {/* {spotifySongList.map((song) => (
           <PlaylistResult
             className={'spotify-album-preview'}
             key={song.songName}
@@ -186,17 +182,17 @@ const SearchPage = () => {
             // duration={song.duration}
             playlistLink={song.songLink}
           />
-        ))}
-        {spotifySongList.map((song) => (
+        ))} */}
+        {spotifyAlbums.map((album) => (
           <PlaylistResult
             className={'spotify-album-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            playlistName={song.songName}
-            artistName={song.artistName}
-            // views={song.views + ' views'}
+            key={album.playlistLink}
+            thumbnailUrl={album.thumbnailUrl}
+            playlistName={album.playlistName}
+            artistName={album.artistName.join(', ')}
+            views={album.popularity + ' views'}
             // duration={song.duration}
-            playlistLink={song.songLink}
+            playlistLink={album.playlistLink}
           />
         ))}
         </div>

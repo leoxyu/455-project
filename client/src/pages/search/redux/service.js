@@ -1,4 +1,73 @@
 
+
+
+
+
+
+function formatDuration(milliseconds) {
+    const seconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+  
+    const formattedHours = hours > 0 ? String(hours) : '';
+    const formattedMinutes = minutes > 0 ? String(minutes % 60): '0';
+    const formattedSeconds = String(seconds % 60);
+  
+    const parts = [];
+    if (formattedHours !== '') {
+      parts.push(formattedHours);
+    }
+    parts.push(formattedMinutes);
+    parts.push(formattedSeconds.padStart(2, '0'));
+  
+    return parts.join(':');
+}
+  
+  
+
+
+// thumbnailUrl, songName,
+//  artistName, views, duration,
+//  songLink, platform,
+function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popularity=false) {
+    return items.map(track => {
+        return {
+            'songName': track.name,
+            'artists': track.artists,
+            'thumbnailUrl': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
+            'views': (popularity)? popularity: track.popularity, // TODO: change to popularity
+            'releaseDate': (release_date)? release_date: track.album.release_date,
+            'genres': track.genresConcat, //and union with artist genre
+            'audioFeatures': track.audioFeatures,
+            'duration': formatDuration(track.duration_ms), // convert to min
+            'songLink': track.href
+        };
+});
+}
+
+
+function parseSpotifyAlbums(items) {
+    return items.map(album => {
+        return {
+
+            'playlistName': album.name,
+            'artistName': album.artists,
+            'thumbnailUrl': album.images[0].url,
+            'date': album.release_date,
+            'genres': album.genresConcat, //and union with artist genre
+            'songs': parseSpotifyTracks(album.tracks.items,
+                album.images[0].url,
+                album.release_date,
+                album.popularity),
+            'duration': album.total_tracks, // convert to min
+            'playlistLink': album.href,
+            'tracksNextLink': album.tracks.next,
+            'popularity': album.popularity
+        };
+});
+}
+
+
 //'https://api.spotify.com/v1/audio-features?ids=4bjN59DRXFRxBE1g5ne6B1%2C0SOnbGVEf5q0YqL0FO2qu0%2C4mEcvV7O3fibI38H2MfHuJ' \
 //'https://api.spotify.com/v1/audio-features?ids=4bjN59DRXFRxBE1g5ne6B1%2C0SOnbGVEf5q0YqL0FO2qu0%2C4mEcvV7O3fibI38H2MfHuJ'
 const removeAudioFeatures = ['type', 'id', 'uri', 'track_href', 'duration_ms'];
@@ -134,15 +203,19 @@ const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track
     const data = await response.json();
     if (types.includes('track')) {
         await addTrackMetadata(data.tracks, accessToken);
+        // console.log(data.tracks)
+        data.tracks.items = parseSpotifyTracks(data.tracks.items);
     }
 
     if (types.includes('album')) {
+        // console.log(data.albums);
         await addAlbumMetadata(data, accessToken);    
+        data.albums.items = parseSpotifyAlbums(data.albums.items);
     }
 
     console.log("after adding album metadata");
-    console.log(data.tracks);
-    console.log(data.albums);
+    // console.log(data.tracks);
+    // console.log(data.albums);
 
     return data;
 };
