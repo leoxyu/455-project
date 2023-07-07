@@ -2,12 +2,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './styles/currentPlaylistPage.css'; 
+import './styles/playlistPage.css';
+
+import PlaylistContainer from "./components/playlistContainer.js";
 
 const CurrentPlaylistPage = () => {
+
+    const currentPlaylist = useSelector(state => state.currentPlaylist.playlist);
+    const dispatch = useDispatch();
+
     return (
         <div>
             <h1>Current Playlist Page</h1>
+            <PlaylistContainer
+                {...currentPlaylist}
+            />
         </div>
     );
 }

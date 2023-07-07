@@ -1,0 +1,45 @@
+.playlist-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--background-base);
+  justify-content: space-between;
+  font-size: 0.9rem; /* Decrease the font size */
+  height: 4rem; /* Increase the height for larger cover image */
+  flex-grow: 1; /* Stretch to fit everything */
+}
+
+.playlist-header .cover img {
+  max-width: 5rem; /* Increase the width for larger cover image */
+  max-height: 5rem; /* Increase the height for larger cover image */
+  object-fit: cover;
+}
+
+.playlist-header .info {
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 30vw;
+}
+
+.playlist-header .info h2 {
+  color: var(--text-base);
+  font-size: 1rem; /* Decrease the font size */
+}
+
+.playlist-header .info p {
+  color: var(--text-subdued);
+  font-size: 0.8rem; /* Decrease the font size */
+}
+
+@media (max-width: 599px) {
+  .playlist-header .info p {
+    display: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .playlist-header .heart-icon {
+    display: none;
+  }
+}
