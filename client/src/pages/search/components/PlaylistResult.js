@@ -8,6 +8,7 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import '../styles/Preview.css';
 import '../styles/SpAlbumPreview.css';
 import '../styles/SpPlaylistPreview.css';
+import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
 import {editPlaylistAsync} from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
@@ -21,6 +22,8 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
   const handleInputChange = (event) => {
     setPlaylistName(event.target.value);
   };
+
+  let optionsRef = null;
 
   const handlePlay = () => {
     // example of how you can load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
@@ -59,7 +62,9 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
 
   const handleOptions = () => {
     // Handle options button click
-    optionsOnClick();
+    const optionsLocation = optionsRef.getBoundingClientRect();
+    console.log("original", optionsLocation.top, optionsLocation.left);
+    optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
   //  TODO avoid rendering if we use none in css
@@ -88,7 +93,7 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
         <div className="stats">
             <HeartIcon className="heart-icon" onClick={handleFavorite}/>
             <div className="duration">{duration}</div>
-            <OptionsIcon className="options-icon" onClick={handleOptions}/>
+            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
         </div>
       </div>
         </div>
