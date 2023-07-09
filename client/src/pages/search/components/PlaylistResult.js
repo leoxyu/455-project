@@ -63,7 +63,6 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
   const handleOptions = () => {
     // Handle options button click
     const optionsLocation = optionsRef.getBoundingClientRect();
-    console.log("original", optionsLocation.top, optionsLocation.left);
     optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
