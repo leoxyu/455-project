@@ -109,6 +109,69 @@ playlistsRouter.post('/', (req, res, next) => {
   .send(playlists[playlists.length - 1]);
 });
 
+function getTracksHelper(access_token, next, playlist) {
+  // if next link is null, dont do anything
+  return next ? fetch(next, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${access_token}` }
+  }).then(response => {
+    if (response.status === 200) {
+        return response.json();
+    } else {
+      return Promise.reject(response);
+    }
+  }).then(data => {
+    // console.log(data);
+    for (const i of data.items) {
+      playlist.songs.push({ artist: i.track.artists[0].name, name: i.track.name, type: 'spotify', link: i.track.uri }); // best for performance
+    }
+    if (data.next) {
+      return getTracksHelper(access_token, data.next, playlist);
+    } else {
+      return playlist;
+    }
+  }) // don't catch, let error bubble up to route handler
+  : 
+  playlist; 
+}
+
+// TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
+playlistsRouter.post('/importManySpotify', async (req, res, next) => {
+  const { playlistIDs, access_token } = req.body;
+  console.log(access_token);
+  
+  Promise.all(playlistIDs.map(id => {
+    return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${access_token}` }
+    }).then(response => {
+      if (response.status === 200) {
+          return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    }).then(data => getTracksHelper(access_token, data.tracks.href, {
+        name: data.name,
+        coverImageURL: data.images[0].url,
+        songs: [],
+      })
+    ).then(playlist => {
+      // TODO: add playlist to mongo
+      playlists.push(playlist);
+
+      return playlist; //TODO: return the id of the playlist
+    })
+  }))
+  .then(ids => {
+    console.log(ids);
+    res.status(200).send(ids)
+  }).catch(error => { // catch outside promise.all, don't catch inside
+    console.log(error);
+    return res.status(500).send(error);
+  });
+});
+  
+
 playlistsRouter.get('/', (req, res, next) => {
 //   const { name } = req.query;
   let filteredplaylists = playlists;
@@ -193,24 +256,25 @@ playlistsRouter.post('/:playlistId', (req, res, next) => {
     return res.status(201).json(song);
   });
   
-  playlistsRouter.delete('/:playlistId/:songId', (req, res, next) => {
-    const { playlistId, songId } = req.params;
-  
-    const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
-    if (playlistIndex === -1) {
-      return res.status(404).json({ message: 'Playlist not found' });
-    }
-  
-    const songIndex = playlists[playlistIndex].songs.findIndex((song) => song.URI === songId);
-    if (songIndex === -1) {
-      return res.status(404).json({ message: 'Song not found in playlist' });
-    }
-  
-    playlists[playlistIndex].songs.splice(songIndex, 1);
-  
-    return res.status(204).send({});
-  });
-  
+playlistsRouter.delete('/:playlistId/:songId', (req, res, next) => {
+  const { playlistId, songId } = req.params;
+
+  const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
+  if (playlistIndex === -1) {
+    return res.status(404).json({ message: 'Playlist not found' });
+  }
+
+  const songIndex = playlists[playlistIndex].songs.findIndex((song) => song.URI === songId);
+  if (songIndex === -1) {
+    return res.status(404).json({ message: 'Song not found in playlist' });
+  }
+
+  playlists[playlistIndex].songs.splice(songIndex, 1);
+
+  return res.status(204).send({});
+});
+
+
 
 
 
