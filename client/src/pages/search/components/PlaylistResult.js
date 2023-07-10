@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../styles/variables.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
@@ -12,12 +12,45 @@ import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
 import {editPlaylistAsync} from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
+import Options2 from '../components/Options2';
+
 const { v4: uuid } = require('uuid');
 
 
-const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
+const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
+
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [optionsTop, setOptionsTop] = useState(false);
+  const [optionsLeft, setOptionsLeft] = useState(false);
+
   const dispatch = useDispatch();
+
+  let optionsPopupRef = useRef();
+
+  useEffect(() => {
+    let optionsHandler = (e) => {
+      if (!optionsPopupRef.current.contains(e.target)) {
+        setOptionsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", optionsHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", optionsHandler);
+    }
+  });
+
+  const optionsOnClick = (top, left) => {
+    if (optionsOpen) {
+      setOptionsOpen(false);
+    } else {
+      setOptionsTop(top + 21);
+      setOptionsLeft(left - 45);
+      setOptionsOpen(true);
+    }
+  };
 
   const handleInputChange = (event) => {
     setPlaylistName(event.target.value);
@@ -92,7 +125,10 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
         <div className="stats">
             <HeartIcon className="heart-icon" onClick={handleFavorite}/>
             <div className="duration">{duration}</div>
-            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+            <div ref={optionsPopupRef}>
+              <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+              <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={deleteOnClick}/>
+            </div>
         </div>
       </div>
         </div>

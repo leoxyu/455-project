@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/variables.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {getPlaylistsAsync, deletePlaylistAsync} from '../../components/home/redux/thunks';
@@ -9,16 +9,10 @@ import Filters from '../search/components/Filters';
 import PlaylistCreator from './components/PlaylistCreator';
 import { ReactComponent as AddIcon } from '../../images/add.svg';
 import '../search/styles/Preview.css';
-import Options2 from '../search/components/Options2';
 
 
 const PlaylistPage = () => {
-
   const [creatorVisible, setCreatorVisible] = useState(false);
-
-  const [optionsOpen, setOptionsOpen] = useState(false);
-  const [optionsTop, setOptionsTop] = useState(false);
-  const [optionsLeft, setOptionsLeft] = useState(false);
 
   useEffect(() => {
     document.title = "Uni.fi - Playlists"; // Change the webpage title
@@ -26,22 +20,6 @@ const PlaylistPage = () => {
     // Clean up the effect
 
   }, []);
-
-  let optionsPopupRef = useRef();
-
-  useEffect(() => {
-    let optionsHandler = (e) => {
-      if (!optionsPopupRef.current.contains(e.target)) {
-        setOptionsOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", optionsHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", optionsHandler);
-    }
-  });
 
   const playlists = useSelector(state => state.playlists.playlists);
   const dispatch = useDispatch();
@@ -64,21 +42,11 @@ const PlaylistPage = () => {
     //  do something
   };
 
-  const optionsOnClick = (top, left) => {
-    if (optionsOpen) {
-      setOptionsOpen(false);
-    } else {
-      setOptionsTop(top + 21);
-      setOptionsLeft(left - 45);
-      setOptionsOpen(true);
-    }
-  };
-
   const onDelete = (playlistId) => {
     dispatch(deletePlaylistAsync(playlistId));
   };
 
-  const onEdit = (playlistId) => {
+  const onEdit = (playlist) => {
 
   };
 
@@ -109,15 +77,10 @@ const PlaylistPage = () => {
             playlistName={playlist.name}
             artistName={playlist.author}
             songs={playlist.songs}
-            optionsOnClick={optionsOnClick}
             deleteOnClick={() => onDelete(playlist.playlistID)}
-            editOnClick={() => onEdit(playlist.playlistID)}
             isEditable={false}
           />
         ))}
-      </div>
-      <div ref={optionsPopupRef}>
-        <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft}/>
       </div>
     </div>
   );
