@@ -13,7 +13,6 @@ const CurrentPlaylistPage = () => {
 
     return (
         <div>
-            <h1>Current Playlist Page</h1>
             <PlaylistContainer
                 {...currentPlaylist}
             />

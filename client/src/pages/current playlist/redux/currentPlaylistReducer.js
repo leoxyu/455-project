@@ -11,7 +11,7 @@ const currentPlaylistSlice = createSlice({
             playlistId: 1,
             playlistLink: "https://open.spotify.com/album/2VFEPv8gs1mSj67hEDbRMO",
             playlistObjectId: null,
-            playlistName: "MYTH & ROID",
+            playlistName: "EYES",
             playlistType: TYPE_ALBUM,
             author: "MYTH & ROID",
             authorCoverUrl: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.nautiljon.com%2Fimages%2Fpeople%2F00%2F99%2Fmyth_roid_62399.jpg%3F1475910665&f=1&nofb=1&ipt=bba15313032611143b9dab6e2e24285649baeb01421f46cecabe93b9357f3719&ipo=images",

@@ -1,0 +1,19 @@
+
+
+
+.track-container {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.5em 0;
+    gap: 0.5em;
+
+    .p {
+        margin: 0.2em 0;
+        padding: 0.2em 0;
+        color: aliceblue;
+      }
+}
+
