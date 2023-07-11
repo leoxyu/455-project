@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 const { MongoClient } = require('mongodb');
 const { LOGIN_STATUS } = require('../login/loginConstants');
-const { URI, DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoConstants');
+const { DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoConstants');
+require('dotenv').config();
 
-const client = new MongoClient(URI);
+const client = new MongoClient(process.env.MONGO_URI);
 
 async function authenticateLogin(username, password) {
     let status = LOGIN_STATUS.UnknownStatus;

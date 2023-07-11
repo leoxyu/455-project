@@ -3,7 +3,15 @@
 // import { addPlaylist, resetDeck, deletePlaylist, modifyPlaylist } from '../../src/redux/inventory';
 var express = require('express');
 var playlistsRouter = express.Router();
-const { v4: uuid } = require('uuid');
+const { v4 } = require('uuid');
+
+const { MongoClient, ObjectId } = require("mongodb");
+const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+require('dotenv').config();
+
+const client = new MongoClient(process.env.MONGO_URI);
+const database = client.db(DATABASE_NAME);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION);
 
 var playlists= [
     {
@@ -151,44 +159,39 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
         return Promise.reject(response);
       }
     }).then(data => getTracksHelper(access_token, data.tracks.href, {
+        id: v4(),
+        dateCreated: new Date(),
+        description: data.description,
         name: data.name,
+        author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
+        isFavorited: false,
         coverImageURL: data.images[0].url,
         songs: [],
       })
-    ).then(playlist => {
-      // TODO: add playlist to mongo
-      playlists.push(playlist);
-
-      return playlist; //TODO: return the id of the playlist
+    ).then(async (playlist) => {
+      const result = await playlistsCol.insertOne(playlist);
+      console.log(`inserted ${result.insertedId}`);
+      return playlist.id; // return the uuid
     })
   }))
   .then(ids => {
     console.log(ids);
     res.status(200).send(ids)
   }).catch(error => { // catch outside promise.all, don't catch inside
+    // TODO: rollback all playlists already added to db
     console.log(error);
     return res.status(500).send(error);
   });
 });
   
 
-playlistsRouter.get('/', (req, res, next) => {
-//   const { name } = req.query;
-  let filteredplaylists = playlists;
-
-  // Apply search filters
-//   if (name) {
-//     const sanitizedName = sanitizeName(name);
-//     filteredplaylists = filteredplaylists.filter(
-//       (playlist) => sanitizeName(playlist.name).includes(sanitizedName)
-//     );
-//   }
-
-// console.log(playlists);
+playlistsRouter.get('/', async (req, res, next) => {
+  // TODO: sort, filter, pagination
+  const allItems = await playlistsCol.find({}).toArray();
   return res
   .setHeader('Content-Type', 'application/json')
   .status(200)
-  .send(filteredplaylists);
+  .send(allItems);
 });
 
 playlistsRouter.delete('/:playlistId', (req, res, next) => {
