@@ -1,19 +1,87 @@
-
-
-
 .track-container {
-    display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 0.5em 0;
-    gap: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 
-    .p {
-        margin: 0.2em 0;
-        padding: 0.2em 0;
-        color: aliceblue;
-      }
 }
 
+.track-container:hover {
+  background-color: var(--background-elevated-base);
+
+  .heart-icon, .options-icon {
+    opacity: 1;
+    fill: var(--text-base);
+  }
+  
+}
+
+.track-container-left {
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0.5em;
+  gap: 0.5em;
+
+  .p {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+  }
+
+  .track-cover {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+  }
+}
+
+.track-container-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  gap: 0.9em;
+
+  .track-duration {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+  }
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+  cursor: pointer;
+  margin: 0;
+  opacity: 0;
+}
+
+.heart-icon {
+  max-width: 1.1rem;
+  max-height: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  fill: aliceblue;
+}
+
+.options-icon {
+  max-width: 1.15rem;
+  max-height: 1.15rem;
+  cursor: pointer;
+  margin-right: 0; 
+  margin-left: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+  rotate: 90deg;
+  fill: aliceblue;
+}

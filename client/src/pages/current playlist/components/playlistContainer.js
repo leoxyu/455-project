@@ -25,6 +25,7 @@ const PlaylistContainer = ({ playlistId, playlistLink, playlistObjectId, playlis
                     <h2 className='playlist-type'>{playlistType}</h2>
                     <h1 className='playlist-title-1'>{playlistName}</h1>
                     <div className='info-footer'>
+                        <img className='author-profile-cover' src={authorCoverUrl} alt="Author cover" />
                         <p className='p'>{author} ・</p>
                         <p className='p'>{numTracks} songs,</p>
                         <p className='p'>{totalDuration} seconds</p>
@@ -32,10 +33,14 @@ const PlaylistContainer = ({ playlistId, playlistLink, playlistObjectId, playlis
                 </div>
             </div>
 
+            <br></br>
+
             <div className='playlist-container'>
                 {tracks.map((track) => (
                     <TrackEntry
-                        trackName={track.trackName}
+                    key={track.trackObjectId}
+                    
+                    {...track}
                     />
                 ))}
             </div>

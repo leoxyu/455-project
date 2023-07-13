@@ -40,6 +40,13 @@
     gap: 0.5em;
   }
 
+  .author-profile-cover {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+  }
+
   .p {
     margin: 0.2em 0;
     padding: 0.2em 0;
@@ -61,13 +68,19 @@
   margin-right: 0.6em;
   margin-top: 0em;
   padding: 0.5%;
-  border-radius: 10px;
+  gap: 0.5%;
+  border-radius: 2px;
 }
 
 .playlist-container {
+  display: flex;
+  flex-direction: column;
   position: static;
   background-color: var(--background-base);
   margin-bottom: 10px;
+  row-gap: 10px;
+  padding-left: 0.7rem;
+  padding-right: 2.5rem;
 }
 
 .playlist-type {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
@@ -12,12 +12,35 @@ const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../re
 
 const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album, isFavorite, type, link, coverUrl, releaseDate, popularity, handleDropdown = () => { } }) => {
 
+    const trackDuration = new Date(duration * 1000).toISOString().slice(11, 19);
+
+    const handlePlay = () => {
+        // Handle play button click
+    };
+
+    const handleFavorite = () => {
+        // Handle favorite button click
+    };
+
+    const handleOptions = () => {
+    };
+
 
     return (
         <div className="track-container">
-            <p className="p">{trackId}</p>
-            <p className="p">{trackName}</p>
+            <div className="track-container-left">
+                <p className="p">{trackId}</p>
+                <img className='track-cover' src={coverUrl} alt="Track Cover" />
+                <p className="p">{trackName}</p>
+            </div>
+            <div className="track-container-right">
+                <HeartIcon className="heart-icon" onClick={handleFavorite} />
+                <p className="track-duration">{trackDuration}</p>
+                <OptionsIcon className="options-icon" onClick={handleOptions} />
+            </div>
         </div>
+
+
 
 
 
