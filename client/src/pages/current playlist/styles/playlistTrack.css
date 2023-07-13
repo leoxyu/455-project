@@ -1,18 +1,27 @@
+
+
+
 .track-container {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-
+  border-radius: 5px;
 }
 
 .track-container:hover {
   background-color: var(--background-elevated-base);
 
-  .heart-icon, .options-icon {
+  .play-icon,
+  .heart-icon,
+  .options-icon {
     opacity: 1;
     fill: var(--text-base);
   }
-  
+
+  .track-id {
+    opacity: 0;
+  }
+
 }
 
 .track-container-left {
@@ -23,12 +32,22 @@
   flex-direction: row;
   justify-content: flex-start;
   padding: 0.5em;
-  gap: 0.5em;
+  gap: 1.2rem;
+  width: 100%;
 
   .p {
     margin: 0.2em 0;
     padding: 0.2em 0;
     color: aliceblue;
+  }
+
+  .track-id {
+    position: relative;
+    left: 0%;
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+    transition: opacity 0.1s;
   }
 
   .track-cover {
@@ -54,15 +73,17 @@
 }
 
 .play-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 1.5rem;
-  max-height: 1.5rem;
+  max-width: 1.1rem;
+  max-height: 1.1rem;
   cursor: pointer;
-  margin: 0;
   opacity: 0;
+  transition: opacity 0.1s;
+  fill: aliceblue;
+  
+  /* manually position play icon over the track-id*/
+  position: relative;
+  left: -1.8rem;
+  z-index: 2;
 }
 
 .heart-icon {
@@ -78,7 +99,7 @@
   max-width: 1.15rem;
   max-height: 1.15rem;
   cursor: pointer;
-  margin-right: 0; 
+  margin-right: 0;
   margin-left: 0;
   opacity: 0;
   transition: opacity 0.2s;

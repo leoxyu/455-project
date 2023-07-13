@@ -78,9 +78,7 @@
   position: static;
   background-color: var(--background-base);
   margin-bottom: 10px;
-  row-gap: 10px;
-  padding-left: 0.7rem;
-  padding-right: 2.5rem;
+  row-gap: 5px;
 }
 
 .playlist-type {

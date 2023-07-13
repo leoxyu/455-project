@@ -29,7 +29,8 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
     return (
         <div className="track-container">
             <div className="track-container-left">
-                <p className="p">{trackId}</p>
+                <p className="track-id">{trackId}</p>
+                <PlayIcon className="play-icon" onClick={handlePlay} />
                 <img className='track-cover' src={coverUrl} alt="Track Cover" />
                 <p className="p">{trackName}</p>
             </div>
