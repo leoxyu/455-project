@@ -17,7 +17,7 @@ import Options2 from '../components/Options2';
 const { v4: uuid } = require('uuid');
 
 
-const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick}) => {
+const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick }) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -89,6 +89,16 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
     }));
   };
 
+  const handleDelete = () => {
+    setOptionsOpen(false);
+    deleteOnClick();
+  };
+
+  const handleEdit = () => {
+    setOptionsOpen(false);
+    editOnClick();
+  };
+
   const handleFavorite = () => {
     // Handle favorite button click
   };
@@ -127,7 +137,7 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
             <div className="duration">{duration}</div>
             <div ref={optionsPopupRef}>
               <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
-              <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={deleteOnClick}/>
+              <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>
             </div>
         </div>
       </div>

@@ -1,0 +1,61 @@
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    border-color: var(--background-tinted-highlight);
+    background-color: var(--background-elevated-base);
+    padding: 1.5em;
+    border-radius: 1em;
+}
+
+.playlist-editor-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--text-base);
+    margin: 0.5em 0;
+}
+
+.playlist-editor-input {
+    width: 100%;
+    min-height: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 0.5em;
+    border: none;
+    background-color: var(--background-elevated-base);
+    color: var(--text-base);
+    padding-left: 0.5em;
+    font-family: 'Roboto', sans-serif;
+    max-height: 6em;
+    overflow: scroll;
+}
+
+.songs-editor-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 7em;
+    overflow: scroll;
+    margin-bottom: 1.5em;
+}
+
+.song-info-container {
+    display: flex;
+    align-items: center;
+}
+
+.song-info {
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+.song-title {
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.song-artist {
+    color: white;
+    font-size: small;
+}
