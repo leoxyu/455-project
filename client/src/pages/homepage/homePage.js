@@ -12,6 +12,8 @@ import { setSpotifyProfile } from '../../components/Oauth/spotifyApiReducer';
 // Youtube
 import { setYoutubeProfile } from '../../components/Oauth/youtubeApiReducer';
 
+import PlaylistPage from '../playlists/playlistsPage';
+import SearchPage from '../search/searchPage';
 
 const HomePage = () => {
   const userId = useSelector(state => state.login.id);
@@ -50,8 +52,8 @@ const HomePage = () => {
   return (
     <div className={`App-header`}>
       <h1>Welcome {userId}!</h1>
-      <h3>Playlists</h3>
-      <PlaylistGrid/>
+      <PlaylistPage />
+      <SearchPage />
     </div>
   );
 

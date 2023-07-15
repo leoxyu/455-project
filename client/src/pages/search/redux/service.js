@@ -8,41 +8,41 @@ function formatDuration(milliseconds) {
     const seconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
-  
+
     const formattedHours = hours > 0 ? String(hours) : '';
-    const formattedMinutes = minutes > 0 ? String(minutes % 60): '0';
+    const formattedMinutes = minutes > 0 ? String(minutes % 60) : '0';
     const formattedSeconds = String(seconds % 60);
-  
+
     const parts = [];
     if (formattedHours !== '') {
-      parts.push(formattedHours);
+        parts.push(formattedHours);
     }
     parts.push(formattedMinutes);
     parts.push(formattedSeconds.padStart(2, '0'));
-  
+
     return parts.join(':');
 }
-  
-  
+
+
 
 
 // thumbnailUrl, songName,
 //  artistName, views, duration,
 //  songLink, platform,
-function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popularity=false) {
+function parseSpotifyTracks(items, thumbnailUrl = false, release_date = false, popularity = false) {
     return items.map(track => {
         return {
             'songName': track.name,
             'artists': track.artists,
-            'thumbnailUrl': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
-            'views': (popularity)? popularity: track.popularity, // TODO: change to popularity
-            'releaseDate': (release_date)? release_date: track.album.release_date,
+            'thumbnailUrl': (thumbnailUrl) ? thumbnailUrl : track.album.images[0].url,
+            'views': (popularity) ? popularity : track.popularity, // TODO: change to popularity
+            'releaseDate': (release_date) ? release_date : track.album.release_date,
             'genres': track.genresConcat, //and union with artist genre
             'audioFeatures': track.audioFeatures,
             'duration': formatDuration(track.duration_ms), // convert to min
             'songLink': track.href
         };
-});
+    });
 }
 
 
@@ -64,16 +64,16 @@ function parseSpotifyAlbums(items) {
             'tracksNextLink': album.tracks.next,
             'popularity': album.popularity
         };
-});
+    });
 }
 
 
 //'https://api.spotify.com/v1/audio-features?ids=4bjN59DRXFRxBE1g5ne6B1%2C0SOnbGVEf5q0YqL0FO2qu0%2C4mEcvV7O3fibI38H2MfHuJ' \
 //'https://api.spotify.com/v1/audio-features?ids=4bjN59DRXFRxBE1g5ne6B1%2C0SOnbGVEf5q0YqL0FO2qu0%2C4mEcvV7O3fibI38H2MfHuJ'
 const removeAudioFeatures = ['type', 'id', 'uri', 'track_href', 'duration_ms'];
-    
 
-const getTrackAudioFeatures = async (accessToken, trackIds=[]) => {
+
+const getTrackAudioFeatures = async (accessToken, trackIds = []) => {
     // max is 100 at a time, make this loop over 100 at at time
     const url = 'https://api.spotify.com/v1/audio-features?';
 
@@ -83,10 +83,10 @@ const getTrackAudioFeatures = async (accessToken, trackIds=[]) => {
 
     while (offset < trackIds.length) {
         const queryParams = new URLSearchParams();
-        queryParams.append('ids', trackIds.slice(offset, offset+limit).join(','));
+        queryParams.append('ids', trackIds.slice(offset, offset + limit).join(','));
         const response = await fetch(`${url}${queryParams.toString()}`, {
             headers: {
-            'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${accessToken}`
             }
         });
         const data = await response.json();
@@ -102,26 +102,26 @@ function splitArrayByLength(arr, lengths) {
     // [[genre]]
     lengths.forEach(length => {
         // [[genre]] -> [[genre]] smaller -> [genre]
-      result.push([...new Set(arr.slice(index, index + length).flat())]);
-      index += length;
+        result.push([...new Set(arr.slice(index, index + length).flat())]);
+        index += length;
     });
     // [[genre]]
     return result;
 }
 
-const getArtistGenres = async (accessToken, artistIds=[], artistLengths) => {
+const getArtistGenres = async (accessToken, artistIds = [], artistLengths) => {
     // max is 50 at a time, make this loop over 50 at a time
     const url = 'https://api.spotify.com/v1/artists?';
     var offset = 0;
     const limit = 50;
-    var artistsGenres=[];
+    var artistsGenres = [];
 
     while (offset < artistIds.length) {
         const queryParams = new URLSearchParams();
-        queryParams.append('ids', artistIds.slice(offset,offset+limit).join(','));
+        queryParams.append('ids', artistIds.slice(offset, offset + limit).join(','));
         const response = await fetch(`${url}${queryParams.toString()}`, {
             headers: {
-            'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${accessToken}`
             }
         });
         const data = await response.json();
@@ -143,22 +143,22 @@ async function addTrackMetadata(tracks, accessToken) {
         removeTrackFeatures.forEach(key => delete obj[key]);
         obj.audioFeatures = audioFeature;
     });
-   
+
     const trackArtistsIds = tracks.items.map(track => track.artists.map(artist => artist.id));
-    
+
     const artistIdSections = trackArtistsIds.map(artistIds => artistIds.length);
 
     const artistGenres = await getArtistGenres(accessToken, trackArtistsIds.flat(), artistIdSections);
     tracks.items.forEach((track, index) => {
         const genres = artistGenres[index];
         track.genresConcat = genres;
-        track.artists = track.artists.map((artist) => artist.name); 
+        track.artists = track.artists.map((artist) => artist.name);
     });
 }
 
 
 const removeAlbumFeatures = ['album_type', 'available_markets', 'uri', 'external_urls', 'release_date_precision', 'copyrights', 'external_ids'];
-const getAlbums = async (accessToken, albumIds=[]) => {
+const getAlbums = async (accessToken, albumIds = []) => {
     // max is 20 at a time, make this loop over 20 at a time
     const url = 'https://api.spotify.com/v1/albums?';
 
@@ -169,10 +169,10 @@ const getAlbums = async (accessToken, albumIds=[]) => {
 
     while (offset < albumIds.length) {
         const queryParams = new URLSearchParams();
-        queryParams.append('ids', albumIds.slice(offset,offset+limit).join(','));
+        queryParams.append('ids', albumIds.slice(offset, offset + limit).join(','));
         const response = await fetch(`${url}${queryParams.toString()}`, {
             headers: {
-            'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${accessToken}`
             }
         });
         const data = await response.json();
@@ -212,7 +212,7 @@ const removeSinglePlaylistFeatures = ['collaborative', 'uri', 'external_urls', '
 const getSinglePlaylist = async (accessToken, playlistLink) => {
     const response = await fetch(playlistLink, {
         headers: {
-        'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${accessToken}`
         }
     });
     const playlist = await response.json();
@@ -237,9 +237,9 @@ function parsePlaylists(playlists) {
 }
 
 
-const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track']) => {
+const getSpotify = async (accessToken, query, types = ['album', 'playlist', 'track']) => {
 
-   
+
     const url = 'https://api.spotify.com/v1/search?';
     const queryParams = new URLSearchParams();
     queryParams.append('q', query);
@@ -249,7 +249,7 @@ const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track
 
     const response = await fetch(`${url}${queryParams.toString()}`, {
         headers: {
-        'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${accessToken}`
         }
     });
     const data = await response.json();
@@ -261,7 +261,7 @@ const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track
 
     if (types.includes('album')) {
         // console.log(data.albums);
-        await addAlbumMetadata(data.albums, accessToken);    
+        await addAlbumMetadata(data.albums, accessToken);
         // console.log(data.albums)
         data.albums.items = parseSpotifyAlbums(data.albums.items);
     }
@@ -291,7 +291,7 @@ async function addAlbumMetadata(albumsObj, accessToken) {
     const albumIds = albumsObj.items.map(album => album.id);
     const albums = await getAlbums(accessToken, albumIds);
     const trackLens = albums.map(album => album.total_tracks);
-    const albumTracks={};
+    const albumTracks = {};
     albumTracks.items = [].concat.apply([], albums.map(album => album.tracks.items));
     await addTrackMetadata(albumTracks, accessToken);
 
@@ -299,7 +299,7 @@ async function addAlbumMetadata(albumsObj, accessToken) {
     const concatGenres = annotatedTracks.map(tracks => tracks.map(track => track.genresConcat));
     const genresPerAlbum = concatGenres.map(genres => [... new Set(genres.flat())]);
     albumsObj.items = albums;
-    
+
     albums.forEach((album, index) => {
         album.tracks.items = annotatedTracks[index];
         album.genresConcat = genresPerAlbum[index];
