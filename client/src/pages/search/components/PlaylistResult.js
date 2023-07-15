@@ -14,7 +14,7 @@ import { setPlaylist } from '../../../components/player/PlayerReducer';
 const { v4: uuid } = require('uuid');
 
 
-const PlaylistResult = ({ className, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
+const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
   const dispatch = useDispatch();
 

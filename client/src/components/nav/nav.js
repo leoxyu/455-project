@@ -43,7 +43,7 @@ const Navbar = () => {
                     <Link to="/home">Home</Link>
                 </h1>
                 <h1>
-                    <Link to="/songs">Songs</Link>
+                    <Link to="/currentPlaylist">Current Playlist</Link>
                 </h1>
                 <h1>
                     <Link to="/playlists">Playlists</Link>
