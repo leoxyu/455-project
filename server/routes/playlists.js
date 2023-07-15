@@ -172,14 +172,25 @@ function modifyPlaylist(action, index) {
   playlists[index] = action;
 }
 
-
-
-playlistsRouter.post('/', (req, res, next) => {
-    addPlaylist(req.body);
-  return res
-  .setHeader('Content-Type', 'application/json')
-  .status(201)
-  .send(playlists[playlists.length - 1]);
+playlistsRouter.post('/', async (req, res, next) => {
+  const pl = {
+    playlistID: uuid(),
+    ...req.body,
+    dateCreated: new Date(),
+    author: new ObjectId(), // TODO: change this field to author's _id. add new field for username
+    isFavorited: false,
+    coverImageURL: '',
+  };
+  try {
+    const result = await playlistsCol.insertOne(pl);
+    console.log(`inserted ${result.insertedId}`);
+    return res.status(200).send(pl);
+  } catch (error) {
+    if (error.codeName === "DocumentValidationFailure" || error.code === 121) {
+      return res.status(400).send(error);
+    }
+    return res.status(500).send(error);
+  }
 });
 
 function getTracksHelper(access_token, next, playlist) {
@@ -221,7 +232,7 @@ function getTracksHelper(access_token, next, playlist) {
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   const { playlistIDs, access_token } = req.body;
 
-  Promise.allSettled(playlistIDs.map(id => {
+  Promise.allSettled(playlistIDs?.map(id => {
     return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${access_token}` }
@@ -300,7 +311,7 @@ playlistsRouter.put('/:playlistID', async (req, res, next) => {
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
-      .send(result);
+      .send(result.value);
   } catch (error) {
     if (error.codeName === "DocumentValidationFailure") {
       return res.status(400).send(error);
