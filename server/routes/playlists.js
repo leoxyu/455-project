@@ -3,7 +3,15 @@
 // import { addPlaylist, resetDeck, deletePlaylist, modifyPlaylist } from '../../src/redux/inventory';
 var express = require('express');
 var playlistsRouter = express.Router();
-const { v4: uuid } = require('uuid');
+const { v4 } = require('uuid');
+
+const { MongoClient, ObjectId } = require("mongodb");
+const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+require('dotenv').config();
+
+const client = new MongoClient(process.env.MONGO_URI);
+const database = client.db(DATABASE_NAME);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION);
 
 var playlists= [
     {
@@ -174,64 +182,141 @@ playlistsRouter.post('/', (req, res, next) => {
   .send(playlists[playlists.length - 1]);
 });
 
-playlistsRouter.get('/', (req, res, next) => {
-//   const { name } = req.query;
-  let filteredplaylists = playlists;
+function getTracksHelper(access_token, next, playlist) {
+  // if next link is null, dont do anything
+  return next ? fetch(next, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${access_token}` }
+  }).then(response => {
+    if (response.status === 200) {
+        return response.json();
+    } else {
+      return Promise.reject(response);
+    }
+  }).then(data => {
+    // console.log(data);
+    for (const i of data.items) {
+      playlist.songs.push(
+        { 
+          artist: i.track.artists[0].name,
+          name: i.track.name, 
+          type: 'spotify', 
+          link: i.track.uri,
+          imageLink: i.track.album.images[0].url,
+        }
+      );
+    }
+    if (data.next) {
+      return getTracksHelper(access_token, data.next, playlist);
+    } else {
+      return playlist;
+    }
+  }) // don't catch, let error bubble up to route handler
+  : 
+  playlist; 
+}
 
-  // Apply search filters
-//   if (name) {
-//     const sanitizedName = sanitizeName(name);
-//     filteredplaylists = filteredplaylists.filter(
-//       (playlist) => sanitizeName(playlist.name).includes(sanitizedName)
-//     );
-//   }
+// TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
+playlistsRouter.post('/importManySpotify', async (req, res, next) => {
+  const { playlistIDs, access_token } = req.body;
+  
+  Promise.allSettled(playlistIDs.map(id => {
+    return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${access_token}` }
+    }).then(response => {
+      if (response.status === 200) {
+          return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    }).then(data => getTracksHelper(access_token, data.tracks.href, {
+        playlistID: v4(),
+        dateCreated: new Date(),
+        description: data.description,
+        name: data.name,
+        author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
+        isFavorited: false,
+        coverImageURL: data.images[0].url,
+        songs: [],
+        originSpotifyId: data.id,
+      })
+    ).then(async (playlist) => {
+      const result = await playlistsCol.insertOne(playlist);
+      console.log(`inserted ${result.insertedId}`);
+      return playlist.originSpotifyId; // useful for frontend retry
+    })
+  }))
+  .then(outcomes => {
+    if (!outcomes.some((o) => o.status === "fulfilled")) {
+      return res.status(500).send(outcomes);
+    }
+    return res.status(200).send(outcomes);
+  })
+  // NOTE: no catch, Promise.allSettled never rejects.
+});
 
-// console.log(playlists);
+playlistsRouter.get('/', async (req, res, next) => {
+  // TODO: sort, filter, pagination
+  const allItems = await playlistsCol.find({}).toArray();
   return res
   .setHeader('Content-Type', 'application/json')
   .status(200)
-  .send(filteredplaylists);
+  .send(allItems);
 });
 
-playlistsRouter.delete('/:playlistId', (req, res, next) => {
-    try {
-        deletePlaylist(req.params.playlistId);
+playlistsRouter.delete('/:playlistId', async (req, res, next) => {
+  try {
+    const result = await playlistsCol.deleteOne({ id: req.params.playlistId });
+    
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Playlist not found' });
     }
-    catch (err) {
-        return res.status(204).json({ message: err.message });
+    
+    return res
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send({});
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
+
+playlistsRouter.put('/:playlistID', async (req, res, next) => {
+  const filter = { id: req.params.playlistID };
+  const updateDocument = {
+    $set: {
+      ...req.body,
+    },
+  };
+
+  try {
+    const options = { returnDocument: "after" };
+    const result = await playlistsCol.findOneAndUpdate(filter, updateDocument, options);
+    if (result.lastErrorObject && result.lastErrorObject.updatedExisting === false) {
+      return res.status(404).json({ message: "Invalid request body" });
     }
     return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send({});
-});
-
-
-
-playlistsRouter.patch('/:playlistID', (req, res,next) => {
-    console.log(req.body);
-    console.log(req.params);
-    const index = playlists.findIndex((playlist) => playlist.playlistID === req.params.playlistID);
-    try {
-        modifyPlaylist(req.body, index);
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send(result);
+  } catch (error) {
+    if (error.codeName === "DocumentValidationFailure") {
+      return res.status(400).send(error);
     }
-    catch (err) {
-        return res.status(404).json({ message: err.message });
-    }
-    return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send(playlists[index]);
+    return res.status(500).send(error);
+  }
 });
 
-playlistsRouter.put('/', (req, res, next) => {
-    resetDeck();
 
-    return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send(playlists);
-});
+// playlistsRouter.put('/', (req, res, next) => {
+//     resetDeck();
+
+//     return res
+//     .setHeader('Content-Type', 'application/json')
+//     .status(200)
+//     .send(playlists);
+// });
 
 
 
@@ -258,24 +343,25 @@ playlistsRouter.post('/:playlistId', (req, res, next) => {
     return res.status(201).json(song);
   });
   
-  playlistsRouter.delete('/:playlistId/:songId', (req, res, next) => {
-    const { playlistId, songId } = req.params;
-  
-    const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
-    if (playlistIndex === -1) {
-      return res.status(404).json({ message: 'Playlist not found' });
-    }
-  
-    const songIndex = playlists[playlistIndex].songs.findIndex((song) => song.URI === songId);
-    if (songIndex === -1) {
-      return res.status(404).json({ message: 'Song not found in playlist' });
-    }
-  
-    playlists[playlistIndex].songs.splice(songIndex, 1);
-  
-    return res.status(204).send({});
-  });
-  
+playlistsRouter.delete('/:playlistId/:songId', (req, res, next) => {
+  const { playlistId, songId } = req.params;
+
+  const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
+  if (playlistIndex === -1) {
+    return res.status(404).json({ message: 'Playlist not found' });
+  }
+
+  const songIndex = playlists[playlistIndex].songs.findIndex((song) => song.URI === songId);
+  if (songIndex === -1) {
+    return res.status(404).json({ message: 'Song not found in playlist' });
+  }
+
+  playlists[playlistIndex].songs.splice(songIndex, 1);
+
+  return res.status(204).send({});
+});
+
+
 
 
 
