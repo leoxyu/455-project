@@ -13,6 +13,7 @@ import '../styles/YtPlaylistPreview.css';
 import {editPlaylistAsync} from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from '../components/Options2';
+import thumbnailImage from '../../../images/album-placeholder.png'
 
 const { v4: uuid } = require('uuid');
 
@@ -94,7 +95,7 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
     <div className={className}>
         <div className='essential-info'>
             <div className="thumbnail-container">
-                <img className="thumbnail" src={thumbnailUrl} alt="Album Thumbnail" />
+                <img className="thumbnail" src={thumbnailUrl ? thumbnailUrl : thumbnailImage} alt="Album Thumbnail" />
                 <PlayIcon className="play-icon" onClick={handlePlay}/>
             </div>
             <div className="details">

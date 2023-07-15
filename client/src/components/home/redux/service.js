@@ -38,19 +38,19 @@ const PlaylistsService = {
     },
     editPlaylist: async (newBody) => {
         const response = await fetch(`http://localhost:3001/playlists/${newBody.playlistID}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newBody)
-    });
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBody)
+        });
 
-    const data = await response.json();
-    if (!response.ok) {
-      const errorMsg = data?.message;
-      throw new Error(errorMsg)
-    }
-    return data;
+        const data = await response.json();
+        if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+        }
+        return data;
     },
     getPlaylists: async (searchParam) => {
         let url = 'http://localhost:3001/playlists';
