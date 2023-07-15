@@ -1,9 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
+
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';
 import PlaylistsPage from './pages/playlists/playlistsPage';
+import CurrentPlaylistPage from './pages/current playlist/currentPlaylistPage';
+
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
 import SongPlayer from './components/player/SongPlayer';
@@ -31,6 +34,7 @@ const App = () => {
                       <Route path="/home" element={<HomePage />} />
                       <Route path="/search" element={<SearchPage />} />
                       <Route path="/playlists" element={<PlaylistsPage />} />
+                      <Route path="/currentPlaylist" element={<CurrentPlaylistPage />} />
                     </Routes>
                   </main>
                   <footer className="general-player">

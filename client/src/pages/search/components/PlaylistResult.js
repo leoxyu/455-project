@@ -16,7 +16,8 @@ import Options2 from '../components/Options2';
 
 const { v4: uuid } = require('uuid');
 
-const PlaylistResult = ({ className, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
+
+const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);

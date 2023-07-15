@@ -1,0 +1,108 @@
+
+
+
+.track-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-radius: 5px;
+}
+
+.track-container:hover {
+  background-color: var(--background-elevated-base);
+
+  .play-icon,
+  .heart-icon,
+  .options-icon {
+    opacity: 1;
+    fill: var(--text-base);
+  }
+
+  .track-id {
+    opacity: 0;
+  }
+
+}
+
+.track-container-left {
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0.5em;
+  gap: 1.2rem;
+  width: 100%;
+
+  .p {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+  }
+
+  .track-id {
+    position: relative;
+    left: 0%;
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+    transition: opacity 0.1s;
+  }
+
+  .track-cover {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+  }
+}
+
+.track-container-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  gap: 0.9em;
+
+  .track-duration {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+  }
+}
+
+.play-icon {
+  max-width: 1.1rem;
+  max-height: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.1s;
+  fill: aliceblue;
+  
+  /* manually position play icon over the track-id*/
+  position: relative;
+  left: -1.8rem;
+  z-index: 2;
+}
+
+.heart-icon {
+  max-width: 1.1rem;
+  max-height: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  fill: aliceblue;
+}
+
+.options-icon {
+  max-width: 1.15rem;
+  max-height: 1.15rem;
+  cursor: pointer;
+  margin-right: 0;
+  margin-left: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+  rotate: 90deg;
+  fill: aliceblue;
+}
