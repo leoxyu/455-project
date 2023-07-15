@@ -3,7 +3,7 @@
 // import { addPlaylist, resetDeck, deletePlaylist, modifyPlaylist } from '../../src/redux/inventory';
 var express = require('express');
 var playlistsRouter = express.Router();
-const { v4 } = require('uuid');
+const { v4: uuid } = require('uuid');
 
 const { MongoClient, ObjectId } = require("mongodb");
 const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
@@ -88,13 +88,13 @@ async function ytSearchVideo(videoName) {
     // const searchResults2 = await ytsr.continueReq(searchResults.continuation, options);
     // const searchResults3 = await ytsr.continueReq(searchResults2.continuation, options);
 
-    
+
     // const info = await ytdl.getInfo(target.link);
     console.log(searchResults);
 
     // searchresults -> keep .items and .continuation
 
-    // searchResults.items[0] -> 
+    // searchResults.items[0] ->
     // {
     //   type: 'video',
     //   title: 'Short Change Hero', *** keep
@@ -123,12 +123,12 @@ async function ytSearchVideo(videoName) {
     // console.log(searchResults2.items.length);
     // console.log(searchResults3.items.length);
     // when none left, then { continuation: null, items: [] }
-    
+
 
     // console.log(filters1);
     // console.log(secondResultBatch.items);
     // console.log(thirdResultBatch.items);
-    
+
     // console.log(info.videoDetails.title); // Short Change Hero
     // console.log(info.videoDetails.uploadDate); // 2017-02-11
     // console.log(info.videoDetails.dislikes); // 8046
@@ -197,11 +197,11 @@ function getTracksHelper(access_token, next, playlist) {
     // console.log(data);
     for (const i of data.items) {
       playlist.songs.push(
-        { 
-          songID: v4(),
+        {
+          songID: uuid(),
           artist: i.track.artists[0].name,
-          name: i.track.name, 
-          type: 'spotify', 
+          name: i.track.name,
+          type: 'spotify',
           link: i.track.uri,
           imageLink: i.track.album.images[0].url,
         }
@@ -213,14 +213,14 @@ function getTracksHelper(access_token, next, playlist) {
       return playlist;
     }
   }) // don't catch, let error bubble up to route handler
-  : 
-  playlist; 
+  :
+  playlist;
 }
 
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   const { playlistIDs, access_token } = req.body;
-  
+
   Promise.allSettled(playlistIDs.map(id => {
     return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
       method: "GET",
@@ -232,7 +232,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
         return Promise.reject(response);
       }
     }).then(data => getTracksHelper(access_token, data.tracks.href, {
-        playlistID: v4(),
+        playlistID: uuid(),
         dateCreated: new Date(),
         description: data.description,
         name: data.name,
@@ -268,12 +268,12 @@ playlistsRouter.get('/', async (req, res, next) => {
 
 playlistsRouter.delete('/:playlistId', async (req, res, next) => {
   try {
-    const result = await playlistsCol.deleteOne({ id: req.params.playlistId });
-    
+    const result = await playlistsCol.deleteOne({ playlistID: req.params.playlistId });
+
     if (result.deletedCount === 0) {
       return res.status(404).json({ message: 'Playlist not found' });
     }
-    
+
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
@@ -284,7 +284,7 @@ playlistsRouter.delete('/:playlistId', async (req, res, next) => {
 });
 
 playlistsRouter.put('/:playlistID', async (req, res, next) => {
-  const filter = { id: req.params.playlistID };
+  const filter = { playlistID: req.params.playlistID };
   const updateDocument = {
     $set: {
       ...req.body,
@@ -332,18 +332,18 @@ playlistsRouter.post('/:playlistId', (req, res, next) => {
     // console.log(req);
     const { playlistId } = req.params;
     const { source, URI } = req.body;
-  
+
     const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
     if (playlistIndex === -1) {
       return res.status(404).json({ message: 'Playlist not found' });
     }
-  
+
     const song = { source, URI };
     playlists[playlistIndex].songs.push(song);
-  
+
     return res.status(201).json(song);
   });
-  
+
 playlistsRouter.delete('/:playlistId/:songId', (req, res, next) => {
   const { playlistId, songId } = req.params;
 

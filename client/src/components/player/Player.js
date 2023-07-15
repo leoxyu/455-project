@@ -23,6 +23,7 @@ export const Player = ({ name, artist, image, playing, played, loop, shuffle, vo
                 min={0}
                 max={1}
                 value={0}
+                onChange={() => null}
               />
             </div>
 
@@ -34,6 +35,7 @@ export const Player = ({ name, artist, image, playing, played, loop, shuffle, vo
                 min={0}
                 max={1}
                 value={1}
+                onChange={() => null}
               />
             </div>
           </div>

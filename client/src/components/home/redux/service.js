@@ -21,7 +21,7 @@ const PlaylistsService = {
 
         // return { id: v1(), ...body };
     },
-    deletePlaylist: async (playlistID) => {  
+    deletePlaylist: async (playlistID) => {
         const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
         method: 'DELETE',
         headers: {
@@ -36,12 +36,11 @@ const PlaylistsService = {
         return playlistID;
         // return playlistID;
     },
-    editPlaylist: async (playlistID, newBody) => {
-        //  TODO implement
-        const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
-        method: 'PATCH',
+    editPlaylist: async (newBody) => {
+        const response = await fetch(`http://localhost:3001/playlists/${newBody.playlistID}`, {
+        method: 'PUT',
         headers: {
-        'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(newBody)
     });
@@ -54,11 +53,6 @@ const PlaylistsService = {
     return data;
     },
     getPlaylists: async (searchParam) => {
-        // return [
-        // { id: 1, name: "Playlist 1", songs: [] },
-        // { id: 2, name: "Playlist 2", songs: [] },
-        // ];
-
         let url = 'http://localhost:3001/playlists';
 
         // Build the query string with search parameters
@@ -120,11 +114,11 @@ const PlaylistsService = {
         if (searchParam) {
           queryParams.append('name', searchParam);
         }
-      
+
         if (queryParams.toString()) {
           url += `?${queryParams.toString()}`;
         }
-      
+
         const response = await fetch(url, {
             method: 'GET'
         });
@@ -140,5 +134,5 @@ const PlaylistsService = {
         // ];
     },
 };
-  
+
 export default PlaylistsService;

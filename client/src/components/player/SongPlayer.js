@@ -83,7 +83,7 @@ export default function SongPlayer() {
           song={songs[currentSongIndex].link}
           name={songs[currentSongIndex].name}
           artist={songs[currentSongIndex].artist}
-          image={songs[currentSongIndex].image}
+          image={songs[currentSongIndex].imageLink}
           prevSong={prevSong}
           nextSong={nextSong}
           randomSong={randomSong}
@@ -98,7 +98,7 @@ export default function SongPlayer() {
           song={songs[currentSongIndex].link}
           name={songs[currentSongIndex].name}
           artist={songs[currentSongIndex].artist}
-          image={songs[currentSongIndex].image}
+          image={songs[currentSongIndex].imageLink}
           prevSong={prevSong}
           nextSong={nextSong}
           randomSong={randomSong}
