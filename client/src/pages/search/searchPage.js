@@ -12,6 +12,9 @@ import PlaylistCreator from '../playlists/components/PlaylistCreator';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpotifyAsync } from './redux/thunks';
 import debounce from 'lodash.debounce';
+// import ScrollingComponent from './ScrollingComponent';
+
+
 
 
 //  look here later: https://github.com/dermasmid/scrapetube
@@ -107,6 +110,8 @@ const SearchPage = () => {
 
 
 
+
+
   return (
     <div className='search-page'>
       <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input)=>{performSearch(input)}}/>
@@ -135,26 +140,6 @@ const SearchPage = () => {
           />
         ))}
       </div>
-      <div className='youtube-videos'>
-        <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {spotifySongList.map((song) => (
-          <SongResult
-            className={'youtube-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            songName={song.songName}
-            artistName={song.artistName}
-            views={song.views + ' views'}
-            duration={song.duration}
-            songLink={song.songLink}
-            platform='Youtube'
-          />
-        ))}
-        
-        </div>
-      </div>
-      
 
        <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
@@ -201,34 +186,40 @@ const SearchPage = () => {
         <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
         <div className='spotify-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {spotifySongList.map((song) => (
+        {spotifyPlaylists.map((playlist) => (
           <PlaylistResult
             className={'spotify-playlist-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            playlistName={song.songName}
-            artistName={song.artistName}
-            songs={spotifySongList}
-            // views={song.views + ' views'}
+            key={playlist.playlistLink}
+            thumbnailUrl={playlist.thumbnailUrl}
+            playlistName={playlist.playlistName}
+            artistName={playlist.artistName}
+            views={0 + ' views'}
             // duration={song.duration}
-            playlistLink={song.songLink}
-          />
-        ))}
-        {spotifySongList.map((song) => (
-          <PlaylistResult
-            className={'spotify-playlist-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            playlistName={song.songName}
-            artistName={song.artistName}
-            songs={spotifySongList}
-            // views={song.views + ' views'}
-            // duration={song.duration}
-            playlistLink={song.songLink}
+            playlistLink={playlist.playlistLink}
           />
         ))}
           </div>
           </div>
+        
+        <div className='youtube-videos'>
+        <h2 className='heading'>Youtube Videos</h2>
+        <div className='youtube-video-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        {spotifySongList.map((song) => (
+          <SongResult
+            className={'youtube-preview'}
+            key={song.songName}
+            thumbnailUrl={song.thumbnailUrl}
+            songName={song.songName}
+            artistName={song.artistName}
+            views={song.views + ' views'}
+            duration={song.duration}
+            songLink={song.songLink}
+            platform='Youtube'
+          />
+        ))}
+        
+        </div>
+      </div>
 
         <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>

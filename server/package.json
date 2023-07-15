@@ -12,6 +12,9 @@
     "express": "~4.16.1",
     "mongodb": "^5.6.0",
     "morgan": "~1.9.1",
-    "uuid": "^9.0.0"
+    "scrape-youtube": "^2.4.0",
+    "uuid": "^9.0.0",
+    "ytdl-core": "^4.11.4",
+    "ytsr": "^3.8.2"
   }
 }

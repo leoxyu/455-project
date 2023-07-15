@@ -52,6 +52,8 @@ const searchSlice = createSlice({
             // state.spotify.albums = parseSpotifyAlbums(action.payload.albums.items);
             // console.log(JSON.stringify(state.spotify.albums[0]));
 
+            state.spotify.playlists = action.payload.playlists.items;
+            state.spotify.playlistsNext = action.payload.playlists.next;
             
             // state.spotify.artists = action.payload.artists;
             // state.getSpotify.playlists = action.payload.playlists;

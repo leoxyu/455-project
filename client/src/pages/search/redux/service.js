@@ -185,6 +185,58 @@ const getAlbums = async (accessToken, albumIds=[]) => {
     return albums;
 };
 
+
+
+function parseSinglePlaylist(playlist) {
+    //  TODO make a set of all genres
+    const genres = playlist.tracks.items.map(track => track.genresConcat).flat();
+
+    return {
+
+        'playlistName': playlist.name,
+        'artistName': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
+        'thumbnailUrl': playlist.images[0].url,
+        'genres': genres, //and union with artist genre
+        'songs': parseSpotifyTracks(playlist.tracks.items),
+        'duration': playlist.tracks.total, // convert to min
+        'playlistLink': playlist.href,
+        'tracksNextLink': playlist.tracks.next,
+        'popularity': playlist.followers.total
+    };
+}
+
+
+
+// no bulk api for playlists from sptoify
+const removeSinglePlaylistFeatures = ['collaborative', 'uri', 'external_urls', 'href', 'public', 'snapshot_id', 'type', 'uri', 'primary_color'];
+const getSinglePlaylist = async (accessToken, playlistLink) => {
+    const response = await fetch(playlistLink, {
+        headers: {
+        'Authorization': `Bearer ${accessToken}`
+        }
+    });
+    const playlist = await response.json();
+    removeSinglePlaylistFeatures.forEach(key => delete playlist[key]);
+    await addTrackMetadata(playlist.tracks, accessToken);
+    return parseSinglePlaylist(playlist);
+};
+
+
+// from search endpoint
+function parsePlaylists(playlists) {
+    return playlists.map(playlist => {
+        return {
+            'playlistName': playlist.name,
+            'artistName': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
+            'thumbnailUrl': playlist.images[0].url,
+            'description': playlist.description, //and union with artist genre,
+            'duration': playlist.tracks.total, // convert to min
+            'playlistLink': playlist.href,
+        };
+    });
+}
+
+
 const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track']) => {
 
    
@@ -192,7 +244,7 @@ const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track
     const queryParams = new URLSearchParams();
     queryParams.append('q', query);
     queryParams.append('type', types.join(','));
-    queryParams.append('limit', 5);
+    queryParams.append('limit', 7);
 
 
     const response = await fetch(`${url}${queryParams.toString()}`, {
@@ -209,16 +261,25 @@ const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track
 
     if (types.includes('album')) {
         // console.log(data.albums);
-        await addAlbumMetadata(data, accessToken);    
+        await addAlbumMetadata(data.albums, accessToken);    
+        // console.log(data.albums)
         data.albums.items = parseSpotifyAlbums(data.albums.items);
+    }
+
+    if (types.includes('playlist')) {
+        console.log(data.playlists);
+        data.playlists.items = parsePlaylists(data.playlists.items);
     }
 
     console.log("after adding album metadata");
     // console.log(data.tracks);
     // console.log(data.albums);
+    console.log(data.playlists);
 
     return data;
 };
+
+
 
 
 
@@ -226,8 +287,8 @@ export default {
     getSpotify
 };
 
-async function addAlbumMetadata(data, accessToken) {
-    const albumIds = data.albums.items.map(album => album.id);
+async function addAlbumMetadata(albumsObj, accessToken) {
+    const albumIds = albumsObj.items.map(album => album.id);
     const albums = await getAlbums(accessToken, albumIds);
     const trackLens = albums.map(album => album.total_tracks);
     const albumTracks={};
@@ -237,9 +298,9 @@ async function addAlbumMetadata(data, accessToken) {
     const annotatedTracks = splitArrayByLength(albumTracks.items, trackLens);
     const concatGenres = annotatedTracks.map(tracks => tracks.map(track => track.genresConcat));
     const genresPerAlbum = concatGenres.map(genres => [... new Set(genres.flat())]);
-    data.albums.items = albums;
+    albumsObj.items = albums;
     
-    data.albums.items.forEach((album, index) => {
+    albums.forEach((album, index) => {
         album.tracks.items = annotatedTracks[index];
         album.genresConcat = genresPerAlbum[index];
         album.artists = album.artists.map((artist) => artist.name);
