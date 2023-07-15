@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 const { MongoClient } = require('mongodb');
 const { LOGIN_STATUS } = require('../login/loginConstants');
-const { URI, DATABASE_NAME, USER_COLLECTION, LOGIN_KEY } = require('../shared/mongoConstants');
+const { DATABASE_NAME, USER_COLLECTION, LOGIN_KEY } = require('../shared/mongoConstants');
 const CryptoJS = require("crypto-js");
+require('dotenv').config();
 
 function decryptString(encryptedMessage, secretKey) {
     var decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, secretKey);
@@ -11,7 +12,7 @@ function decryptString(encryptedMessage, secretKey) {
     return decryptedMessage;
 }
 
-const client = new MongoClient(URI);
+const client = new MongoClient(process.env.MONGO_URI);
 
 async function authenticateLogin(username, password) {
     let status = LOGIN_STATUS.UnknownStatus;

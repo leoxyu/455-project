@@ -62,29 +62,7 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date,  duration
 
     dispatch(setPlaylist({
       id: uuid(),
-      songs: [
-        {
-          link: "https://www.youtube.com/watch?v=C9K2b9yxjXg",
-          type: "youtube",
-          name: "Fuego",
-          artist: "Eleni Foureira",
-          image: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
-        },
-        {
-          link: "https://open.spotify.com/track/4bjN59DRXFRxBE1g5ne6B1?si=d40939f4f897437d",
-          type: "spotify",
-          name: "Haegeum",
-          artist: "Agust D",
-          image: "https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e"
-        },
-        {
-          link: 'https://open.spotify.com/track/1zi7xx7UVEFkmKfv06H8x0?si=d0226490edb4470b',
-          type: "spotify",
-          name: 'One Dance',
-          artist: "Drake",
-          image: "https://i1.sndcdn.com/artworks-Vi8kWdDLyiHb-0-t500x500.jpg",
-        },
-      ]
+      songs
     }));
   };
 
