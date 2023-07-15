@@ -61,65 +61,47 @@ var playlists= [
 
 ];
 
-const youtube = require('scrape-youtube');
 const ytdl = require('ytdl-core');
 const ytsr = require('ytsr');
-const { first } = require('lodash');
+const ytpl = require('ytpl');
 
+
+async function ytParseVideo(item) {
+
+    const info = await ytdl.getInfo(item.id);
+    return {
+      'songName':item.title,
+      'artists':[item.author.name],
+      'thumbnailUrl': item.bestThumbnail.url,
+      // 'views': info.videoDetails.viewCount,
+      // 'releaseDate': info.videoDetails.publishDate,
+      // 'genres':info.videoDetails.keywords,
+      'audioFeatures':[],
+      'duration': item.duration,
+      'songLink': ("shortUrl" in item) ? item.shortUrl:item.url,
+    };
+}
 
 async function ytSearchVideo(videoName) {
     const filters1 = await ytsr.getFilters(videoName);
     const filter1 = filters1.get('Type').get('Video');
-    // const filters2 = await ytsr.getFilters(filter1.url);
-    // console.log(filters2); look into this later
-    // const filter2 = filters2.get('Features').get('Live');
+    const filters2 = await ytsr.getFilters(filter1.url);
+    // console.log(filters2); //look into this later for sorting
     const options = {
-      pages: 1, // 5 is roughly 100 results
+      pages: 5, // 5 is roughly 100 results
     }
     const searchResults = await ytsr(filter1.url, options);
+    //  for pagination
     // const searchResults2 = await ytsr.continueReq(searchResults.continuation, options);
-    // const searchResults3 = await ytsr.continueReq(searchResults2.continuation, options);
-
     
-    // const info = await ytdl.getInfo(target.link);
-    console.log(searchResults);
-
     // searchresults -> keep .items and .continuation
-
-    // searchResults.items[0] -> 
-    // {
-    //   type: 'video',
-    //   title: 'Short Change Hero', *** keep
-    //   id: 'GjTTB6yII4o',
-    //   url: 'https://www.youtube.com/watch?v=GjTTB6yII4o', *** keep
-    //   bestThumbnail: [Object], *** keep but look closer into this
-    //   thumbnails: [Array],
-    //   isUpcoming: false,
-    //   upcoming: null,
-    //   isLive: false,
-    //   badges: [],
-    //   author: [Object],
-    //   description: null,
-    //   views: 21575889,
-    //   duration: '5:23',
-    //   uploadedAt: null
-    // },
-
-
-
-
-
-
-
-    console.log(searchResults.items.length);
-    // console.log(searchResults2.items.length);
-    // console.log(searchResults3.items.length);
+    searchResults.items = searchResults.items.filter((item) => item.type === 'video');
+    searchResults.items =  await Promise.all(searchResults.items.map(ytParseVideo));
+    // console.log(searchResults.items[0]);
+    
+    //  comments for todos later
     // when none left, then { continuation: null, items: [] }
     
-
-    // console.log(filters1);
-    // console.log(secondResultBatch.items);
-    // console.log(thirdResultBatch.items);
     
     // console.log(info.videoDetails.title); // Short Change Hero
     // console.log(info.videoDetails.uploadDate); // 2017-02-11
@@ -127,6 +109,44 @@ async function ytSearchVideo(videoName) {
     // console.log(info.videoDetails.channelId); // UCbGFbVqBTN3aCjUwz3FChFw
 }
 
+
+async function ytSearchPlaylist(playlistName) {
+    const filters1 = await ytsr.getFilters(playlistName);
+    const filter1 = filters1.get('Type').get('Playlist');
+    const searchResults = await ytsr(filter1.url, {pages: 1});
+    // console.log(searchResults.items[0]);
+    
+    searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
+      const info = await ytpl(item.playlistID);
+      const songsList = await Promise.all(info.items.map(ytParseVideo));
+      return {
+        'playlistName':item.title,
+        'artistName':[item.owner.name],
+        'thumbnailUrl': item.firstVideo.bestThumbnail.url,
+        // 'genres':[],//[].concat(songsList.map((item) => item.genres)), // need to unify across all songs
+        'songs':songsList,
+        'duration':item.length,
+        'playlistLink': item.playlistID,
+        'tracksNextLink':info.continuation,
+        'popularity':info.views,
+        // 'playlistLink': item.playlistID,
+      };
+    }));
+
+    console.log(searchResults.items[0].songs[0]);
+
+    
+    // console.log(searchResults.items[0]);
+    // console.log(searchResults.items[0].url);
+    // console.log(searchResults.items[0].bestThumbnail.url);
+    // console.log(searchResults.items[0].title);
+    // console.log(searchResults.items[0].author.name);
+    // console.log(searchResults.items[0].duration);
+    // console.log(searchResults.items[0].views);
+    // console.log(searchResults.items[0].description);
+    // console.log(searchResults.items[0].uploadedAt);
+    // console.log(searchResults.items[0].id);
+}
 function addPlaylist(action) {
     action.playlistID = uuid();
     //  TODO make these customizable to users later via client
@@ -138,7 +158,8 @@ function addPlaylist(action) {
     action.coverImageURL= 'https://zerojackerzz.com/wp-content/uploads/2019/10/album-placeholder.png'
 
     // end of TOOD
-    ytSearchVideo("short change hero");
+    // ytSearchVideo("short change hero");
+    ytSearchPlaylist("pewdiepie");
     console.log('yt res should have finished');
     playlists.push(action);
 }

@@ -45,7 +45,7 @@ const searchSlice = createSlice({
             state.spotify.tracks = action.payload.tracks.items;
             state.spotify.tracksNext = action.payload.tracks.next;
             // state.nextPageLink = action.payload.tracks.next;
-            
+            // console.log(state.spotify.tracks[0]);
             // console.log(action.payload.albums)
             state.spotify.albums=action.payload.albums.items;
             state.spotify.albumsNext = action.payload.albums.next;

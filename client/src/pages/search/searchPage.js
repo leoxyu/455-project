@@ -112,6 +112,9 @@ const SearchPage = () => {
 
 
 
+
+
+
   return (
     <div className='search-page'>
       <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input)=>{performSearch(input)}}/>
