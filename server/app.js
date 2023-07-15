@@ -64,8 +64,12 @@ async function setupCollections() {
             description: "Array of songs",
             items: {
               bsonType: "object",
-              required: ["artist", "name", "type", "link"],
+              required: ["songID", "artist", "name", "type", "link"],
               properties: {
+                songID: {
+                  bsonType: "string",
+                  description: "uuid",
+                },
                 artist: {
                   bsonType: "string",
                   description: "Name of the artist",
