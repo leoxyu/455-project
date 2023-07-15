@@ -12,12 +12,12 @@ const Navbar = () => {
     const spotifyProfile = useSelector((state) => state.spotify.profile);
 
     useEffect(() => {
-        try{
+        try {
             if (spotifyProfile && spotifyProfile.images.length > 0) {
                 const lastImage = spotifyProfile.images.slice(-1)[0];
                 setDynamicProfilePicture(lastImage.url);
             }
-        }catch {
+        } catch {
             console.log('Issue with setting custom profile picture. Please try again later.')
         }
 
@@ -43,7 +43,10 @@ const Navbar = () => {
                     <Link to="/home">Home</Link>
                 </h1>
                 <h1>
-                    <Link to="/currentPlaylist">Current Playlist</Link>
+                    <Link to="/songs">Songs</Link>
+                </h1>
+                <h1>
+                    <Link to="/currentPlaylist">Playlist</Link>
                 </h1>
                 <h1>
                     <Link to="/playlists">Playlists</Link>

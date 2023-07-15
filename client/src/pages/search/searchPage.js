@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import { searchSpotifySongs, searchSpotifyPlaylists } from './spotifyAPI';
 // import { searchYouTubeVideos, searchYouTubePlaylists } from './youtubeAPI';
 import '../../styles/variables.css';
@@ -24,8 +24,8 @@ const SearchPage = () => {
   useEffect(() => {
     document.title = "Uni.fi - Search"; // Change the webpage title
 
-    
-    
+
+
   }, []);
 
   const [creatorVisible, setCreatorVisible] = useState(false);
@@ -50,11 +50,11 @@ const SearchPage = () => {
   const performSearch = debounce((searchTerm) => {
     setSearchTerm(searchTerm);
   }, 400);
-  
+
   useEffect(() => {
     console.log("calling it with " + searchTerm)
     if (searchTerm === '') return; // make it load recommended songs from spotify
-    dispatch(getSpotifyAsync({accessToken:accessToken, query:searchTerm}));
+    dispatch(getSpotifyAsync({ accessToken: accessToken, query: searchTerm }));
   }, [searchTerm]);
 
 
@@ -70,7 +70,7 @@ const SearchPage = () => {
   const handleAddClick = () => {
     setCreatorVisible(true);
   }
-  
+
 
 
   const spotifySongList = [
@@ -108,20 +108,16 @@ const SearchPage = () => {
     }
   ]
 
-
-
-
-
   return (
     <div className='search-page'>
-      <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input)=>{performSearch(input)}}/>
+      <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input) => { performSearch(input) }} />
       <Filters />
-      {creatorVisible && 
-       <div className='creator-dialog-overlay'>
-       <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef}/>
-       </div>
-       }
-      
+      {creatorVisible &&
+        <div className='creator-dialog-overlay'>
+          <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef} />
+        </div>
+      }
+
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
         {spotifyTracks.map((song) => (
@@ -131,19 +127,20 @@ const SearchPage = () => {
             thumbnailUrl={song.thumbnailUrl}
             songName={song.songName}
             artistName={song.artistName}
-            views={song.views + ' streams'}
+            artists={song.artists}
             duration={song.duration}
             songLink={song.songLink}
             platform='Spotify'
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
+            songObject={song}
           />
         ))}
       </div>
 
-       <div className='spotify-albums'>
+      <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='spotify-album-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
           {/* <PlaylistResult 
           className={'spotify-album-preview'}
           thumbnailUrl={'https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e'}
@@ -168,78 +165,78 @@ const SearchPage = () => {
             playlistLink={song.songLink}
           />
         ))} */}
-        {spotifyAlbums.map((album) => (
-          <PlaylistResult
-            className={'spotify-album-preview'}
-            key={album.playlistLink}
-            thumbnailUrl={album.thumbnailUrl}
-            playlistName={album.playlistName}
-            artistName={album.artistName.join(', ')}
-            views={album.popularity + ' views'}
-            // duration={song.duration}
-            playlistLink={album.playlistLink}
-          />
-        ))}
-        </div>
-        </div>
-
-        <div className='spotify-playlists'>
-        <h2 className='heading'>Spotify Playlists</h2>
-        <div className='spotify-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {spotifyPlaylists.map((playlist) => (
-          <PlaylistResult
-            className={'spotify-playlist-preview'}
-            key={playlist.playlistLink}
-            thumbnailUrl={playlist.thumbnailUrl}
-            playlistName={playlist.playlistName}
-            artistName={playlist.artistName}
-            views={0 + ' views'}
-            // duration={song.duration}
-            playlistLink={playlist.playlistLink}
-          />
-        ))}
-          </div>
-          </div>
-        
-        <div className='youtube-videos'>
-        <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {spotifySongList.map((song) => (
-          <SongResult
-            className={'youtube-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            songName={song.songName}
-            artistName={song.artistName}
-            views={song.views + ' views'}
-            duration={song.duration}
-            songLink={song.songLink}
-            platform='Youtube'
-          />
-        ))}
-        
+          {spotifyAlbums.map((album) => (
+            <PlaylistResult
+              className={'spotify-album-preview'}
+              key={album.playlistLink}
+              thumbnailUrl={album.thumbnailUrl}
+              playlistName={album.playlistName}
+              artistName={album.artistName.join(', ')}
+              views={album.popularity + ' views'}
+              // duration={song.duration}
+              playlistLink={album.playlistLink}
+            />
+          ))}
         </div>
       </div>
 
-        <div className='youtube-playlists'>
+      <div className='spotify-playlists'>
+        <h2 className='heading'>Spotify Playlists</h2>
+        <div className='spotify-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {spotifyPlaylists.map((playlist) => (
+            <PlaylistResult
+              className={'spotify-playlist-preview'}
+              key={playlist.playlistLink}
+              thumbnailUrl={playlist.thumbnailUrl}
+              playlistName={playlist.playlistName}
+              artistName={playlist.artistName}
+              views={0 + ' views'}
+              // duration={song.duration}
+              playlistLink={playlist.playlistLink}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className='youtube-videos'>
+        <h2 className='heading'>Youtube Videos</h2>
+        <div className='youtube-video-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {spotifySongList.map((song) => (
+            <SongResult
+              className={'youtube-preview'}
+              key={song.songName}
+              thumbnailUrl={song.thumbnailUrl}
+              songName={song.songName}
+              artistName={song.artistName}
+              views={song.views + ' views'}
+              duration={song.duration}
+              songLink={song.songLink}
+              platform='Youtube'
+            />
+          ))}
+
+        </div>
+      </div>
+
+      <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
-        <div className='youtube-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {spotifySongList.map((song) => (
-          <PlaylistResult
-            className={'youtube-playlist-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            playlistName={song.songName}
-            artistName={song.artistName}
-            songs={spotifySongList}
-            // views={song.views + ' views'}
-            // duration={song.duration}
-            playlistLink={song.songLink}
-          />
-        ))}
-          </div>
-          </div>
-{/*
+        <div className='youtube-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {spotifySongList.map((song) => (
+            <PlaylistResult
+              className={'youtube-playlist-preview'}
+              key={song.songName}
+              thumbnailUrl={song.thumbnailUrl}
+              playlistName={song.songName}
+              artistName={song.artistName}
+              songs={spotifySongList}
+              // views={song.views + ' views'}
+              // duration={song.duration}
+              playlistLink={song.songLink}
+            />
+          ))}
+        </div>
+      </div>
+      {/*
           <div className='youtube-channels'>
         <h2 className='heading'>Youtube Channels</h2>
         <div className='youtube-channel-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
@@ -258,7 +255,7 @@ const SearchPage = () => {
           </div>
         </div>
          */}
-        
+
     </div>
   );
 };
