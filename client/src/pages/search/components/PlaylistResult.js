@@ -14,7 +14,7 @@ import { setPlaylist } from '../../../components/player/PlayerReducer';
 const { v4: uuid } = require('uuid');
 
 
-const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
+const PlaylistResult = ({ className, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, optionsOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
   const dispatch = useDispatch();
 
@@ -23,8 +23,7 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
   };
 
   const handlePlay = () => {
-    // example of how you can load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
-    console.log(songs);
+    // example of how youc an load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
 
     dispatch(setPlaylist({
       id: uuid(),

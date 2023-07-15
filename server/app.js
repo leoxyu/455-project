@@ -6,7 +6,6 @@ var cors = require('cors');
 const { DATABASE_NAME, PLAYLIST_COLLECTION } = require('./shared/mongoConstants');
 
 var indexRouter = require('./routes/index');
-var spotifyRouter = require('./routes/spotify');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var playlistsRouter = require('./routes/playlists');
@@ -98,6 +97,10 @@ async function setupCollections() {
 }
 setupCollections().catch(console.dir);
 
+// api
+var spotifyRouter = require('./routes/spotify');
+var youtubeRouter = require('./routes/youtube');
+
 var app = express();
 
 app.use(cors());
@@ -111,6 +114,7 @@ app.use('/', indexRouter);
 
 // API
 app.use('/spotify', spotifyRouter);
+app.use('/youtube', youtubeRouter);
 
 // login
 app.use('/login', loginRouter);

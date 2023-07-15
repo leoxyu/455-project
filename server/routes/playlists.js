@@ -69,8 +69,71 @@ var playlists= [
 
 ];
 
+const youtube = require('scrape-youtube');
+const ytdl = require('ytdl-core');
+const ytsr = require('ytsr');
+const { first } = require('lodash');
 
 
+async function ytSearchVideo(videoName) {
+    const filters1 = await ytsr.getFilters(videoName);
+    const filter1 = filters1.get('Type').get('Video');
+    // const filters2 = await ytsr.getFilters(filter1.url);
+    // console.log(filters2); look into this later
+    // const filter2 = filters2.get('Features').get('Live');
+    const options = {
+      pages: 1, // 5 is roughly 100 results
+    }
+    const searchResults = await ytsr(filter1.url, options);
+    // const searchResults2 = await ytsr.continueReq(searchResults.continuation, options);
+    // const searchResults3 = await ytsr.continueReq(searchResults2.continuation, options);
+
+    
+    // const info = await ytdl.getInfo(target.link);
+    console.log(searchResults);
+
+    // searchresults -> keep .items and .continuation
+
+    // searchResults.items[0] -> 
+    // {
+    //   type: 'video',
+    //   title: 'Short Change Hero', *** keep
+    //   id: 'GjTTB6yII4o',
+    //   url: 'https://www.youtube.com/watch?v=GjTTB6yII4o', *** keep
+    //   bestThumbnail: [Object], *** keep but look closer into this
+    //   thumbnails: [Array],
+    //   isUpcoming: false,
+    //   upcoming: null,
+    //   isLive: false,
+    //   badges: [],
+    //   author: [Object],
+    //   description: null,
+    //   views: 21575889,
+    //   duration: '5:23',
+    //   uploadedAt: null
+    // },
+
+
+
+
+
+
+
+    console.log(searchResults.items.length);
+    // console.log(searchResults2.items.length);
+    // console.log(searchResults3.items.length);
+    // when none left, then { continuation: null, items: [] }
+    
+
+    // console.log(filters1);
+    // console.log(secondResultBatch.items);
+    // console.log(thirdResultBatch.items);
+    
+    // console.log(info.videoDetails.title); // Short Change Hero
+    // console.log(info.videoDetails.uploadDate); // 2017-02-11
+    // console.log(info.videoDetails.dislikes); // 8046
+    // console.log(info.videoDetails.channelId); // UCbGFbVqBTN3aCjUwz3FChFw
+}
 
 function addPlaylist(action) {
     action.playlistID = uuid();
@@ -83,6 +146,8 @@ function addPlaylist(action) {
     action.coverImageURL= 'https://zerojackerzz.com/wp-content/uploads/2019/10/album-placeholder.png'
 
     // end of TOOD
+    ytSearchVideo("short change hero");
+    console.log('yt res should have finished');
     playlists.push(action);
 }
 

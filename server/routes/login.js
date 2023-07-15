@@ -2,8 +2,15 @@ var express = require('express');
 var router = express.Router();
 const { MongoClient } = require('mongodb');
 const { LOGIN_STATUS } = require('../login/loginConstants');
-const { DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoConstants');
+const { DATABASE_NAME, USER_COLLECTION, LOGIN_KEY } = require('../shared/mongoConstants');
+const CryptoJS = require("crypto-js");
 require('dotenv').config();
+
+function decryptString(encryptedMessage, secretKey) {
+    var decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, secretKey);
+    var decryptedMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
+    return decryptedMessage;
+}
 
 const client = new MongoClient(process.env.MONGO_URI);
 
@@ -18,7 +25,7 @@ async function authenticateLogin(username, password) {
     const foundUser = await collection.findOne({ user: username });
 
     if (foundUser) {
-        if (foundUser.pass === password) {
+        if (decryptString(foundUser.pass, LOGIN_KEY) === password) {
             status = LOGIN_STATUS.LogInSuccess;
         } else {
             status = LOGIN_STATUS.LogInFailed;
