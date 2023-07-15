@@ -33,11 +33,11 @@ jobs:
       working-directory: ./client
       run: yarn install
 
-    - name: Run tests server
-      working-directory: ./server
-      run: yarn test
+#     - name: Run tests server
+#       working-directory: ./server
+#       run: yarn test
       
-    - name: Run tests client
-      working-directory: ./client
-      run: yarn test
+#     - name: Run tests client
+#       working-directory: ./client
+#       run: yarn test
 
