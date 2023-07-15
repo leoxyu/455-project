@@ -21,7 +21,7 @@ const PlaylistsService = {
 
         // return { id: v1(), ...body };
     },
-    deletePlaylist: async (playlistID) => {  
+    deletePlaylist: async (playlistID) => {
         const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
         method: 'DELETE',
         headers: {
@@ -36,12 +36,12 @@ const PlaylistsService = {
         return playlistID;
         // return playlistID;
     },
-    editPlaylist: async (playlistID, newBody) => {
+    editPlaylist: async (newBody) => {
         //  TODO implement
-        const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
+        const response = await fetch(`http://localhost:3001/playlists/${newBody.playlistID}`, {
         method: 'PATCH',
         headers: {
-        'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(newBody)
     });
@@ -120,11 +120,11 @@ const PlaylistsService = {
         if (searchParam) {
           queryParams.append('name', searchParam);
         }
-      
+
         if (queryParams.toString()) {
           url += `?${queryParams.toString()}`;
         }
-      
+
         const response = await fetch(url, {
             method: 'GET'
         });
@@ -140,5 +140,5 @@ const PlaylistsService = {
         // ];
     },
 };
-  
+
 export default PlaylistsService;

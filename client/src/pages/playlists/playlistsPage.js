@@ -52,6 +52,7 @@ const PlaylistPage = () => {
   const handleClickEdit = (playlist) => {
     // just a placeholder before we finalize the playlist & song fields
     setPlaylistToEdit({
+      playlistID: "1",
       name: "Playlist Name",
       description: "Playlist description",
       coverImageURL: "https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg",

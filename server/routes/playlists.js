@@ -143,7 +143,7 @@ playlistsRouter.delete('/:playlistId', (req, res, next) => {
 
 
 
-playlistsRouter.patch('/:playlistID', (req, res,next) => {
+playlistsRouter.patch('/:playlistID', (req, res, next) => {
     console.log(req.body);
     console.log(req.params);
     const index = playlists.findIndex((playlist) => playlist.playlistID === req.params.playlistID);
@@ -181,36 +181,36 @@ playlistsRouter.post('/:playlistId', (req, res, next) => {
     // console.log(req);
     const { playlistId } = req.params;
     const { source, URI } = req.body;
-  
+
     const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
     if (playlistIndex === -1) {
       return res.status(404).json({ message: 'Playlist not found' });
     }
-  
+
     const song = { source, URI };
     playlists[playlistIndex].songs.push(song);
-  
+
     return res.status(201).json(song);
   });
-  
+
   playlistsRouter.delete('/:playlistId/:songId', (req, res, next) => {
     const { playlistId, songId } = req.params;
-  
+
     const playlistIndex = playlists.findIndex((playlist) => playlist.playlistID === playlistId);
     if (playlistIndex === -1) {
       return res.status(404).json({ message: 'Playlist not found' });
     }
-  
+
     const songIndex = playlists[playlistIndex].songs.findIndex((song) => song.URI === songId);
     if (songIndex === -1) {
       return res.status(404).json({ message: 'Song not found in playlist' });
     }
-  
+
     playlists[playlistIndex].songs.splice(songIndex, 1);
-  
+
     return res.status(204).send({});
   });
-  
+
 
 
 

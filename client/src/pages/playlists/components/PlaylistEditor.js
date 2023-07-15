@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {createPlaylistAsync} from '../../../components/home/redux/thunks';
+import { editPlaylistAsync } from '../../../components/home/redux/thunks';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
 
-const SongDisplay = ({ name, artist, image }) => {
+const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
-    <div className="song-info-container">
-      <img src={image} alt="Cover Art" width="48px" height="48px"/>
-      <div className="song-info">
-        <div className="song-title">{name}</div>
-        <div className="song-artist">{artist}</div>
+    <div className="song-display-container">
+      <div className="song-info-container">
+        <img src={image} alt="Cover Art" width="48px" height="48px"/>
+        <div className="song-info">
+          <div className="song-title">{name}</div>
+          <div className="song-artist">{artist}</div>
+        </div>
       </div>
+      <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete}/>
     </div>
   );
 };
@@ -20,7 +24,7 @@ const PlaylistEditor = ({ playlist, onClose }) => {
   const [name, setName] = useState(playlist.name);
   const [description, setDescription] = useState(playlist.description);
   const [imageUrl, setImageUrl] = useState(playlist.coverImageURL);
-  const [songs, setSongs] = useState(playlist.songs);
+  const [deletedSongs, setDeletedSongs] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -28,19 +32,38 @@ const PlaylistEditor = ({ playlist, onClose }) => {
     setName(event.target.value);
   };
 
+  const handleUrlChange = (event) => {
+    setImageUrl(event.target.value);
+  };
+
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
 
   const submitPlaylist = () => {
-    // const data = {
-    //     name: playlistName,
-    //     songs: [],
-    //     description: playlistDescription,
-    // }
-    // dispatch(createPlaylistAsync(data));
-    // setPlaylistName('');
-    // onClose();
+    if (!(name.trim())) {
+      return;
+    }
+
+    const newSongs = [];
+
+    for (const [i, song] of playlist.songs.entries()) {
+      if (!deletedSongs.includes(i)) {
+        const songClone = { ...song };
+        newSongs.push(songClone);
+      }
+    }
+
+    const newPlaylist = {
+      playlistID: playlist.playlistID,
+      name: name,
+      description: description,
+      coverImageURL: imageUrl,
+      songs: newSongs
+    };
+
+    dispatch(editPlaylistAsync(newPlaylist));
+    onClose();
   };
 
   const calculateTextareaHeight = (element) => {
@@ -53,22 +76,36 @@ const PlaylistEditor = ({ playlist, onClose }) => {
     calculateTextareaHeight(textarea);
   };
 
+  const deleteSong = (index) => {
+    const newDeletedSongs = [...deletedSongs];
+    newDeletedSongs.push(index);
+    setDeletedSongs(newDeletedSongs);
+  };
+
   return (
     <div className='modal-container'>
       <h2 className='playlist-editor-title'>Playlist Editor</h2>
 
-      <div className=''>
+      <div className='playlist-editor-title-container'>
+        <img src={imageUrl} className="playlist-editor-image" alt="" width="40px" height="40px"/>
         <input
           className='playlist-editor-input'
           type="text"
-          value={name}
-          onChange={handleNameChange}
+          value={imageUrl}
+          onChange={handleUrlChange}
           id="titleField"
-          placeholder='Name'
+          placeholder='Cover Image Link'
         />
-
       </div>
-      <div className=''>
+      <input
+        className='playlist-editor-input'
+        type="text"
+        value={name}
+        onChange={handleNameChange}
+        id="titleField"
+        placeholder='Name'
+      />
+      <div>
         <textarea
           className='playlist-editor-input'
           value={description}
@@ -78,13 +115,16 @@ const PlaylistEditor = ({ playlist, onClose }) => {
           placeholder='Description'
         />
         <div className="songs-editor-container">
-          {songs.map((song, i) => {
+          {playlist.songs.map((song, i) => {
             return (
-              <SongDisplay
-                name={song.songName}
-                artist={song.artistName}
-                image={song.thumbnailUrl}
-              />
+              <div key={i}>
+                {!deletedSongs.includes(i) && <SongDisplay
+                  name={song.songName}
+                  artist={song.artistName}
+                  image={song.thumbnailUrl}
+                  onDelete={() => deleteSong(i)}
+                />}
+              </div>
             );
           })}
         </div>
