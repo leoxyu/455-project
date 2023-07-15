@@ -3,7 +3,7 @@
 // import { addPlaylist, resetDeck, deletePlaylist, modifyPlaylist } from '../../src/redux/inventory';
 var express = require('express');
 var playlistsRouter = express.Router();
-const { v4 } = require('uuid');
+const { v4: uuid } = require('uuid');
 
 const { MongoClient, ObjectId } = require("mongodb");
 const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
@@ -198,7 +198,7 @@ function getTracksHelper(access_token, next, playlist) {
     for (const i of data.items) {
       playlist.songs.push(
         {
-          songID: v4(),
+          songID: uuid(),
           artist: i.track.artists[0].name,
           name: i.track.name,
           type: 'spotify',
@@ -232,7 +232,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
         return Promise.reject(response);
       }
     }).then(data => getTracksHelper(access_token, data.tracks.href, {
-        playlistID: v4(),
+        playlistID: uuid(),
         dateCreated: new Date(),
         description: data.description,
         name: data.name,
@@ -268,7 +268,7 @@ playlistsRouter.get('/', async (req, res, next) => {
 
 playlistsRouter.delete('/:playlistId', async (req, res, next) => {
   try {
-    const result = await playlistsCol.deleteOne({ id: req.params.playlistId });
+    const result = await playlistsCol.deleteOne({ playlistID: req.params.playlistId });
 
     if (result.deletedCount === 0) {
       return res.status(404).json({ message: 'Playlist not found' });
@@ -284,7 +284,7 @@ playlistsRouter.delete('/:playlistId', async (req, res, next) => {
 });
 
 playlistsRouter.put('/:playlistID', async (req, res, next) => {
-  const filter = { id: req.params.playlistID };
+  const filter = { playlistID: req.params.playlistID };
   const updateDocument = {
     $set: {
       ...req.body,

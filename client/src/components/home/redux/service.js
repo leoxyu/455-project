@@ -37,9 +37,8 @@ const PlaylistsService = {
         // return playlistID;
     },
     editPlaylist: async (newBody) => {
-        //  TODO implement
         const response = await fetch(`http://localhost:3001/playlists/${newBody.playlistID}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -54,11 +53,6 @@ const PlaylistsService = {
     return data;
     },
     getPlaylists: async (searchParam) => {
-        // return [
-        // { id: 1, name: "Playlist 1", songs: [] },
-        // { id: 2, name: "Playlist 2", songs: [] },
-        // ];
-
         let url = 'http://localhost:3001/playlists';
 
         // Build the query string with search parameters
