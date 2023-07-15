@@ -25,11 +25,19 @@ jobs:
       with:
         node-version: 14.x
 
-    - name: Install dependencies
+    - name: Install dependencies server
       working-directory: ./server
       run: yarn install
+      
+    - name: Install dependencies client
+      working-directory: ./client
+      run: yarn install
 
-    - name: Run tests
+    - name: Run tests server
+      working-directory: ./server
+      run: yarn test
+      
+    - name: Run tests client
       working-directory: ./client
       run: yarn test
 
