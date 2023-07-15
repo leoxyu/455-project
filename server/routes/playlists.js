@@ -196,7 +196,15 @@ function getTracksHelper(access_token, next, playlist) {
   }).then(data => {
     // console.log(data);
     for (const i of data.items) {
-      playlist.songs.push({ artist: i.track.artists[0].name, name: i.track.name, type: 'spotify', link: i.track.uri });
+      playlist.songs.push(
+        { 
+          artist: i.track.artists[0].name,
+          name: i.track.name, 
+          type: 'spotify', 
+          link: i.track.uri,
+          imageLink: i.track.album.images[0].url,
+        }
+      );
     }
     if (data.next) {
       return getTracksHelper(access_token, data.next, playlist);
@@ -223,7 +231,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
         return Promise.reject(response);
       }
     }).then(data => getTracksHelper(access_token, data.tracks.href, {
-        id: v4(),
+        playlistID: v4(),
         dateCreated: new Date(),
         description: data.description,
         name: data.name,

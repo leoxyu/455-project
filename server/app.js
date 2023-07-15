@@ -31,6 +31,10 @@ async function setupCollections() {
         bsonType: "object",
         required: ["name", "dateCreated", "description", "author", "isFavorited", "coverImageURL", "songs"],
         properties: {
+          playlistID: {
+            bsonType: "string",
+            description: "uuid",
+          },
           name: {
             bsonType: "string",
             description: "Name of the object",
@@ -78,6 +82,10 @@ async function setupCollections() {
                 link: {
                   bsonType: "string",
                   description: "song URI",
+                },
+                imageLink: {
+                  bsonType: "string",
+                  description: "image link",
                 },
               },
             },
