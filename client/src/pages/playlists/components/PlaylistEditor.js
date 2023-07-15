@@ -9,7 +9,7 @@ const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
     <div className="song-display-container">
       <div className="song-info-container">
-        <img src={image} alt="Cover Art" width="48px" height="48px"/>
+        <img src={image} alt="" width="48px" height="48px"/>
         <div className="song-info">
           <div className="song-title">{name}</div>
           <div className="song-artist">{artist}</div>
@@ -55,6 +55,7 @@ const PlaylistEditor = ({ playlist, onClose }) => {
     }
 
     const newPlaylist = {
+      ...playlist,
       playlistID: playlist.playlistID,
       name: name,
       description: description,
@@ -119,9 +120,9 @@ const PlaylistEditor = ({ playlist, onClose }) => {
             return (
               <div key={i}>
                 {!deletedSongs.includes(i) && <SongDisplay
-                  name={song.songName}
-                  artist={song.artistName}
-                  image={song.thumbnailUrl}
+                  name={song.name}
+                  artist={song.artist}
+                  image={song.imageLink}
                   onDelete={() => deleteSong(i)}
                 />}
               </div>
