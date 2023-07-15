@@ -7,10 +7,20 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "assert": "^2.0.0",
     "axios": "^1.4.0",
+    "buffer": "^6.0.3",
     "cors": "^2.8.5",
+    "fs": "^0.0.1-security",
     "gatsby-plugin-react-svg": "^3.3.0",
+    "https-browserify": "^1.0.0",
     "jquery": "^3.7.0",
+    "node-libs-browser": "^2.2.1",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "querystring-es3": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
@@ -20,15 +30,22 @@
     "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
     "scikit-learn": "^0.1.0",
+    "scrape-youtube": "^2.4.0",
+    "selenium-webdriver": "^4.10.0",
     "sentiment": "^5.0.2",
     "spotify-web-api-js": "^1.5.2",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "tm": "^0.0.1",
-    "web-vitals": "^2.1.0"
+    "url": "^0.11.1",
+    "util": "^0.12.5",
+    "web-vitals": "^2.1.0",
+    "ytsr": "^3.8.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,5 +65,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "crypto-browserify": "^3.12.0",
+    "react-app-rewired": "^2.2.1"
   }
 }

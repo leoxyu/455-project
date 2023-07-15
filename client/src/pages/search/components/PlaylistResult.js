@@ -16,8 +16,7 @@ import Options2 from '../components/Options2';
 
 const { v4: uuid } = require('uuid');
 
-
-const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick }) => {
+const PlaylistResult = ({ className, thumbnailUrl, playlistName, date,  duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -59,7 +58,7 @@ const PlaylistResult = ({ className, playlistID, thumbnailUrl, playlistName, dat
   let optionsRef = null;
 
   const handlePlay = () => {
-    // example of how you can load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
+    // example of how youc an load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
 
     dispatch(setPlaylist({
       id: uuid(),
