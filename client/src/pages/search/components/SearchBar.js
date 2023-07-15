@@ -4,13 +4,13 @@ import '../styles/SearchBar.css';
 import { ReactComponent as SearchIcon } from '../../../images/search.svg';
 import { ReactComponent as ClearIcon } from '../../../images/clear.svg';
 
-function SearchBar({placeholder='Search for songs, albums, artists...'}) {
+function SearchBar({placeholder='Search for songs, albums, artists...', searchCallback=()=>{}}) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     // Perform search or filtering logic here based on the search term
-    console.log('Performing search with term:', event.target.value);
+    searchCallback(event.target.value);
   };
 
   const clearSearch = () => {

@@ -1,0 +1,392 @@
+{
+    "playlists": {
+      "href": "https://api.spotify.com/v1/search?query=hype&type=playlist&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=5&limit=10",
+      "items": [
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/6l3wEBANopjFYzZLppM8eJ"
+          },
+          "href": "https://api.spotify.com/v1/playlists/6l3wEBANopjFYzZLppM8eJ",
+          "id": "6l3wEBANopjFYzZLppM8eJ",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://mosaic.scdn.co/640/ab67616d0000b2732e94b668c60b06deb1c3a05cab67616d0000b2735675e83f707f1d7271e5cf8aab67616d0000b273de03bfc2991fd5bcfde65ba3ab67616d0000b273f85f5986018fe25aa1b9f7f5",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://mosaic.scdn.co/300/ab67616d0000b2732e94b668c60b06deb1c3a05cab67616d0000b2735675e83f707f1d7271e5cf8aab67616d0000b273de03bfc2991fd5bcfde65ba3ab67616d0000b273f85f5986018fe25aa1b9f7f5",
+              "width": 300
+            },
+            {
+              "height": 60,
+              "url": "https://mosaic.scdn.co/60/ab67616d0000b2732e94b668c60b06deb1c3a05cab67616d0000b2735675e83f707f1d7271e5cf8aab67616d0000b273de03bfc2991fd5bcfde65ba3ab67616d0000b273f85f5986018fe25aa1b9f7f5",
+              "width": 60
+            }
+          ],
+          "name": "hype music that everyone knows",
+          "owner": {
+            "display_name": "kruti sheth",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/skillmuph8mvmkedaesm58v97"
+            },
+            "href": "https://api.spotify.com/v1/users/skillmuph8mvmkedaesm58v97",
+            "id": "skillmuph8mvmkedaesm58v97",
+            "type": "user",
+            "uri": "spotify:user:skillmuph8mvmkedaesm58v97"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "Njk5LGY4NjlhYmI3MjAxMGQzMmZlMjkzZjBkN2RlNjBkZGFmOTMxZDJiZWU=",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/6l3wEBANopjFYzZLppM8eJ/tracks",
+            "total": 263
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:6l3wEBANopjFYzZLppM8eJ"
+        },
+        {
+          "collaborative": false,
+          "description": "Pump up songs that get you insanely hype",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/6B4kAIimKKskZw9ObUSfHe"
+          },
+          "href": "https://api.spotify.com/v1/playlists/6B4kAIimKKskZw9ObUSfHe",
+          "id": "6B4kAIimKKskZw9ObUSfHe",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://mosaic.scdn.co/640/ab67616d0000b273557adf6fe6e1f9c609f4357aab67616d0000b2736ca5c90113b30c3c43ffb8f4ab67616d0000b273b72ddbc2e5b8c9ce5f3c4ef7ab67616d0000b273eab40fc794b88b9d1e012578",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://mosaic.scdn.co/300/ab67616d0000b273557adf6fe6e1f9c609f4357aab67616d0000b2736ca5c90113b30c3c43ffb8f4ab67616d0000b273b72ddbc2e5b8c9ce5f3c4ef7ab67616d0000b273eab40fc794b88b9d1e012578",
+              "width": 300
+            },
+            {
+              "height": 60,
+              "url": "https://mosaic.scdn.co/60/ab67616d0000b273557adf6fe6e1f9c609f4357aab67616d0000b2736ca5c90113b30c3c43ffb8f4ab67616d0000b273b72ddbc2e5b8c9ce5f3c4ef7ab67616d0000b273eab40fc794b88b9d1e012578",
+              "width": 60
+            }
+          ],
+          "name": "INSANE PUMP UP SONGS",
+          "owner": {
+            "display_name": "jgielx10",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/rapisel"
+            },
+            "href": "https://api.spotify.com/v1/users/rapisel",
+            "id": "rapisel",
+            "type": "user",
+            "uri": "spotify:user:rapisel"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "NTM5MSw4NDZkYmI2Zjg5MTQ0Y2RmNTEwNWJiNzE2MzEwMWZlZGQ2MTM2YWQ1",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/6B4kAIimKKskZw9ObUSfHe/tracks",
+            "total": 206
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:6B4kAIimKKskZw9ObUSfHe"
+        },
+        {
+          "collaborative": false,
+          "description": "Hype Getting Ready music picked just for you",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1EIhQBSkQRcBti"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EIhQBSkQRcBti",
+          "id": "37i9dQZF1EIhQBSkQRcBti",
+          "images": [
+            {
+              "height": null,
+              "url": "https://seed-mix-image.spotifycdn.com/v6/img/desc/Hype%20Getting%20Ready/en/large",
+              "width": null
+            }
+          ],
+          "name": "Hype Getting Ready Mix",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTk1MzksMDAwMDAwMDA1MDU2ZDUxZGEyMWJlYTQ0NTg3OWNiMDg2Njg2MzQ0Mg==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EIhQBSkQRcBti/tracks",
+            "total": 50
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1EIhQBSkQRcBti"
+        },
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/1GkEiL7qsGQKzyBGAm1vbt"
+          },
+          "href": "https://api.spotify.com/v1/playlists/1GkEiL7qsGQKzyBGAm1vbt",
+          "id": "1GkEiL7qsGQKzyBGAm1vbt",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb637745ffd045ea46916afdd9",
+              "width": null
+            }
+          ],
+          "name": "hype songs for the girls💃🏼",
+          "owner": {
+            "display_name": "leahholmes",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/cljeq3h3wr40kvir381hp02da"
+            },
+            "href": "https://api.spotify.com/v1/users/cljeq3h3wr40kvir381hp02da",
+            "id": "cljeq3h3wr40kvir381hp02da",
+            "type": "user",
+            "uri": "spotify:user:cljeq3h3wr40kvir381hp02da"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MzI5LGY2YmVhNzBmOTY2YTY5OGFmYzM1MzU4YzFmYmQ3NTk1MGVmZGQxOTI=",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/1GkEiL7qsGQKzyBGAm1vbt/tracks",
+            "total": 116
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:1GkEiL7qsGQKzyBGAm1vbt"
+        },
+        {
+          "collaborative": false,
+          "description": "Hype Rap music picked just for you",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1EIhpG2qPPV1Lr"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EIhpG2qPPV1Lr",
+          "id": "37i9dQZF1EIhpG2qPPV1Lr",
+          "images": [
+            {
+              "height": null,
+              "url": "https://seed-mix-image.spotifycdn.com/v6/img/desc/Hype%20Rap/en/large",
+              "width": null
+            }
+          ],
+          "name": "Hype Rap Mix",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTk1MzksMDAwMDAwMDA1MmQ0ZTdjNTVmMThmMjFmYjI0YTRmN2EyMThkZmQ5Mg==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EIhpG2qPPV1Lr/tracks",
+            "total": 50
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1EIhpG2qPPV1Lr"
+        },
+        {
+          "collaborative": false,
+          "description": "Listen while hoopin, you will drop 50🔥 Pregame Playlist - Motivation- 100% Buckets - NBA PLAYOFFS HYPE - Everyday = new opportunity @alex631_ on twitter for song requests",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/4803FQKhFd3nSpUvqWh8gB"
+          },
+          "href": "https://api.spotify.com/v1/playlists/4803FQKhFd3nSpUvqWh8gB",
+          "id": "4803FQKhFd3nSpUvqWh8gB",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb109e0d125c4686e4db9276bd",
+              "width": null
+            }
+          ],
+          "name": "Hype Basketball 2023 Playlist🔥🔥🔥",
+          "owner": {
+            "display_name": "alex.63",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/sdl5t2vr6lpj12xxec2ip8rea"
+            },
+            "href": "https://api.spotify.com/v1/users/sdl5t2vr6lpj12xxec2ip8rea",
+            "id": "sdl5t2vr6lpj12xxec2ip8rea",
+            "type": "user",
+            "uri": "spotify:user:sdl5t2vr6lpj12xxec2ip8rea"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "OTcyLDcwMzhhODllYzE4Y2IwOGM2MjM0ZTgzNWRhZDdjZDgyZTlhMzEyMDg=",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/4803FQKhFd3nSpUvqWh8gB/tracks",
+            "total": 112
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:4803FQKhFd3nSpUvqWh8gB"
+        },
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/2ukuJYHQM2fvs41UbDtHVE"
+          },
+          "href": "https://api.spotify.com/v1/playlists/2ukuJYHQM2fvs41UbDtHVE",
+          "id": "2ukuJYHQM2fvs41UbDtHVE",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebb72c512fa285aa3381a22e768",
+              "width": null
+            }
+          ],
+          "name": "hype music for the girls 🥵💅🏼💋",
+          "owner": {
+            "display_name": "carleighms",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/carleighms"
+            },
+            "href": "https://api.spotify.com/v1/users/carleighms",
+            "id": "carleighms",
+            "type": "user",
+            "uri": "spotify:user:carleighms"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "ODEsZTNkODljOTkxMjFmZDRlMGE0NjhiZmUzNDlhNTBhZTVkZjNkNmMwNA==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/2ukuJYHQM2fvs41UbDtHVE/tracks",
+            "total": 45
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:2ukuJYHQM2fvs41UbDtHVE"
+        },
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/3tde7okJ2FYC3CMCzK2TSA"
+          },
+          "href": "https://api.spotify.com/v1/playlists/3tde7okJ2FYC3CMCzK2TSA",
+          "id": "3tde7okJ2FYC3CMCzK2TSA",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebba2da7c43d75bbc7972b94a35",
+              "width": null
+            }
+          ],
+          "name": "Hype Beats 🔥 For Gym Girls ",
+          "owner": {
+            "display_name": "Casey Smith",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/clsmith35"
+            },
+            "href": "https://api.spotify.com/v1/users/clsmith35",
+            "id": "clsmith35",
+            "type": "user",
+            "uri": "spotify:user:clsmith35"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "OTEsYjVjNDk2NjlkYjlmYmM4Nzg3YjA3MTVjN2RiNGM0OGZkNzcwMWMwMA==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/3tde7okJ2FYC3CMCzK2TSA/tracks",
+            "total": 73
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:3tde7okJ2FYC3CMCzK2TSA"
+        },
+        {
+          "collaborative": false,
+          "description": "The latest in hype Christian Hip Hop (CHH). Playlist updated weekly! Follow us on Instagram @CHHTalk",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/6NDHIP1IH6pbvpfULnjDqo"
+          },
+          "href": "https://api.spotify.com/v1/playlists/6NDHIP1IH6pbvpfULnjDqo",
+          "id": "6NDHIP1IH6pbvpfULnjDqo",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebbdef79d98a3195932bb6af7ae",
+              "width": null
+            }
+          ],
+          "name": "Hype Christian Rap",
+          "owner": {
+            "display_name": "CHHTalk",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/dmele012"
+            },
+            "href": "https://api.spotify.com/v1/users/dmele012",
+            "id": "dmele012",
+            "type": "user",
+            "uri": "spotify:user:dmele012"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTUyMixlMzQ0MzVmNjM1NjZjMjFhNDE3MjFlNGE1OWRmYjhkYmRiNDNiYjc1",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/6NDHIP1IH6pbvpfULnjDqo/tracks",
+            "total": 210
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:6NDHIP1IH6pbvpfULnjDqo"
+        },
+        {
+          "collaborative": false,
+          "description": "for inquiries pls email: hannah@craftplaylists.com &#x2F; this playlist has high energy that you can&#x27;t match anywhere else &#x2F; featuring A$AP Rocky",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/6rFQYMA3Md4BmMPPxVTlKv"
+          },
+          "href": "https://api.spotify.com/v1/playlists/6rFQYMA3Md4BmMPPxVTlKv",
+          "id": "6rFQYMA3Md4BmMPPxVTlKv",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000bebbef15ded21d4d76a50f65e22b",
+              "width": null
+            }
+          ],
+          "name": "hype",
+          "owner": {
+            "display_name": "Craft Vibes",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/31loo4gixewncnlbqo6icw7ulkte"
+            },
+            "href": "https://api.spotify.com/v1/users/31loo4gixewncnlbqo6icw7ulkte",
+            "id": "31loo4gixewncnlbqo6icw7ulkte",
+            "type": "user",
+            "uri": "spotify:user:31loo4gixewncnlbqo6icw7ulkte"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "ODA5LGZjOTRhZTIxYzU4MmIyYzc1ZDMzZmMzYjE4OTIwN2EwYTQ5NzJkM2Q=",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/6rFQYMA3Md4BmMPPxVTlKv/tracks",
+            "total": 77
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:6rFQYMA3Md4BmMPPxVTlKv"
+        }
+      ],
+      "limit": 10,
+      "next": "https://api.spotify.com/v1/search?query=hype&type=playlist&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=15&limit=10",
+      "offset": 5,
+      "previous": "https://api.spotify.com/v1/search?query=hype&type=playlist&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=10",
+      "total": 24
+    }
+  }
