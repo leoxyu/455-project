@@ -131,7 +131,7 @@ function getTracksHelper(access_token, next, playlist) {
   }).then(data => {
     // console.log(data);
     for (const i of data.items) {
-      playlist.songs.push({ artist: i.track.artists[0].name, name: i.track.name, type: 'spotify', link: i.track.uri }); // best for performance
+      playlist.songs.push({ artist: i.track.artists[0].name, name: i.track.name, type: 'spotify', link: i.track.uri });
     }
     if (data.next) {
       return getTracksHelper(access_token, data.next, playlist);
@@ -146,9 +146,8 @@ function getTracksHelper(access_token, next, playlist) {
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   const { playlistIDs, access_token } = req.body;
-  console.log(access_token);
   
-  Promise.all(playlistIDs.map(id => {
+  Promise.allSettled(playlistIDs.map(id => {
     return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${access_token}` }
@@ -167,23 +166,22 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
         isFavorited: false,
         coverImageURL: data.images[0].url,
         songs: [],
+        originSpotifyId: data.id,
       })
     ).then(async (playlist) => {
       const result = await playlistsCol.insertOne(playlist);
       console.log(`inserted ${result.insertedId}`);
-      return playlist.id; // return the uuid
+      return playlist.originSpotifyId; // useful for frontend retry
     })
   }))
-  .then(ids => {
-    console.log(ids);
-    res.status(200).send(ids)
-  }).catch(error => { // catch outside promise.all, don't catch inside
-    // TODO: rollback all playlists already added to db
-    console.log(error);
-    return res.status(500).send(error);
-  });
+  .then(outcomes => {
+    if (!outcomes.some((o) => o.status === "fulfilled")) {
+      return res.status(500).send(outcomes);
+    }
+    return res.status(200).send(outcomes);
+  })
+  // NOTE: no catch, Promise.allSettled never rejects.
 });
-  
 
 playlistsRouter.get('/', async (req, res, next) => {
   // TODO: sort, filter, pagination
@@ -194,45 +192,58 @@ playlistsRouter.get('/', async (req, res, next) => {
   .send(allItems);
 });
 
-playlistsRouter.delete('/:playlistId', (req, res, next) => {
-    try {
-        deletePlaylist(req.params.playlistId);
+playlistsRouter.delete('/:playlistId', async (req, res, next) => {
+  try {
+    const result = await playlistsCol.deleteOne({ id: req.params.playlistId });
+    
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Playlist not found' });
     }
-    catch (err) {
-        return res.status(204).json({ message: err.message });
+    
+    return res
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send({});
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
+
+playlistsRouter.put('/:playlistID', async (req, res, next) => {
+  const filter = { id: req.params.playlistID };
+  const updateDocument = {
+    $set: {
+      ...req.body,
+    },
+  };
+
+  try {
+    const options = { returnDocument: "after" };
+    const result = await playlistsCol.findOneAndUpdate(filter, updateDocument, options);
+    if (result.lastErrorObject && result.lastErrorObject.updatedExisting === false) {
+      return res.status(404).json({ message: "Invalid request body" });
     }
     return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send({});
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send(result);
+  } catch (error) {
+    if (error.codeName === "DocumentValidationFailure") {
+      return res.status(400).send(error);
+    }
+    return res.status(500).send(error);
+  }
 });
 
 
+// playlistsRouter.put('/', (req, res, next) => {
+//     resetDeck();
 
-playlistsRouter.patch('/:playlistID', (req, res,next) => {
-    console.log(req.body);
-    console.log(req.params);
-    const index = playlists.findIndex((playlist) => playlist.playlistID === req.params.playlistID);
-    try {
-        modifyPlaylist(req.body, index);
-    }
-    catch (err) {
-        return res.status(404).json({ message: err.message });
-    }
-    return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send(playlists[index]);
-});
-
-playlistsRouter.put('/', (req, res, next) => {
-    resetDeck();
-
-    return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send(playlists);
-});
+//     return res
+//     .setHeader('Content-Type', 'application/json')
+//     .status(200)
+//     .send(playlists);
+// });
 
 
 
