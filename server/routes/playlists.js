@@ -198,6 +198,7 @@ function getTracksHelper(access_token, next, playlist) {
     for (const i of data.items) {
       playlist.songs.push(
         { 
+          songID: v4(),
           artist: i.track.artists[0].name,
           name: i.track.name, 
           type: 'spotify', 
