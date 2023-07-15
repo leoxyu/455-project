@@ -55,7 +55,6 @@ const PlaylistEditor = ({ playlist, onClose }) => {
     }
 
     const newPlaylist = {
-      ...playlist,
       playlistID: playlist.playlistID,
       name: name,
       description: description,
