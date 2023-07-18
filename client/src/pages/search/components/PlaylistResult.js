@@ -125,16 +125,3 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
 };
 
 export default PlaylistResult;
-
-
-// playlistID: 1004,
-//         name: 'songs',
-//         artist: 'User',
-//         date: '2023-06-09',
-//         length: 812,
-//         albumCover: "(some-image-URL)",
-//         isFavorited: false,
-//         songs: [
-//             4415,
-//             1151
-//         ]
