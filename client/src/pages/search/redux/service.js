@@ -40,7 +40,7 @@ function parseSpotifyTracks(items, thumbnailUrl = false, release_date = false, p
             'genres': track.genresConcat, //and union with artist genre
             'audioFeatures': track.audioFeatures,
             'duration': formatDuration(track.duration_ms), // convert to min
-            'songLink': track.href
+            'songLink': `spotify:track:${track.id}`
         };
     });
 }

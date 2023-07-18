@@ -22,15 +22,15 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     // TODO: look to change search schema so this doesn't need to happen
     let parsedSongObject;
     if (songObject.songName) {
-      const url = songObject.songLink;
-      const id = url.substring(url.lastIndexOf("/") + 1);
+      // const url = songObject.songLink;
+      // const id = url.substring(url.lastIndexOf("/") + 1);
       const artistName = songObject.artists[0];
       parsedSongObject = {
-        songID: uuid(),
+        songID: uuid(), // we need song id? can we just use the link
         name: songObject.songName,
         artist: artistName,
         type: 'spotify',
-        link: `spotify:track:${id}`,
+        link: songObject.songLink,
         imageLink: songObject.thumbnailUrl
       }
     }
@@ -67,7 +67,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
         </div>
         <div className="details">
           <div className="name">{songName}</div>
-          <div className="artist">{artists}</div>
+          <div className="artist">{(artists)? artists.join(', '): ''}</div>
           <div className="artist-name">{artistName}</div>
         </div>
       </div>
