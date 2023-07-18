@@ -27,7 +27,8 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
 
 
     return (
-        <div className="track-container">
+        <div>
+            <div className="track-container">
             <div className="track-container-left">
                 <p className="track-id">{trackId}</p>
                 <PlayIcon className="play-icon" onClick={handlePlay} />
@@ -38,6 +39,10 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
                 <HeartIcon className="heart-icon" onClick={handleFavorite} />
                 <p className="track-duration">{trackDuration}</p>
                 <OptionsIcon className="options-icon" onClick={handleOptions} />
+            </div>
+        </div>
+        <div className='info-track-container'>
+            <img className='info-track-cover' src={coverUrl} alt="Track Cover" />
             </div>
         </div>
 

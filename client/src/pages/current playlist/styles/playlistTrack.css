@@ -72,6 +72,20 @@
   }
 }
 
+.info-track-container {
+  width: auto;
+  max-height: 9rem;
+  min-height: 9rem;
+
+  .info-track-cover {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+  }
+}
+
+
+
 .play-icon {
   max-width: 1.1rem;
   max-height: 1.1rem;
