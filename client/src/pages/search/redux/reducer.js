@@ -44,6 +44,8 @@ const searchSlice = createSlice({
             state.getSpotify = REQUEST_STATE.FULFILLED;
             state.spotify.tracks = action.payload.tracks.items;
             state.spotify.tracksNext = action.payload.tracks.next;
+            
+            // console.log(state.spotify.tracks[0]);
             // state.nextPageLink = action.payload.tracks.next;
             // console.log(state.spotify.tracks[0]);
             // console.log(action.payload.albums)
@@ -51,10 +53,10 @@ const searchSlice = createSlice({
             state.spotify.albumsNext = action.payload.albums.next;
             // state.spotify.albums = parseSpotifyAlbums(action.payload.albums.items);
             // console.log(JSON.stringify(state.spotify.albums[0]));
-
+            // console.log(state.spotify.albums[0]);
             state.spotify.playlists = action.payload.playlists.items;
             state.spotify.playlistsNext = action.payload.playlists.next;
-            
+            // console.log(state.spotify.playlists[0]);
             // state.spotify.artists = action.payload.artists;
             // state.getSpotify.playlists = action.payload.playlists;
         });

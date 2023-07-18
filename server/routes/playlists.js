@@ -67,14 +67,22 @@ const ytpl = require('ytpl');
 
 
 async function ytParseVideo(item) {
-
-    const info = await ytdl.getInfo(item.id);
+    // console.log('queried ' + item.id); //ffs
+    try {
+      // check for later
+      // https://github.com/fent/node-ytdl-core/issues/1139
+      const info = await ytdl.getInfo(item.id);
+      // console.log('passed ' + item.id); //ffs
+    }
+    catch(e) {
+      console.log('failed ' + item.id); //ffs
+      throw e;
+    }
     return {
       'songName':item.title,
       'artists':[item.author.name],
       'thumbnailUrl': item.bestThumbnail.url,
       // 'views': info.videoDetails.viewCount,
-      // 'releaseDate': info.videoDetails.publishDate,
       // 'genres':info.videoDetails.keywords,
       'audioFeatures':[],
       'duration': item.duration,
