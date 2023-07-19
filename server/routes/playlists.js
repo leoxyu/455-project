@@ -215,6 +215,9 @@ function getTracksHelper(access_token, next, playlist) {
           type: 'spotify',
           link: i.track.uri,
           imageLink: i.track.album.images[0].url,
+          album: i.track.album.name,
+          duration: i.track.duration_ms,
+          releaseDate: i.track.album.release_date,
         }
       );
     }
@@ -252,6 +255,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
         coverImageURL: data.images[0].url,
         songs: [],
         originSpotifyId: data.id,
+        isAlbum: false,
       })
     ).then(async (playlist) => {
       const result = await playlistsCol.insertOne(playlist);

@@ -27,9 +27,17 @@ async function setupCollections() {
     };
 
     const validator = {
+      $or: [
+        {
+          "isAlbum": { $eq: false }
+        },
+        {
+          $and: [ { "artist": { $exists: true } } ]
+        }
+      ],
       $jsonSchema: {
         bsonType: "object",
-        required: ["name", "dateCreated", "description", "author", "isFavorited", "coverImageURL", "songs"],
+        required: ["name", "dateCreated", "description", "author", "isFavorited", "coverImageURL", "songs", "isAlbum"],
         properties: {
           playlistID: {
             bsonType: "string",
@@ -49,7 +57,19 @@ async function setupCollections() {
           },
           author: {
             bsonType: "objectId",
-            description: "ID of the object's author",
+            description: "ObjectId of the unifi user who created this playlist",
+          },
+          isAlbum: {
+            bsonType: "bool",
+            description: "true if this playlist is a Spotify album, false otherwise",
+          },
+          artist: {
+            bsonType: "string",
+            description: "name of artist if this is a Spotify album",
+          },
+          artistImage: {
+            bsonType: "string",
+            description: "link to artist image",
           },
           isFavorited: {
             bsonType: "bool",
@@ -66,6 +86,10 @@ async function setupCollections() {
               bsonType: "object",
               required: ["songID", "artist", "name", "type", "link"],
               properties: {
+                addedBy: {
+                  bsonType: "objectid",
+                  description: "ObjectId of the unifi user who added this song to the playlist",
+                },
                 songID: {
                   bsonType: "string",
                   description: "uuid",
@@ -73,6 +97,18 @@ async function setupCollections() {
                 artist: {
                   bsonType: "string",
                   description: "Name of the artist",
+                },
+                album: {
+                  bsonType: "string",
+                  description: "name of the album it's from",
+                },
+                duration: {
+                  bsonType: "number",
+                  description: "duration in ms",
+                },
+                releaseDate: {
+                  bsonType: "string",
+                  description: "release date of the song's album",
                 },
                 name: {
                   bsonType: "string",
