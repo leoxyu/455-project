@@ -15,6 +15,8 @@ import debounce from 'lodash.debounce';
 // import ScrollingComponent from './ScrollingComponent';
 
 
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../typeConstants.js");
+
 
 
 //  look here later: https://github.com/dermasmid/scrapetube
@@ -130,10 +132,12 @@ const SearchPage = () => {
             artists={song.artists}
             duration={song.duration}
             songLink={song.songLink}
-            platform='Spotify'
+            platform={TYPE_SPOTIFY}
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
             songObject={song}
+
+            isFavorite={false}
           />
         ))}
       </div>
@@ -141,30 +145,7 @@ const SearchPage = () => {
       <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
         <div className='spotify-album-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
-          {/* <PlaylistResult 
-          className={'spotify-album-preview'}
-          thumbnailUrl={'https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e'}
-          playlistName={'D-2'}
-          artistName={'Agust D'}
-          // date={''}
-          // duration={}
-          playlistLink={'https://open.spotify.com/album/2OeWW05eH3qKcnaNRY0qR0?si=8e9e2e9e0b3e4e4a'}
-          // songs={[]}
-          isFavorite={false}/> */}
 
-
-          {/* {spotifySongList.map((song) => (
-          <PlaylistResult
-            className={'spotify-album-preview'}
-            key={song.songName}
-            thumbnailUrl={song.thumbnailUrl}
-            playlistName={song.songName}
-            artistName={song.artistName}
-            // views={song.views + ' views'}
-            // duration={song.duration}
-            playlistLink={song.songLink}
-          />
-        ))} */}
           {spotifyAlbums.map((album) => (
             <PlaylistResult
               className={'spotify-album-preview'}
@@ -173,8 +154,12 @@ const SearchPage = () => {
               playlistName={album.playlistName}
               artistName={album.artistName.join(', ')}
               views={album.popularity + ' views'}
-              // duration={song.duration}
               playlistLink={album.playlistLink}
+
+              isFavorite={false}
+              duration={album.duration}
+              source={TYPE_SPOTIFY}
+              type={TYPE_ALBUM}
             />
           ))}
         </div>
@@ -191,8 +176,12 @@ const SearchPage = () => {
               playlistName={playlist.playlistName}
               artistName={playlist.artistName}
               views={0 + ' views'}
-              // duration={song.duration}
               playlistLink={playlist.playlistLink}
+
+              isFavorite={false}
+              duration={playlist.duration}
+              source={TYPE_SPOTIFY}
+              type={TYPE_PLAYLIST}
             />
           ))}
         </div>
@@ -211,7 +200,9 @@ const SearchPage = () => {
               views={song.views + ' views'}
               duration={song.duration}
               songLink={song.songLink}
-              platform='Youtube'
+              platform={TYPE_YOUTUBE}
+
+              isFavorite={false}
             />
           ))}
 
@@ -230,8 +221,12 @@ const SearchPage = () => {
               artistName={song.artistName}
               songs={spotifySongList}
               // views={song.views + ' views'}
-              // duration={song.duration}
               playlistLink={song.songLink}
+
+              isFavorite={false}
+              duration={song.duration}
+              source={TYPE_YOUTUBE}
+              type={TYPE_PLAYLIST}
             />
           ))}
         </div>

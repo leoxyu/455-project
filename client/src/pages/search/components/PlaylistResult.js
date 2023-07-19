@@ -18,7 +18,7 @@ import thumbnailImage from '../../../images/album-placeholder.png'
 const { v4: uuid } = require('uuid');
 
 
-const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
+const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, source, type, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -64,7 +64,17 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
 
     dispatch(setPlaylist({
       id: uuid(),
-      songs
+
+      playlistName: playlistName,
+      coverUrl: thumbnailUrl,
+      releaseDate: date,
+      duration: duration,
+      artists: artistName,
+      isFavorite: isFavorite,
+      source: source,
+      type: type,
+
+      songs: songs
     }));
   };
 
