@@ -41,9 +41,6 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
                 <OptionsIcon className="options-icon" onClick={handleOptions} />
             </div>
         </div>
-        <div className='info-track-container'>
-            <img className='info-track-cover' src={coverUrl} alt="Track Cover" />
-            </div>
         </div>
 
 
