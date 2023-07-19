@@ -105,8 +105,8 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
                 <div className="artist-name">{artistName}</div>
                 </div>
                 <div className="optional-details">
-                {songs.slice(0,3).map((song) => (
-                <div className="song">{song.songName}</div>
+                {songs.slice(0,3).map((song, i) => (
+                <div key={i} className="song">{song.songName}</div>
                 ))}
                 </div>
             </div>
