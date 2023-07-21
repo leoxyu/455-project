@@ -105,7 +105,7 @@ async function ytSearchVideo(videoName) {
     // searchresults -> keep .items and .continuation
     searchResults.items = searchResults.items.filter((item) => item.type === 'video');
     searchResults.items =  await Promise.all(searchResults.items.map(ytParseVideo));
-    // console.log(searchResults.items[0]);
+    console.log(searchResults.items[0]);
     
     //  comments for todos later
     // when none left, then { continuation: null, items: [] }
@@ -166,8 +166,8 @@ function addPlaylist(action) {
     action.coverImageURL= 'https://zerojackerzz.com/wp-content/uploads/2019/10/album-placeholder.png'
 
     // end of TOOD
-    // ytSearchVideo("short change hero");
-    ytSearchPlaylist("pewdiepie");
+    ytSearchVideo("short change hero");
+    // ytSearchPlaylist("pewdiepie");
     console.log('yt res should have finished');
     playlists.push(action);
 }
