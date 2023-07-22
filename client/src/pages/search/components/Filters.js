@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import '../../../styles/variables.css';
 import '../styles/Filters.css';
 
-function Filters({filters=['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists']}) {
-    const [selectedFilter, setSelectedFilter] = useState('All');
+function Filters({ filters = ['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists'] }) {
+  const [selectedFilter, setSelectedFilter] = useState('All');
 
-    const handlePress = (event) => {
-        const filter = event.target.textContent;
-        setSelectedFilter(filter);
-      // dispatch filter to redux store
-    };
+  const handlePress = (event) => {
+    const filter = event.target.textContent;
+    setSelectedFilter(filter);
+    // dispatch filter to redux store
+  };
 
   // const filters = ['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists'];
 
@@ -21,7 +21,7 @@ function Filters({filters=['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'A
           className="filter-button"
           onClick={handlePress}
           data-selected={selectedFilter === filter ? 'true' : 'false'}
-          >
+        >
           {filter}
         </button>
       ))}

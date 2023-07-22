@@ -56,6 +56,9 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     setShowIcons(true);
   };
 
+  if (!artists) {
+    artists = '';
+  }
 
   return (
     <div className={className}>
@@ -67,7 +70,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
         </div>
         <div className="details">
           <div className="name">{songName}</div>
-          <div className="artist">{(artists)? artists.join(', '): ''}</div>
+          <div className="artist">{Array.isArray(artists) ? (artists.join(', ')) : artists}</div>
           <div className="artist-name">{artistName}</div>
         </div>
       </div>

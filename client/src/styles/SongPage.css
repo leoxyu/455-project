@@ -10,3 +10,11 @@
     color: var(--text-base);
     /* padding-left: 250px; */
 }
+
+.spotify-songs {
+    display: flex;
+    flex-direction: column;
+    /* Set the flex direction to column */
+    align-items: left;
+    /* Optional: Center the components horizontally */
+}
