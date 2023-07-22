@@ -1,11 +1,12 @@
 import { v1 } from 'uuid';
 import {actionTypes} from './actionTypes';
-const ROOT_URL = "http://localhost:3001";
+import {store} from '../../../store';
+const ROOT_URL = 'http://localhost:3001';
 
 // TODO probably follow what was from class to be safe if we have extra time
 const PlaylistsService = {
     createPlaylist: async (body) => {
-        const response = await fetch('http://localhost:3001/playlists', {
+        const response = await fetch(`${ROOT_URL}/playlists`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -22,7 +23,7 @@ const PlaylistsService = {
         // return { id: v1(), ...body };
     },
     deletePlaylist: async (playlistID) => {
-        const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
+        const response = await fetch(`${ROOT_URL}/playlists/${playlistID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -37,7 +38,7 @@ const PlaylistsService = {
         // return playlistID;
     },
     editPlaylist: async (newBody) => {
-        const response = await fetch(`http://localhost:3001/playlists/${newBody.playlistID}`, {
+        const response = await fetch(`${ROOT_URL}/playlists/${newBody.playlistID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,13 +54,18 @@ const PlaylistsService = {
         return data;
     },
     getPlaylists: async (searchParam) => {
-        let url = 'http://localhost:3001/playlists';
+        let url = `${ROOT_URL}/playlists`;
 
-        // Build the query string with search parameters
+        // TODO: Build the query string with search parameters
         const queryParams = new URLSearchParams();
         if (searchParam) {
             queryParams.append('name', searchParam);
         }
+        const lastId = store.getState().playlists.lastId;
+        if (lastId) {
+            queryParams.append('lastId', lastId);
+        }
+        // console.log('lastid being passed', lastId);
 
         if (queryParams.toString()) {
             url += `?${queryParams.toString()}`;
@@ -75,8 +81,19 @@ const PlaylistsService = {
         }
         return data;
     },
+    getOnePlaylist: async (playlistID) => {
+        const response = await fetch(`${ROOT_URL}/playlists/${playlistID}`, {
+            method: 'GET'
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            const errorMsg = data?.message;
+            throw new Error(errorMsg)
+        }
+        return data;
+    },
     addSong: async (playlistID, songBody) => {
-        const response = await fetch(`http://localhost:3001/playlists/${playlistID}`, {
+        const response = await fetch(`${ROOT_URL}/playlists/${playlistID}/songs`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -85,14 +102,13 @@ const PlaylistsService = {
           });
         const data = await response.json();
         if (!response.ok) {
-        const errorMsg = data?.message;
-        throw new Error(errorMsg)
+            const errorMsg = data?.message;
+            throw new Error(errorMsg)
         }
         return data;
-        // return { id: v1(), ...songBody };
     },
     removeSong: async (playlistID, songID) => {
-        const response = await fetch(`http://localhost:3001/playlists/${playlistID}/${songID}`, {
+        const response = await fetch(`${ROOT_URL}/playlists/${playlistID}/songs/${songID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -107,7 +123,7 @@ const PlaylistsService = {
         // return songID;
     },
     getSongs: async (playlistID, searchParam) => {
-        let url = `http://localhost:3001/playlists/${playlistID}`;
+        let url = `${ROOT_URL}/playlists/${playlistID}`;
 
         // Build the query string with search parameters
         const queryParams = new URLSearchParams();
