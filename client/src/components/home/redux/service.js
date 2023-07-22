@@ -1,6 +1,6 @@
 import {store} from '../../../store';
-const ROOT_URL = 'http://localhost:3001';
 import { getUserId } from '../../../util';
+const ROOT_URL = 'http://localhost:3001';
 
 // TODO probably follow what was from class to be safe if we have extra time
 const PlaylistsService = {
