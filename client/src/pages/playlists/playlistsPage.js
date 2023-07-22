@@ -97,6 +97,7 @@ const PlaylistPage = () => {
         </div>
         {playlists.map((playlist) => (
           <PlaylistResult
+            key={playlist.playlistID}
             className={'spotify-playlist-preview'}
             playlistID={playlist.playlistID}
             thumbnailUrl={playlist.coverImageURL}
