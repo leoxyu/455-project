@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
@@ -16,24 +16,38 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
 
   const [showOptionsDialog, setShowOptionsDialog] = useState(false);
   const [showIcons, setShowIcons] = useState(true);
+  const [parsedSongObject, setparsedSongObject] = useState({});
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (songObject) {
+      const parsed = {
+        name: songObject?.songName,
+        artist: songObject?.artists[0],
+        type: 'spotify',
+        link: songObject?.songLink,
+        imageLink: songObject?.thumbnailUrl
+      };
+      setparsedSongObject(parsed);
+    }
+  }, [songObject]);
 
   const handlePlay = () => {
     // TODO: look to change search schema so this doesn't need to happen
-    let parsedSongObject;
-    if (songObject.songName) {
-      // const url = songObject.songLink;
-      // const id = url.substring(url.lastIndexOf("/") + 1);
-      const artistName = songObject.artists[0];
-      parsedSongObject = {
-        songID: uuid(), // we need song id? can we just use the link
-        name: songObject.songName,
-        artist: artistName,
-        type: 'spotify',
-        link: songObject.songLink,
-        imageLink: songObject.thumbnailUrl
-      }
-    }
+    // let parsedSongObject;
+    // if (songObject.songName) {
+    //   // const url = songObject.songLink;
+    //   // const id = url.substring(url.lastIndexOf("/") + 1);
+    //   const artistName = songObject.artists[0];
+    //   parsedSongObject = {
+    //     songID: uuid(), // we need song id? can we just use the link
+    //     name: songObject.songName,
+    //     artist: artistName,
+    //     type: 'spotify',
+    //     link: songObject.songLink,
+    //     imageLink: songObject.thumbnailUrl
+    //   }
+    // }
 
     dispatch(setPlaylist({
       id: uuid(),
@@ -83,7 +97,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
       )}
 
       {showOptionsDialog && (
-        <Options songLink={songLink} platform={platform} onClose={closeOptionsDialog} handleAddClick={handleAddClick} />
+        <Options songBody={parsedSongObject} onClose={closeOptionsDialog} handleAddClick={handleAddClick} />
       )}
     </div>
   );
