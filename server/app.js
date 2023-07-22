@@ -12,6 +12,7 @@ var playlistsRouter = require('./routes/playlists');
 // api
 var spotifyRouter = require('./routes/spotify');
 var youtubeRouter = require('./routes/youtube');
+var youtubeSearchRouter = require('./routes/ytSearch');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/', indexRouter);
 // API
 app.use('/spotify', spotifyRouter);
 app.use('/youtube', youtubeRouter);
+app.use('/yt-search', youtubeSearchRouter);
 
 // login
 app.use('/login', loginRouter);
