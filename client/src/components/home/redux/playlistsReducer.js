@@ -5,7 +5,9 @@ import { createPlaylistAsync,
   addSongAsync, 
   getPlaylistsAsync, 
   removeSongAsync, 
-  getSongsAsync } from './thunks';
+  getSongsAsync,
+  getOnePlaylist
+ } from './thunks';
 
 /*
 ACTIONS:
@@ -25,7 +27,8 @@ toggleFavoriteSong:     {type: ..., payload: {songID}}
 const playlistsSlice = createSlice({
   name: 'playlists',
   initialState: {
-    playlists: []
+    playlists: [],
+    lastId: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -37,29 +40,36 @@ const playlistsSlice = createSlice({
     })
     builder.addCase(editPlaylistAsync.fulfilled, (state, action) => {
       // Find the edited playlist in the state and update its properties
-      const idx = state.playlists.findIndex((playlist) => playlist.playlistID === action.payload.id);
+      const idx = state.playlists.findIndex((playlist) => playlist.playlistID === action.payload.playlistID);
       state.playlists[idx] = action.payload;
     });
     builder.addCase(getPlaylistsAsync.fulfilled, (state, action) => {
-      state.playlists = action.payload;
+      // console.log('action payload', action.payload);
+      state.playlists = [...state.playlists, ...action.payload.data];
+      state.lastId = action.payload.lastId;
+    });
+    builder.addCase(getOnePlaylist.fulfilled, (state, action) => {
+      const { playlistID } = action.payload;
+      const idx = state.playlists.findIndex((pl) => pl.playlistID === playlistID);
+      state.playlists[idx] = action.payload;
     });
     builder.addCase(addSongAsync.fulfilled, (state, action) => {
-      const { playlistID, songBody } = action.payload;
-      const playlist = state.playlists.find((playlist) => playlist.id === playlistID);
+      const { playlistID, song } = action.payload;
+      const playlist = state.playlists.find((playlist) => playlist.playlistID === playlistID);
       if (playlist) {
-        playlist.songs.push(songBody);
+        playlist.songs.push(song);
       }
     });
     builder.addCase(removeSongAsync.fulfilled, (state, action) => {
       const { playlistID, songID } = action.payload;
-      const playlist = state.playlists.find((playlist) => playlist.id === playlistID);
+      const playlist = state.playlists.find((playlist) => playlist.playlistID === playlistID);
       if (playlist) {
         playlist.songs = playlist.songs.filter((song) => song !== songID);
       }
     });
     builder.addCase(getSongsAsync.fulfilled, (state, action) => {
       const { playlistID, songs } = action.payload;
-      const playlist = state.playlists.find((playlist) => playlist.id === playlistID);
+      const playlist = state.playlists.find((playlist) => playlist.playlistID === playlistID);
       if (playlist) {
         playlist.songs = songs;
       }

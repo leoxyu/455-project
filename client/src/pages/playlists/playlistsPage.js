@@ -16,18 +16,31 @@ const PlaylistPage = () => {
   const [creatorVisible, setCreatorVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [playlistToEdit, setPlaylistToEdit] = useState(false);
+  const [firstRender, setFirstRender] = useState(true);
+  const playlists = useSelector(state => state.playlists.playlists);
+  const lastId = useSelector(state => state.playlists.lastId);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getPlaylistsAsync());
+  // }, [dispatch]);
+
+  // testing out pagination
+  // TODO: add actual infinite scroll component
+  useEffect(() => {
+    let ignore = false;
+    setTimeout(() => {
+      if (!ignore) dispatch(getPlaylistsAsync());
+    }, 300);
+    return () => {
+      ignore = true;
+    };
+  }, [lastId]);
 
   useEffect(() => {
     document.title = "Uni.fi - Playlists"; // Change the webpage title
-
+    if (firstRender) setFirstRender(false);
     // Clean up the effect
-
-  }, []);
-
-  const playlists = useSelector(state => state.playlists.playlists);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPlaylistsAsync());
   }, []);
 
 

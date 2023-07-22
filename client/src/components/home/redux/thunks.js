@@ -45,9 +45,16 @@ export const getPlaylistsAsync = createAsyncThunk(
     }
 );
 
+export const getOnePlaylist = createAsyncThunk(
+    actionTypes.GET_ONE_PLAYLIST,
+    async (playlistID) => {
+        return await PlaylistsService.getOnePlaylist(playlistID);
+    }
+);
+
 export const addSongAsync = createAsyncThunk(
     actionTypes.ADD_SONG,
-    async (playlistID, songBody) => {
+    async ({playlistID, songBody}) => { // BRUH this is annoying (needs to be in an object, not separate params)
         return await PlaylistsService.addSong(playlistID, songBody);
     }
 );
