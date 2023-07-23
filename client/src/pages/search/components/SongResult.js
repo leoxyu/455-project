@@ -21,9 +21,10 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
 
   useEffect(() => {
     if (songObject) {
+      console.log(songObject)
       const parsed = {
         name: songObject?.songName,
-        artist: songObject?.artists[0],
+        artist: songObject?.artist[0],
         type: 'spotify',
         link: songObject?.songLink,
         imageLink: songObject?.thumbnailUrl
