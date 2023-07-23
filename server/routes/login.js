@@ -16,6 +16,7 @@ const client = new MongoClient(process.env.MONGO_URI);
 
 async function authenticateLogin(username, password) {
     let status = LOGIN_STATUS.UnknownStatus;
+    let id;
 
     await client.connect();
 
@@ -25,6 +26,7 @@ async function authenticateLogin(username, password) {
     const foundUser = await collection.findOne({ user: username });
 
     if (foundUser) {
+        id = foundUser._id.toString();
         if (decryptString(foundUser.pass, LOGIN_KEY) === password) {
             status = LOGIN_STATUS.LogInSuccess;
         } else {
@@ -34,7 +36,10 @@ async function authenticateLogin(username, password) {
         status = LOGIN_STATUS.TryRegister;
     }
 
-    return status;
+    return {
+        status: status,
+        id: id
+    };
 }
 
 router.post('/', function (req, res, next) {
@@ -48,12 +53,13 @@ router.post('/', function (req, res, next) {
     const password = req.body.pass;
 
     authenticateLogin(username, password)
-        .then((status) => {
-            switch (status) {
+        .then((result) => {
+            switch (result.status) {
                 case LOGIN_STATUS.LogInSuccess:
                     return res.status(200).send({
                         message: 'Successfully signed into account ' + username,
                         id: username,
+                        authorID: result.id,
                         status: LOGIN_STATUS.LogInSuccess
                     });
                 case LOGIN_STATUS.LogInFailed:

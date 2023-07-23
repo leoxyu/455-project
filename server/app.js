@@ -133,7 +133,7 @@ async function setupCollections() {
         },
       },
     };
-    
+
     await database.createCollection(PLAYLIST_COLLECTION, {
       validator,
     });

@@ -82,7 +82,7 @@ playlistsRouter.post('/', async (req, res, next) => {
     playlistID: uuid(),
     ...req.body,
     dateCreated: new Date(),
-    author: new ObjectId(), // TODO: change this field to author's _id. add new field for username
+    author: new ObjectId(req.body.author),
     isFavorited: false,
     coverImageURL: '',
   };
@@ -200,7 +200,7 @@ playlistsRouter.get('/', async (req, res, next) => {
   }
 });
 
-/* 
+/*
 Single playlist REST endpoints
 */
 
@@ -264,16 +264,16 @@ playlistsRouter.get('/:playlistID', async (req, res, next) => {
   }
 });
 
-/* 
+/*
 Single playlist songs REST endpoints
 */
-// GET songs: redundant, get single playlist will have populated songs. 
+// GET songs: redundant, get single playlist will have populated songs.
 // GET single song: maybe useful, unimplemented for now.
 // PUT: no meaningful put action for a single song.
 // POST: only support adding songs to the end (like spotify does)
 // DELETE: remove song from playlist.
 
-// TODO: update frontend api calls to use new paths 
+// TODO: update frontend api calls to use new paths
 playlistsRouter.post('/:playlistID/songs', async (req, res, next) => {
   const { playlistID } = req.params;
   try {
