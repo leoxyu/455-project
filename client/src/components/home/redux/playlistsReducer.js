@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createPlaylistAsync, 
-  deletePlaylistAsync, 
-  editPlaylistAsync, 
-  addSongAsync, 
-  getPlaylistsAsync, 
-  removeSongAsync, 
+import { createPlaylistAsync,
+  deletePlaylistAsync,
+  editPlaylistAsync,
+  addSongAsync,
+  getPlaylistsAsync,
+  removeSongAsync,
   getSongsAsync,
   getOnePlaylist
  } from './thunks';
@@ -19,7 +19,7 @@ getPlaylists
 
 addSong:                {type: ..., payload: {playlistID, songID}}
 removeSong:             {type: ..., payload: {playlistID, songID}}
-getSongs:               {type: ..., payload: {playlistID, songID}}    
+getSongs:               {type: ..., payload: {playlistID, songID}}
 toggleFavoriteSong:     {type: ..., payload: {songID}}
 
 */
@@ -34,6 +34,7 @@ const playlistsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(createPlaylistAsync.fulfilled, (state, action) => {
       state.playlists.push(action.payload);
+      state.lastId = action.payload._id;
     })
     builder.addCase(deletePlaylistAsync.fulfilled, (state, action) => {
       state.playlists = state.playlists.filter((i) => i.playlistID !== action.payload);
@@ -44,7 +45,6 @@ const playlistsSlice = createSlice({
       state.playlists[idx] = action.payload;
     });
     builder.addCase(getPlaylistsAsync.fulfilled, (state, action) => {
-      // console.log('action payload', action.payload);
       state.playlists = [...state.playlists, ...action.payload.data];
       state.lastId = action.payload.lastId;
     });

@@ -11,7 +11,6 @@ import { ReactComponent as AddIcon } from '../../images/add.svg';
 import '../search/styles/Preview.css';
 import PlaylistEditor from './components/PlaylistEditor';
 
-
 const PlaylistPage = () => {
   const [creatorVisible, setCreatorVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
@@ -30,7 +29,9 @@ const PlaylistPage = () => {
   useEffect(() => {
     let ignore = false;
     setTimeout(() => {
-      if (!ignore) dispatch(getPlaylistsAsync());
+      if (!ignore) {
+        dispatch(getPlaylistsAsync());
+      }
     }, 300);
     return () => {
       ignore = true;

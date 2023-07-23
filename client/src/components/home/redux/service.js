@@ -1,5 +1,5 @@
 import {store} from '../../../store';
-import { getUserId } from '../../../util';
+import { getUserId, getAuthorID } from '../../../util';
 const ROOT_URL = 'http://localhost:3001';
 
 // TODO probably follow what was from class to be safe if we have extra time
@@ -60,6 +60,7 @@ const PlaylistsService = {
     getPlaylists: async (searchParam) => {
         let url = `${ROOT_URL}/playlists`;
         const userId = getUserId();
+        const authorID = getAuthorID();
 
         // TODO: Build the query string with search parameters
         const queryParams = new URLSearchParams();
@@ -67,9 +68,12 @@ const PlaylistsService = {
             queryParams.append('name', searchParam);
         }
         const lastId = store.getState().playlists.lastId;
+
         if (lastId) {
             queryParams.append('lastId', lastId);
         }
+
+        queryParams.append("authorID", authorID);
         // console.log('lastid being passed', lastId);
 
         if (queryParams.toString()) {

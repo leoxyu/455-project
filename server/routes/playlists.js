@@ -82,7 +82,7 @@ playlistsRouter.post('/', async (req, res, next) => {
     playlistID: uuid(),
     ...req.body,
     dateCreated: new Date(),
-    author: new ObjectId(), // TODO: change this field to author's _id. add new field for username
+    author: new ObjectId(req.body.author),
     isFavorited: false,
     coverImageURL: '',
   };
@@ -180,27 +180,36 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 // ?lastId=ObjectId&deep=false&sortField=dateCreated&sortDir=-1
 playlistsRouter.get('/', async (req, res, next) => {
   try {
-    let { lastId, isDeep, sortDir, sortField } = req.query;
+    let { lastId, isDeep, sortDir, sortField, authorID } = req.query;
     isDeep = isDeep === 'true'
     sortDir = sortDir === '-1' ? -1 : 1;
+
+    const query = {
+      author: { $eq: new ObjectId(authorID) }
+    };
+
+    if (lastId) {
+      query["_id"] =  { $gt: new ObjectId(lastId) };
+    }
+
     const page = await playlistsCol
-      .find(lastId ? { _id: { $gt: new ObjectId(lastId) } } : {})
+      .find(query)
       .sort(sortField, sortDir) // TODO: sorting by sort field should revert the cursor to start. add $gt for the sort field, id is just default.
       .project(isDeep ? {} : { songs: 0 })
       .limit(1) // TODO: set proper limit
       .toArray();
     if (!isDeep) page.forEach(p => p.songs = []);
     return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send({ data: page, lastId: page.length ? page[page.length-1]._id : lastId });
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send({ data: page, lastId: page.length ? page[page.length-1]._id : lastId });
   } catch (e) {
     console.log(e);
     return res.status(500).send(e);
   }
 });
 
-/* 
+/*
 Single playlist REST endpoints
 */
 
@@ -264,16 +273,16 @@ playlistsRouter.get('/:playlistID', async (req, res, next) => {
   }
 });
 
-/* 
+/*
 Single playlist songs REST endpoints
 */
-// GET songs: redundant, get single playlist will have populated songs. 
+// GET songs: redundant, get single playlist will have populated songs.
 // GET single song: maybe useful, unimplemented for now.
 // PUT: no meaningful put action for a single song.
 // POST: only support adding songs to the end (like spotify does)
 // DELETE: remove song from playlist.
 
-// TODO: update frontend api calls to use new paths 
+// TODO: update frontend api calls to use new paths
 playlistsRouter.post('/:playlistID/songs', async (req, res, next) => {
   const { playlistID } = req.params;
   try {
