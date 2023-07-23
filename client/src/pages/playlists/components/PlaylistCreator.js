@@ -4,11 +4,10 @@ import {createPlaylistAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/playlistCreator.css'
 
-
 const PlaylistCreator = ({onClose=()=>{}}) => {
   const [playlistName, setPlaylistName] = useState('');
   const [playlistDescription, setPlaylistDescription] = useState('');
-  const author = useSelector((state) => state.login.id);
+  const author = useSelector((state) => state.login.authorID);
 
   const dispatch = useDispatch();
 
@@ -49,11 +48,11 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
   return (
     <div className='playlist-creator'>
       <h2 className='playlist-creator-title'>Create New Playlist</h2>
-      
+
       <div className='playlist-creator-body'>
 
       <div className='playlist-creator-input-container'>
-      <label htmlFor="titleField" 
+      <label htmlFor="titleField"
       className={`placeholder ${playlistName !== '' ? 'active' : ''}`}>
         Title
       </label>
@@ -65,10 +64,10 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
         id="titleField"
         // placeholder="Title"
       />
-      
+
       </div>
       <div className='playlist-creator-input-container'>
-      <label htmlFor="descriptionField" 
+      <label htmlFor="descriptionField"
       className={`placeholder ${playlistDescription !== '' ? 'active' : ''}`}>
       Description
       </label>

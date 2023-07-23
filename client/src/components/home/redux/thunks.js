@@ -12,7 +12,7 @@ getPlaylists
 
 addSong:                {type: ..., payload: {playlistID, songID}}
 removeSong:             {type: ..., payload: {playlistID, songID}}
-getSongs:               {type: ..., payload: {playlistID, songID}}    
+getSongs:               {type: ..., payload: {playlistID, songID}}
 toggleFavoriteSong:     {type: ..., payload: {songID}}
 
 */
@@ -72,4 +72,3 @@ export const getSongsAsync = createAsyncThunk(
         return await PlaylistsService.getSongs(playlistID);
     }
 );
-
