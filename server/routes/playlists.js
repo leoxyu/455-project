@@ -180,20 +180,29 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 // ?lastId=ObjectId&deep=false&sortField=dateCreated&sortDir=-1
 playlistsRouter.get('/', async (req, res, next) => {
   try {
-    let { lastId, isDeep, sortDir, sortField } = req.query;
+    let { lastId, isDeep, sortDir, sortField, authorID } = req.query;
     isDeep = isDeep === 'true'
     sortDir = sortDir === '-1' ? -1 : 1;
+
+    const query = {
+      author: { $eq: new ObjectId(authorID) }
+    };
+
+    if (lastId) {
+      query["_id"] =  { $gt: new ObjectId(lastId) };
+    }
+
     const page = await playlistsCol
-      .find(lastId ? { _id: { $gt: new ObjectId(lastId) } } : {})
+      .find(query)
       .sort(sortField, sortDir) // TODO: sorting by sort field should revert the cursor to start. add $gt for the sort field, id is just default.
       .project(isDeep ? {} : { songs: 0 })
       .limit(1) // TODO: set proper limit
       .toArray();
     if (!isDeep) page.forEach(p => p.songs = []);
     return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send({ data: page, lastId: page.length ? page[page.length-1]._id : lastId });
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send({ data: page, lastId: page.length ? page[page.length-1]._id : lastId });
   } catch (e) {
     console.log(e);
     return res.status(500).send(e);
