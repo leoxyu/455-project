@@ -25,11 +25,12 @@ async function register(res, username, password) {
     if (!userExists) {
         try {
             const encryptedPass = encryptString(password, LOGIN_KEY)
-            await collection.insertOne({ user: username, pass: encryptedPass });
+            const inserted = await collection.insertOne({ user: username, pass: encryptedPass });
 
             return res.status(200).send({
                 message: 'Successfully registered account ' + username,
                 id: username,
+                authorID: inserted.insertedId.toString(),
                 status: LOGIN_STATUS.RegisterSuccess,
             });
         } catch (error) {
