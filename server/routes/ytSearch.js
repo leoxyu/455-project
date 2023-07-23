@@ -1,10 +1,12 @@
 var express = require('express');
 const ytsr = require('ytsr');
 const yts = require('yt-search');
+const { v4: uuid } = require('uuid');
 
 var ytSearchRouter = express.Router();
-var videosNext = null;
-var playlistsNext = null;
+// var videosNext = null;
+// var playlistsNext = null;
+
 
 async function ytParseVideo(item) {
     try {
@@ -42,6 +44,21 @@ function ytParseVideoFrPlaylist(info) {
   };
 }
 
+async function ytSearchVideoNext(videosNext) {
+  
+  const options = {
+    pages: 1, // 5 is roughly 100 results
+  }
+  //  for pagination
+  const searchResults = await ytsr.continueReq(videosNext, options);
+  searchResults.items = searchResults.items.filter((item) => item.type === 'video');
+  searchResults.items =  await Promise.all(searchResults.items.map(ytParseVideo));
+  searchResults.items = searchResults.items.filter((item) => item !== null);
+  // console.log(searchResults);
+  // when none left, then { continuation: null, items: [] }
+  return searchResults;
+}
+
 
 async function ytSearchVideo(videoName) {
   const filters1 = await ytsr.getFilters(videoName);
@@ -56,8 +73,6 @@ async function ytSearchVideo(videoName) {
   searchResults.items = searchResults.items.filter((item) => item.type === 'video');
   searchResults.items =  await Promise.all(searchResults.items.map(ytParseVideo));
   searchResults.items = searchResults.items.filter((item) => item !== null);
-  // console.log(searchResults);
-  // when none left, then { continuation: null, items: [] }
   return searchResults;
 }
 
@@ -65,6 +80,25 @@ async function ytSearchPlaylist(playlistName) {
   const filters1 = await ytsr.getFilters(playlistName);
   const filter1 = filters1.get('Type').get('Playlist');
   const searchResults = await ytsr(filter1.url, {pages: 1});
+  searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
+    const info = await yts({listId: item.playlistID});
+    return {
+      'playlistName':info.title,
+      'artistName':[info.author.name],
+      'thumbnailUrl': info.thumbnail,
+      'songs':info.videos.map(ytParseVideoFrPlaylist),
+      'duration':info.videos.length,
+      'playlistLink': info.url,
+      'tracksNextLink':null, //not needed for this package; null to match spotify 
+      'popularity':info.views,
+    };
+  }));
+  return searchResults;
+}
+
+
+async function ytSearchPlaylistNext(playlistsNext) {
+  const searchResults = await ytsr.continueReq(playlistsNext, {pages: 1});
   searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
     const info = await yts({listId: item.playlistID});
     return {
@@ -109,15 +143,17 @@ ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
       if (searchType === 'video' || searchType === 'all') {
         const videoResults = await ytSearchVideo(searchTerm);
         searchResults.videos = videoResults.items;
-        videosNext = videoResults.continuation;
-        // console.log(videoResults.items[0]);
+        const nextVideoCookie = uuid();
+        res.cookie(nextVideoCookie, videoResults.continuation);
+        searchResults.nextVideoCookie = nextVideoCookie;
       }
       
       if (searchType === 'playlist' || searchType === 'all') {
         const playlistResults = await ytSearchPlaylist(searchTerm);
         searchResults.playlists = playlistResults.items;
-        playlistsNext = playlistResults.continuation;
-        // console.log(playlistResults.items[0]);
+        const nextPlaylistCookie = uuid();
+        res.cookie(nextPlaylistCookie, playlistResults.continuation);
+        searchResults.nextPlaylistCookie = nextPlaylistCookie;
       }
       return res
         .setHeader('Content-Type', 'application/json')
@@ -133,27 +169,38 @@ ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
 // type is either 'videos', 'playlists', or 'all'
 ytSearchRouter.get('/next', rateLimitMiddleware, async (req, res) => {
     try {
-    //   const searchTerm = req.query.q; // Get the search term from the query parameters
-      const searchType = req.query.type || 'all'; // Get the search type from the query parameters (default to 'all')
-  
-      if (!searchTerm) {
-        return res.status(400).json({ error: 'Youtube Search term is missing.' });
+      const searchType = req.query.type;
+      const cookieId = req.query.cookieId;
+      const continuation = req.cookies[cookieId];
+
+      // Check if the cookieId is provided in the query parameters
+      if (!cookieId) {
+          return res.status(400).json({ error: 'Missing cookieId in the request.' });
       }
+
+      // Check if the continuation is null or missing
+      if (!continuation) {
+          return res.status(400).json({ error: 'Invalid or expired continuation token.' });
+      }
+
+      if (!searchType) {
+        return res.status(400).json({ error: 'No search type specified.' });
+    }
       const searchResults ={};
   
       // Call a function to fetch YouTube search results using the YouTube Data API
-      if (searchType === 'video' || searchType === 'all') {
-        const videoResults = await ytSearchVideo(searchTerm);
+      if (cookieId && (searchType === 'video')) {
+        const videoResults = await ytSearchVideoNext(continuation);
         searchResults.videos = videoResults.items;
-        videosNext = videoResults.continuation;
-        // console.log(videoResults.items[0]);
+        res.cookie(cookieId, videoResults.continuation);
+        searchResults.nextVideoCookie = cookieId;
       }
       
-      if (searchType === 'playlist' || searchType === 'all') {
-        const playlistResults = await ytSearchPlaylist(searchTerm);
+      if (cookieId && (searchType === 'playlist')) {
+        const playlistResults = await ytSearchPlaylistNext(continuation);
         searchResults.playlists = playlistResults.items;
-        playlistsNext = playlistResults.continuation;
-        // console.log(playlistResults.items[0]);
+        res.cookie(cookieId, playlistResults.continuation);
+        searchResults.nextPlaylistCookie = cookieId;
       }
       return res
         .setHeader('Content-Type', 'application/json')
