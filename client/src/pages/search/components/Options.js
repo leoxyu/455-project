@@ -5,12 +5,9 @@ import '../../../styles/variables.css';
 import '../styles/Options.css';
 import SearchBar from './SearchBar';
 
-const Options = ({ songLink, onClose=()=>{}, platform, handleAddClick=()=>{}}) => {
+const Options = ({ songBody = {}, onClose=()=>{}, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
-  const divRef = useRef(null);
-
-
-  
+  const divRef = useRef(null);  
   const dispatch = useDispatch();
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
@@ -42,15 +39,15 @@ const Options = ({ songLink, onClose=()=>{}, platform, handleAddClick=()=>{}}) =
   };
 
   
-  const handleSelection = (event) => {
+  const handleSelection = (playlistID, event) => {
     // Handle playlist selection
     // console.log(`Selected playlist: ${selectedPlaylist}`);
-    const data = {
-        URI: songLink,
-        source: platform
-    };
+    // const data = {
+    //     URI: songLink,
+    //     source: platform
+    // };
 
-    dispatch(addSongAsync(event.target.value, data));
+    dispatch(addSongAsync({ playlistID, songBody }));
     onClose(); // Trigger the onClose callback
   };
 
@@ -67,7 +64,7 @@ const Options = ({ songLink, onClose=()=>{}, platform, handleAddClick=()=>{}}) =
           <div
           className="options-playlist-input"
           value={playlist.playlistID}
-          onClick={handleSelection}>
+          onClick={(e) => handleSelection(playlist.playlistID, e)}>
           {playlist.name}
           </div>
         ))}

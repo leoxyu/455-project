@@ -10,20 +10,18 @@ import '../styles/SpAlbumPreview.css';
 import '../styles/SpPlaylistPreview.css';
 import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
-import {editPlaylistAsync} from '../../../components/home/redux/thunks';
+import {editPlaylistAsync, getOnePlaylist} from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from '../components/Options2';
 import thumbnailImage from '../../../images/album-placeholder.png'
 
-const { v4: uuid } = require('uuid');
-
-
-const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
+const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [optionsTop, setOptionsTop] = useState(false);
   const [optionsLeft, setOptionsLeft] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -43,6 +41,17 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
     }
   });
 
+  // upon songs loading, dispatch to player
+  useEffect(() => {
+    if (isLoading && songs.length) {
+      setIsLoading(false);
+      dispatch(setPlaylist({
+        id: playlistID,
+        songs
+      }));
+    }
+  }, [songs]); // dep array only needs songs
+
   const optionsOnClick = (top, left) => {
     if (optionsOpen) {
       setOptionsOpen(false);
@@ -59,11 +68,15 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
 
   let optionsRef = null;
 
-  const handlePlay = () => {
-    // example of how youc an load a playlist in the player. this is a temporary playlist and when we finish the api stuff we'll be using the data from songs instead
-
+  const handlePlay = async () => {
+    // hit play for first time, load songs
+    if (!songs?.length) {
+      setIsLoading(true);
+      dispatch(getOnePlaylist(playlistID));
+    }
+    // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
-      id: uuid(),
+      id: playlistID,
       songs
     }));
   };
@@ -105,8 +118,8 @@ const PlaylistResult = ({ className, thumbnailUrl, playlistName, date, duration,
                 <div className="artist-name">{artistName}</div>
                 </div>
                 <div className="optional-details">
-                {songs.slice(0,3).map((song) => (
-                <div className="song">{song.songName}</div>
+                {songs.slice(0,3).map((song, i) => (
+                <div key={i} className="song">{song.songName}</div>
                 ))}
                 </div>
             </div>
