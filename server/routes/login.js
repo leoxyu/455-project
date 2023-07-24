@@ -2,12 +2,21 @@ var express = require('express');
 var router = express.Router();
 const { MongoClient } = require('mongodb');
 const { LOGIN_STATUS } = require('../login/loginConstants');
-const { URI, DATABASE_NAME, USER_COLLECTION } = require('../shared/mongoConstants');
+const { DATABASE_NAME, USER_COLLECTION, LOGIN_KEY } = require('../shared/mongoConstants');
+const CryptoJS = require("crypto-js");
+require('dotenv').config();
 
-const client = new MongoClient(URI);
+function decryptString(encryptedMessage, secretKey) {
+    var decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, secretKey);
+    var decryptedMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
+    return decryptedMessage;
+}
+
+const client = new MongoClient(process.env.MONGO_URI);
 
 async function authenticateLogin(username, password) {
     let status = LOGIN_STATUS.UnknownStatus;
+    let id;
 
     await client.connect();
 
@@ -17,7 +26,8 @@ async function authenticateLogin(username, password) {
     const foundUser = await collection.findOne({ user: username });
 
     if (foundUser) {
-        if (foundUser.pass === password) {
+        id = foundUser._id.toString();
+        if (decryptString(foundUser.pass, LOGIN_KEY) === password) {
             status = LOGIN_STATUS.LogInSuccess;
         } else {
             status = LOGIN_STATUS.LogInFailed;
@@ -26,7 +36,10 @@ async function authenticateLogin(username, password) {
         status = LOGIN_STATUS.TryRegister;
     }
 
-    return status;
+    return {
+        status: status,
+        id: id
+    };
 }
 
 router.post('/', function (req, res, next) {
@@ -40,12 +53,13 @@ router.post('/', function (req, res, next) {
     const password = req.body.pass;
 
     authenticateLogin(username, password)
-        .then((status) => {
-            switch (status) {
+        .then((result) => {
+            switch (result.status) {
                 case LOGIN_STATUS.LogInSuccess:
                     return res.status(200).send({
                         message: 'Successfully signed into account ' + username,
                         id: username,
+                        authorID: result.id,
                         status: LOGIN_STATUS.LogInSuccess
                     });
                 case LOGIN_STATUS.LogInFailed:

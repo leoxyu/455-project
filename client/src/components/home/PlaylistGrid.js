@@ -4,22 +4,6 @@ import '../../styles/App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {getPlaylistsAsync} from './redux/thunks';
 
-// const playlists = [
-//   {
-//     id: 1,
-//     name: 'Playlist 1',
-//     image: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',
-//     creator: 'John Doe'
-//   },
-//   {
-//     id: 2,
-//     name: 'Playlist 2',
-//     image: 'https://www.ikea.com/ca/en/images/products/blahaj-soft-toy-shark__0710175_pe727378_s5.jpg',
-//     creator: 'Jane Smith'
-//   },
-//   // Add more playlists as needed
-// ];
-
 const PlaylistCard = ({ playlist }) => {
   return (
     <div className="playlist-card website-highlight3">

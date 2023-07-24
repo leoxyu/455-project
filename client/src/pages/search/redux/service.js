@@ -1,3 +1,4 @@
+
 const BASE_URL = 'http://localhost:3001/';
 async function getSpotify(accessToken, query, type) {
     var url = BASE_URL + 'sp-search';
@@ -37,6 +38,7 @@ async function getSpotifyNext(accessToken, cookieId, type) {
 
     const response = await fetch(url, {
         method: 'GET'
+
     });
     const data = await response.json();
     if (!response.ok) {

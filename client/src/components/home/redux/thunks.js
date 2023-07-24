@@ -12,7 +12,7 @@ getPlaylists
 
 addSong:                {type: ..., payload: {playlistID, songID}}
 removeSong:             {type: ..., payload: {playlistID, songID}}
-getSongs:               {type: ..., payload: {playlistID, songID}}    
+getSongs:               {type: ..., payload: {playlistID, songID}}
 toggleFavoriteSong:     {type: ..., payload: {songID}}
 
 */
@@ -45,9 +45,16 @@ export const getPlaylistsAsync = createAsyncThunk(
     }
 );
 
+export const getOnePlaylist = createAsyncThunk(
+    actionTypes.GET_ONE_PLAYLIST,
+    async (playlistID) => {
+        return await PlaylistsService.getOnePlaylist(playlistID);
+    }
+);
+
 export const addSongAsync = createAsyncThunk(
     actionTypes.ADD_SONG,
-    async (playlistID, songBody) => {
+    async ({playlistID, songBody}) => { // BRUH this is annoying (needs to be in an object, not separate params)
         return await PlaylistsService.addSong(playlistID, songBody);
     }
 );
@@ -65,4 +72,3 @@ export const getSongsAsync = createAsyncThunk(
         return await PlaylistsService.getSongs(playlistID);
     }
 );
-

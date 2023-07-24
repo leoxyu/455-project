@@ -89,7 +89,7 @@ export default function SpotifyPlayer(props) {
     if (truePosition === 0) {
       controller.current.play();
     } else if (!isPlaying) {
-      controller.current.togglePlay();
+      controller.current.resume();
     }
 
     setIsPlaying(true);
@@ -97,7 +97,7 @@ export default function SpotifyPlayer(props) {
 
   const handlePause = () => {
     if (isPlaying) {
-      controller.current.togglePlay();
+      controller.current.pause();
       setIsPlaying(false);
     }
   };

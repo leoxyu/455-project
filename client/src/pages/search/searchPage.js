@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import { searchSpotifySongs, searchSpotifyPlaylists } from './spotifyAPI';
 // import { searchYouTubeVideos, searchYouTubePlaylists } from './youtubeAPI';
 import '../../styles/variables.css';
@@ -24,8 +24,8 @@ const SearchPage = () => {
   useEffect(() => {
     document.title = "Uni.fi - Search"; // Change the webpage title
 
-    
-    
+
+
   }, []);
 
   const [creatorVisible, setCreatorVisible] = useState(false);
@@ -50,7 +50,7 @@ const SearchPage = () => {
   const performSearch = debounce((searchTerm) => {
     setSearchTerm(searchTerm);
   }, 400);
-  
+
   useEffect(() => {
     console.log("calling it with " + searchTerm)
     if (searchTerm === '') return; // make it load recommended songs from spotify
@@ -73,20 +73,16 @@ const SearchPage = () => {
   }
 
 
-
-
-
-
   return (
     <div className='search-page'>
-      <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input)=>{performSearch(input)}}/>
+      <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input) => { performSearch(input) }} />
       <Filters />
-      {creatorVisible && 
-       <div className='creator-dialog-overlay'>
-       <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef}/>
-       </div>
-       }
-      
+      {creatorVisible &&
+        <div className='creator-dialog-overlay'>
+          <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef} />
+        </div>
+      }
+
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
         {spotifyTracks.map((song) => (
@@ -102,11 +98,12 @@ const SearchPage = () => {
             platform='Spotify'
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
+            songObject={song}
           />
         ))}
       </div>
 
-       <div className='spotify-albums'>
+      <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
         <div className='spotify-album-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
 
@@ -122,9 +119,23 @@ const SearchPage = () => {
           />
         ))}
         </div>
+        <div className='spotify-album-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {spotifyAlbums.map((album) => (
+            <PlaylistResult
+              className={'spotify-album-preview'}
+              key={album.playlistLink}
+              thumbnailUrl={album.thumbnailUrl}
+              playlistName={album.playlistName}
+              artistName={album.artistName.join(', ')}
+              views={album.popularity + ' views'}
+              // duration={song.duration}
+              playlistLink={album.playlistLink}
+            />
+          ))}
         </div>
+      </div>
 
-        <div className='spotify-playlists'>
+      <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
         <div className='spotify-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
         {spotifyPlaylists.map((playlist) => (
@@ -161,7 +172,7 @@ const SearchPage = () => {
         </div>
       </div>
 
-        <div className='youtube-playlists'>
+      <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
         <div className='youtube-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
         {youtubePlaylists.map((playlist) => (
@@ -180,14 +191,13 @@ const SearchPage = () => {
           </div>
           </div>
 {/*
-
         <div className='unifi-playlists'>
         <h2 className='heading'>Uni.fi Playlists</h2>
         <div className='unifi-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
           </div>
         </div>
          */}
-        
+
     </div>
   );
 };

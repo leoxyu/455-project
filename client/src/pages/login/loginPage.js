@@ -88,7 +88,7 @@ const LoginPage = () => {
       console.log('youtube successfully logged in');
 
     } else {
-      console.log("Something went wrong with youtube OAuth and retrieving tokens from URl");
+      console.log("youtube OAuth tokens not found in Uri");
     }
 
   }, []);
@@ -139,7 +139,7 @@ const LoginPage = () => {
       console.log('spotify successfully logged in');
 
     } else {
-      console.log("Something went wrong with spotify OAuth and retrieving tokens from URl");
+      console.log("spotify OAuth tokens not found in Uri");
     }
 
 

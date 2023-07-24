@@ -6,6 +6,7 @@ import playlistsReducer from './components/home/redux/playlistsReducer';
 import PlayerReducer from './components/player/PlayerReducer';
 import searchReducer from './pages/search/redux/reducer';
 import youtubeApiReducer from './components/Oauth/youtubeApiReducer';
+import currentPlaylistReducer from './pages/current playlist/redux/currentPlaylistReducer';
 
 
 export const store = configureStore({
@@ -16,7 +17,8 @@ export const store = configureStore({
     playlists: playlistsReducer,
     player: PlayerReducer,
     search: searchReducer,
-    youtube: youtubeApiReducer
+    youtube: youtubeApiReducer,
+    currentPlaylist: currentPlaylistReducer
   },
   devTools: true
 });
