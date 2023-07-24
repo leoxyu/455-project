@@ -13,6 +13,7 @@ var playlistsRouter = require('./routes/playlists');
 var spotifyRouter = require('./routes/spotify');
 var youtubeRouter = require('./routes/youtube');
 var youtubeSearchRouter = require('./routes/ytSearch');
+var spotifySearchRouter = require('./routes/spSearch');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', indexRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/youtube', youtubeRouter);
 app.use('/yt-search', youtubeSearchRouter);
+app.use('/sp-search', spotifySearchRouter);
 
 // login
 app.use('/login', loginRouter);

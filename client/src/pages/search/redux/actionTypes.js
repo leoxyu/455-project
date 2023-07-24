@@ -1,10 +1,10 @@
 export const actionTypes = {
-    GET_SPOTIFY_TRACKS: 'spotify/getTracks',
-    GET_SPOTIFY_ALBUMS: 'spotify/getAlbums',
-    GET_SPOTIFY_PLAYLISTS: 'spotify/getPlaylists',
-    GET_YOUTUBE_VIDEOS: 'youtube/getVideos',
-    GET_YOUTUBE_PLAYLISTS: 'youtube/getPlaylists',
-    GET_SPOTIFY: 'spotify/get', // temp
-    GET_YOUTUBE: 'youtube/get', // temp
+    GET_NEXT_SPOTIFY_TRACKS: 'spotify/getNextTracks',
+    GET_NEXT_SPOTIFY_ALBUMS: 'spotify/getNextAlbums',
+    GET_NEXT_SPOTIFY_PLAYLISTS: 'spotify/getNextPlaylists',
+    GET_NEXT_YOUTUBE_VIDEOS: 'youtube/getNextVideos',
+    GET_NEXT_YOUTUBE_PLAYLISTS: 'youtube/getNextPlaylists',
+    GET_SPOTIFY: 'spotify/get',  
+    GET_YOUTUBE: 'youtube/get',
     GET_UNIFI: 'unifi/get',
 }
