@@ -119,20 +119,6 @@ const SearchPage = () => {
           />
         ))}
         </div>
-        <div className='spotify-album-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
-          {spotifyAlbums.map((album) => (
-            <PlaylistResult
-              className={'spotify-album-preview'}
-              key={album.playlistLink}
-              thumbnailUrl={album.thumbnailUrl}
-              playlistName={album.playlistName}
-              artistName={album.artistName.join(', ')}
-              views={album.popularity + ' views'}
-              // duration={song.duration}
-              playlistLink={album.playlistLink}
-            />
-          ))}
-        </div>
       </div>
 
       <div className='spotify-playlists'>
@@ -189,7 +175,7 @@ const SearchPage = () => {
           />
         ))}
           </div>
-          </div>
+          </div> 
 {/*
         <div className='unifi-playlists'>
         <h2 className='heading'>Uni.fi Playlists</h2>

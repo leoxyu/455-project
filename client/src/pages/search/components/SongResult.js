@@ -22,11 +22,11 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
   useEffect(() => {
     if (songObject) {
       const parsed = {
-        name: songObject?.songName,
-        artist: songObject?.artists[0],
-        type: 'spotify',
-        link: songObject?.songLink,
-        imageLink: songObject?.thumbnailUrl
+        name: songObject.name,
+        artist: songObject.artist,
+        type: songObject.type,
+        link: songObject.link,
+        imageLink: songObject.imageLink,
       };
       setparsedSongObject(parsed);
     }
@@ -81,7 +81,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
         </div>
         <div className="details">
           <div className="name">{songName}</div>
-          <div className="artist">{(artists)? artists.join(', '): ''}</div>
+          <div className="artist">{artistName}</div>
           <div className="artist-name">{artistName}</div>
         </div>
       </div>
