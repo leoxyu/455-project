@@ -1,1 +1,1 @@
-localhost:3001/yt-search?q=overwatch&type=all
+localhost:3001/yt-search?q=overwatch
