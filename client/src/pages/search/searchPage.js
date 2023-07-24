@@ -42,6 +42,9 @@ const SearchPage = () => {
   // users
   // artists
 
+  // used to determine type of popup of options menu on playlist component
+  const OPTIONS_TYPE3 = "SEARCH_RESULT_PLAYLIST";
+
 
 
 
@@ -71,6 +74,21 @@ const SearchPage = () => {
 
   const handleAddClick = () => {
     setCreatorVisible(true);
+  }
+
+  const saveOnClick = (playlistLink, playlistType) => {
+    
+    if (playlistLink && playlistType && typeof(playlistLink) === 'string') {
+
+      const parsedPlaylistObject = {
+        id: playlistLink,
+        playlistType: playlistType
+      }
+    } else {
+      console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
+    }
+
+    // make API call here...
   }
 
 
@@ -160,6 +178,9 @@ const SearchPage = () => {
               duration={album.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_ALBUM}
+
+              optionType={OPTIONS_TYPE3}
+              saveOnClick={saveOnClick(album.playlistLink, TYPE_ALBUM)}
             />
           ))}
         </div>
@@ -182,6 +203,9 @@ const SearchPage = () => {
               duration={playlist.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_PLAYLIST}
+
+              optionType={OPTIONS_TYPE3}
+              saveOnClick={saveOnClick(playlist.playlistLink, TYPE_PLAYLIST)}
             />
           ))}
         </div>
@@ -227,6 +251,8 @@ const SearchPage = () => {
               duration={song.duration}
               source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}
+
+              optionType={OPTIONS_TYPE3}
             />
           ))}
         </div>

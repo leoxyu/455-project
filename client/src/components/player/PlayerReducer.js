@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../typeConstants.js");
 const initialState = {
     playlist: {
-        id: "",
+        playlistID: "",
 
         playlistName: "",
         coverUrl: "",
