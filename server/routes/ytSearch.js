@@ -13,14 +13,18 @@ async function ytParseVideo(item) {
       const info = await yts({videoId: item.id});
       // console.log('finished parsing ' + item.id);
       return {
-        'songName': info.title,
-        'artists':[info.author.name],
-        'thumbnailUrl': info.thumbnail,
+        'songID': item.id,
+        'artist':info.author.name,
+        'name': info.title,
+        'type':'youtube',
+        'link': info.url,
+        'imageLink': info.thumbnail,
+        'album': null,
+        'duration': info.timestamp,
+        'releaseDate': info.uploadDate,
+
         'views': info.views,
         'genres': [info.genre],
-        'audioFeatures':[],
-        'duration': info.timestamp,
-        'songLink': info.url,
       };
     }
     catch(e) {
@@ -33,14 +37,18 @@ async function ytParseVideo(item) {
 
 function ytParseVideoFrPlaylist(info) {
   return {
-    'songName': info.title,
-    'artists':[info.author.name],
-    'thumbnailUrl': info.thumbnail,
+    'songID': info.videoId,
+    'artist':info.author.name,
+    'name': info.title,
+    'type':'youtube',
+    'link': 'https://youtube.com/watch?v='+info.videoId,
+    'imageLink': info.thumbnail,
+    'album': null,
+    'duration': info.duration.timestamp,
+    'releaseDate': info.uploadDate,
+
     // 'views': info.views, need additional query for this
     // 'genres': [info.genre], need additional query for this
-    // 'audioFeatures':[], need additional query for this
-    'duration': info.duration.timestamp,
-    'songLink': 'https://youtube.com/watch?v='+info.videoId, // TODO extract this out as constant
   };
 }
 
@@ -83,14 +91,21 @@ async function ytSearchPlaylist(playlistName) {
   searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
     const info = await yts({listId: item.playlistID});
     return {
-      'playlistName':info.title,
-      'artistName':[info.author.name],
-      'thumbnailUrl': info.thumbnail,
+      // uuid not created
+      'dateCreated': info.date,
+      'description': null, // no way to get it without manually parsing html
+      'name':info.title,
+      'author':info.author.name,
+      'isFavorited':false,
+      'coverImageURL': info.thumbnail,
       'songs':info.videos.map(ytParseVideoFrPlaylist),
+      'originId': item.playlistID,
+      'isAlbum':false,
+      
+      // extra
       'duration':info.videos.length,
-      'playlistLink': info.url,
-      'tracksNextLink':null, //not needed for this package; null to match spotify 
       'popularity':info.views,
+      'type': 'youtube',
     };
   }));
   return searchResults;
@@ -102,14 +117,21 @@ async function ytSearchPlaylistNext(playlistsNext) {
   searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
     const info = await yts({listId: item.playlistID});
     return {
-      'playlistName':info.title,
-      'artistName':[info.author.name],
-      'thumbnailUrl': info.thumbnail,
+      // uuid not created
+      'dateCreated': info.date,
+      'description': null, // no way to get it without manually parsing html
+      'name':info.title,
+      'author':info.author.name,
+      'isFavorited':false,
+      'coverImageURL': info.thumbnail,
       'songs':info.videos.map(ytParseVideoFrPlaylist),
+      'originId': info.url,
+      'isAlbum':false,
+      
+      // extra
       'duration':info.videos.length,
-      'playlistLink': info.url,
-      'tracksNextLink':null, //not needed for this package; null to match spotify 
       'popularity':info.views,
+      'type': 'youtube',
     };
   }));
   return searchResults;
@@ -142,18 +164,28 @@ ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
       // Call a function to fetch YouTube search results using the YouTube Data API
       if (searchType === 'video' || searchType === 'all') {
         const videoResults = await ytSearchVideo(searchTerm);
-        searchResults.videos = videoResults.items;
+        // searchResults.videos = videoResults.items;
         const nextVideoCookie = uuid();
         res.cookie(nextVideoCookie, videoResults.continuation);
-        searchResults.nextVideoCookie = nextVideoCookie;
+        // searchResults.nextVideoCookie = nextVideoCookie;
+
+        searchResults.videos = {
+          'items': videoResults.items,
+          'next': nextVideoCookie,
+        };
       }
       
       if (searchType === 'playlist' || searchType === 'all') {
         const playlistResults = await ytSearchPlaylist(searchTerm);
-        searchResults.playlists = playlistResults.items;
+        // searchResults.playlists = playlistResults.items;
         const nextPlaylistCookie = uuid();
         res.cookie(nextPlaylistCookie, playlistResults.continuation);
-        searchResults.nextPlaylistCookie = nextPlaylistCookie;
+        // searchResults.nextPlaylistCookie = nextPlaylistCookie;
+
+        searchResults.playlists = {
+          'items': playlistResults.items,
+          'next': nextPlaylistCookie,
+        };
       }
       return res
         .setHeader('Content-Type', 'application/json')
@@ -191,16 +223,24 @@ ytSearchRouter.get('/next', rateLimitMiddleware, async (req, res) => {
       // Call a function to fetch YouTube search results using the YouTube Data API
       if (cookieId && (searchType === 'video')) {
         const videoResults = await ytSearchVideoNext(continuation);
-        searchResults.videos = videoResults.items;
+        // searchResults.videos = videoResults.items;
         res.cookie(cookieId, videoResults.continuation);
-        searchResults.nextVideoCookie = cookieId;
+        // searchResults.nextVideoCookie = cookieId;
+        searchResults.videos = {
+          'items': videoResults.items,
+          'next': cookieId,
+        };
       }
       
       if (cookieId && (searchType === 'playlist')) {
         const playlistResults = await ytSearchPlaylistNext(continuation);
-        searchResults.playlists = playlistResults.items;
+        // searchResults.playlists = playlistResults.items;
         res.cookie(cookieId, playlistResults.continuation);
-        searchResults.nextPlaylistCookie = cookieId;
+        // searchResults.nextPlaylistCookie = cookieId;
+        searchResults.playlists = {
+          'items': playlistResults.items,
+          'next': cookieId,
+        };
       }
       return res
         .setHeader('Content-Type', 'application/json')

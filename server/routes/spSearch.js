@@ -34,18 +34,25 @@ function formatDuration(milliseconds) {
 // thumbnailUrl, songName,
 //  artistName, views, duration,
 //  songLink, platform,
-function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popularity=false) {
+function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popularity=false, album=false) {
     return items.map(track => {
         return {
-            'songName': track.name,
-            'artists': track.artists,
-            'thumbnailUrl': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
-            'views': (popularity)? popularity: track.popularity, // TODO: change to popularity
+            'songID': track.id, 
+            'artist': track.artists.join(', '),
+            'name': track.name,
+            'type': 'spotify',
+            'link': track.uri, // TODO: look at main
+            'imageLink': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
+            'album': (album)? album: track.album.name, 
+            'duration': formatDuration(track.duration_ms),
             'releaseDate': (release_date)? release_date: track.album.release_date,
+
+            // extra
+            'views': (popularity)? popularity: track.popularity, // TODO: change to popularity
             'genres': track.genresConcat, //and union with artist genre
             'audioFeatures': track.audioFeatures,
-            'duration': formatDuration(track.duration_ms), // convert to min
-            'songLink': track.href
+            
+            
         };
 });
 }
@@ -54,20 +61,29 @@ function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popul
 function parseSpotifyAlbums(items) {
     return items.map(album => {
         return {
-
-            'playlistName': album.name,
-            'artistName': album.artists,
-            'thumbnailUrl': album.images[0].url,
-            'date': album.release_date,
-            'genres': album.genresConcat, //and union with artist genre
+            // uuid: not created yet
+            'dateCreated': album.release_date,
+            'description':null, // none for spotify
+            'name': album.name,
+            'author': album.artists.join(', '),
+            'isFavorited': false,
+            'coverImageURL': album.images[0].url,
             'songs': parseSpotifyTracks(album.tracks.items,
                 album.images[0].url,
                 album.release_date,
-                album.popularity),
+                album.popularity,
+                album.name),
+            'originId': album.id,
+            'isAlbum': true,
+            
+            //extra
+            'genres': album.genresConcat, //and union with artist genre
             'duration': album.total_tracks, // convert to min
-            'playlistLink': album.href,
+            // 'playlistLink': album.href,
             'tracksNextLink': album.tracks.next,
-            'popularity': album.popularity
+            'popularity': album.popularity,
+            'uri': album.uri,
+            'type': 'spotify',
         };
 });
 }
@@ -206,7 +222,8 @@ function parseSinglePlaylist(playlist) {
         'duration': playlist.tracks.total, // convert to min
         'playlistLink': playlist.href,
         'tracksNextLink': playlist.tracks.next,
-        'popularity': playlist.followers.total
+        'popularity': playlist.followers.total,
+        'type': 'spotify',
     };
 }
 
@@ -231,12 +248,20 @@ const getSinglePlaylist = async (accessToken, playlistLink) => {
 function parsePlaylists(playlists) {
     return playlists.map(playlist => {
         return {
-            'playlistName': playlist.name,
-            'artistName': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
-            'thumbnailUrl': playlist.images[0].url,
-            'description': playlist.description, //and union with artist genre,
+            //uuid: not created yet
+            'dateCreated': null, //none for spotify
+            'description': playlist.description, // none for spotify
+            'name': playlist.name,
+            'author': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
+            'isFavorited': false,
+            'coverImageURL': playlist.images[0].url,
+            'songs': playlist.href, // best not to fetch while searching. better to click on it
+            'originId': playlist.id,
+            'isAlbum': false,
+
+            // extra
             'duration': playlist.tracks.total, // convert to min
-            'playlistLink': playlist.href,
+            'uri': playlist.uri,
         };
     });
 }
@@ -409,6 +434,7 @@ spotifySearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
       var searchResults;
   
       // Call a function to fetch YouTube search results using the YouTube Data API
+      console.log(continuation);
       searchResults = await getSpotifyNext(accessToken, continuation, [searchType]);
       for (let key in searchResults) {
         res.cookie(cookieId, searchResults[key].next);
