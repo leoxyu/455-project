@@ -16,36 +16,3 @@ export async function spotifyGetProfile() {
   return await result.json();
 }
 
-export async function spotifyGetManyPlaylists(playlists, accessToken) {
-
-  const result = await fetch(`${ROOT_URL}/spotify/importManySpotify`, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-
-    // playlists are of the following format:
-    /**
-     * [
-     * 
-     * {
-     * 
-     * id: string (SPOTIFY ID),
-     * type: string (TYPE_PLAYLIST, TYPE_ALBUM)
-     * },
-     * 
-     * ...
-     * 
-     * ]
-     * 
-     */
-
-    body: {
-      playlists,
-      accessToken
-    }
-  });
-
-  return await result.json();
-}
-

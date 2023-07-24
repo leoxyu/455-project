@@ -15,6 +15,8 @@ import debounce from 'lodash.debounce';
 // import ScrollingComponent from './ScrollingComponent';
 
 
+import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
+
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../typeConstants.js");
 
 
@@ -77,13 +79,34 @@ const SearchPage = () => {
   }
 
   const saveOnClick = (playlistLink, playlistType) => {
+
+    console.log("Inside saveOnClick()");
     
     if (playlistLink && playlistType && typeof(playlistLink) === 'string') {
 
+      const urlArray = playlistLink.split('/');
+
+      const spotifyID = urlArray[urlArray.length - 1];
+
       const parsedPlaylistObject = {
-        id: playlistLink,
+        id: spotifyID,
         playlistType: playlistType
       }
+      console.log(parsedPlaylistObject);
+      console.log(accessToken);
+
+      const parsedParam = {
+        playlists: [parsedPlaylistObject], 
+        accessToken
+      };
+
+      dispatch(spotifyGetManyPlaylistsThunk(parsedParam)).then((res) => {
+        console.log("res: ");
+        console.log(res);
+      });
+
+
+
     } else {
       console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
     }
@@ -180,7 +203,7 @@ const SearchPage = () => {
               type={TYPE_ALBUM}
 
               optionType={OPTIONS_TYPE3}
-              saveOnClick={saveOnClick(album.playlistLink, TYPE_ALBUM)}
+              saveOnClick={saveOnClick}
             />
           ))}
         </div>
@@ -205,7 +228,7 @@ const SearchPage = () => {
               type={TYPE_PLAYLIST}
 
               optionType={OPTIONS_TYPE3}
-              saveOnClick={saveOnClick(playlist.playlistLink, TYPE_PLAYLIST)}
+              saveOnClick={saveOnClick}
             />
           ))}
         </div>

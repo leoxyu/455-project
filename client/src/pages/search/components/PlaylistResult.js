@@ -146,7 +146,7 @@ const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, 
             <div ref={optionsPopupRef}>
               <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
               { optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>}
-              { optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} saveOnClick={saveOnClick}/>}
+              { optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={playlistLink} playlistType={type} saveOnClick={saveOnClick}/>}
             </div>
         </div>
       </div>
