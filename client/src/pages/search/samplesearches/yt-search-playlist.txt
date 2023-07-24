@@ -1,0 +1,5 @@
+initial page:
+localhost:3001/yt-search?q=kpop&type=playlist
+
+next pages(all queries look the same):
+localhost:3001/yt-search?cookieId=029e5758-6f05-4a88-a4bd-4e9a5a3519ca&type=playlist

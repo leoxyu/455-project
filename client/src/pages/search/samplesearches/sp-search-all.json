@@ -1,0 +1,125 @@
+{
+    "albums": {
+        "items": [
+            {
+                "dateCreated": "2000-11-13",
+                "description": null,
+                "name": "1 (Remastered)",
+                "author": "The Beatles",
+                "isFavorited": false,
+                "coverImageURL": "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+                "songs": [
+                    {
+                        "songID": "4aX3n1Pn6jiCbvqBL8eqyP",
+                        "artist": "The Beatles",
+                        "name": "Love Me Do - Mono / Remastered",
+                        "type": "spotify",
+                        "imageLink": "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+                        "album": "1 (Remastered)",
+                        "duration": "2:20",
+                        "releaseDate": "2000-11-13",
+                        "views": 76,
+                        "genres": [
+                            "beatlesque",
+                            "british invasion",
+                            "classic rock",
+                            "merseybeat",
+                            "psychedelic rock",
+                            "rock"
+                        ],
+                        "audioFeatures": {
+                            "danceability": 0.524,
+                            "energy": 0.88,
+                            "key": 0,
+                            "loudness": -3.865,
+                            "mode": 1,
+                            "speechiness": 0.0987,
+                            "acousticness": 0.404,
+                            "instrumentalness": 0.000191,
+                            "liveness": 0.154,
+                            "valence": 0.758,
+                            "tempo": 148.058,
+                            "analysis_url": "https://api.spotify.com/v1/audio-analysis/4aX3n1Pn6jiCbvqBL8eqyP",
+                            "time_signature": 4
+                        }
+                    }
+                ],
+                "originSpotifyId": "7vEJAtP3KgKSpOHVgwm3Eh",
+                "isAlbum": true,
+                "genres": [
+                    "beatlesque",
+                    "british invasion",
+                    "classic rock",
+                    "merseybeat",
+                    "psychedelic rock",
+                    "rock",
+                    "funk",
+                    "psychedelic soul",
+                    "rock keyboard",
+                    "soul"
+                ],
+                "duration": 27,
+                "tracksNextLink": null,
+                "popularity": 76
+            }
+        ],
+        "next": "11b13bd9-4054-418a-b79f-6719f3a74a07"
+    },
+    "tracks": {
+        "items": [
+            {
+                "songID": "1ABegtCPBMMJaMpfDyATjE",
+                "artist": "The Beatles",
+                "name": "Birthday - Remastered 2009",
+                "type": "spotify",
+                "imageLink": "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+                "album": "The Beatles (Remastered)",
+                "duration": "2:43",
+                "releaseDate": "1968-11-22",
+                "views": 57,
+                "genres": [
+                    "beatlesque",
+                    "british invasion",
+                    "classic rock",
+                    "merseybeat",
+                    "psychedelic rock",
+                    "rock"
+                ],
+                "audioFeatures": {
+                    "danceability": 0.541,
+                    "energy": 0.727,
+                    "key": 2,
+                    "loudness": -7.509,
+                    "mode": 1,
+                    "speechiness": 0.0384,
+                    "acousticness": 0.0000737,
+                    "instrumentalness": 0.717,
+                    "liveness": 0.232,
+                    "valence": 0.91,
+                    "tempo": 139.239,
+                    "analysis_url": "https://api.spotify.com/v1/audio-analysis/1ABegtCPBMMJaMpfDyATjE",
+                    "time_signature": 4
+                }
+            }
+        ],
+        "next": "7381b40c-52b7-47f6-8d58-72769b5b082d"
+    },
+    "playlists": {
+        "items": [
+            {
+                "dateCreated": null,
+                "description": "The best of the best band to ever grace this world. The Beatles Greatest Hits. Simple as that.",
+                "name": "The Beatles Greatest Hits",
+                "author": "Tristan Rioseco",
+                "isFavorited": false,
+                "coverImageURL": "https://mosaic.scdn.co/640/ab67616d0000b273582d56ce20fe0146ffa0e5cfab67616d0000b27384243a01af3c77b56fe01ab1ab67616d0000b273dc30583ba717007b00cceb25ab67616d0000b273e3e3b64cea45265469d4cafa",
+                "songs": "https://api.spotify.com/v1/playlists/2CKnioFobYQRK3EEMf9Jr6",
+                "originSpotifyId": "2CKnioFobYQRK3EEMf9Jr6",
+                "isAlbum": false,
+                "duration": 137,
+                "uri": "spotify:playlist:2CKnioFobYQRK3EEMf9Jr6"
+            }
+        ],
+        "next": "57b5c847-a5e3-4d28-a546-b506cbd22c1f"
+    }
+}
