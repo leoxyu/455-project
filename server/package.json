@@ -20,6 +20,6 @@
     "yt-search": "^2.10.4",
     "ytdl-core": "^4.11.5",
     "ytpl": "^2.3.0",
-    "ytsr": "github:TimeForANinja/node-ytsr#fdf905623475ca79c8fd8d82efe0f196dd72d10a"
+    "node-ytsr": "github:wgervasio/node-ytsr"
   }
 }
