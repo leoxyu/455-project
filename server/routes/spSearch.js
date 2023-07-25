@@ -41,7 +41,7 @@ function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popul
             'artist': track.artists.join(', '),
             'name': track.name,
             'type': 'spotify',
-            'link': track.uri, // TODO: look at main
+            'link': `spotify:track:${track.id}`, // TODO: look at main
             'imageLink': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
             'album': (album)? album: track.album.name, 
             'duration': formatDuration(track.duration_ms),
