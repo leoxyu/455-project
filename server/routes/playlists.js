@@ -325,9 +325,10 @@ function getTracksHelper(access_token, next, playlist) {
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 
   console.log("inside importManySpotify");
+  console.log(req.body);
 
 
-  const { playlists, accessToken } = req.body;
+  const { playlists, accessToken, authorID } = req.body;
 
   // console.log("\r\nreq body: ");
   // console.log(req.body);
@@ -337,6 +338,9 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 
   // console.log("\r\naccess_token: ");
   // console.log(accessToken);
+
+  console.log("\r\nauthorID: ");
+  console.log(authorID);
 
 
 
@@ -368,7 +372,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       dateCreated: data.type === TYPE_ALBUM ? data.release_date : new Date(), // sets to releaseDate if album. Playlist don't have a release date, so just set to import/creation time
       description: data.description,
       name: data.name,
-      author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
+      author: new ObjectId(authorID), // TODO: objectid of the user who is importing the playlist
       isFavorited: false,
       coverImageURL: data.images[0].url,
       songs: [],

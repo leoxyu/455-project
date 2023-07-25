@@ -78,8 +78,8 @@ export const getSongsAsync = createAsyncThunk(
 
 export const spotifyGetManyPlaylistsThunk = createAsyncThunk(
     actionTypes.SPOTIFY_GET_PLAYLISTS,
-    async ({playlists, accessToken}) => {
-      return await PlaylistsService.spotifyGetManyPlaylists(playlists, accessToken);
+    async ({playlists, accessToken, authorID}) => {
+      return await PlaylistsService.spotifyGetManyPlaylists(playlists, accessToken, authorID);
     }
 );
   

@@ -169,11 +169,12 @@ const PlaylistsService = {
         // ];
     },
 
-    spotifyGetManyPlaylists: async (playlists, accessToken) => {
+    spotifyGetManyPlaylists: async (playlists, accessToken, authorID) => {
 
         const dataToSend = {
             playlists: playlists, 
-            accessToken: accessToken
+            accessToken: accessToken,
+            authorID: authorID
         };
 
         const dataToSendStringify = JSON.stringify(dataToSend);

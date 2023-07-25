@@ -20,7 +20,6 @@ import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../typeConstants.js");
 
 
-
 //  look here later: https://github.com/dermasmid/scrapetube
 // also here: https://github.com/paulomcnally/youtube-node
 const SearchPage = () => {
@@ -42,6 +41,8 @@ const SearchPage = () => {
   const youtubeVideos = useSelector(state => state.search.youtube.videos);
   const youtubePlaylists = useSelector(state => state.search.youtube.playlists);
   // users
+
+  const authorID = useSelector(state => state.login.authorID);
   // artists
 
   // used to determine type of popup of options menu on playlist component
@@ -90,17 +91,19 @@ const SearchPage = () => {
 
       const parsedPlaylistObject = {
         id: spotifyID,
-        playlistType: playlistType
+        playlistType: playlistType,
       }
       console.log(parsedPlaylistObject);
       console.log(accessToken);
 
       const parsedParam = {
         playlists: [parsedPlaylistObject], 
-        accessToken
+        accessToken,
+        authorID
       };
 
-      dispatch(spotifyGetManyPlaylistsThunk(parsedParam)).then((res) => {
+      dispatch(spotifyGetManyPlaylistsThunk(parsedParam))
+      .then((res) => {
         console.log("res: ");
         console.log(res);
       });
