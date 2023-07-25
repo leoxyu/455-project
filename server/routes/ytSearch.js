@@ -1,5 +1,5 @@
 var express = require('express');
-const ytsr = require('node-ytsr');
+const ytsr = require('ytsr');
 const yts = require('yt-search');
 const { v4: uuid } = require('uuid');
 
