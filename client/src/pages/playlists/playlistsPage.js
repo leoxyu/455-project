@@ -89,7 +89,7 @@ const PlaylistPage = () => {
       }
 
       <h2 className='playlists-heading'>Your Playlists</h2>
-      <div className='unifi-playlists-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+      <div className='unifi-playlists-list' style={{display:'flex', flexWrap: 'wrap'}}>
         <div className='adder' onClick={handleAddClick}>
         <div className='add-icon-container'>
         <AddIcon className='add-icon'/>

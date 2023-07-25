@@ -105,7 +105,7 @@ const SearchPage = () => {
 
       <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='spotify-album-list' style={{display:'flex', flexWrap: 'wrap'}}>
 
         {spotifyAlbums.map((album) => (
           <PlaylistResult
@@ -123,7 +123,7 @@ const SearchPage = () => {
 
       <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
-        <div className='spotify-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='spotify-playlist-list' style={{display:'flex', flexWrap: 'wrap'}}>
         {spotifyPlaylists.map((playlist) => (
           <PlaylistResult
             className={'spotify-playlist-preview'}
@@ -137,10 +137,10 @@ const SearchPage = () => {
         ))}
           </div>
           </div>
-        
+
         <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='youtube-video-list' style={{display:'flex', flexWrap: 'wrap'}}>
         {youtubeVideos.map((song) => (
           <SongResult
             className={'youtube-preview'}
@@ -154,13 +154,13 @@ const SearchPage = () => {
             platform='Youtube'
           />
         ))}
-        
+
         </div>
       </div>
 
       <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
-        <div className='youtube-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='youtube-playlist-list' style={{display:'flex', flexWrap: 'wrap'}}>
         {youtubePlaylists.map((playlist) => (
           <PlaylistResult
             className={'youtube-playlist-preview'}
@@ -175,15 +175,7 @@ const SearchPage = () => {
           />
         ))}
           </div>
-          </div> 
-{/*
-        <div className='unifi-playlists'>
-        <h2 className='heading'>Uni.fi Playlists</h2>
-        <div className='unifi-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
           </div>
-        </div>
-         */}
-
     </div>
   );
 };
