@@ -6,14 +6,11 @@ const TYPE_YOUTUBE = "youtube";
 // PLAYLIST:  user-created playlist. Can we modified
 const TYPE_PLAYLIST = "playlist";
 const TYPE_ALBUM = "album";
-const TYPE_TRACK = "track";
 
 
 module.exports = {
     TYPE_SPOTIFY,
     TYPE_YOUTUBE,
-    
     TYPE_PLAYLIST,
-    TYPE_ALBUM,
-    TYPE_TRACK
+    TYPE_ALBUM
 }

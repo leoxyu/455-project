@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { spotifyProfileThunk, spotifyGetManyPlaylistsThunk } from './Spotify/spotifyApiThunks';
+import { spotifyProfileThunk } from './Spotify/spotifyApiThunks';
 
 // =================================================================================>
 // parameters for spotify OAuth
@@ -42,7 +42,6 @@ const spotifyApiSlice = createSlice({
         builder.addCase(spotifyProfileThunk.fulfilled, (state, action) => {
             state.profile = action.payload;
         });
-
     }
 });
 

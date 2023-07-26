@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { spotifyLogin, spotifyGetProfile, spotifyGetManyPlaylists } from "./spotifyApiActions.js";
+import { spotifyLogin, spotifyGetProfile } from "./spotifyApiActions.js";
 
 export const spotifyLoginThunk = createAsyncThunk(
   'SPOTIFY_LOGIN',

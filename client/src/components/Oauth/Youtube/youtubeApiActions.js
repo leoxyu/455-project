@@ -1,7 +1,7 @@
-const ROOT_URL = 'http://localhost:3001';
+
 
 export async function youtubeLogin() {
-    const result = await fetch(`${ROOT_URL}/youtube/login`, {
+    const result = await fetch("http://localhost:3001/youtube/login", {
       method: "GET"
     });
   

@@ -20,10 +20,6 @@ const PlaylistPage = () => {
   const lastId = useSelector(state => state.playlists.lastId);
   const dispatch = useDispatch();
 
-  // used to determine type of popup of options menu on playlist component
-  const OPTIONS_TYPE2 = "LIBRARY_PLAYLIST";
-  const OPTIONS_TYPE3 = "SEARCH_RESULT_PLAYLIST";
-
   // useEffect(() => {
   //   dispatch(getPlaylistsAsync());
   // }, [dispatch]);
@@ -112,7 +108,6 @@ const PlaylistPage = () => {
             deleteOnClick={() => onDelete(playlist.playlistID)}
             editOnClick={() => handleClickEdit(playlist)}
             isEditable={false}
-            optionType={OPTIONS_TYPE2}
           />
         ))}
       </div>

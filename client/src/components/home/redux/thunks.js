@@ -72,15 +72,3 @@ export const getSongsAsync = createAsyncThunk(
         return await PlaylistsService.getSongs(playlistID);
     }
 );
-
-
-
-
-export const spotifyGetManyPlaylistsThunk = createAsyncThunk(
-    actionTypes.SPOTIFY_GET_PLAYLISTS,
-    async ({playlists, accessToken, authorID}) => {
-      return await PlaylistsService.spotifyGetManyPlaylists(playlists, accessToken, authorID);
-    }
-);
-  
-  
