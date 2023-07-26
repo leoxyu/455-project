@@ -8,6 +8,9 @@ var ytSearchRouter = express.Router();
 // var playlistsNext = null;
 
 const NO_THUMBNAIL_PLACEHOLDER = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/1200px-YouTube_play_button_square_%282013-2017%29.svg.png'
+const RESULTS_PER_PAGE = 20;
+const RESULTS_WANTED = 20 * 1;
+const NUM_PAGES = Math.trunc(RESULTS_WANTED/RESULTS_PER_PAGE)
 
 async function ytParseVideo(item) {
     try {
@@ -56,7 +59,7 @@ function ytParseVideoFrPlaylist(info) {
 async function ytSearchVideoNext(videosNext) {
   
   const options = {
-    pages: 1, // 5 is roughly 100 results
+    pages: NUM_PAGES, // 5 is roughly 100 results
   }
   //  for pagination
   const searchResults = await ytsr.continueReq(videosNext, options);
@@ -74,7 +77,7 @@ async function ytSearchVideo(videoName) {
   const filter1 = filters1.get('Type').get('Video');
   // const filters2 = await ytsr.getFilters(filter1.url); additonal filters for sorting and such
   const options = {
-    pages: 1, // 5 is roughly 100 results
+    pages: NUM_PAGES, // 5 is roughly 100 results
   }
   const searchResults = await ytsr(filter1.url, options);
   //  for pagination
@@ -109,7 +112,7 @@ async function getPlaylistData(playlistID) {
 async function ytSearchPlaylist(playlistName) {
   const filters1 = await ytsr.getFilters(playlistName);
   const filter1 = filters1.get('Type').get('Playlist');
-  const searchResults = await ytsr(filter1.url, {pages: 1});
+  const searchResults = await ytsr(filter1.url, {pages: NUM_PAGES});
   searchResults.items =  searchResults.items.map((item) => {
     return {
       // uuid not created
@@ -134,7 +137,7 @@ async function ytSearchPlaylist(playlistName) {
 
 
 async function ytSearchPlaylistNext(playlistsNext) {
-  const searchResults = await ytsr.continueReq(playlistsNext, {pages: 1});
+  const searchResults = await ytsr.continueReq(playlistsNext, {pages: NUM_PAGES});
   searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
     const info = await yts({listId: item.playlistID});
     return {

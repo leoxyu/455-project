@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './utils';
-import { getNextSpotifyAsync, getNextYoutubeAsync, getSpotifyAsync, getYoutubeAsync } from './thunks';
+import { getNextSpotifyAsync, getNextYoutubeAsync, getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistAsync } from './thunks';
 
 
 // because we get rate limited and have limited search results, we need to query for all possible data
@@ -19,8 +19,9 @@ const INITIAL_STATE = {
         'playlists': [],
         'videosNext': null,
         'playlistsNext': null,
+        'playlistVideos': [],
     },
-    unifi: { playlists: [] }, // TODO: add users
+    unifi: { 'playlists': [] }, // TODO: add users
     getSpotify: REQUEST_STATE.IDLE,
     getSpotifyNext: REQUEST_STATE.IDLE,
     getYoutube: REQUEST_STATE.IDLE,
@@ -117,6 +118,21 @@ const searchSlice = createSlice({
                 state.youtube.playlists = [...state.youtube.playlists, ...action.payload.playlists.items];
                 state.youtube.playlistsNext = action.payload.playlists.next;
             }
+        });
+        builder.addCase(getNextYoutubeAsync.rejected, (state, action) => {
+            state.getYoutubeNext = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        });
+        builder.addCase(getYoutubePlaylistAsync.pending, (state, action) => {
+            state.getYoutube = REQUEST_STATE.PENDING;
+        });
+        builder.addCase(getYoutubePlaylistAsync.fulfilled, (state, action) => {
+            state.getYoutube = REQUEST_STATE.FULFILLED;
+            state.youtube.playlistVideos = action.payload;
+        });
+        builder.addCase(getYoutubePlaylistAsync.rejected, (state, action) => {
+            state.getYoutube = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
         });
         // builder.addCase(getUnifiAsync.pending, (state, action) => {
         //     state.getUnifi = REQUEST_STATE.PENDING;

@@ -96,13 +96,34 @@ async function getYoutubeNext(cookieId, type) {
     return data;
 }
 
+async function getYoutubePlaylist(playlistId) {
+    let url = BASE_URL + 'yt-playlist';
+    const queryParams = new URLSearchParams();
+    queryParams.append('playlistId', playlistId);
 
+    if (queryParams.toString()) {
+        url += `?${queryParams.toString()}`;
+    }
+
+    const response = await fetch(url, {
+        method: 'GET'
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+    }
+    return data;
+}
 
 
 export default {
     getSpotify,
     getSpotifyNext,
     getYoutube,
-    getYoutubeNext
+    getYoutubeNext,
+    getYoutubePlaylist
 };
 

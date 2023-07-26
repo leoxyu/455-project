@@ -33,3 +33,10 @@ export const getNextYoutubeAsync = createAsyncThunk(
         return await UserService.getYoutubeNext(cookieId, type);
     }
 );
+
+export const getYoutubePlaylistAsync = createAsyncThunk(
+    actionTypes.GET_PLAYLIST_YOUTUBE,
+    async ({playlistId}) => {
+        return await UserService.getYoutubePlaylist(playlistId);
+    }
+);

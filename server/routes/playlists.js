@@ -123,10 +123,11 @@ playlistsRouter.get('/', async (req, res, next) => {
     isDeep = isDeep === 'true'
     sortDir = sortDir === '-1' ? -1 : 1;
 
-    const query = {
-      author: { $eq: new ObjectId(authorID) }
-    };
-
+    // [UNIFI-SEARCH] support searching all playlists
+    const query = {};
+    if (authorID) {
+      query['author'] = { $eq: new ObjectId(authorID) };
+    }
     if (lastId) {
       query["_id"] =  { $gt: new ObjectId(lastId) };
     }
