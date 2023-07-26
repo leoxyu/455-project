@@ -16,6 +16,8 @@ let youtube_profile = null;
 const { MongoClient, ObjectId } = require("mongodb");
 const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
 
+const YOUTUBE_URL = `https://www.youtube.com/watch?v=`
+
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION);
@@ -26,8 +28,6 @@ require('dotenv').config();
 router.use(cors());
 
 router.get('/login', function (req, res) { // handle login request from the hyperlink on html page
-  console.log("In youtube login");
-
   // request authorization - automatically redirects to callback
   const scope = 'https://www.googleapis.com/auth/youtube.readonly';
   const redirect_url = 'https://accounts.google.com/o/oauth2/v2/auth?' +
@@ -53,13 +53,10 @@ router.get('/playlists', async (req, res) => { // handle login request from the 
   const token = accessToken.split(' ')[1];
 
   const playlists = await getYoutubePlaylists(token);
-  console.log(playlists);
 
   for (let i = 0; i < playlists.length; i++) {
     try {
       const playlist = playlists[i];
-      console.log(await (playlistsCol.find({ ['playlistID']: playlist.playlistID })).toArray())
-      console.log((await (playlistsCol.find({ ['playlistID']: playlist.playlistID })).toArray()).length == 0)
       if ((await (playlistsCol.find({ ['playlistID']: playlist.playlistID })).toArray()).length == 0) {
         const result = await playlistsCol.insertOne(playlist);
       } else {
@@ -70,8 +67,6 @@ router.get('/playlists', async (req, res) => { // handle login request from the 
       console.log(error);
     }
   }
-
-  console.log('shit is working');
   return res.send({});
 });
 
@@ -119,12 +114,12 @@ async function getYoutubePlaylists(token) {
         songDataList[i].id,
         songDataList[i].snippet.videoOwnerChannelTitle,
         songDataList[i].snippet.title,
-        songDataList[i].snippet.resourceId.videoId,
-        songDataList[i].snippet.thumbnails.medium,
-        songDataList[i].snippet,
-        songDataList[i].snippet,
-        songDataList[i].snippet,
-        songDataList[i].snippet,
+        'youtube',
+        YOUTUBE_URL + songDataList[i].snippet.resourceId.videoId,
+        songDataList[i].snippet.thumbnails.medium.url,
+        null,
+        null,
+        songDataList[i].snippet.publishedAt,
       );
       songList.push(song);
     }
@@ -147,27 +142,39 @@ async function getYoutubePlaylists(token) {
   return playlistList;
 }
 
+function reformatTime(originalDate) {
+  const dateObj = new Date(originalDate);
+
+  const year = dateObj.getUTCFullYear();
+  const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getUTCDate()).padStart(2, "0");
+
+  const reformattedDate = `${year}-${month}-${day}`;
+  return reformattedDate;
+}
 
 function formatSong(
   songID,
   artist,
   name,
+  type,
   link,
   imageLink,
   album,
   duration,
   releaseDate
 ) {
+  const formattedReleaseDate = reformatTime(releaseDate);
   return {
     songID: songID,
     artist: artist,
     name: name,
-    type: 'youtube',
+    type: type,
     link: link,
     imageLink: imageLink,
     album: album,
     duration: duration,
-    releaseDate: releaseDate,
+    releaseDate: formattedReleaseDate,
   };
 }
 
@@ -183,9 +190,10 @@ function formatPlaylist(
   originSpotifyId,
   isAlbum
 ) {
+  const formattedReleaseDate = reformatTime(dateCreated);
   return {
     playlistID: playlistID,
-    dateCreated: dateCreated,
+    dateCreated: formattedReleaseDate,
     description: description,
     name: name,
     author: author,
@@ -196,5 +204,7 @@ function formatPlaylist(
     isAlbum: isAlbum,
   };
 }
+
+
 
 module.exports = router;  
