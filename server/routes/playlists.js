@@ -12,9 +12,6 @@ const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION);
 
 
-
-
-
 playlistsRouter.post('/', async (req, res, next) => {
   const pl = {
     playlistID: uuid(),
@@ -44,7 +41,7 @@ function getTracksHelper(access_token, next, playlist) {
     headers: { Authorization: `Bearer ${access_token}` }
   }).then(response => {
     if (response.status === 200) {
-        return response.json();
+      return response.json();
     } else {
       return Promise.reject(response);
     }
@@ -71,8 +68,8 @@ function getTracksHelper(access_token, next, playlist) {
       return playlist;
     }
   }) // don't catch, let error bubble up to route handler
-  :
-  playlist;
+    :
+    playlist;
 }
 
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
@@ -85,34 +82,34 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       headers: { Authorization: `Bearer ${access_token}` }
     }).then(response => {
       if (response.status === 200) {
-          return response.json();
+        return response.json();
       } else {
         return Promise.reject(response);
       }
     }).then(data => getTracksHelper(access_token, data.tracks.href, {
-        playlistID: uuid(),
-        dateCreated: new Date(),
-        description: data.description,
-        name: data.name,
-        author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
-        isFavorited: false,
-        coverImageURL: data.images[0].url,
-        songs: [],
-        originSpotifyId: data.id,
-        isAlbum: false,
-      })
+      playlistID: uuid(),
+      dateCreated: new Date(),
+      description: data.description,
+      name: data.name,
+      author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
+      isFavorited: false,
+      coverImageURL: data.images[0].url,
+      songs: [],
+      originSpotifyId: data.id,
+      isAlbum: false,
+    })
     ).then(async (playlist) => {
       const result = await playlistsCol.insertOne(playlist);
       console.log(`inserted ${result.insertedId}`);
       return playlist.originSpotifyId; // useful for frontend retry
     })
   }))
-  .then(outcomes => {
-    if (!outcomes.some((o) => o.status === "fulfilled")) {
-      return res.status(500).send(outcomes);
-    }
-    return res.status(200).send(outcomes);
-  })
+    .then(outcomes => {
+      if (!outcomes.some((o) => o.status === "fulfilled")) {
+        return res.status(500).send(outcomes);
+      }
+      return res.status(200).send(outcomes);
+    })
   // NOTE: no catch, Promise.allSettled never rejects.
 });
 
@@ -128,7 +125,7 @@ playlistsRouter.get('/', async (req, res, next) => {
     };
 
     if (lastId) {
-      query["_id"] =  { $gt: new ObjectId(lastId) };
+      query["_id"] = { $gt: new ObjectId(lastId) };
     }
 
     const page = await playlistsCol
@@ -141,7 +138,7 @@ playlistsRouter.get('/', async (req, res, next) => {
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
-      .send({ data: page, lastId: page.length ? page[page.length-1]._id : lastId });
+      .send({ data: page, lastId: page.length ? page[page.length - 1]._id : lastId });
   } catch (e) {
     console.log(e);
     return res.status(500).send(e);
@@ -203,9 +200,9 @@ playlistsRouter.get('/:playlistID', async (req, res, next) => {
       return res.status(404).send('playlist not found');
     }
     return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send(result);
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send(result);
   } catch (e) {
     console.log(e);
     return res.status(500).send(e);

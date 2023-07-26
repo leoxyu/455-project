@@ -10,7 +10,8 @@ import { spotifyProfileThunk } from '../../components/Oauth/Spotify/spotifyApiTh
 import { setSpotifyProfile } from '../../components/Oauth/spotifyApiReducer';
 
 // Youtube
-import { setYoutubeProfile } from '../../components/Oauth/youtubeApiReducer';
+import { getYoutubePlaylists } from '../../components/Oauth/youtubeApiReducer';
+import { youtubeProfileThunk } from '../../components/Oauth/Youtube/youtubeApiThunks';
 
 import PlaylistPage from '../playlists/playlistsPage';
 import SearchPage from '../search/searchPage';
@@ -39,14 +40,18 @@ const HomePage = () => {
       });
     }
 
-    // if (access_token_youtube && !youtube_profile) {
-    //   // fetch profile info...
-    //   const response = dispatch(youtubeProfileThunk());
-    //   response.then((contents) => {
-    //     dispatch(setYoutubeProfile(contents.payload));
-    //   });
-    // }
   }, [access_token_spotify, access_token_youtube]);
+
+  // fetches playlists
+  useEffect(() => {
+    if (access_token_youtube && !youtube_profile) {
+      // fetch profile info...
+      const response = dispatch(youtubeProfileThunk(access_token_youtube));
+      response.then((contents) => {
+        dispatch(getYoutubePlaylists(contents.payload));
+      });
+    }
+  }, [access_token_youtube]);
 
 
   return (
