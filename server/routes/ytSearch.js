@@ -84,12 +84,8 @@ async function ytSearchVideo(videoName) {
   return searchResults;
 }
 
-async function ytSearchPlaylist(playlistName) {
-  const filters1 = await ytsr.getFilters(playlistName);
-  const filter1 = filters1.get('Type').get('Playlist');
-  const searchResults = await ytsr(filter1.url, {pages: 1});
-  searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
-    const info = await yts({listId: item.playlistID});
+async function addPlaylistMetadata(playlist) {
+  const info = await yts({listId: playlist.originId});
     return {
       // uuid not created
       'dateCreated': info.date,
@@ -107,7 +103,31 @@ async function ytSearchPlaylist(playlistName) {
       'popularity':info.views,
       'type': 'youtube',
     };
-  }));
+  }
+
+async function ytSearchPlaylist(playlistName) {
+  const filters1 = await ytsr.getFilters(playlistName);
+  const filter1 = filters1.get('Type').get('Playlist');
+  const searchResults = await ytsr(filter1.url, {pages: 1});
+  searchResults.items =  searchResults.items.map((item) => {
+    return {
+      // uuid not created
+      'dateCreated': null, 
+      'description': null, // no way to get it without manually parsing html
+      'name':item.title,
+      'author':item.owner.name,
+      'isFavorited':false,
+      'coverImageURL': item.firstVideo.thumbnails[0].url,
+      'songs': item.playlistID,
+      'originId': item.playlistID,
+      'isAlbum':false,
+      
+      // extra
+      'previewDetails': item.firstVideo.title + ' • ' + item.firstVideo.length,
+      'duration':item.length,
+      'type': 'youtube',
+    };
+  });
   return searchResults;
 }
 
