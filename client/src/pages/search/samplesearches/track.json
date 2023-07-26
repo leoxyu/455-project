@@ -1,0 +1,397 @@
+{
+  "tracks": {
+    "href": "https://api.spotify.com/v1/search?query=haegeum&type=track&include_external=audio&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=5",
+    "items": [
+      {
+        "album": {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5RmQ8k4l3HZ8JoPb4mNsML"
+              },
+              "href": "https://api.spotify.com/v1/artists/5RmQ8k4l3HZ8JoPb4mNsML",
+              "id": "5RmQ8k4l3HZ8JoPb4mNsML",
+              "name": "Agust D",
+              "type": "artist",
+              "uri": "spotify:artist:5RmQ8k4l3HZ8JoPb4mNsML"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/446ROKmKfpEwkbi2SjELVX"
+          },
+          "href": "https://api.spotify.com/v1/albums/446ROKmKfpEwkbi2SjELVX",
+          "id": "446ROKmKfpEwkbi2SjELVX",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273fa9247b68471b82d2125651e",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02fa9247b68471b82d2125651e",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851fa9247b68471b82d2125651e",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "D-DAY",
+          "release_date": "2023-04-21",
+          "release_date_precision": "day",
+          "total_tracks": 10,
+          "type": "album",
+          "uri": "spotify:album:446ROKmKfpEwkbi2SjELVX"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/5RmQ8k4l3HZ8JoPb4mNsML"
+            },
+            "href": "https://api.spotify.com/v1/artists/5RmQ8k4l3HZ8JoPb4mNsML",
+            "id": "5RmQ8k4l3HZ8JoPb4mNsML",
+            "name": "Agust D",
+            "type": "artist",
+            "uri": "spotify:artist:5RmQ8k4l3HZ8JoPb4mNsML"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 168926,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "USA2P2310691"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4bjN59DRXFRxBE1g5ne6B1"
+        },
+        "href": "https://api.spotify.com/v1/tracks/4bjN59DRXFRxBE1g5ne6B1",
+        "id": "4bjN59DRXFRxBE1g5ne6B1",
+        "is_local": false,
+        "is_playable": true,
+        "name": "Haegeum",
+        "popularity": 89,
+        "preview_url": "https://p.scdn.co/mp3-preview/3c2f1894de0f6a51f557131c3eb275cb8bc80831?cid=0b297fa8a249464ba34f5861d4140e58",
+        "track_number": 2,
+        "type": "track",
+        "uri": "spotify:track:4bjN59DRXFRxBE1g5ne6B1"
+      },
+      {
+        "album": {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/53A0W3U0s8diEn9RhXQhVz"
+              },
+              "href": "https://api.spotify.com/v1/artists/53A0W3U0s8diEn9RhXQhVz",
+              "id": "53A0W3U0s8diEn9RhXQhVz",
+              "name": "Keane",
+              "type": "artist",
+              "uri": "spotify:artist:53A0W3U0s8diEn9RhXQhVz"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/02Ird1pnGUdA6ruy87cxVa"
+          },
+          "href": "https://api.spotify.com/v1/albums/02Ird1pnGUdA6ruy87cxVa",
+          "id": "02Ird1pnGUdA6ruy87cxVa",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732ebd3c8519497dc562f8f9aa",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022ebd3c8519497dc562f8f9aa",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512ebd3c8519497dc562f8f9aa",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "Under The Iron Sea",
+          "release_date": "2006-06-12",
+          "release_date_precision": "day",
+          "total_tracks": 13,
+          "type": "album",
+          "uri": "spotify:album:02Ird1pnGUdA6ruy87cxVa"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/53A0W3U0s8diEn9RhXQhVz"
+            },
+            "href": "https://api.spotify.com/v1/artists/53A0W3U0s8diEn9RhXQhVz",
+            "id": "53A0W3U0s8diEn9RhXQhVz",
+            "name": "Keane",
+            "type": "artist",
+            "uri": "spotify:artist:53A0W3U0s8diEn9RhXQhVz"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 277253,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "GBUM70600561"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4eO8lE5u4EONb3cIREyMDv"
+        },
+        "href": "https://api.spotify.com/v1/tracks/4eO8lE5u4EONb3cIREyMDv",
+        "id": "4eO8lE5u4EONb3cIREyMDv",
+        "is_local": false,
+        "is_playable": true,
+        "name": "Hamburg Song",
+        "popularity": 44,
+        "preview_url": null,
+        "track_number": 6,
+        "type": "track",
+        "uri": "spotify:track:4eO8lE5u4EONb3cIREyMDv"
+      },
+      {
+        "album": {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2BTb9bZeph6qXO5EmjVbbm"
+              },
+              "href": "https://api.spotify.com/v1/artists/2BTb9bZeph6qXO5EmjVbbm",
+              "id": "2BTb9bZeph6qXO5EmjVbbm",
+              "name": "HAELIUM",
+              "type": "artist",
+              "uri": "spotify:artist:2BTb9bZeph6qXO5EmjVbbm"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/2nGZCBK3XRONKHwDS3Ajnj"
+          },
+          "href": "https://api.spotify.com/v1/albums/2nGZCBK3XRONKHwDS3Ajnj",
+          "id": "2nGZCBK3XRONKHwDS3Ajnj",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2737fb4982fa84d4356cc45f625",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e027fb4982fa84d4356cc45f625",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048517fb4982fa84d4356cc45f625",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "Expanding",
+          "release_date": "2021-08-20",
+          "release_date_precision": "day",
+          "total_tracks": 7,
+          "type": "album",
+          "uri": "spotify:album:2nGZCBK3XRONKHwDS3Ajnj"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2BTb9bZeph6qXO5EmjVbbm"
+            },
+            "href": "https://api.spotify.com/v1/artists/2BTb9bZeph6qXO5EmjVbbm",
+            "id": "2BTb9bZeph6qXO5EmjVbbm",
+            "name": "HAELIUM",
+            "type": "artist",
+            "uri": "spotify:artist:2BTb9bZeph6qXO5EmjVbbm"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 224000,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "FRIDO2111487"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4mEcvV7O3fibI38H2MfHuJ"
+        },
+        "href": "https://api.spotify.com/v1/tracks/4mEcvV7O3fibI38H2MfHuJ",
+        "id": "4mEcvV7O3fibI38H2MfHuJ",
+        "is_local": false,
+        "is_playable": true,
+        "name": "Lost Someone",
+        "popularity": 34,
+        "preview_url": "https://p.scdn.co/mp3-preview/4dd4ce4d8ee7562691b11dc8e68cdeef2b4fef98?cid=0b297fa8a249464ba34f5861d4140e58",
+        "track_number": 2,
+        "type": "track",
+        "uri": "spotify:track:4mEcvV7O3fibI38H2MfHuJ"
+      },
+      {
+        "album": {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4UW65n6QZ8YmanLPuUXVui"
+              },
+              "href": "https://api.spotify.com/v1/artists/4UW65n6QZ8YmanLPuUXVui",
+              "id": "4UW65n6QZ8YmanLPuUXVui",
+              "name": "Lovebirds",
+              "type": "artist",
+              "uri": "spotify:artist:4UW65n6QZ8YmanLPuUXVui"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/2Kc9gujl0ViQ0TaAOmChfO"
+          },
+          "href": "https://api.spotify.com/v1/albums/2Kc9gujl0ViQ0TaAOmChfO",
+          "id": "2Kc9gujl0ViQ0TaAOmChfO",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273daee83562e4b14edec15143b",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02daee83562e4b14edec15143b",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851daee83562e4b14edec15143b",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "The Hamburg Years EP, Pt. 2",
+          "release_date": "2016-02-04",
+          "release_date_precision": "day",
+          "total_tracks": 4,
+          "type": "album",
+          "uri": "spotify:album:2Kc9gujl0ViQ0TaAOmChfO"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/4UW65n6QZ8YmanLPuUXVui"
+            },
+            "href": "https://api.spotify.com/v1/artists/4UW65n6QZ8YmanLPuUXVui",
+            "id": "4UW65n6QZ8YmanLPuUXVui",
+            "name": "Lovebirds",
+            "type": "artist",
+            "uri": "spotify:artist:4UW65n6QZ8YmanLPuUXVui"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 305252,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "FR10S1618524"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0Yg6G5jKFxL7JPgSoBADWG"
+        },
+        "href": "https://api.spotify.com/v1/tracks/0Yg6G5jKFxL7JPgSoBADWG",
+        "id": "0Yg6G5jKFxL7JPgSoBADWG",
+        "is_local": false,
+        "is_playable": true,
+        "name": "National",
+        "popularity": 45,
+        "preview_url": "https://p.scdn.co/mp3-preview/37820248a948ffaa69965a007dbb38d8277af2a6?cid=0b297fa8a249464ba34f5861d4140e58",
+        "track_number": 3,
+        "type": "track",
+        "uri": "spotify:track:0Yg6G5jKFxL7JPgSoBADWG"
+      },
+      {
+        "album": {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1oSPZhvZMIrWW5I41kPkkY"
+              },
+              "href": "https://api.spotify.com/v1/artists/1oSPZhvZMIrWW5I41kPkkY",
+              "id": "1oSPZhvZMIrWW5I41kPkkY",
+              "name": "Jimin",
+              "type": "artist",
+              "uri": "spotify:artist:1oSPZhvZMIrWW5I41kPkkY"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/4xc3Lc9yASZgEJGH7acWMB"
+          },
+          "href": "https://api.spotify.com/v1/albums/4xc3Lc9yASZgEJGH7acWMB",
+          "id": "4xc3Lc9yASZgEJGH7acWMB",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732b46078245d0120690eb560d",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022b46078245d0120690eb560d",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512b46078245d0120690eb560d",
+              "width": 64
+            }
+          ],
+          "is_playable": true,
+          "name": "FACE",
+          "release_date": "2023-03-24",
+          "release_date_precision": "day",
+          "total_tracks": 6,
+          "type": "album",
+          "uri": "spotify:album:4xc3Lc9yASZgEJGH7acWMB"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/1oSPZhvZMIrWW5I41kPkkY"
+            },
+            "href": "https://api.spotify.com/v1/artists/1oSPZhvZMIrWW5I41kPkkY",
+            "id": "1oSPZhvZMIrWW5I41kPkkY",
+            "name": "Jimin",
+            "type": "artist",
+            "uri": "spotify:artist:1oSPZhvZMIrWW5I41kPkkY"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 212241,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "USA2P2251865"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/3Ua0m0YmEjrMi9XErKcNiR"
+        },
+        "href": "https://api.spotify.com/v1/tracks/3Ua0m0YmEjrMi9XErKcNiR",
+        "id": "3Ua0m0YmEjrMi9XErKcNiR",
+        "is_local": false,
+        "is_playable": true,
+        "name": "Like Crazy",
+        "popularity": 95,
+        "preview_url": "https://p.scdn.co/mp3-preview/2db5f36096963d97afc870c50990d62d27858a43?cid=0b297fa8a249464ba34f5861d4140e58",
+        "track_number": 3,
+        "type": "track",
+        "uri": "spotify:track:3Ua0m0YmEjrMi9XErKcNiR"
+      }
+    ],
+    "limit": 5,
+    "next": "https://api.spotify.com/v1/search?query=haegeum&type=track&include_external=audio&market=CA&locale=en-US%2Cen%3Bq%3D0.9&offset=5&limit=5",
+    "offset": 0,
+    "previous": null,
+    "total": 819
+  }
+}

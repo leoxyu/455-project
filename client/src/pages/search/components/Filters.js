@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../../styles/variables.css';
 import '../styles/Filters.css';
 
-function Filters({filters=['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums']}) {
+function Filters({filters=['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists']}) {
     const [selectedFilter, setSelectedFilter] = useState('All');
 
     const handlePress = (event) => {

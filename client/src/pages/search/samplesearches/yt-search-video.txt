@@ -1,5 +1,0 @@
-initial page:
-localhost:3001/yt-search?q=pewdiepie&type=video
-
-next pages(all queries look the same):
-localhost:3001/yt-search?cookieId=f01a80eb-2092-4d62-a4d9-aa6a1342fb03&type=video

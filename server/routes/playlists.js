@@ -13,10 +13,73 @@ const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION);
 
+const youtube = require('scrape-youtube');
+const ytdl = require('ytdl-core');
+const ytsr = require('ytsr');
+const { first } = require('lodash');
+
 const { TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, TYPE_SPOTIFY, TYPE_YOUTUBE } = require("../shared/playlistTypeConstants");
 
 
+async function ytSearchVideo(videoName) {
+  const filters1 = await ytsr.getFilters(videoName);
+  const filter1 = filters1.get('Type').get('Video');
+  // const filters2 = await ytsr.getFilters(filter1.url);
+  // console.log(filters2); look into this later
+  // const filter2 = filters2.get('Features').get('Live');
+  const options = {
+    pages: 1, // 5 is roughly 100 results
+  }
+  const searchResults = await ytsr(filter1.url, options);
+  // const searchResults2 = await ytsr.continueReq(searchResults.continuation, options);
+  // const searchResults3 = await ytsr.continueReq(searchResults2.continuation, options);
 
+
+  // const info = await ytdl.getInfo(target.link);
+  console.log(searchResults);
+
+  // searchresults -> keep .items and .continuation
+
+  // searchResults.items[0] ->
+  // {
+  //   type: 'video',
+  //   title: 'Short Change Hero', *** keep
+  //   id: 'GjTTB6yII4o',
+  //   url: 'https://www.youtube.com/watch?v=GjTTB6yII4o', *** keep
+  //   bestThumbnail: [Object], *** keep but look closer into this
+  //   thumbnails: [Array],
+  //   isUpcoming: false,
+  //   upcoming: null,
+  //   isLive: false,
+  //   badges: [],
+  //   author: [Object],
+  //   description: null,
+  //   views: 21575889,
+  //   duration: '5:23',
+  //   uploadedAt: null
+  // },
+
+
+
+
+
+
+
+  console.log(searchResults.items.length);
+  // console.log(searchResults2.items.length);
+  // console.log(searchResults3.items.length);
+  // when none left, then { continuation: null, items: [] }
+
+
+  // console.log(filters1);
+  // console.log(secondResultBatch.items);
+  // console.log(thirdResultBatch.items);
+
+  // console.log(info.videoDetails.title); // Short Change Hero
+  // console.log(info.videoDetails.uploadDate); // 2017-02-11
+  // console.log(info.videoDetails.dislikes); // 8046
+  // console.log(info.videoDetails.channelId); // UCbGFbVqBTN3aCjUwz3FChFw
+}
 
 playlistsRouter.post('/', async (req, res, next) => {
   const pl = {
@@ -37,87 +100,6 @@ playlistsRouter.post('/', async (req, res, next) => {
     }
     return res.status(500).send(error);
   }
-});
-
-
-
-function getTracksHelper(access_token, next, playlist) {
-  // if next link is null, dont do anything
-  return next ? fetch(next, {
-    method: "GET",
-    headers: { Authorization: `Bearer ${access_token}` }
-  }).then(response => {
-    if (response.status === 200) {
-        return response.json();
-    } else {
-      return Promise.reject(response);
-    }
-  }).then(data => {
-    // console.log(data);
-    for (const i of data.items) {
-      playlist.songs.push(
-        {
-          songID: uuid(),
-          artist: i.track.artists[0].name,
-          name: i.track.name,
-          type: 'spotify',
-          link: i.track.uri,
-          imageLink: i.track.album.images[0].url,
-          album: i.track.album.name,
-          duration: i.track.duration_ms,
-          releaseDate: i.track.album.release_date,
-        }
-      );
-    }
-    if (data.next) {
-      return getTracksHelper(access_token, data.next, playlist);
-    } else {
-      return playlist;
-    }
-  }) // don't catch, let error bubble up to route handler
-  :
-  playlist;
-}
-
-// TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
-playlistsRouter.post('/importManySpotify', async (req, res, next) => {
-  const { playlistIDs, access_token } = req.body;
-
-  Promise.allSettled(playlistIDs?.map(id => {
-    return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${access_token}` }
-    }).then(response => {
-      if (response.status === 200) {
-          return response.json();
-      } else {
-        return Promise.reject(response);
-      }
-    }).then(data => getTracksHelper(access_token, data.tracks.href, {
-        playlistID: uuid(),
-        dateCreated: new Date(),
-        description: data.description,
-        name: data.name,
-        author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
-        isFavorited: false,
-        coverImageURL: data.images[0].url,
-        songs: [],
-        originSpotifyId: data.id,
-        isAlbum: false,
-      })
-    ).then(async (playlist) => {
-      const result = await playlistsCol.insertOne(playlist);
-      console.log(`inserted ${result.insertedId}`);
-      return playlist.originSpotifyId; // useful for frontend retry
-    })
-  }))
-  .then(outcomes => {
-    if (!outcomes.some((o) => o.status === "fulfilled")) {
-      return res.status(500).send(outcomes);
-    }
-    return res.status(200).send(outcomes);
-  })
-  // NOTE: no catch, Promise.allSettled never rejects.
 });
 
 

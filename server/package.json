@@ -17,9 +17,7 @@
     "morgan": "~1.9.1",
     "scrape-youtube": "^2.4.0",
     "uuid": "^9.0.0",
-    "yt-search": "^2.10.4",
-    "ytdl-core": "^4.11.5",
-    "ytpl": "^2.3.0",
-    "ytsr": "github:wgervasio/node-ytsr"
+    "ytdl-core": "^4.11.4",
+    "ytsr": "^3.8.2"
   }
 }
