@@ -10,9 +10,10 @@ import '../styles/SpSongPreview.css';
 import thumbnailImage from '../../../images/album-placeholder.png'
 import { useDispatch } from 'react-redux';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
+import { TYPE_TRACK } from '../../../typeConstants';
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, date, isFavorite, handleAddClick = () => { }, songObject }) => {
 
   const [showOptionsDialog, setShowOptionsDialog] = useState(false);
   const [showIcons, setShowIcons] = useState(true);
@@ -51,6 +52,16 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
 
     dispatch(setPlaylist({
       id: uuid(),
+
+      playlistName: songName,
+      coverUrl: thumbnailUrl,
+      releaseDate: date,
+      duration: duration,
+      artists: artistName,
+      isFavorite: isFavorite,
+      source: platform,
+      type: TYPE_TRACK,
+
       songs: [parsedSongObject ? parsedSongObject : songObject]
     }));
     // Handle play button click
@@ -81,7 +92,9 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
         </div>
         <div className="details">
           <div className="name">{songName}</div>
+
           <div className="artist">{artistName}</div>
+
           <div className="artist-name">{artistName}</div>
         </div>
       </div>
