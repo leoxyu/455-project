@@ -339,7 +339,6 @@ async function addAlbumMetadata(albumsObj, accessToken) {
     const trackLens = albums.map(album => album.total_tracks);
     const albumTracks={};
     albumTracks.items = [].concat.apply([], albums.map(album => album.tracks.items));
-    // console.log(albumTracks.items.some(track => track === undefined || track === null));
     await addTrackMetadata(albumTracks, accessToken);
 
     const annotatedTracks = splitArrayByLength(albumTracks.items, trackLens);
