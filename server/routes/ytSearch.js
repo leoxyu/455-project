@@ -111,6 +111,7 @@ async function ytSearchPlaylist(playlistName) {
   const filter1 = filters1.get('Type').get('Playlist');
   const searchResults = await ytsr(filter1.url, {pages: 1});
   searchResults.items =  searchResults.items.map((item) => {
+    console.log(item);
     return {
       // uuid not created
       'dateCreated': null, 
