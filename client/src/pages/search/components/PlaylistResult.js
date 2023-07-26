@@ -12,10 +12,16 @@ import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
 import {editPlaylistAsync, getOnePlaylist} from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
-import Options2 from '../components/Options2';
+import Options2 from './Options2';
+import Options3 from './Options3';
 import thumbnailImage from '../../../images/album-placeholder.png'
 
-const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
+const OPTIONS_TYPE2 = "LIBRARY_PLAYLIST";
+const OPTIONS_TYPE3 = "SEARCH_RESULT_PLAYLIST";
+
+
+const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, source, type, songs=[], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
+
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -77,7 +83,17 @@ const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, 
     // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
       id: playlistID,
-      songs
+
+      playlistName: playlistName,
+      coverUrl: thumbnailUrl,
+      releaseDate: date,
+      duration: duration,
+      artists: artistName,
+      isFavorite: isFavorite,
+      source: source,
+      type: type,
+
+      songs: songs
     }));
   };
 
@@ -129,7 +145,8 @@ const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, 
             <div className="duration">{duration}</div>
             <div ref={optionsPopupRef}>
               <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
-              <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>
+              { optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>}
+              { optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={playlistLink} playlistType={type} saveOnClick={saveOnClick}/>}
             </div>
         </div>
       </div>

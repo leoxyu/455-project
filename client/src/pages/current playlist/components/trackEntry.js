@@ -7,7 +7,7 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import "../styles/playlistTrack.css";
 
 
-const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../redux/typeConstants.js");
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
 const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album, isFavorite, type, link, coverUrl, releaseDate, popularity, handleDropdown = () => { } }) => {
@@ -27,7 +27,8 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
 
 
     return (
-        <div className="track-container">
+        <div>
+            <div className="track-container">
             <div className="track-container-left">
                 <p className="track-id">{trackId}</p>
                 <PlayIcon className="play-icon" onClick={handlePlay} />
@@ -39,6 +40,7 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
                 <p className="track-duration">{trackDuration}</p>
                 <OptionsIcon className="options-icon" onClick={handleOptions} />
             </div>
+        </div>
         </div>
 
 

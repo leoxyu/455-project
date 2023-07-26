@@ -1,11 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-// playlist is an object that contains:
-// id: "",
-// songs: []
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../typeConstants.js");
 const initialState = {
     playlist: {
-        id: "",
+        playlistID: "",
+
+        playlistName: "",
+        coverUrl: "",
+        releaseDate: "",
+        duration: 0, // IF   duration is string: playlist is just 1 song
+                     // ELSE duration is a number: duration = # songs
+        artists: [],
+        isFavorite: false,
+        type: null, // TYPE_PLAYLIST, TYPE_ALBUM or TYPE_TRACK
+
         songs: []
     }
 };
