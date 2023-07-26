@@ -7,6 +7,7 @@ var ytSearchRouter = express.Router();
 // var videosNext = null;
 // var playlistsNext = null;
 
+const NO_THUMBNAIL_PLACEHOLDER = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/1200px-YouTube_play_button_square_%282013-2017%29.svg.png'
 
 async function ytParseVideo(item) {
     try {
@@ -84,12 +85,8 @@ async function ytSearchVideo(videoName) {
   return searchResults;
 }
 
-async function ytSearchPlaylist(playlistName) {
-  const filters1 = await ytsr.getFilters(playlistName);
-  const filter1 = filters1.get('Type').get('Playlist');
-  const searchResults = await ytsr(filter1.url, {pages: 1});
-  searchResults.items =  await Promise.all(searchResults.items.map(async (item) => {
-    const info = await yts({listId: item.playlistID});
+async function getPlaylistData(playlistID) {
+  const info = await yts({listId: playlistID});
     return {
       // uuid not created
       'dateCreated': info.date,
@@ -99,7 +96,7 @@ async function ytSearchPlaylist(playlistName) {
       'isFavorited':false,
       'coverImageURL': info.thumbnail,
       'songs':info.videos.map(ytParseVideoFrPlaylist),
-      'originId': item.playlistID,
+      'originId': playlistID,
       'isAlbum':false,
       
       // extra
@@ -107,7 +104,32 @@ async function ytSearchPlaylist(playlistName) {
       'popularity':info.views,
       'type': 'youtube',
     };
-  }));
+  }
+
+async function ytSearchPlaylist(playlistName) {
+  const filters1 = await ytsr.getFilters(playlistName);
+  const filter1 = filters1.get('Type').get('Playlist');
+  const searchResults = await ytsr(filter1.url, {pages: 1});
+  searchResults.items =  searchResults.items.map((item) => {
+    console.log(item);
+    return {
+      // uuid not created
+      'dateCreated': null, 
+      'description': null, // no way to get it without manually parsing html
+      'name':item.title,
+      'author':item.owner.name,
+      'isFavorited':false,
+      'coverImageURL': (item.firstVideo)? item.firstVideo.thumbnails[0].url : NO_THUMBNAIL_PLACEHOLDER,
+      'songs': item.playlistID,
+      'originId': item.playlistID,
+      'isAlbum':false,
+      
+      // extra
+      'previewDetails': (item.firstVideo)? item.firstVideo.title + ' • ' + item.firstVideo.length : null,
+      'duration':item.length,
+      'type': 'youtube',
+    };
+  });
   return searchResults;
 }
 
@@ -147,7 +169,20 @@ const rateLimitMiddleware = async (req, res, next) => {
     next();
   };
 
-  
+
+ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, res) => {
+  try {
+    const playlistID = req.params.playlistID;
+    playlistDetails = await getPlaylistData(playlistID);
+    return res
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send(playlistDetails);
+  } catch (error) {
+    console.error('Error fetching YouTube search results:', error);
+    res.status(500).json({ error: 'Something went wrong with YouTube.' });
+  }
+});
 
 //  q is search query
 // type is either 'videos', 'playlists', or 'all'
