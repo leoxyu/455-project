@@ -27,6 +27,7 @@ const INITIAL_STATE = {
     getYoutube: REQUEST_STATE.IDLE,
     getYoutubeNext: REQUEST_STATE.IDLE,
     getUnifi: REQUEST_STATE.IDLE,
+    getYoutubePlaylist: REQUEST_STATE.IDLE,
     errors: null
 };
 
@@ -124,14 +125,14 @@ const searchSlice = createSlice({
             state.errors = action.payload;
         });
         builder.addCase(getYoutubePlaylistAsync.pending, (state, action) => {
-            state.getYoutube = REQUEST_STATE.PENDING;
+            state.getYoutubePlaylist = REQUEST_STATE.PENDING;
         });
         builder.addCase(getYoutubePlaylistAsync.fulfilled, (state, action) => {
-            state.getYoutube = REQUEST_STATE.FULFILLED;
+            state.getYoutubePlaylist = REQUEST_STATE.FULFILLED;
             state.youtube.playlistVideos = action.payload;
         });
         builder.addCase(getYoutubePlaylistAsync.rejected, (state, action) => {
-            state.getYoutube = REQUEST_STATE.REJECTED;
+            state.getYoutubePlaylist = REQUEST_STATE.REJECTED;
             state.errors = action.payload;
         });
         // builder.addCase(getUnifiAsync.pending, (state, action) => {
