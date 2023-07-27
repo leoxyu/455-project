@@ -12,6 +12,11 @@ import PlaylistCreator from '../playlists/components/PlaylistCreator';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpotifyAsync, getYoutubeAsync } from './redux/thunks';
 import debounce from 'lodash.debounce';
+
+import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
+
+import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2 } from '../../typeConstants';
+
 // import ScrollingComponent from './ScrollingComponent';
 
 
@@ -37,7 +42,10 @@ const SearchPage = () => {
   const spotifyAlbums = useSelector(state => state.search.spotify.albums);
   const youtubeVideos = useSelector(state => state.search.youtube.videos);
   const youtubePlaylists = useSelector(state => state.search.youtube.playlists);
+
   // users
+  const authorID = useSelector(state => state.login.authorID);
+
   // artists
 
 
@@ -54,8 +62,8 @@ const SearchPage = () => {
   useEffect(() => {
     console.log("calling it with " + searchTerm)
     if (searchTerm === '') return; // make it load recommended songs from spotify
-    dispatch(getSpotifyAsync({accessToken:accessToken, query:searchTerm}));
-    dispatch(getYoutubeAsync({query:searchTerm}));
+    dispatch(getSpotifyAsync({ accessToken: accessToken, query: searchTerm }));
+    dispatch(getYoutubeAsync({ query: searchTerm }));
   }, [searchTerm]);
 
 
@@ -70,6 +78,42 @@ const SearchPage = () => {
 
   const handleAddClick = () => {
     setCreatorVisible(true);
+  }
+
+  const saveOnClick = (playlistLink, playlistType) => {
+
+    console.log("Inside saveOnClick()");
+
+    if (playlistLink && playlistType && typeof (playlistLink) === 'string') {
+
+      const urlArray = playlistLink.split(':');
+
+      const spotifyID = urlArray[urlArray.length - 1];
+
+      const parsedPlaylistObject = {
+        id: spotifyID,
+        playlistType: playlistType,
+      }
+      console.log(parsedPlaylistObject);
+      console.log(accessToken);
+
+      const parsedParam = {
+        playlists: [parsedPlaylistObject],
+        accessToken,
+        authorID
+      };
+
+      dispatch(spotifyGetManyPlaylistsThunk(parsedParam))
+        .then((res) => {
+          console.log("res: ");
+          console.log(res);
+        });
+
+    } else {
+      console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
+    }
+
+    // make API call here...
   }
 
 
@@ -95,88 +139,117 @@ const SearchPage = () => {
             views={song.views + ' streams'}
             duration={song.duration}
             songLink={song.link}
-            platform='Spotify'
+            platform={TYPE_SPOTIFY} // !!!(TODO)!!! {TYPE_SPOTIFY}
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
             songObject={song}
+
+            // new changes
+            isFavorite={false}
           />
         ))}
       </div>
 
       <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
+        <div className='spotify-album-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
 
-        {spotifyAlbums.map((album) => (
-          <PlaylistResult
-            className={'spotify-album-preview'}
-            key={album.originSpotifyId}
-            thumbnailUrl={album.coverImageURL}
-            playlistName={album.name}
-            artistName={album.author}
-            views={album.popularity + ' views'}
-            playlistLink={album.originSpotifyId}
-          />
-        ))}
+          {spotifyAlbums.map((album) => (
+            <PlaylistResult
+              className={'spotify-album-preview'}
+              key={album.originSpotifyId}
+              thumbnailUrl={album.coverImageURL}
+              playlistName={album.name}
+              artistName={album.author}
+              views={album.popularity + ' views'}
+              playlistLink={album.originId}
+
+              // new changes
+              isFavorite={false}
+              duration={album.duration}
+              source={TYPE_SPOTIFY}
+              type={TYPE_ALBUM}
+              optionType={OPTIONS_TYPE3}
+              saveOnClick={saveOnClick}
+            />
+          ))}
         </div>
       </div>
 
       <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
-        <div className='spotify-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {spotifyPlaylists.map((playlist) => (
-          <PlaylistResult
-            className={'spotify-playlist-preview'}
-            key={playlist.originSpotifyId}
-            thumbnailUrl={playlist.coverImageURL}
-            playlistName={playlist.name}
-            artistName={playlist.author}
-            views={0 + ' views'}
-            playlistLink={playlist.originSpotifyId}
-          />
-        ))}
-          </div>
-          </div>
-        
-        <div className='youtube-videos'>
+        <div className='spotify-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {spotifyPlaylists.map((playlist) => (
+            <PlaylistResult
+              className={'spotify-playlist-preview'}
+              key={playlist.originSpotifyId}
+              thumbnailUrl={playlist.coverImageURL}
+              playlistName={playlist.name}
+              artistName={playlist.author}
+              views={0 + ' views'}
+              playlistLink={playlist.originId}
+
+              // new changes
+              isFavorite={false}
+              duration={playlist.duration}
+              source={TYPE_SPOTIFY}
+              type={TYPE_PLAYLIST}
+              optionType={OPTIONS_TYPE3}
+              saveOnClick={saveOnClick}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {youtubeVideos.map((song) => (
-          <SongResult
-            className={'youtube-preview'}
-            key={song.link}
-            thumbnailUrl={song.imageLink}
-            songName={song.name}
-            artistName={song.artist}
-            views={song.views + ' views'}
-            duration={song.duration}
-            songLink={song.link}
-            platform='Youtube'
-          />
-        ))}
-        
+        <div className='youtube-video-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {youtubeVideos.map((song) => (
+            <SongResult
+              className={'youtube-preview'}
+              key={song.link}
+              thumbnailUrl={song.imageLink}
+              songName={song.name}
+              artistName={song.artist}
+              views={song.views + ' views'}
+              duration={song.duration}
+              songLink={song.link}
+              platform={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
+
+              // new changes
+              // isFavorite={false}
+            />
+          ))}
+
         </div>
       </div>
 
       <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
-        <div className='youtube-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-        {youtubePlaylists.map((playlist) => (
-          <PlaylistResult
-            className={'youtube-playlist-preview'}
-            key={playlist.name}
-            thumbnailUrl={playlist.coverImageURL}
-            playlistName={playlist.name}
-            artistName={playlist.author}
-            songs={[]}
-            // views={song.views + ' views'}
-            // duration={song.duration}
-            playlistLink={playlist.originId}
-          />
-        ))}
-          </div>
-          </div> 
-{/*
+        <div className='youtube-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+          {youtubePlaylists.map((playlist) => (
+            <PlaylistResult
+              className={'youtube-playlist-preview'}
+              key={playlist.name}
+              thumbnailUrl={playlist.coverImageURL}
+              playlistName={playlist.name}
+              artistName={playlist.author}
+              songs={[]}
+              // views={song.views + ' views'}
+              // duration={song.duration}
+              playlistLink={playlist.originId}
+
+              // new changes
+              isFavorite={false}
+              // duration={playlist.duration}
+              source={TYPE_YOUTUBE}
+              type={TYPE_PLAYLIST}
+              optionType={OPTIONS_TYPE2}
+            />
+          ))}
+        </div>
+      </div>
+      {/*
         <div className='unifi-playlists'>
         <h2 className='heading'>Uni.fi Playlists</h2>
         <div className='unifi-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>

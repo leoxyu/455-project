@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createPlaylistAsync,
+import {
+  createPlaylistAsync,
   deletePlaylistAsync,
   editPlaylistAsync,
   addSongAsync,
   getPlaylistsAsync,
   removeSongAsync,
   getSongsAsync,
-  getOnePlaylist
- } from './thunks';
+  getOnePlaylist,
+  spotifyGetManyPlaylistsThunk
+} from './thunks';
 
 /*
 ACTIONS:
@@ -73,6 +75,10 @@ const playlistsSlice = createSlice({
       if (playlist) {
         playlist.songs = songs;
       }
+    });
+
+    builder.addCase(spotifyGetManyPlaylistsThunk.fulfilled, (state, action) => {
+      console.log(action.payload);
     });
   }
 });
