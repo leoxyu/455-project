@@ -40,7 +40,7 @@ function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popul
             'songID': track.id, 
             'artist': track.artists.join(', '),
             'name': track.name,
-            'type': 'spotify',
+            'source': 'spotify',
             'link': `spotify:track:${track.id}`, // TODO: look at main
             'imageLink': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
             'album': (album)? album: track.album.name, 
@@ -83,7 +83,7 @@ function parseSpotifyAlbums(items) {
             'tracksNextLink': album.tracks.next,
             'popularity': album.popularity,
             'uri': album.uri,
-            'type': 'spotify',
+            'source': 'spotify',
         };
 });
 }
@@ -251,7 +251,7 @@ function parseSinglePlaylist(playlist) {
         'playlistLink': playlist.href,
         'tracksNextLink': playlist.tracks.next,
         'popularity': playlist.followers.total,
-        'type': 'spotify',
+        'source': 'spotify',
     };
 }
 
@@ -290,7 +290,7 @@ function parsePlaylists(playlists) {
             // extra
             'duration': playlist.tracks.total, // convert to min
             'uri': playlist.uri,
-            'type': 'spotify'
+            'source': 'spotify'
         };
     });
 }

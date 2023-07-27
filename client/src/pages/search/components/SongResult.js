@@ -27,7 +27,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
       const parsed = {
         name: songObject.name,
         artist: songObject.artist,
-        type: songObject.type,
+        source: songObject.source,
         link: songObject.link,
         imageLink: songObject.imageLink,
       };

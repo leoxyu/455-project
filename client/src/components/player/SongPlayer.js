@@ -14,6 +14,7 @@ export default function SongPlayer() {
   const shuffle = useRef(false);
 
   useEffect(() => {
+    console.log("playlist id changed, playing song");
     setCurrentSongIndex(0);
     playOnLoad.current = true;
     shuffle.current = false;
@@ -77,7 +78,7 @@ export default function SongPlayer() {
           type="none"
         />
       }
-      {songs.length !== 0 && songs[currentSongIndex].type === "youtube" &&
+      {songs.length !== 0 && songs[currentSongIndex].source === "youtube" &&
         <YoutubePlayer
           key={playlist.id.concat(currentSongIndex)}
           song={songs[currentSongIndex].link}
@@ -92,7 +93,7 @@ export default function SongPlayer() {
           isLastSong={currentSongIndex === songs.length - 1}
         />
       }
-      {songs.length !== 0 && songs[currentSongIndex].type === "spotify" &&
+      {songs.length !== 0 && songs[currentSongIndex].source === "spotify" &&
         <SpotifyPlayer
           key={playlist.id.concat(currentSongIndex)}
           song={songs[currentSongIndex].link}
