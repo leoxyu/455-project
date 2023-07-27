@@ -9,6 +9,8 @@ import '../../styles/variables.css';
 import '../../styles/searchPage.css';
 import { useEffect } from 'react';
 
+import { TYPE_SPOTIFY, TYPE_YOUTUBE } from '../../typeConstants';
+
 const SongPage = () => {
     const playlists = useSelector(state => state.playlists.playlists);
     const allSongs = playlists.flatMap(playlist => playlist.songs);
@@ -42,7 +44,7 @@ const SongPage = () => {
                         artists={song.artist}
                         duration={song.duration}
                         songLink={song.songLink}
-                        platform='Spotify'
+                        source={TYPE_SPOTIFY}
                         songObject={song}
                     />
                 ))}

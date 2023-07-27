@@ -139,7 +139,7 @@ const SearchPage = () => {
             views={song.views + ' streams'}
             duration={song.duration}
             songLink={song.link}
-            platform={TYPE_SPOTIFY} // !!!(TODO)!!! {TYPE_SPOTIFY}
+            source={TYPE_SPOTIFY}
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
             songObject={song}
@@ -214,7 +214,7 @@ const SearchPage = () => {
               views={song.views + ' views'}
               duration={song.duration}
               songLink={song.link}
-              platform={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
+              source={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
 
               // new changes
               // isFavorite={false}

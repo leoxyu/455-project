@@ -30,6 +30,10 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
 
   let optionsPopupRef = useRef();
 
+  // useEffect(() => {
+  //   console.log(type, source, optionType);
+  // }, []);
+
   useEffect(() => {
     let optionsHandler = (e) => {
       if (!optionsPopupRef.current.contains(e.target)) {

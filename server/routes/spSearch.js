@@ -1,7 +1,7 @@
 var express = require('express');
 const { v4: uuid } = require('uuid');
 
-
+const {TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY} = require("../shared/playlistTypeConstants");
 
 var spotifySearchRouter = express.Router();
 
@@ -290,6 +290,7 @@ function parsePlaylists(playlists) {
             // extra
             'duration': playlist.tracks.total, // convert to min
             'uri': playlist.uri,
+            'type': 'spotify'
         };
     });
 }

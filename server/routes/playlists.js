@@ -3,14 +3,14 @@ var playlistsRouter = express.Router();
 const { v4: uuid } = require('uuid');
 
 const { MongoClient, ObjectId } = require("mongodb");
-const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+const { DATABASE_NAME, PLAYLIST_COLLECTION, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
 const {TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY} = require("../shared/playlistTypeConstants");
 // const querystring = require('querystring');
 require('dotenv').config();
 
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
-const playlistsCol = database.collection(PLAYLIST_COLLECTION);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 
 
 
@@ -63,7 +63,7 @@ function getTracksHelper(access_token, next, playlist) {
           songID: uuid(),
           artist: i.artists[0].name,
           name: i.name,
-          type: TYPE_SPOTIFY,
+          source: TYPE_SPOTIFY,
           link: i.uri,
           imageLink: playlist.coverImageURL,
           album: playlist.name,
@@ -78,7 +78,7 @@ function getTracksHelper(access_token, next, playlist) {
           songID: uuid(),
           artist: i.track.artists[0].name,
           name: i.track.name,
-          type: TYPE_SPOTIFY,
+          source: TYPE_SPOTIFY,
           link: i.track.uri,
           imageLink: i.track.album.images[0].url,
           album: i.track.album.name,
@@ -158,6 +158,8 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       songs: [],
       originSpotifyId: data.id,
       isAlbum: data.type === TYPE_ALBUM ? true : false,
+      source: TYPE_SPOTIFY,
+      type: data.type === TYPE_ALBUM ? TYPE_ALBUM : TYPE_PLAYLIST,
     })
     ).then(async (playlist) => {
       // console.log(playlist);

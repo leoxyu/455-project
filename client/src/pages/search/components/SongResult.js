@@ -15,7 +15,7 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, date, isFavorite, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, source, date, isFavorite, handleAddClick = () => { }, songObject }) => {
 
   const [showOptionsDialog, setShowOptionsDialog] = useState(false);
   const [showIcons, setShowIcons] = useState(true);
