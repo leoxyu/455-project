@@ -107,13 +107,9 @@ async function getPlaylistData(playlistID) {
 }
 
 async function ytSearchPlaylist(playlistName) {
-  console.log('search: ' + playlistName)
   const filters1 = await ytsr.getFilters(playlistName);
-  console.log('filters: ' + JSON.stringify(filters1))
   const filter1 = filters1.get('Type').get('Playlist');
-  console.log('filters1: ' + JSON.stringify(filter1))
   const searchResults = await ytsr(filter1.url, { pages: 1 });
-  console.log('filters: ' + JSON.stringify(searchResults))
   searchResults.items = searchResults.items.map((item) => {
     return {
       // uuid not created

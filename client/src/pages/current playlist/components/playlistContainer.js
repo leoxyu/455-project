@@ -9,7 +9,7 @@ import TrackEntry from './trackEntry';
 
 import "../styles/playlistContainer.css";
 
-const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../redux/typeConstants.js");
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
 const PlaylistContainer = ({ playlistId, playlistLink, playlistObjectId, playlistName, playlistType, author, authorCoverUrl, authorUserId, releaseDate, type, coverUrl, numTracks, totalDuration, isFavorite, tracks }) => {
