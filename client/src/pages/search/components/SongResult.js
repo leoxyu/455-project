@@ -30,6 +30,9 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
         source: songObject.source,
         link: songObject.link,
         imageLink: songObject.imageLink,
+        album: songObject.album,
+        duration: songObject.duration,
+        releaseDate: songObject.releaseDate,
       };
       setparsedSongObject(parsed);
     }
