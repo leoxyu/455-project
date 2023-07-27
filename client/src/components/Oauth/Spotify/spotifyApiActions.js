@@ -1,7 +1,7 @@
-
+const ROOT_URL = 'http://localhost:3001';
 
 export async function spotifyLogin() {
-  const result = await fetch("http://localhost:3001/spotify/login", {
+  const result = await fetch(`${ROOT_URL}/spotify/login`, {
     method: "GET"
   });
 
@@ -9,7 +9,7 @@ export async function spotifyLogin() {
 }
 
 export async function spotifyGetProfile() {
-  const result = await fetch("http://localhost:3001/spotify/profile", {
+  const result = await fetch(`${ROOT_URL}/spotify/profile`, {
     method: "GET"
   });
 
