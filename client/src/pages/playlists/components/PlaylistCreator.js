@@ -4,6 +4,8 @@ import {createPlaylistAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/playlistCreator.css'
 
+import {TYPE_UNIFI, TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2} from '../../../typeConstants'; 
+
 const PlaylistCreator = ({onClose=()=>{}}) => {
   const [playlistName, setPlaylistName] = useState('');
   const [playlistDescription, setPlaylistDescription] = useState('');
@@ -26,7 +28,12 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
         name: playlistName,
         songs: [],
         description: playlistDescription,
-        author: author
+        author: author,
+        isAlbum: false,
+        type: TYPE_PLAYLIST,
+        source: TYPE_UNIFI,
+
+
     }
     dispatch(createPlaylistAsync(data));
     setPlaylistName('');

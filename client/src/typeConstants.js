@@ -4,6 +4,7 @@ const TYPE_ALBUM = "album";
 const TYPE_TRACK = "track";
 const TYPE_SPOTIFY = "spotify";
 const TYPE_YOUTUBE = "youtube";
+const TYPE_UNIFI = "unifi";
 
 const OPTIONS_TYPE2 = "LIBRARY_PLAYLIST";
 const OPTIONS_TYPE3 = "SEARCH_RESULT_PLAYLIST";
@@ -15,6 +16,7 @@ module.exports = {
     TYPE_PLAYLIST,
     TYPE_ALBUM,
     TYPE_TRACK,
+    TYPE_UNIFI,
 
     OPTIONS_TYPE2,
     OPTIONS_TYPE3
