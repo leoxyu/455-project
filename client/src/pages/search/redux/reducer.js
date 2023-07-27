@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './utils';
-import { getNextSpotifyAsync, getNextYoutubeAsync, getSpotifyAsync, getYoutubeAsync } from './thunks';
+import { getNextSpotifyAsync, getNextYoutubeAsync, getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync } from './thunks';
 
 
 // because we get rate limited and have limited search results, we need to query for all possible data
 // then filter on server side, then return to client side due to filters
 const INITIAL_STATE = {
-    spotify: { 
+    spotify: {
         'tracks': [],
-        'albums': [], 
+        'albums': [],
         'playlists': [],
         'tracksNext': null,
         'albumsNext': null,
         'playlistsNext': null,
     }, // TODO add artists
-    youtube: { 
+    youtube: {
         'videos': [],
         'playlists': [],
         'videosNext': null,
@@ -45,9 +45,9 @@ const searchSlice = createSlice({
                 state.spotify.tracks = action.payload.tracks.items;
                 state.spotify.tracksNext = action.payload.tracks.next;
             }
-            
+
             if ('albums' in action.payload) {
-                state.spotify.albums=action.payload.albums.items;
+                state.spotify.albums = action.payload.albums.items;
                 state.spotify.albumsNext = action.payload.albums.next;
             }
 
@@ -118,6 +118,11 @@ const searchSlice = createSlice({
                 state.youtube.playlistsNext = action.payload.playlists.next;
             }
         });
+
+        // builder.addCase(getYoutubePlaylistByIDAsync.fulfilled, (state, action) => {
+        // this is prob not needed
+        // });
+
         // builder.addCase(getUnifiAsync.pending, (state, action) => {
         //     state.getUnifi = REQUEST_STATE.PENDING;
         // });

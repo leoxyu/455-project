@@ -58,7 +58,6 @@ const HomePage = () => {
     <div className={`App-header`}>
       <h1>Welcome {userId}!</h1>
       <PlaylistPage />
-      <SearchPage />
     </div>
   );
 

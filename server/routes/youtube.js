@@ -43,16 +43,14 @@ router.get('/login', function (req, res) { // handle login request from the hype
   return res.send({ redirect_url });
 });
 
-router.get('/playlists', async (req, res) => { // handle login request from the hyperlink on html page
+router.get('/playlists', async (req, res) => {
 
   const accessToken = req.headers.authorization;
-  // Validate if the Authorization header is present and starts with 'Bearer '
   if (!accessToken || !accessToken.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'Invalid or missing access token' });
   }
   const token = accessToken.split(' ')[1];
-
-  const playlists = await getYoutubePlaylists(token);
+  const playlists = await getYoutubePlaylists(token, req.query.authorID);
 
   for (let i = 0; i < playlists.length; i++) {
     try {
@@ -70,8 +68,7 @@ router.get('/playlists', async (req, res) => { // handle login request from the 
   return res.send({});
 });
 
-
-async function getYoutubePlaylists(token) {
+async function getYoutubePlaylists(token, author) {
   // set up call to get youtube playlist IDs
   const params = {
     part: 'snippet',
@@ -129,7 +126,7 @@ async function getYoutubePlaylists(token) {
       playlistDataList[i].snippet.publishedAt,
       playlistDataList[i].snippet.description,
       playlistDataList[i].snippet.title,
-      playlistDataList[i].snippet.channelTitle,
+      new ObjectId(author),
       false,
       playlistDataList[i].snippet.thumbnails.medium.url,
       songList,

@@ -4,6 +4,12 @@ const yts = require('yt-search');
 const { v4: uuid } = require('uuid');
 
 var ytSearchRouter = express.Router();
+
+const { MongoClient, ObjectId } = require("mongodb");
+const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+const client = new MongoClient(process.env.MONGO_URI);
+const database = client.db(DATABASE_NAME);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION);
 // var videosNext = null;
 // var playlistsNext = null;
 
@@ -169,10 +175,26 @@ const rateLimitMiddleware = async (req, res, next) => {
 };
 
 
+async function pushPlaylistToDatabase(playlist) {
+  if ((await (playlistsCol.find({ ['playlistID']: playlist.playlistID })).toArray()).length == 0) {
+    const result = await playlistsCol.insertOne(playlist);
+  } else {
+    console.log(`playlist ${playlist.playlistID} already exists in database`);
+  }
+}
+
 ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, res) => {
   try {
+    const pushToDatabase = req.query.pushToDatabase;
     const playlistID = req.params.playlistID;
     playlistDetails = await getPlaylistData(playlistID);
+
+    if (pushToDatabase) {
+      const author = req.query.authorID;
+      playlistDetails.author = new ObjectId(author);
+      await pushPlaylistToDatabase(playlistDetails);
+    }
+
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
