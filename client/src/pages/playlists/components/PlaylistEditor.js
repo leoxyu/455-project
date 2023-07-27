@@ -26,6 +26,8 @@ const PlaylistEditor = ({ playlist, onClose }) => {
   const [imageUrl, setImageUrl] = useState(playlist.coverImageURL);
   const [deletedSongs, setDeletedSongs] = useState([]);
 
+  console.log(playlist);
+
   const dispatch = useDispatch();
 
   const handleNameChange = (event) => {

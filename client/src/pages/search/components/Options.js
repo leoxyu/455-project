@@ -5,40 +5,20 @@ import '../../../styles/variables.css';
 import '../styles/Options.css';
 import SearchBar from './SearchBar';
 
-const Options = ({ songBody = {}, onClose=()=>{}, handleAddClick=()=>{}}) => {
+const Options = ({ open, top, left, songBody = {}, onClose=()=>{}, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
-  const divRef = useRef(null);  
   const dispatch = useDispatch();
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
     dispatch(getPlaylistsAsync());
   }, []);
 
-  useEffect(() => {
-
-    
-
-
-    const handleClickOutside = (event) => {
-
-      if (divRef.current && !divRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [divRef]);
-
-
-
   const handlePlaylistChange = (event) => {
     setSelectedPlaylist(event.target.value);
     // setSelectedPlaylist('wtf');
   };
 
-  
+
   const handleSelection = (playlistID, event) => {
     // Handle playlist selection
     // console.log(`Selected playlist: ${selectedPlaylist}`);
@@ -52,7 +32,7 @@ const Options = ({ songBody = {}, onClose=()=>{}, handleAddClick=()=>{}}) => {
   };
 
   return (
-    <div className='options-dialog' ref={divRef}>
+    <div className={`search-options-container ${open ? "active" : "inactive"}`} style={{ top: top, left: left }}>
       <p className='options-title'>Add to playlist:</p>
       <SearchBar />
         <div className="options-playlist-input" onClick={handleAddClick}>
@@ -60,12 +40,13 @@ const Options = ({ songBody = {}, onClose=()=>{}, handleAddClick=()=>{}}) => {
         </div>
       <div className="options-dropdown">
         {/* add search bar here*/}
-        {playlists.map((playlist) => (
+        {playlists.map((playlist, i) => (
           <div
-          className="options-playlist-input"
-          value={playlist.playlistID}
-          onClick={(e) => handleSelection(playlist.playlistID, e)}>
-          {playlist.name}
+            key={i}
+            className="options-playlist-input"
+            value={playlist.playlistID}
+            onClick={(e) => handleSelection(playlist.playlistID, e)}>
+            {playlist.name}
           </div>
         ))}
       </div>

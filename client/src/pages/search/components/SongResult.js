@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
@@ -14,8 +14,6 @@ const { v4: uuid } = require('uuid');
 
 const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, handleAddClick = () => { }, songObject }) => {
 
-  const [showOptionsDialog, setShowOptionsDialog] = useState(false);
-  const [showIcons, setShowIcons] = useState(true);
   const [parsedSongObject, setparsedSongObject] = useState({});
   const dispatch = useDispatch();
 
@@ -60,14 +58,52 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     // Handle favorite button click
   };
 
-  const handleOptions = () => {
-    setShowOptionsDialog(true);
-    setShowIcons(false);
+  // const handleOptions = () => {
+  //   setShowOptionsDialog(true);
+  //   setShowIcons(false);
+  // };
+
+  // const closeOptionsDialog = () => {
+  //   setShowOptionsDialog(false);
+  //   setShowIcons(true);
+  // };
+
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [optionsTop, setOptionsTop] = useState(false);
+  const [optionsLeft, setOptionsLeft] = useState(false);
+
+  let optionsPopupRef = useRef();
+
+  useEffect(() => {
+    let optionsHandler = (e) => {
+      if (!optionsPopupRef.current.contains(e.target)) {
+        setOptionsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", optionsHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", optionsHandler);
+    }
+  });
+
+  const optionsOnClick = (top, left) => {
+    if (optionsOpen) {
+      setOptionsOpen(false);
+    } else {
+      setOptionsTop(top + 21);
+      setOptionsLeft(left - 85);
+      setOptionsOpen(true);
+    }
   };
 
-  const closeOptionsDialog = () => {
-    setShowOptionsDialog(false);
-    setShowIcons(true);
+  let optionsRef = null;
+
+  const handleOptions = () => {
+    // Handle options button click
+    const optionsLocation = optionsRef.getBoundingClientRect();
+    optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
 
@@ -85,7 +121,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
           <div className="artist-name">{artistName}</div>
         </div>
       </div>
-      {showIcons && (
+      {/* {showIcons && (
         <div className="stats">
           <HeartIcon className="heart-icon" onClick={handleFavorite} />
           <div className="duration">{duration}</div>
@@ -95,7 +131,15 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
 
       {showOptionsDialog && (
         <Options songBody={parsedSongObject} onClose={closeOptionsDialog} handleAddClick={handleAddClick} />
-      )}
+      )} */}
+       <div className="stats">
+          <HeartIcon className="heart-icon" onClick={handleFavorite}/>
+          <div className="duration">{duration}</div>
+          <div ref={optionsPopupRef}>
+            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+            <Options open={optionsOpen} top={optionsTop} left={optionsLeft}/>
+          </div>
+      </div>
     </div>
   );
 };

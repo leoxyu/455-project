@@ -104,36 +104,34 @@ const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, 
   //  TODO avoid rendering if we use none in css
 
   return (
-    <div>
     <div className={className}>
-        <div className='essential-info'>
-            <div className="thumbnail-container">
-                <img className="thumbnail" src={thumbnailUrl ? thumbnailUrl : thumbnailImage} alt="Album Thumbnail" />
-                <PlayIcon className="play-icon" onClick={handlePlay}/>
-            </div>
-            <div className="details">
-                <div className="name">{playlistName}</div>
-                <div className="secondary-details">
-                <div className="date">{date}</div>
-                <div className="artist-name">{artistName}</div>
-                </div>
-                <div className="optional-details">
-                {songs.slice(0,3).map((song, i) => (
-                <div key={i} className="song">{song.songName}</div>
-                ))}
-                </div>
-            </div>
-        </div>
-        <div className="stats">
-            <HeartIcon className="heart-icon" onClick={handleFavorite}/>
-            <div className="duration">{duration}</div>
-            <div ref={optionsPopupRef}>
-              <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
-              <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>
-            </div>
-        </div>
+      <div className='essential-info'>
+          <div className="thumbnail-container">
+              <img className="thumbnail" src={thumbnailUrl ? thumbnailUrl : thumbnailImage} alt="Album Thumbnail" />
+              <PlayIcon className="play-icon" onClick={handlePlay}/>
+          </div>
+          <div className="details">
+              <div className="name">{playlistName}</div>
+              <div className="secondary-details">
+              <div className="date">{date}</div>
+              <div className="artist-name">{artistName}</div>
+              </div>
+              <div className="optional-details">
+              {songs.slice(0,3).map((song, i) => (
+              <div key={i} className="song">{song.songName}</div>
+              ))}
+              </div>
+          </div>
       </div>
-        </div>
+      <div className="stats">
+          <HeartIcon className="heart-icon" onClick={handleFavorite}/>
+          <div className="duration">{duration}</div>
+          <div ref={optionsPopupRef}>
+            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+            <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>
+          </div>
+      </div>
+    </div>
   );
 };
 

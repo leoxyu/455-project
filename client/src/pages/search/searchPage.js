@@ -141,10 +141,10 @@ const SearchPage = () => {
         <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
         <div className='youtube-video-list' style={{display:'flex', flexWrap: 'wrap'}}>
-        {youtubeVideos.map((song) => (
+        {youtubeVideos.map((song, i) => (
           <SongResult
             className={'youtube-preview'}
-            key={song.link}
+            key={i}
             thumbnailUrl={song.imageLink}
             songName={song.name}
             artistName={song.artist}
