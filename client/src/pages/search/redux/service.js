@@ -1,5 +1,5 @@
 
-const BASE_URL = 'http://localhost:3001/';
+const BASE_URL = 'https://uni-fi.onrender.com/';
 async function getSpotify(accessToken, query, type) {
     var url = BASE_URL + 'sp-search';
     // Build the query string with search parameters
@@ -31,7 +31,7 @@ async function getSpotifyNext(accessToken, cookieId, type) {
     queryParams.append('accessToken', accessToken);
     queryParams.append('type', type);
 
-    
+
     if (queryParams.toString()) {
         url += `?${queryParams.toString()}`;
     }
@@ -105,4 +105,3 @@ export default {
     getYoutube,
     getYoutubeNext
 };
-
