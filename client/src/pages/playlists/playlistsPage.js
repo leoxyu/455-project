@@ -114,6 +114,11 @@ const PlaylistPage = () => {
             editOnClick={() => handleClickEdit(playlist)}
             isEditable={false}
             optionType={OPTIONS_TYPE2}
+            duration={playlist.songs?.length}
+            isFavorite={playlist.isFavorited}
+            releaseDate={playlist.dateCreated}
+            source={playlist.source}
+            type={playlist.type}
           />
         ))}
       </div>

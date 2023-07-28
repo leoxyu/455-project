@@ -8,8 +8,17 @@ const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = re
 const initialState = {
     playlist: {
         id: "",
+        playlistName: "",
+        thumbnailUrl: "",
+        releaseDate: "",
+        duration: 0,
+        artistName: "",
+        isFavorite: false,
+        source: "",
+        type: "",
         songs: []
-    }
+    },
+    currSong: "",
 };
 
 const playerSlice = createSlice({

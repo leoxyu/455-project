@@ -161,6 +161,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       isAlbum: data.type === TYPE_ALBUM ? true : false,
       source: TYPE_SPOTIFY,
       type: data.type === TYPE_ALBUM ? TYPE_ALBUM : TYPE_PLAYLIST,
+      duration: data.tracks?.total,
     })
     ).then(async (playlist) => {
       // console.log(playlist);

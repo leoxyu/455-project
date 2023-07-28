@@ -15,7 +15,7 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, source, date, isFavorite, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, source, releaseDate, isFavorite, handleAddClick = () => { }, songObject }) => {
 
   const [showOptionsDialog, setShowOptionsDialog] = useState(false);
   const [showIcons, setShowIcons] = useState(true);
@@ -42,6 +42,14 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
 
     dispatch(setPlaylist({
       id: uuid(),
+      playlistName: songName,
+      thumbnailUrl: thumbnailUrl,
+      releaseDate: releaseDate,
+      duration: duration,
+      artistName: artistName,
+      isFavorite: isFavorite,
+      source: source,
+      type: TYPE_TRACK,
       songs: [parsedSongObject ? parsedSongObject : songObject]
     }));
     // Handle play button click

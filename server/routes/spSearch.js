@@ -277,8 +277,8 @@ function parsePlaylists(playlists) {
     return playlists.map(playlist => {
         return {
             //uuid: not created yet
-            'dateCreated': null, //none for spotify
-            'description': playlist.description, // none for spotify
+            'dateCreated': new Date(),
+            'description': playlist.description, 
             'name': playlist.name,
             'author': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
             'isFavorited': false,

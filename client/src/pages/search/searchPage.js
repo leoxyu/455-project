@@ -143,6 +143,7 @@ const SearchPage = () => {
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
             songObject={song}
+            releaseDate={song.releaseDate}
 
             // new changes
             isFavorite={false}
@@ -163,6 +164,7 @@ const SearchPage = () => {
               artistName={album.author}
               views={album.popularity + ' views'}
               playlistLink={album.originId}
+              releaseDate={album.dateCreated}
 
               // new changes
               isFavorite={false}
@@ -188,6 +190,7 @@ const SearchPage = () => {
               artistName={playlist.author}
               views={0 + ' views'}
               playlistLink={playlist.originId}
+              releaseDate={playlist.dateCreated}
 
               // new changes
               isFavorite={false}
@@ -238,6 +241,7 @@ const SearchPage = () => {
               // views={song.views + ' views'}
               // duration={song.duration}
               playlistLink={playlist.originId}
+              // releaseDate={playlist.releaseDate}
 
               // new changes
               isFavorite={false}

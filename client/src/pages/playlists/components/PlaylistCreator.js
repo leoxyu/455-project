@@ -35,6 +35,8 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
         isAlbum: false,
         type: TYPE_PLAYLIST,
         source: TYPE_UNIFI,
+        duration: 0,
+
 
 
     }

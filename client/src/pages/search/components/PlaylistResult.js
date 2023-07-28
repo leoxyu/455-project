@@ -18,7 +18,7 @@ import thumbnailImage from '../../../images/album-placeholder.png'
 
 import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 
-const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, source, type, songs = [], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
+const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName, releaseDate, duration, artistName, isFavorite, source, type, songs = [], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -54,6 +54,14 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
       setIsLoading(false);
       dispatch(setPlaylist({
         id: playlistID,
+        playlistName: playlistName,
+        thumbnailUrl: thumbnailUrl,
+        releaseDate: releaseDate,
+        duration: songs.length,
+        artistName: artistName,
+        isFavorite: isFavorite,
+        source: source,
+        type: type,
         songs
       }));
     }
@@ -84,6 +92,14 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
     // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
       id: playlistID,
+      playlistName: playlistName,
+      thumbnailUrl: thumbnailUrl,
+      releaseDate: releaseDate,
+      duration: songs.length,
+      artistName: artistName,
+      isFavorite: isFavorite,
+      source: source,
+      type: type,
       songs
     }));
   };
@@ -121,7 +137,7 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
           <div className="details">
             <div className="name">{playlistName}</div>
             <div className="secondary-details">
-              <div className="date">{date}</div>
+              <div className="date">{releaseDate}</div>
               <div className="artist-name">{artistName}</div>
             </div>
             <div className="optional-details">
