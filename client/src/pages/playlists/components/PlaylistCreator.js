@@ -11,6 +11,8 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
   const [playlistDescription, setPlaylistDescription] = useState('');
   const author = useSelector((state) => state.login.authorID);
 
+  const user = useSelector((state) => state.login.id);
+
   const dispatch = useDispatch();
 
   const handleNameChange = (event) => {
@@ -29,6 +31,7 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
         songs: [],
         description: playlistDescription,
         author: author,
+        artist: user,
         isAlbum: false,
         type: TYPE_PLAYLIST,
         source: TYPE_UNIFI,

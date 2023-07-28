@@ -153,6 +153,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       description: data.description,
       name: data.name,
       author: new ObjectId(authorID), // TODO: objectid of the user who is importing the playlist
+      artist: data.type === TYPE_ALBUM ? data.artists[0]?.name : data.owner.display_name,
       isFavorited: false,
       coverImageURL: data.images[0].url,
       songs: [],
