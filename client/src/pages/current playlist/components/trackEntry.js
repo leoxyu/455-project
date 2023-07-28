@@ -10,9 +10,16 @@ import "../styles/playlistTrack.css";
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album, isFavorite, type, link, coverUrl, releaseDate, popularity, handleDropdown = () => { } }) => {
+const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, imageLink, releaseDate, source, handleDropdown = () => { } }) => {
 
-    const trackDuration = new Date(duration * 1000).toISOString().slice(11, 19);
+    function convertMsToDuration(duration) {
+        if (typeof(duration) === 'number') {
+            return new Date(duration).toISOString().slice(11, 19);
+        } else return duration;
+    }
+
+
+    const trackDuration = convertMsToDuration(duration);
 
     const handlePlay = () => {
         // Handle play button click
@@ -29,10 +36,10 @@ const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album
     return (
         <div className="track-container">
             <div className="track-container-left">
-                <p className="track-id">{trackId}</p>
+                <p className="track-id">{songID}</p>
                 <PlayIcon className="play-icon" onClick={handlePlay} />
-                <img className='track-cover' src={coverUrl} alt="Track Cover" />
-                <p className="p">{trackName}</p>
+                <img className='track-cover' src={imageLink} alt="Track Cover" />
+                <p className="p">{name}</p>
             </div>
             <div className="track-container-right">
                 <HeartIcon className="heart-icon" onClick={handleFavorite} />

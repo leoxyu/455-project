@@ -18,7 +18,7 @@ const initialState = {
         type: "",
         songs: []
     },
-    currSong: "",
+    currSong: null,
 };
 
 const playerSlice = createSlice({
