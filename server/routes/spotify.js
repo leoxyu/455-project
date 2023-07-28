@@ -78,10 +78,10 @@ fetch('https://accounts.spotify.com/api/token', authOptions) // make request to 
               console.log("token successfully retrieved");
                 access_token = data.access_token
                 refresh_token = data.refresh_token
-                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&type=${"spotify"}&error=${"NO_ERROR"}`);
+                res.redirect(`https://uni-fi-9b54.onrender.com/login?access_token=${access_token}&refresh_token=${refresh_token}&type=${"spotify"}&error=${"NO_ERROR"}`);
             });
         } else {
-            res.redirect(`http://localhost:3000/login?&error=${"ERROR_INVALID_TOKEN"}`);;
+            res.redirect(`https://uni-fi-9b54.onrender.com/login?&error=${"ERROR_INVALID_TOKEN"}`);;
         };
     })
     .catch(error => {

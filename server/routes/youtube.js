@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 
 const client_id = '27604080756-2btdk60i5tahi5i4687pokqj56bavkcb.apps.googleusercontent.com';
 const client_secret = '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'; // important to protect this one
-const callback_uri = 'http://localhost:3000/login';
+const callback_uri = 'https://uni-fi-9b54.onrender.com/login';
 
 let access_token = null;
 let refresh_token = null;
