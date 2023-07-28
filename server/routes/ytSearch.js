@@ -189,9 +189,10 @@ ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, re
     const playlistID = req.params.playlistID;
     playlistDetails = await getPlaylistData(playlistID);
 
-    if (pushToDatabase) {
+    if (pushToDatabase == 'true') {
       const author = req.query.authorID;
       playlistDetails.author = new ObjectId(author);
+      playlistDetails.playlistID = playlistID;
       await pushPlaylistToDatabase(playlistDetails);
     }
 
