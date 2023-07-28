@@ -10,6 +10,7 @@ import TrackEntry from './trackEntry';
 import "../styles/playlistContainer.css";
 
 import { getTotalTrackDuration } from './util';
+import placeholderCover from '../../../images/album-placeholder.png';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
@@ -17,13 +18,22 @@ const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../..
 const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorite, songs, currSong }) => {
 
     const totalDuration = getTotalTrackDuration(songs);
+    const thumbnailUrlSet = setThumbnail(thumbnailUrl);
+
+    function setThumbnail(thumbnailUrl) {
+        if (!thumbnailUrl && songs && songs.length > 0 && thumbnailUrl.length === 0) {
+            return songs[0].imageLink;
+        } else if (!songs || songs.length === 0)  {
+            return placeholderCover;
+        } else return thumbnailUrl;
+    }
 
     return (
         <div className='background-container'>
 
             <div className="playlist-header">
                 <div className="thumbnail-container">
-                    <img className='thumbnail' src={thumbnailUrl} alt="Playlist Cover" />
+                    <img className='thumbnail' src={thumbnailUrlSet} alt="Playlist Cover" />
                 </div>
                 <div className="info">
                     <h2 className='playlist-type'>{type}</h2>
