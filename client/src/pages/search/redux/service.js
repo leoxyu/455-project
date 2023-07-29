@@ -1,5 +1,6 @@
 import { getAuthorID } from "../../../util";
-const BASE_URL = 'http://localhost:3001/';
+const BASE_URL = 'https://uni-fi.onrender.com/';
+
 async function getSpotify(accessToken, query, type) {
     var url = BASE_URL + 'sp-search';
     // Build the query string with search parameters
@@ -125,4 +126,3 @@ export default {
     getYoutubeNext,
     getYoutubePlaylistByID
 };
-

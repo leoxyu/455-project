@@ -1,6 +1,5 @@
 import { getAuthorID } from "../../../util";
-
-const ROOT_URL = 'http://localhost:3001';
+const ROOT_URL = 'https://uni-fi.onrender.com';
 
 export async function youtubeLogin() {
   const result = await fetch(`${ROOT_URL}/youtube/login`, {
@@ -32,4 +31,3 @@ export async function youtubeGetPlaylists(access_token) {
 
   return await result.json();
 }
-

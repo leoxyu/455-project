@@ -5,7 +5,7 @@ const querystring = require('querystring');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const ROOT_URL = 'http://localhost:3001';
+const ROOT_URL = 'https://uni-fi.onrender.com';
 
 const client_id = 'e44db89e494a47529355c4401180f251';
 const client_secret = '4b1f65eda5464bfabb44593e87284d9f'; // important to protect this one
@@ -78,10 +78,10 @@ fetch('https://accounts.spotify.com/api/token', authOptions) // make request to 
               console.log("token successfully retrieved");
                 access_token = data.access_token
                 refresh_token = data.refresh_token
-                res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&type=${"spotify"}&error=${"NO_ERROR"}`);
+                res.redirect(`https://uni-fi-9b54.onrender.com/login?access_token=${access_token}&refresh_token=${refresh_token}&type=${"spotify"}&error=${"NO_ERROR"}`);
             });
         } else {
-            res.redirect(`http://localhost:3000/login?&error=${"ERROR_INVALID_TOKEN"}`);;
+            res.redirect(`https://uni-fi-9b54.onrender.com/login?&error=${"ERROR_INVALID_TOKEN"}`);;
         };
     })
     .catch(error => {
@@ -94,7 +94,7 @@ router.get('/refresh_token', function (req, res) {
 
   /*
   I included an example refresh token request since it's useful to have, but this should obviously be implemented
-  in a different way than just having the user press a button on the screen - access tokens expire after 
+  in a different way than just having the user press a button on the screen - access tokens expire after
   2 hours (I believe) so you'll need to manage refreshes based on that
   */
 
@@ -102,7 +102,7 @@ router.get('/refresh_token', function (req, res) {
   const authOptions = {
       method: 'POST',
       headers: {
-          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')), 
+          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
           'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: `grant_type=refresh_token&refresh_token=${refresh_token}`,

@@ -153,7 +153,11 @@ var spotifySearchRouter = require('./routes/spSearch');
 
 var app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://uni-fi-9b54.onrender.com",
+}
+
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

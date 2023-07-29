@@ -1,4 +1,4 @@
-const ROOT_URL = 'http://localhost:3001';
+const ROOT_URL = 'https://uni-fi.onrender.com';
 
 export async function spotifyLogin() {
   const result = await fetch(`${ROOT_URL}/spotify/login`, {
@@ -15,4 +15,3 @@ export async function spotifyGetProfile() {
 
   return await result.json();
 }
-
