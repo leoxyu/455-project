@@ -2,7 +2,11 @@
 
 ## Project Description
 
-This project aims to create a music application for people who use multiple music services and do not want to switch apps, particularly targeting audiophiles. The app will support the following activities:
+This project aims to create a music application for people who use multiple music services and do not want to switch applications when listending to music. It will allow users to import songs and playlists acroess nultiple services, and listen to them together seamlessly. 
+
+## Project Details
+
+The app will support the following activities:
 
 - Combining YouTube and Spotify playlists seamlessly
 - Managing said playlists
@@ -13,8 +17,6 @@ The application will store the following types of data:
 - Metadata for playlists and songs
 - URLs/URIs
 - User credentials
-
-Users will be able to perform various actions with this data, including importing songs & playlists from Spotify and YouTube, creating custom playlists, sorting and searching songs, and accessing metadata for playlists, songs, and users.
 
 ## Project Task Requirements
 
