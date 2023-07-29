@@ -26,7 +26,7 @@ const PlaylistsService = {
         const userId = getUserId();
         const response = await fetch(`${ROOT_URL}/playlists/${playlistID}`, {
             method: 'DELETE',
-            headers: {
+            headers: {  
                 'Content-Type': 'application/json',
                 'User-ID': userId,
             }
