@@ -170,6 +170,33 @@ const PlaylistsService = {
         //     { URI: 'dfwefd9df9f9', source: 'Youtube' },
         // ];
     },
+    spotifyGetManyPlaylists: async (playlists, accessToken, authorID) => {
+
+        const dataToSend = {
+            playlists: playlists,
+            accessToken: accessToken,
+            authorID: authorID
+        };
+
+        const dataToSendStringify = JSON.stringify(dataToSend);
+
+
+        console.log(JSON.stringify(playlists));
+        console.log(accessToken);
+
+        const result = await fetch(`${ROOT_URL}/playlists/importManySpotify`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: dataToSendStringify
+        });
+
+        return await result.json();
+
+
+    }
 };
 
 export default PlaylistsService;

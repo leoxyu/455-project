@@ -10,9 +10,12 @@ import '../styles/SpSongPreview.css';
 import thumbnailImage from '../../../images/album-placeholder.png'
 import { useDispatch } from 'react-redux';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
+
+import { TYPE_TRACK } from '../../../typeConstants';
+
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, date, isFavorite, handleAddClick = () => { }, songObject }) => {
 
   const [showOptionsDialog, setShowOptionsDialog] = useState(false);
   const [showIcons, setShowIcons] = useState(true);
@@ -23,32 +26,19 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     if (songObject) {
       console.log(songObject)
       const parsed = {
-        name: songObject?.songName,
-        artist: songObject?.artist[0],
-        type: 'spotify',
-        link: songObject?.songLink,
-        imageLink: songObject?.thumbnailUrl
+
+        name: songObject.name,
+        artist: songObject.artist,
+        type: songObject.type,
+        link: songObject.link,
+        imageLink: songObject.imageLink,
+
       };
       setparsedSongObject(parsed);
     }
   }, [songObject]);
 
   const handlePlay = () => {
-    // TODO: look to change search schema so this doesn't need to happen
-    // let parsedSongObject;
-    // if (songObject.songName) {
-    //   // const url = songObject.songLink;
-    //   // const id = url.substring(url.lastIndexOf("/") + 1);
-    //   const artistName = songObject.artists[0];
-    //   parsedSongObject = {
-    //     songID: uuid(), // we need song id? can we just use the link
-    //     name: songObject.songName,
-    //     artist: artistName,
-    //     type: 'spotify',
-    //     link: songObject.songLink,
-    //     imageLink: songObject.thumbnailUrl
-    //   }
-    // }
 
     dispatch(setPlaylist({
       id: uuid(),
@@ -85,7 +75,9 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
         </div>
         <div className="details">
           <div className="name">{songName}</div>
+
           <div className="artist">{Array.isArray(artists) ? (artists.join(', ')) : artists}</div>
+
           <div className="artist-name">{artistName}</div>
         </div>
       </div>

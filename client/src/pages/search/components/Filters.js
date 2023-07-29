@@ -5,6 +5,7 @@ import '../styles/Filters.css';
 function Filters({ filters = ['All', 'Spotify', 'YouTube', 'Songs', 'Playlists', 'Albums', 'Artists'] }) {
   const [selectedFilter, setSelectedFilter] = useState('All');
 
+
   const handlePress = (event) => {
     const filter = event.target.textContent;
     setSelectedFilter(filter);

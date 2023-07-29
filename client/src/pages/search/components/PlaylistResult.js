@@ -10,12 +10,15 @@ import '../styles/SpAlbumPreview.css';
 import '../styles/SpPlaylistPreview.css';
 import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
-import {editPlaylistAsync, getOnePlaylist} from '../../../components/home/redux/thunks';
+import { editPlaylistAsync, getOnePlaylist } from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
-import Options2 from '../components/Options2';
+import Options2 from './Options2';
+import Options3 from './Options3';
 import thumbnailImage from '../../../images/album-placeholder.png'
 
-const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, songs=[], playlistLink, deleteOnClick, editOnClick}) => {
+import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
+
+const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, source, type, songs = [], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -105,35 +108,36 @@ const PlaylistResult = ({ playlistID='', className, thumbnailUrl, playlistName, 
 
   return (
     <div>
-    <div className={className}>
+      <div className={className}>
         <div className='essential-info'>
-            <div className="thumbnail-container">
-                <img className="thumbnail" src={thumbnailUrl ? thumbnailUrl : thumbnailImage} alt="Album Thumbnail" />
-                <PlayIcon className="play-icon" onClick={handlePlay}/>
+          <div className="thumbnail-container">
+            <img className="thumbnail" src={thumbnailUrl ? thumbnailUrl : thumbnailImage} alt="Album Thumbnail" />
+            <PlayIcon className="play-icon" onClick={handlePlay} />
+          </div>
+          <div className="details">
+            <div className="name">{playlistName}</div>
+            <div className="secondary-details">
+              <div className="date">{date}</div>
+              <div className="artist-name">{artistName}</div>
             </div>
-            <div className="details">
-                <div className="name">{playlistName}</div>
-                <div className="secondary-details">
-                <div className="date">{date}</div>
-                <div className="artist-name">{artistName}</div>
-                </div>
-                <div className="optional-details">
-                {songs.slice(0,3).map((song, i) => (
+            <div className="optional-details">
+              {songs.slice(0, 3).map((song, i) => (
                 <div key={i} className="song">{song.songName}</div>
-                ))}
-                </div>
+              ))}
             </div>
+          </div>
         </div>
         <div className="stats">
-            <HeartIcon className="heart-icon" onClick={handleFavorite}/>
-            <div className="duration">{duration}</div>
-            <div ref={optionsPopupRef}>
-              <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
-              <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit}/>
-            </div>
+          <HeartIcon className="heart-icon" onClick={handleFavorite} />
+          <div className="duration">{duration}</div>
+          <div ref={optionsPopupRef}>
+            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
+            {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} />}
+            {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={playlistLink} playlistType={type} saveOnClick={saveOnClick} />}
+          </div>
         </div>
       </div>
-        </div>
+    </div>
   );
 };
 

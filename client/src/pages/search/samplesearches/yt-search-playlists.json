@@ -1,0 +1,1015 @@
+{
+    "dateCreated": "2023-7-16",
+    "description": null,
+    "name": "KPOP 2023 - K-POP Songs 2023 - KPop Playlist",
+    "author": "#NewMusic Top Charts",
+    "isFavorited": false,
+    "coverImageURL": "https://i.ytimg.com/vi/7HDeem-JaSY/hqdefault.jpg",
+    "songs": [
+        {
+            "songID": "7HDeem-JaSY",
+            "artist": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+            "name": "(여자)아이들((G)I-DLE) - '퀸카 (Queencard)' Official Music Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=7HDeem-JaSY",
+            "imageLink": "https://i.ytimg.com/vi/7HDeem-JaSY/hqdefault.jpg",
+            "album": null,
+            "duration": "3:31"
+        },
+        {
+            "songID": "QU9c0053UAU",
+            "artist": "HYBE LABELS",
+            "name": "정국 (Jung Kook) 'Seven (feat. Latto)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=QU9c0053UAU",
+            "imageLink": "https://i.ytimg.com/vi/QU9c0053UAU/hqdefault.jpg",
+            "album": null,
+            "duration": "3:47"
+        },
+        {
+            "songID": "Os_heh8vPfs",
+            "artist": "SMTOWN",
+            "name": "aespa 에스파 'Spicy' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Os_heh8vPfs",
+            "imageLink": "https://i.ytimg.com/vi/Os_heh8vPfs/hqdefault.jpg",
+            "album": null,
+            "duration": "3:25"
+        },
+        {
+            "songID": "YudHcBIxlYw",
+            "artist": "BLACKPINK",
+            "name": "JISOO - ‘꽃(FLOWER)’ M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=YudHcBIxlYw",
+            "imageLink": "https://i.ytimg.com/vi/YudHcBIxlYw/hqdefault.jpg",
+            "album": null,
+            "duration": "3:05"
+        },
+        {
+            "songID": "ArmDp-zijuc",
+            "artist": "HYBE LABELS",
+            "name": "NewJeans (뉴진스) 'Super Shy' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=ArmDp-zijuc",
+            "imageLink": "https://i.ytimg.com/vi/ArmDp-zijuc/hqdefault.jpg",
+            "album": null,
+            "duration": "3:21"
+        },
+        {
+            "songID": "JsOOis4bBFg",
+            "artist": "JYP Entertainment",
+            "name": "Stray Kids \"특(S-Class)\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=JsOOis4bBFg",
+            "imageLink": "https://i.ytimg.com/vi/JsOOis4bBFg/hqdefault.jpg",
+            "album": null,
+            "duration": "3:31"
+        },
+        {
+            "songID": "wXFLzODIdUI",
+            "artist": "HYBE LABELS",
+            "name": "ENHYPEN (엔하이픈) 'Bite Me' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=wXFLzODIdUI",
+            "imageLink": "https://i.ytimg.com/vi/wXFLzODIdUI/hqdefault.jpg",
+            "album": null,
+            "duration": "3:09"
+        },
+        {
+            "songID": "lwAHfOhOONw",
+            "artist": "BANGTANTV",
+            "name": "Take Two",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=lwAHfOhOONw",
+            "imageLink": "https://i.ytimg.com/vi/lwAHfOhOONw/hqdefault.jpg",
+            "album": null,
+            "duration": "3:50"
+        },
+        {
+            "songID": "UBURTj20HXI",
+            "artist": "HYBE LABELS",
+            "name": "LE SSERAFIM (르세라핌) 'UNFORGIVEN (feat. Nile Rodgers)' OFFICIAL M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=UBURTj20HXI",
+            "imageLink": "https://i.ytimg.com/vi/UBURTj20HXI/hqdefault.jpg",
+            "album": null,
+            "duration": "4:20"
+        },
+        {
+            "songID": "2Hc1OjFxv-M",
+            "artist": "FNCEnt",
+            "name": "P1Harmony (피원하모니) – ‘JUMP’ MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=2Hc1OjFxv-M",
+            "imageLink": "https://i.ytimg.com/vi/2Hc1OjFxv-M/hqdefault.jpg",
+            "album": null,
+            "duration": "3:14"
+        },
+        {
+            "songID": "NFnAuiklEug",
+            "artist": "THEBLACKLABEL",
+            "name": "TAEYANG - ‘Shoong! (feat. LISA of BLACKPINK)’ PERFORMANCE VIDEO",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=NFnAuiklEug",
+            "imageLink": "https://i.ytimg.com/vi/NFnAuiklEug/hqdefault.jpg",
+            "album": null,
+            "duration": "3:30"
+        },
+        {
+            "songID": "C0EYKxF1oTI",
+            "artist": "HYBE LABELS",
+            "name": "TXT (투모로우바이투게더), Jonas Brothers 'Do It Like That' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=C0EYKxF1oTI",
+            "imageLink": "https://i.ytimg.com/vi/C0EYKxF1oTI/hqdefault.jpg",
+            "album": null,
+            "duration": "2:37"
+        },
+        {
+            "songID": "6ZUIwj3FgUY",
+            "artist": "starshipTV",
+            "name": "IVE 아이브 'I AM' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=6ZUIwj3FgUY",
+            "imageLink": "https://i.ytimg.com/vi/6ZUIwj3FgUY/hqdefault.jpg",
+            "album": null,
+            "duration": "3:05"
+        },
+        {
+            "songID": "dZs_cLHfnNA",
+            "artist": "HYBE LABELS",
+            "name": "LE SSERAFIM (르세라핌) 'Eve, Psyche & The Bluebeard's wife' OFFICIAL M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=dZs_cLHfnNA",
+            "imageLink": "https://i.ytimg.com/vi/dZs_cLHfnNA/hqdefault.jpg",
+            "album": null,
+            "duration": "3:48"
+        },
+        {
+            "songID": "-GQg25oP0S4",
+            "artist": "HYBE LABELS",
+            "name": "SEVENTEEN (세븐틴) '손오공' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=-GQg25oP0S4",
+            "imageLink": "https://i.ytimg.com/vi/-GQg25oP0S4/hqdefault.jpg",
+            "album": null,
+            "duration": "3:33"
+        },
+        {
+            "songID": "kcelgrGY1h8",
+            "artist": "HYBE LABELS",
+            "name": "NewJeans (뉴진스) 'New Jeans' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=kcelgrGY1h8",
+            "imageLink": "https://i.ytimg.com/vi/kcelgrGY1h8/hqdefault.jpg",
+            "album": null,
+            "duration": "3:31"
+        },
+        {
+            "songID": "b3GYcA7j5mg",
+            "artist": "Stray Kids",
+            "name": "Stray Kids \"TOPLINE (Feat. Tiger JK)\" Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=b3GYcA7j5mg",
+            "imageLink": "https://i.ytimg.com/vi/b3GYcA7j5mg/hqdefault.jpg",
+            "album": null,
+            "duration": "3:31"
+        },
+        {
+            "songID": "nOI67IDlNMQ",
+            "artist": "HYBE LABELS",
+            "name": "지민 (Jimin) 'Like Crazy' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=nOI67IDlNMQ",
+            "imageLink": "https://i.ytimg.com/vi/nOI67IDlNMQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:45"
+        },
+        {
+            "songID": "pG6iaOMV46I",
+            "artist": "starshipTV",
+            "name": "IVE 아이브 'Kitsch' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=pG6iaOMV46I",
+            "imageLink": "https://i.ytimg.com/vi/pG6iaOMV46I/hqdefault.jpg",
+            "album": null,
+            "duration": "3:22"
+        },
+        {
+            "songID": "uVD-YgzDzyY",
+            "artist": "HYBE LABELS",
+            "name": "Agust D 'People Pt.2 (feat. IU)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=uVD-YgzDzyY",
+            "imageLink": "https://i.ytimg.com/vi/uVD-YgzDzyY/hqdefault.jpg",
+            "album": null,
+            "duration": "4:30"
+        },
+        {
+            "songID": "w4cTYnOPdNk",
+            "artist": "JYP Entertainment",
+            "name": "TWICE \"SET ME FREE\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=w4cTYnOPdNk",
+            "imageLink": "https://i.ytimg.com/vi/w4cTYnOPdNk/hqdefault.jpg",
+            "album": null,
+            "duration": "3:32"
+        },
+        {
+            "songID": "Dc9CkC6n0Z8",
+            "artist": "KARD",
+            "name": "KARD - ICKY _ M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Dc9CkC6n0Z8",
+            "imageLink": "https://i.ytimg.com/vi/Dc9CkC6n0Z8/hqdefault.jpg",
+            "album": null,
+            "duration": "3:05"
+        },
+        {
+            "songID": "UaywgAqcLxI",
+            "artist": "HYBE LABELS",
+            "name": "지민 (Jimin) 'Set Me Free Pt.2' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=UaywgAqcLxI",
+            "imageLink": "https://i.ytimg.com/vi/UaywgAqcLxI/hqdefault.jpg",
+            "album": null,
+            "duration": "3:45"
+        },
+        {
+            "songID": "T6YVgEpRU6Q",
+            "artist": "XG",
+            "name": "XG - LEFT RIGHT (Official Music Video)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=T6YVgEpRU6Q",
+            "imageLink": "https://i.ytimg.com/vi/T6YVgEpRU6Q/hqdefault.jpg",
+            "album": null,
+            "duration": "3:45"
+        },
+        {
+            "songID": "2OjCMR8DGLg",
+            "artist": "AleXa • ZB Label",
+            "name": "AleXa (알렉사) – \"Bomb\" Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=2OjCMR8DGLg",
+            "imageLink": "https://i.ytimg.com/vi/2OjCMR8DGLg/hqdefault.jpg",
+            "album": null,
+            "duration": "4:20"
+        },
+        {
+            "songID": "Rr2i3L5LgeQ",
+            "artist": "KQ ENTERTAINMENT",
+            "name": "xikers(싸이커스) - 'ROCKSTAR' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Rr2i3L5LgeQ",
+            "imageLink": "https://i.ytimg.com/vi/Rr2i3L5LgeQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:33"
+        },
+        {
+            "songID": "r6WbbU_lLCA",
+            "artist": "HYBE LABELS",
+            "name": "j-hope 'on the street (with J. Cole)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=r6WbbU_lLCA",
+            "imageLink": "https://i.ytimg.com/vi/r6WbbU_lLCA/hqdefault.jpg",
+            "album": null,
+            "duration": "4:29"
+        },
+        {
+            "songID": "X6MAjL5LvuE",
+            "artist": "Apink (에이핑크)",
+            "name": "Apink 에이핑크 'D N D' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=X6MAjL5LvuE",
+            "imageLink": "https://i.ytimg.com/vi/X6MAjL5LvuE/hqdefault.jpg",
+            "album": null,
+            "duration": "3:14"
+        },
+        {
+            "songID": "ynOtYmpZxak",
+            "artist": "BABYMONSTER",
+            "name": "BABYMONSTER - 'DREAM' (PRE-DEBUT SONG)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=ynOtYmpZxak",
+            "imageLink": "https://i.ytimg.com/vi/ynOtYmpZxak/hqdefault.jpg",
+            "album": null,
+            "duration": "3:15"
+        },
+        {
+            "songID": "xSwJGduvM_g",
+            "artist": "SMTOWN",
+            "name": "SHINee 샤이니 'The Feeling' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=xSwJGduvM_g",
+            "imageLink": "https://i.ytimg.com/vi/xSwJGduvM_g/hqdefault.jpg",
+            "album": null,
+            "duration": "4:28"
+        },
+        {
+            "songID": "P9tKTxbgdkk",
+            "artist": "HYBE LABELS",
+            "name": "TXT (투모로우바이투게더) 'Sugar Rush Ride' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=P9tKTxbgdkk",
+            "imageLink": "https://i.ytimg.com/vi/P9tKTxbgdkk/hqdefault.jpg",
+            "album": null,
+            "duration": "3:33"
+        },
+        {
+            "songID": "selkk5MpGVo",
+            "artist": "THE BOYZ",
+            "name": "THE BOYZ(더보이즈) ‘ROAR’ MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=selkk5MpGVo",
+            "imageLink": "https://i.ytimg.com/vi/selkk5MpGVo/hqdefault.jpg",
+            "album": null,
+            "duration": "3:41"
+        },
+        {
+            "songID": "5eh6Vj_vVg4",
+            "artist": "JYP Entertainment",
+            "name": "NMIXX \"Young, Dumb, Stupid\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=5eh6Vj_vVg4",
+            "imageLink": "https://i.ytimg.com/vi/5eh6Vj_vVg4/hqdefault.jpg",
+            "album": null,
+            "duration": "3:49"
+        },
+        {
+            "songID": "MVjQIQGqNFM",
+            "artist": "Billlie",
+            "name": "Billlie | 'EUNOIA' M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=MVjQIQGqNFM",
+            "imageLink": "https://i.ytimg.com/vi/MVjQIQGqNFM/hqdefault.jpg",
+            "album": null,
+            "duration": "4:56"
+        },
+        {
+            "songID": "SxHmoifp0oQ",
+            "artist": "STAYC",
+            "name": "STAYC(스테이씨) 'Teddy Bear' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=SxHmoifp0oQ",
+            "imageLink": "https://i.ytimg.com/vi/SxHmoifp0oQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:24"
+        },
+        {
+            "songID": "KRgbVo4OTKQ",
+            "artist": "iKON",
+            "name": "iKON - 딴따라 Tantara MV Performance Ver",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=KRgbVo4OTKQ",
+            "imageLink": "https://i.ytimg.com/vi/KRgbVo4OTKQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:00"
+        },
+        {
+            "songID": "Qc7_zRjH808",
+            "artist": "FIFTY FIFTY Official",
+            "name": "FIFTY FIFTY (피프티피프티) - 'Cupid'  Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Qc7_zRjH808",
+            "imageLink": "https://i.ytimg.com/vi/Qc7_zRjH808/hqdefault.jpg",
+            "album": null,
+            "duration": "3:23"
+        },
+        {
+            "songID": "9PdH-zavwO4",
+            "artist": "Halsey",
+            "name": "Halsey, SUGA - Lilith (Diablo IV Anthem)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=9PdH-zavwO4",
+            "imageLink": "https://i.ytimg.com/vi/9PdH-zavwO4/hqdefault.jpg",
+            "album": null,
+            "duration": "3:01"
+        },
+        {
+            "songID": "-8jAmDvO64E",
+            "artist": "THEBLACKLABEL",
+            "name": "TAEYANG - ‘나의 마음에 (Seed)’ M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=-8jAmDvO64E",
+            "imageLink": "https://i.ytimg.com/vi/-8jAmDvO64E/hqdefault.jpg",
+            "album": null,
+            "duration": "4:21"
+        },
+        {
+            "songID": "POe9SOEKotk",
+            "artist": "BLACKPINK",
+            "name": "BLACKPINK - ‘Shut Down’ M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=POe9SOEKotk",
+            "imageLink": "https://i.ytimg.com/vi/POe9SOEKotk/hqdefault.jpg",
+            "album": null,
+            "duration": "3:01"
+        },
+        {
+            "songID": "R_BcG3q10k0",
+            "artist": "ONEUS",
+            "name": "ONEUS(원어스) ‘ERASE ME’ MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=R_BcG3q10k0",
+            "imageLink": "https://i.ytimg.com/vi/R_BcG3q10k0/hqdefault.jpg",
+            "album": null,
+            "duration": "3:17"
+        },
+        {
+            "songID": "sVTy_wmn5SU",
+            "artist": "HYBE LABELS",
+            "name": "NewJeans (뉴진스) 'OMG' Official MV (Performance ver.1)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=sVTy_wmn5SU",
+            "imageLink": "https://i.ytimg.com/vi/sVTy_wmn5SU/hqdefault.jpg",
+            "album": null,
+            "duration": "3:40"
+        },
+        {
+            "songID": "IwzkfMmNMpM",
+            "artist": "FIFA",
+            "name": "정국 Jung Kook (of BTS) featuring Fahad Al Kubaisi - Dreamers | FIFA World Cup 2022 Soundtrack",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=IwzkfMmNMpM",
+            "imageLink": "https://i.ytimg.com/vi/IwzkfMmNMpM/hqdefault.jpg",
+            "album": null,
+            "duration": "4:16"
+        },
+        {
+            "songID": "XIOoqJyx8E4",
+            "artist": "NewJeans",
+            "name": "NewJeans (뉴진스) 'Zero' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=XIOoqJyx8E4",
+            "imageLink": "https://i.ytimg.com/vi/XIOoqJyx8E4/hqdefault.jpg",
+            "album": null,
+            "duration": "3:20"
+        },
+        {
+            "songID": "c6ASQOwKkhk",
+            "artist": "HYBE LABELS",
+            "name": "진 (Jin) 'The Astronaut' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=c6ASQOwKkhk",
+            "imageLink": "https://i.ytimg.com/vi/c6ASQOwKkhk/hqdefault.jpg",
+            "album": null,
+            "duration": "5:20"
+        },
+        {
+            "songID": "Km71Rr9K-Bw",
+            "artist": "NewJeans",
+            "name": "NewJeans (뉴진스) 'Ditto' Performance Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Km71Rr9K-Bw",
+            "imageLink": "https://i.ytimg.com/vi/Km71Rr9K-Bw/hqdefault.jpg",
+            "album": null,
+            "duration": "3:10"
+        },
+        {
+            "songID": "cXCBiF67jLM",
+            "artist": "THEBLACKLABEL",
+            "name": "TAEYANG - 'VIBE (feat. Jimin of BTS)' M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=cXCBiF67jLM",
+            "imageLink": "https://i.ytimg.com/vi/cXCBiF67jLM/hqdefault.jpg",
+            "album": null,
+            "duration": "2:59"
+        },
+        {
+            "songID": "SszP3hlQ55Y",
+            "artist": "KQ ENTERTAINMENT",
+            "name": "ATEEZ(에이티즈) - 'HALAZIA' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=SszP3hlQ55Y",
+            "imageLink": "https://i.ytimg.com/vi/SszP3hlQ55Y/hqdefault.jpg",
+            "album": null,
+            "duration": "4:25"
+        },
+        {
+            "songID": "3TQd2ahq6oU",
+            "artist": "tripleS official",
+            "name": "트리플에스(tripleS) 'Rising' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=3TQd2ahq6oU",
+            "imageLink": "https://i.ytimg.com/vi/3TQd2ahq6oU/hqdefault.jpg",
+            "album": null,
+            "duration": "3:09"
+        },
+        {
+            "songID": "zugAhfd2r0g",
+            "artist": "JYP Entertainment",
+            "name": "ITZY “Cheshire” M/V @ITZY",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=zugAhfd2r0g",
+            "imageLink": "https://i.ytimg.com/vi/zugAhfd2r0g/hqdefault.jpg",
+            "album": null,
+            "duration": "3:08"
+        },
+        {
+            "songID": "k6jqx9kZgPM",
+            "artist": "JYP Entertainment",
+            "name": "TWICE \"Talk that Talk\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=k6jqx9kZgPM",
+            "imageLink": "https://i.ytimg.com/vi/k6jqx9kZgPM/hqdefault.jpg",
+            "album": null,
+            "duration": "2:55"
+        },
+        {
+            "songID": "2zXg8CbymYc",
+            "artist": "starshipTV",
+            "name": "MONSTA X 몬스타엑스 'Beautiful Liar' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=2zXg8CbymYc",
+            "imageLink": "https://i.ytimg.com/vi/2zXg8CbymYc/hqdefault.jpg",
+            "album": null,
+            "duration": "3:24"
+        },
+        {
+            "songID": "u18be_kRmC0",
+            "artist": "HYBE LABELS",
+            "name": "RM 'Wild Flower (with youjeen)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=u18be_kRmC0",
+            "imageLink": "https://i.ytimg.com/vi/u18be_kRmC0/hqdefault.jpg",
+            "album": null,
+            "duration": "4:49"
+        },
+        {
+            "songID": "Hbb5GPxXF1w",
+            "artist": "JYP Entertainment",
+            "name": "ITZY “SNEAKERS” M/V @ITZY",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Hbb5GPxXF1w",
+            "imageLink": "https://i.ytimg.com/vi/Hbb5GPxXF1w/hqdefault.jpg",
+            "album": null,
+            "duration": "3:05"
+        },
+        {
+            "songID": "F0B7HDiY-10",
+            "artist": "starshipTV",
+            "name": "IVE 아이브 'After LIKE' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=F0B7HDiY-10",
+            "imageLink": "https://i.ytimg.com/vi/F0B7HDiY-10/hqdefault.jpg",
+            "album": null,
+            "duration": "3:01"
+        },
+        {
+            "songID": "Ut1OzEVUiM4",
+            "artist": "SMTOWN",
+            "name": "Red Velvet 레드벨벳 'Birthday' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Ut1OzEVUiM4",
+            "imageLink": "https://i.ytimg.com/vi/Ut1OzEVUiM4/hqdefault.jpg",
+            "album": null,
+            "duration": "4:05"
+        },
+        {
+            "songID": "pyf8cbqyfPs",
+            "artist": "HYBE LABELS",
+            "name": "LE SSERAFIM (르세라핌) 'ANTIFRAGILE' OFFICIAL M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=pyf8cbqyfPs",
+            "imageLink": "https://i.ytimg.com/vi/pyf8cbqyfPs/hqdefault.jpg",
+            "album": null,
+            "duration": "3:52"
+        },
+        {
+            "songID": "Vz508O9NNTg",
+            "artist": "MAMAMOO",
+            "name": "[MV] 마마무 (MAMAMOO) - ILLELLA (일낼라)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Vz508O9NNTg",
+            "imageLink": "https://i.ytimg.com/vi/Vz508O9NNTg/hqdefault.jpg",
+            "album": null,
+            "duration": "3:29"
+        },
+        {
+            "songID": "p1bjnyDqI9k",
+            "artist": "JYP Entertainment",
+            "name": "NMIXX \"DICE\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=p1bjnyDqI9k",
+            "imageLink": "https://i.ytimg.com/vi/p1bjnyDqI9k/hqdefault.jpg",
+            "album": null,
+            "duration": "3:19"
+        },
+        {
+            "songID": "fCO7f0SmrDc",
+            "artist": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+            "name": "(G)I-DLE - 'Nxde' Official Music Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=fCO7f0SmrDc",
+            "imageLink": "https://i.ytimg.com/vi/fCO7f0SmrDc/hqdefault.jpg",
+            "album": null,
+            "duration": "3:04"
+        },
+        {
+            "songID": "f6YDKF0LVWw",
+            "artist": "JYP Entertainment",
+            "name": "NAYEON \"POP!\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=f6YDKF0LVWw",
+            "imageLink": "https://i.ytimg.com/vi/f6YDKF0LVWw/hqdefault.jpg",
+            "album": null,
+            "duration": "2:51"
+        },
+        {
+            "songID": "dYRITmpFbJ4",
+            "artist": "SMTOWN",
+            "name": "aespa 에스파 'Girls' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=dYRITmpFbJ4",
+            "imageLink": "https://i.ytimg.com/vi/dYRITmpFbJ4/hqdefault.jpg",
+            "album": null,
+            "duration": "4:29"
+        },
+        {
+            "songID": "kXpOEzNZ8hQ",
+            "artist": "HYBE LABELS",
+            "name": "BTS (방탄소년단) 'Yet To Come (The Most Beautiful Moment)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=kXpOEzNZ8hQ",
+            "imageLink": "https://i.ytimg.com/vi/kXpOEzNZ8hQ/hqdefault.jpg",
+            "album": null,
+            "duration": "4:41"
+        },
+        {
+            "songID": "6uZy86ePgO0",
+            "artist": "JYP Entertainment",
+            "name": "ITZY “Boys Like You” M/V @ITZY",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=6uZy86ePgO0",
+            "imageLink": "https://i.ytimg.com/vi/6uZy86ePgO0/hqdefault.jpg",
+            "album": null,
+            "duration": "4:26"
+        },
+        {
+            "songID": "gQlMMD8auMs",
+            "artist": "BLACKPINK",
+            "name": "BLACKPINK - ‘Pink Venom’ M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=gQlMMD8auMs",
+            "imageLink": "https://i.ytimg.com/vi/gQlMMD8auMs/hqdefault.jpg",
+            "album": null,
+            "duration": "3:14"
+        },
+        {
+            "songID": "jYSlpC6Ud2A",
+            "artist": "JYP Entertainment",
+            "name": "Stray Kids \"CASE 143\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=jYSlpC6Ud2A",
+            "imageLink": "https://i.ytimg.com/vi/jYSlpC6Ud2A/hqdefault.jpg",
+            "album": null,
+            "duration": "3:41"
+        },
+        {
+            "songID": "QmpTkkaKYSU",
+            "artist": "HYBE LABELS",
+            "name": "j-hope '방화 (Arson)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=QmpTkkaKYSU",
+            "imageLink": "https://i.ytimg.com/vi/QmpTkkaKYSU/hqdefault.jpg",
+            "album": null,
+            "duration": "2:59"
+        },
+        {
+            "songID": "QfIY1r0_tRI",
+            "artist": "BIBI",
+            "name": "비비 (BIBI) - 나쁜년 (BIBI Vengeance) Official M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=QfIY1r0_tRI",
+            "imageLink": "https://i.ytimg.com/vi/QfIY1r0_tRI/hqdefault.jpg",
+            "album": null,
+            "duration": "4:55"
+        },
+        {
+            "songID": "r4wVoQsJUGw",
+            "artist": "KONNECT Entertainment",
+            "name": "강다니엘(KANGDANIEL) - Nirvana (Feat. pH-1, WDBZ) M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=r4wVoQsJUGw",
+            "imageLink": "https://i.ytimg.com/vi/r4wVoQsJUGw/hqdefault.jpg",
+            "album": null,
+            "duration": "3:40"
+        },
+        {
+            "songID": "2vfmL4q2koo",
+            "artist": "HYBE LABELS",
+            "name": "RM 'Still Life (with Anderson .Paak)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=2vfmL4q2koo",
+            "imageLink": "https://i.ytimg.com/vi/2vfmL4q2koo/hqdefault.jpg",
+            "album": null,
+            "duration": "3:14"
+        },
+        {
+            "songID": "IZ0oQ6nzKxo",
+            "artist": "GOT7",
+            "name": "GOT7 \"NANANA\" OFFICIAL M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=IZ0oQ6nzKxo",
+            "imageLink": "https://i.ytimg.com/vi/IZ0oQ6nzKxo/hqdefault.jpg",
+            "album": null,
+            "duration": "3:09"
+        },
+        {
+            "songID": "a7GITgqwDVg",
+            "artist": "Charlie Puth",
+            "name": "Charlie Puth - Left And Right (feat. Jung Kook of BTS) [Official Video]",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=a7GITgqwDVg",
+            "imageLink": "https://i.ytimg.com/vi/a7GITgqwDVg/hqdefault.jpg",
+            "album": null,
+            "duration": "2:40"
+        },
+        {
+            "songID": "r5n1GCY-nYQ",
+            "artist": "iKON",
+            "name": "iKON - '너라는 이유 (BUT YOU)' M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=r5n1GCY-nYQ",
+            "imageLink": "https://i.ytimg.com/vi/r5n1GCY-nYQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:44"
+        },
+        {
+            "songID": "5UdoUmvu_n8",
+            "artist": "TRI_BE 트라이비 Official Channel",
+            "name": "TRI.BE - KISS",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=5UdoUmvu_n8",
+            "imageLink": "https://i.ytimg.com/vi/5UdoUmvu_n8/hqdefault.jpg",
+            "album": null,
+            "duration": "3:08"
+        },
+        {
+            "songID": "Qpf26PtBXgo",
+            "artist": "SMTOWN",
+            "name": "Girls' Generation 소녀시대 'FOREVER 1' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Qpf26PtBXgo",
+            "imageLink": "https://i.ytimg.com/vi/Qpf26PtBXgo/hqdefault.jpg",
+            "album": null,
+            "duration": "3:34"
+        },
+        {
+            "songID": "js1CtxSY38I",
+            "artist": "HYBE LABELS",
+            "name": "NewJeans (뉴진스) 'Attention' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=js1CtxSY38I",
+            "imageLink": "https://i.ytimg.com/vi/js1CtxSY38I/hqdefault.jpg",
+            "album": null,
+            "duration": "4:23"
+        },
+        {
+            "songID": "VCDWg0ljbFQ",
+            "artist": "HYBE LABELS",
+            "name": "SEVENTEEN (세븐틴) '_WORLD' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=VCDWg0ljbFQ",
+            "imageLink": "https://i.ytimg.com/vi/VCDWg0ljbFQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:37"
+        },
+        {
+            "songID": "VQo4hyWfBQ4",
+            "artist": "BLACKPINK",
+            "name": "BLACKPINK - ‘Tally’ (Official Audio)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=VQo4hyWfBQ4",
+            "imageLink": "https://i.ytimg.com/vi/VQo4hyWfBQ4/hqdefault.jpg",
+            "album": null,
+            "duration": "3:05"
+        },
+        {
+            "songID": "juQvizeZJFM",
+            "artist": "STAYC",
+            "name": "STAYC(스테이씨) 'BEAUTIFUL MONSTER' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=juQvizeZJFM",
+            "imageLink": "https://i.ytimg.com/vi/juQvizeZJFM/hqdefault.jpg",
+            "album": null,
+            "duration": "3:01"
+        },
+        {
+            "songID": "aVatpxBTfZs",
+            "artist": "XG",
+            "name": "XG - MASCARA (Official Music Video)",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=aVatpxBTfZs",
+            "imageLink": "https://i.ytimg.com/vi/aVatpxBTfZs/hqdefault.jpg",
+            "album": null,
+            "duration": "3:20"
+        },
+        {
+            "songID": "4C7xGubTL90",
+            "artist": "THE NEW SIX (TNX)",
+            "name": "TNX - '비켜 (MOVE)' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=4C7xGubTL90",
+            "imageLink": "https://i.ytimg.com/vi/4C7xGubTL90/hqdefault.jpg",
+            "album": null,
+            "duration": "3:51"
+        },
+        {
+            "songID": "ukIGxgdbqqI",
+            "artist": "JYP Entertainment",
+            "name": "Stray Kids \"Time Out\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=ukIGxgdbqqI",
+            "imageLink": "https://i.ytimg.com/vi/ukIGxgdbqqI/hqdefault.jpg",
+            "album": null,
+            "duration": "4:12"
+        },
+        {
+            "songID": "JC6budcACNE",
+            "artist": "HYBE LABELS",
+            "name": "fromis_9 (프로미스나인) 'Stay This Way' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=JC6budcACNE",
+            "imageLink": "https://i.ytimg.com/vi/JC6budcACNE/hqdefault.jpg",
+            "album": null,
+            "duration": "3:33"
+        },
+        {
+            "songID": "G_BYjnopO6U",
+            "artist": "SMTOWN",
+            "name": "SEULGI 슬기 '28 Reasons' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=G_BYjnopO6U",
+            "imageLink": "https://i.ytimg.com/vi/G_BYjnopO6U/hqdefault.jpg",
+            "album": null,
+            "duration": "3:47"
+        },
+        {
+            "songID": "6j928wBZ_Bo",
+            "artist": "Jessi",
+            "name": "Jessi (제시) - 'ZOOM' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=6j928wBZ_Bo",
+            "imageLink": "https://i.ytimg.com/vi/6j928wBZ_Bo/hqdefault.jpg",
+            "album": null,
+            "duration": "3:03"
+        },
+        {
+            "songID": "z0YLZmcARRU",
+            "artist": "starshipTV",
+            "name": "우주소녀 WJSN 'Last Sequence' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=z0YLZmcARRU",
+            "imageLink": "https://i.ytimg.com/vi/z0YLZmcARRU/hqdefault.jpg",
+            "album": null,
+            "duration": "3:12"
+        },
+        {
+            "songID": "hr-325mclek",
+            "artist": "Kep1er",
+            "name": "Kep1er 케플러 l 'Up!' M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=hr-325mclek",
+            "imageLink": "https://i.ytimg.com/vi/hr-325mclek/hqdefault.jpg",
+            "album": null,
+            "duration": "3:19"
+        },
+        {
+            "songID": "bagFQCTHXy8",
+            "artist": "SMTOWN",
+            "name": "NCT DREAM 엔시티 드림 'Beatbox' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=bagFQCTHXy8",
+            "imageLink": "https://i.ytimg.com/vi/bagFQCTHXy8/hqdefault.jpg",
+            "album": null,
+            "duration": "3:57"
+        },
+        {
+            "songID": "jW-bkbSWb4A",
+            "artist": "Stray Kids Japan Official YouTube",
+            "name": "Stray Kids 『CIRCUS』 Music Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=jW-bkbSWb4A",
+            "imageLink": "https://i.ytimg.com/vi/jW-bkbSWb4A/hqdefault.jpg",
+            "album": null,
+            "duration": "3:20"
+        },
+        {
+            "songID": "QMlNLo74mOw",
+            "artist": "HYBE LABELS",
+            "name": "ENHYPEN (엔하이픈) 'Future Perfect (Pass the MIC)' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=QMlNLo74mOw",
+            "imageLink": "https://i.ytimg.com/vi/QMlNLo74mOw/hqdefault.jpg",
+            "album": null,
+            "duration": "3:24"
+        },
+        {
+            "songID": "VOmIplFAGeg",
+            "artist": "HYBE LABELS",
+            "name": "NewJeans (뉴진스) 'Cookie' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=VOmIplFAGeg",
+            "imageLink": "https://i.ytimg.com/vi/VOmIplFAGeg/hqdefault.jpg",
+            "album": null,
+            "duration": "3:59"
+        },
+        {
+            "songID": "pKdBFeewZYE",
+            "artist": "HYBE LABELS",
+            "name": "j-hope 'MORE' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=pKdBFeewZYE",
+            "imageLink": "https://i.ytimg.com/vi/pKdBFeewZYE/hqdefault.jpg",
+            "album": null,
+            "duration": "3:28"
+        },
+        {
+            "songID": "5huBq36OLDs",
+            "artist": "fantagio 판타지오",
+            "name": "ASTRO 아스트로 - Candy Sugar Pop M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=5huBq36OLDs",
+            "imageLink": "https://i.ytimg.com/vi/5huBq36OLDs/hqdefault.jpg",
+            "album": null,
+            "duration": "2:54"
+        },
+        {
+            "songID": "gRnuFC4Ualw",
+            "artist": "HYBE LABELS",
+            "name": "SEVENTEEN (세븐틴) 'HOT' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=gRnuFC4Ualw",
+            "imageLink": "https://i.ytimg.com/vi/gRnuFC4Ualw/hqdefault.jpg",
+            "album": null,
+            "duration": "3:20"
+        },
+        {
+            "songID": "Jh4QFaPmdss",
+            "artist": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+            "name": "(G)I-DLE - 'TOMBOY' Official Music Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Jh4QFaPmdss",
+            "imageLink": "https://i.ytimg.com/vi/Jh4QFaPmdss/hqdefault.jpg",
+            "album": null,
+            "duration": "3:18"
+        },
+        {
+            "songID": "Os_6c5j6YiQ",
+            "artist": "HYBE LABELS",
+            "name": "TXT (투모로우바이투게더) 'Good Boy Gone Bad' Official MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=Os_6c5j6YiQ",
+            "imageLink": "https://i.ytimg.com/vi/Os_6c5j6YiQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:36"
+        },
+        {
+            "songID": "R9At2ICm4LQ",
+            "artist": "SMTOWN",
+            "name": "Red Velvet 레드벨벳 'Feel My Rhythm' MV",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=R9At2ICm4LQ",
+            "imageLink": "https://i.ytimg.com/vi/R9At2ICm4LQ/hqdefault.jpg",
+            "album": null,
+            "duration": "3:58"
+        },
+        {
+            "songID": "pM-jOfy_1jM",
+            "artist": "Stray Kids",
+            "name": "Stray Kids \"거미줄(VENOM)\" Video",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=pM-jOfy_1jM",
+            "imageLink": "https://i.ytimg.com/vi/pM-jOfy_1jM/hqdefault.jpg",
+            "album": null,
+            "duration": "3:22"
+        },
+        {
+            "songID": "3GWscde8rM8",
+            "artist": "JYP Entertainment",
+            "name": "NMIXX \"O.O\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=3GWscde8rM8",
+            "imageLink": "https://i.ytimg.com/vi/3GWscde8rM8/hqdefault.jpg",
+            "album": null,
+            "duration": "3:34"
+        },
+        {
+            "songID": "OvioeS1ZZ7o",
+            "artist": "JYP Entertainment",
+            "name": "Stray Kids \"MANIAC\" M/V",
+            "type": "youtube",
+            "link": "https://youtube.com/watch?v=OvioeS1ZZ7o",
+            "imageLink": "https://i.ytimg.com/vi/OvioeS1ZZ7o/hqdefault.jpg",
+            "album": null,
+            "duration": "3:23"
+        }
+    ],
+    "originId": "PLOHoVaTp8R7dfrJW5pumS0iD_dhlXKv17",
+    "isAlbum": false,
+    "duration": 100,
+    "popularity": 142944169,
+    "type": "youtube"
+}

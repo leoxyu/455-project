@@ -5,9 +5,11 @@ const querystring = require('querystring');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const ROOT_URL = 'http://localhost:3001';
+
 const client_id = 'e44db89e494a47529355c4401180f251';
 const client_secret = '4b1f65eda5464bfabb44593e87284d9f'; // important to protect this one
-const redirect_uri = 'http://localhost:3001/spotify/callback';
+const redirect_uri = `${ROOT_URL}/spotify/callback`;
 
 let access_token = null;
 let refresh_token = null;
