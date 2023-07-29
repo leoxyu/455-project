@@ -23,7 +23,12 @@ const App = () => {
           path="/login"
           element={<LoginPage />}
         />
-        <Route
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/songs" element={<SongPage />} />
+        <Route path="/playlists" element={<PlaylistsPage />} />
+        <Route path="/currentPlaylist" element={<CurrentPlaylistPage />} />
+        {/* <Route
           path="/*"
           element={
             userId ? (
@@ -48,7 +53,7 @@ const App = () => {
               <Navigate to="/login" replace={true} />
             )
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   );
