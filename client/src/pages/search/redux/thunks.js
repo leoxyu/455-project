@@ -5,7 +5,7 @@ import UserService from './service';
 
 export const getSpotifyAsync = createAsyncThunk(
     actionTypes.GET_SPOTIFY,
-    async ({accessToken, query, type}) => {
+    async ({ accessToken, query, type }) => {
         return await UserService.getSpotify(accessToken, query, type);
     }
 );
@@ -13,7 +13,7 @@ export const getSpotifyAsync = createAsyncThunk(
 
 export const getNextSpotifyAsync = createAsyncThunk(
     actionTypes.GET_NEXT_SPOTIFY_TRACKS,
-    async ({accessToken, cookieId, type}) => {
+    async ({ accessToken, cookieId, type }) => {
         return await UserService.getSpotifyNext(accessToken, cookieId, type);
     }
 );
@@ -21,7 +21,7 @@ export const getNextSpotifyAsync = createAsyncThunk(
 
 export const getYoutubeAsync = createAsyncThunk(
     actionTypes.GET_YOUTUBE,
-    async ({query, type}) => {
+    async ({ query, type }) => {
         return await UserService.getYoutube(query, type);
     }
 );
@@ -29,7 +29,14 @@ export const getYoutubeAsync = createAsyncThunk(
 
 export const getNextYoutubeAsync = createAsyncThunk(
     actionTypes.GET_NEXT_YOUTUBE,
-    async ({cookieId, type}) => {
+    async ({ cookieId, type }) => {
         return await UserService.getYoutubeNext(cookieId, type);
+    }
+);
+
+export const getYoutubePlaylistByIDAsync = createAsyncThunk(
+    actionTypes.GET_YOUTUBE_PLAYLIST_BY_ID,
+    async (id) => {
+        return await UserService.getYoutubePlaylistByID(id, true);
     }
 );

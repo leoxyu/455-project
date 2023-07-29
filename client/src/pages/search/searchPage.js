@@ -10,11 +10,10 @@ import PlaylistResult from './components/PlaylistResult';
 import Filters from './components/Filters';
 import PlaylistCreator from '../playlists/components/PlaylistCreator';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSpotifyAsync, getYoutubeAsync } from './redux/thunks';
+import { getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync } from './redux/thunks';
 import debounce from 'lodash.debounce';
 
-import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
-
+import { createPlaylistAsync, spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2 } from '../../typeConstants';
 
 // import ScrollingComponent from './ScrollingComponent';
@@ -28,8 +27,6 @@ const SearchPage = () => {
 
   useEffect(() => {
     document.title = "Uni.fi - Search"; // Change the webpage title
-
-
 
   }, []);
 
@@ -47,12 +44,6 @@ const SearchPage = () => {
   const authorID = useSelector(state => state.login.authorID);
 
   // artists
-
-
-
-
-
-
   const dispatch = useDispatch();
 
   const performSearch = debounce((searchTerm) => {
@@ -80,38 +71,51 @@ const SearchPage = () => {
     setCreatorVisible(true);
   }
 
-  const saveOnClick = (playlistLink, playlistType) => {
+  const saveOnClick = (playlistLink, playlistType, source) => {
 
     console.log("Inside saveOnClick()");
+    console.log(playlistLink);
+    console.log(playlistType);
+    if (source === TYPE_SPOTIFY) {
+      if (playlistLink && playlistType && typeof (playlistLink) === 'string') {
 
-    if (playlistLink && playlistType && typeof (playlistLink) === 'string') {
+        const urlArray = playlistLink.split(':');
 
-      const urlArray = playlistLink.split(':');
+        const spotifyID = urlArray[urlArray.length - 1];
 
-      const spotifyID = urlArray[urlArray.length - 1];
+        const parsedPlaylistObject = {
+          id: spotifyID,
+          playlistType: playlistType,
+        }
+        console.log(parsedPlaylistObject);
+        console.log(accessToken);
 
-      const parsedPlaylistObject = {
-        id: spotifyID,
-        playlistType: playlistType,
+        const parsedParam = {
+          playlists: [parsedPlaylistObject],
+          accessToken,
+          authorID
+        };
+
+        dispatch(spotifyGetManyPlaylistsThunk(parsedParam))
+          .then((res) => {
+            console.log("res: ");
+            console.log(res);
+          });
+
+      } else {
+        console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
       }
-      console.log(parsedPlaylistObject);
-      console.log(accessToken);
-
-      const parsedParam = {
-        playlists: [parsedPlaylistObject],
-        accessToken,
-        authorID
-      };
-
-      dispatch(spotifyGetManyPlaylistsThunk(parsedParam))
+    } else if (source === TYPE_YOUTUBE) {
+      dispatch(getYoutubePlaylistByIDAsync(playlistLink))
         .then((res) => {
           console.log("res: ");
-          console.log(res);
-        });
-
+          console.log(res.payload);
+          // dispatch(createPlaylistAsync(res.payload));
+        })
     } else {
-      console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
+      console.log(`Unexpected platform [${source}] for playlist`);
     }
+
 
     // make API call here...
   }
@@ -216,8 +220,8 @@ const SearchPage = () => {
               songLink={song.link}
               platform={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
 
-              // new changes
-              // isFavorite={false}
+            // new changes
+            // isFavorite={false}
             />
           ))}
 
@@ -244,7 +248,8 @@ const SearchPage = () => {
               // duration={playlist.duration}
               source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}
-              optionType={OPTIONS_TYPE2}
+              optionType={OPTIONS_TYPE3}
+              saveOnClick={saveOnClick}
             />
           ))}
         </div>

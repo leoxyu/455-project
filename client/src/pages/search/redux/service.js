@@ -1,5 +1,6 @@
-
+import { getAuthorID } from "../../../util";
 const BASE_URL = 'https://uni-fi.onrender.com/';
+
 async function getSpotify(accessToken, query, type) {
     var url = BASE_URL + 'sp-search';
     // Build the query string with search parameters
@@ -96,12 +97,32 @@ async function getYoutubeNext(cookieId, type) {
     return data;
 }
 
+async function getYoutubePlaylistByID(id, pushToDatabase = false) {
+    const authorID = getAuthorID();
+    let url = BASE_URL + `yt-search/playlists/${id}`;
+    const queryParams = new URLSearchParams();
+    queryParams.append('pushToDatabase', pushToDatabase);
+    queryParams.append('authorID', authorID);
+    if (queryParams.toString()) {
+        url += `?${queryParams.toString()}`;
+    }
+    const response = await fetch(url, {
+        method: 'GET'
+    });
 
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+    }
+    return data;
+}
 
 
 export default {
     getSpotify,
     getSpotifyNext,
     getYoutube,
-    getYoutubeNext
+    getYoutubeNext,
+    getYoutubePlaylistByID
 };

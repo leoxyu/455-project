@@ -4,16 +4,13 @@ const { v4: uuid } = require('uuid');
 
 const { MongoClient, ObjectId } = require("mongodb");
 const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
-const {TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY} = require("../shared/playlistTypeConstants");
+const { TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY } = require("../shared/playlistTypeConstants");
 // const querystring = require('querystring');
 require('dotenv').config();
 
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION);
-
-
-
 
 
 playlistsRouter.post('/', async (req, res, next) => {
@@ -147,17 +144,20 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       } else {
         return Promise.reject(response);
       }
+
     }).then(data => getTracksHelper(accessToken, data.tracks.href, {
       playlistID: uuid(),
       dateCreated: data.type === TYPE_ALBUM ? data.release_date : new Date(), // sets to releaseDate if album. Playlist don't have a release date, so just set to import/creation time
       description: data.description,
       name: data.name,
       author: new ObjectId(authorID), // TODO: objectid of the user who is importing the playlist
+
       isFavorited: false,
       coverImageURL: data.images[0].url,
       songs: [],
       originSpotifyId: data.id,
       isAlbum: data.type === TYPE_ALBUM ? true : false,
+
     })
     ).then(async (playlist) => {
       // console.log(playlist);
@@ -168,7 +168,6 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   }))
     .then(outcomes => {
       if (!outcomes.some((o) => o.status === "fulfilled")) {
-        console.log(outcomes);
         return res.status(500).send(outcomes);
       }
       return res.status(200).send(outcomes);
