@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Navigate, HashRouter} from 'react-router-dom';
 
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
@@ -17,7 +17,7 @@ import Menu from './components/nav/navBar';
 const App = () => {
   const userId = useSelector(state => state.login.id);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/login"
@@ -50,7 +50,7 @@ const App = () => {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
