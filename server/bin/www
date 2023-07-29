@@ -8,11 +8,6 @@ var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
 
-// Always serve the index.html file for any route
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 /**
  * Get port from environment and store in Express.
  */
