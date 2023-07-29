@@ -4,15 +4,13 @@ const { v4: uuid } = require('uuid');
 
 const { MongoClient, ObjectId } = require("mongodb");
 const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+const { TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY } = require("../shared/playlistTypeConstants");
 // const querystring = require('querystring');
 require('dotenv').config();
 
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION);
-
-
-
 
 
 playlistsRouter.post('/', async (req, res, next) => {
@@ -38,32 +36,56 @@ playlistsRouter.post('/', async (req, res, next) => {
 
 
 function getTracksHelper(access_token, next, playlist) {
+
+  console.log("\r\ninside getTrackHelper");
+  console.log("\r\nplaylist.isAlbum: ", playlist.isAlbum);
+
   // if next link is null, dont do anything
   return next ? fetch(next, {
     method: "GET",
     headers: { Authorization: `Bearer ${access_token}` }
   }).then(response => {
     if (response.status === 200) {
-        return response.json();
+      return response.json();
     } else {
       return Promise.reject(response);
     }
   }).then(data => {
     // console.log(data);
     for (const i of data.items) {
-      playlist.songs.push(
-        {
+
+      if (playlist.isAlbum) {
+        // playlist is TYPE_ALBUM
+        const parsedTrack = {
+          songID: uuid(),
+          artist: i.artists[0].name,
+          name: i.name,
+          type: TYPE_SPOTIFY,
+          link: i.uri,
+          imageLink: playlist.coverImageURL,
+          album: playlist.name,
+          duration: i.duration_ms,
+          releaseDate: playlist.dateCreated,
+        };
+        console.log(parsedTrack);
+        playlist.songs.push(parsedTrack);
+      } else {
+        // playlist is TYPE_PLAYLIST
+        const parsedTrack = {
           songID: uuid(),
           artist: i.track.artists[0].name,
           name: i.track.name,
-          type: 'spotify',
+          type: TYPE_SPOTIFY,
           link: i.track.uri,
           imageLink: i.track.album.images[0].url,
           album: i.track.album.name,
           duration: i.track.duration_ms,
           releaseDate: i.track.album.release_date,
-        }
-      );
+        };
+        console.log(parsedTrack);
+        playlist.songs.push(parsedTrack);
+      }
+
     }
     if (data.next) {
       return getTracksHelper(access_token, data.next, playlist);
@@ -71,48 +93,85 @@ function getTracksHelper(access_token, next, playlist) {
       return playlist;
     }
   }) // don't catch, let error bubble up to route handler
-  :
-  playlist;
+    :
+    playlist;
 }
 
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
-  const { playlistIDs, access_token } = req.body;
 
-  Promise.allSettled(playlistIDs?.map(id => {
-    return fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+  console.log("inside importManySpotify");
+  console.log(req.body);
+
+
+  const { playlists, accessToken, authorID } = req.body;
+
+  // console.log("\r\nreq body: ");
+  // console.log(req.body);
+
+  // console.log("\r\nplaylistIDs: ");
+  // console.log(playlists);
+
+  // console.log("\r\naccess_token: ");
+  // console.log(accessToken);
+
+  console.log("\r\nauthorID: ");
+  console.log(authorID);
+
+
+
+  Promise.allSettled(playlists?.map(playlist => {
+
+    const type = playlist.playlistType;
+    console.log(type);
+
+    let queryUrl;
+
+    if (type === TYPE_PLAYLIST) queryUrl = `https://api.spotify.com/v1/playlists/${playlist.id}`;
+    else if (type === TYPE_ALBUM) queryUrl = `https://api.spotify.com/v1/albums/${playlist.id}`;
+    else {
+      return res.status(400).send({ error: "one of the playlists ID's had invalid type (not playlist or album)" });
+    }
+
+
+    return fetch(queryUrl, {
       method: "GET",
-      headers: { Authorization: `Bearer ${access_token}` }
+      headers: { Authorization: `Bearer ${accessToken}` }
     }).then(response => {
+
       if (response.status === 200) {
-          return response.json();
+        return response.json();
       } else {
         return Promise.reject(response);
       }
-    }).then(data => getTracksHelper(access_token, data.tracks.href, {
-        playlistID: uuid(),
-        dateCreated: new Date(),
-        description: data.description,
-        name: data.name,
-        author: new ObjectId(), // TODO: objectid of the user who is importing the playlist
-        isFavorited: false,
-        coverImageURL: data.images[0].url,
-        songs: [],
-        originSpotifyId: data.id,
-        isAlbum: false,
-      })
+
+    }).then(data => getTracksHelper(accessToken, data.tracks.href, {
+      playlistID: uuid(),
+      dateCreated: data.type === TYPE_ALBUM ? data.release_date : new Date(), // sets to releaseDate if album. Playlist don't have a release date, so just set to import/creation time
+      description: data.description,
+      name: data.name,
+      author: new ObjectId(authorID), // TODO: objectid of the user who is importing the playlist
+
+      isFavorited: false,
+      coverImageURL: data.images[0].url,
+      songs: [],
+      originSpotifyId: data.id,
+      isAlbum: data.type === TYPE_ALBUM ? true : false,
+
+    })
     ).then(async (playlist) => {
+      // console.log(playlist);
       const result = await playlistsCol.insertOne(playlist);
       console.log(`inserted ${result.insertedId}`);
       return playlist.originSpotifyId; // useful for frontend retry
     })
   }))
-  .then(outcomes => {
-    if (!outcomes.some((o) => o.status === "fulfilled")) {
-      return res.status(500).send(outcomes);
-    }
-    return res.status(200).send(outcomes);
-  })
+    .then(outcomes => {
+      if (!outcomes.some((o) => o.status === "fulfilled")) {
+        return res.status(500).send(outcomes);
+      }
+      return res.status(200).send(outcomes);
+    })
   // NOTE: no catch, Promise.allSettled never rejects.
 });
 
@@ -128,7 +187,7 @@ playlistsRouter.get('/', async (req, res, next) => {
     };
 
     if (lastId) {
-      query["_id"] =  { $gt: new ObjectId(lastId) };
+      query["_id"] = { $gt: new ObjectId(lastId) };
     }
 
     const page = await playlistsCol
@@ -141,7 +200,7 @@ playlistsRouter.get('/', async (req, res, next) => {
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
-      .send({ data: page, lastId: page.length ? page[page.length-1]._id : lastId });
+      .send({ data: page, lastId: page.length ? page[page.length - 1]._id : lastId });
   } catch (e) {
     console.log(e);
     return res.status(500).send(e);
@@ -203,9 +262,9 @@ playlistsRouter.get('/:playlistID', async (req, res, next) => {
       return res.status(404).send('playlist not found');
     }
     return res
-    .setHeader('Content-Type', 'application/json')
-    .status(200)
-    .send(result);
+      .setHeader('Content-Type', 'application/json')
+      .status(200)
+      .send(result);
   } catch (e) {
     console.log(e);
     return res.status(500).send(e);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/variables.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {getPlaylistsAsync, deletePlaylistAsync} from '../../components/home/redux/thunks';
+import { getPlaylistsAsync, deletePlaylistAsync } from '../../components/home/redux/thunks';
 import '../../styles/PlaylistsPage.css';
 import SearchBar from '../search/components/SearchBar';
 import PlaylistResult from '../search/components/PlaylistResult';
@@ -11,6 +11,10 @@ import { ReactComponent as AddIcon } from '../../images/add.svg';
 import '../search/styles/Preview.css';
 import PlaylistEditor from './components/PlaylistEditor';
 
+
+// used to determine type of popup of options menu on playlist component
+import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../typeConstants';
+
 const PlaylistPage = () => {
   const [creatorVisible, setCreatorVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
@@ -19,6 +23,7 @@ const PlaylistPage = () => {
   const playlists = useSelector(state => state.playlists.playlists);
   const lastId = useSelector(state => state.playlists.lastId);
   const dispatch = useDispatch();
+
 
   // useEffect(() => {
   //   dispatch(getPlaylistsAsync());
@@ -71,12 +76,12 @@ const PlaylistPage = () => {
   return (
     <div className='playlists-page'>
 
-      <SearchBar placeholder='Search for playlist'/>
-      <Filters filters={['All', 'Uni.fi', 'Spotify', 'YouTube']}/>
+      <SearchBar placeholder='Search for playlist' />
+      <Filters filters={['All', 'Uni.fi', 'Spotify', 'YouTube']} />
 
       {creatorVisible &&
         <div className='creator-dialog-overlay'>
-          <PlaylistCreator onClose={closeCreator}/>
+          <PlaylistCreator onClose={closeCreator} />
         </div>
       }
       {editVisible &&
@@ -91,10 +96,10 @@ const PlaylistPage = () => {
       <h2 className='playlists-heading'>Your Playlists</h2>
       <div className='unifi-playlists-list' style={{display:'flex', flexWrap: 'wrap'}}>
         <div className='adder' onClick={handleAddClick}>
-        <div className='add-icon-container'>
-        <AddIcon className='add-icon'/>
-        </div>
-        <p className='add-text'>New Playlist</p>
+          <div className='add-icon-container'>
+            <AddIcon className='add-icon' />
+          </div>
+          <p className='add-text'>New Playlist</p>
         </div>
         {playlists.map((playlist) => (
           <PlaylistResult
@@ -108,6 +113,7 @@ const PlaylistPage = () => {
             deleteOnClick={() => onDelete(playlist.playlistID)}
             editOnClick={() => handleClickEdit(playlist)}
             isEditable={false}
+            optionType={OPTIONS_TYPE2}
           />
         ))}
       </div>

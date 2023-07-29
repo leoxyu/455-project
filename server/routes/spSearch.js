@@ -41,7 +41,7 @@ function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popul
             'artist': track.artists.join(', '),
             'name': track.name,
             'type': 'spotify',
-            'link': track.uri, // TODO: look at main
+            'link': `spotify:track:${track.id}`, // TODO: look at main
             'imageLink': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
             'album': (album)? album: track.album.name, 
             'duration': formatDuration(track.duration_ms),
@@ -153,11 +153,39 @@ const getArtistGenres = async (accessToken, artistIds=[], artistLengths) => {
 };
 
 const removeTrackFeatures = ['available_markets', 'uri', 'external_urls', 'preview_url', 'disc_number', 'track_number', 'is_local', 'external_ids'];
+function getItemsNotShared(list1, list2) {
+    const set1 = new Set(list1);
+    const set2 = new Set(list2);
+  
+    const itemsNotShared = [];
+  
+    for (const item of set1) {
+      if (!set2.has(item)) {
+        itemsNotShared.push(item);
+      }
+    }
+  
+    for (const item of set2) {
+      if (!set1.has(item)) {
+        itemsNotShared.push(item);
+      }
+    }
+  
+    return itemsNotShared;
+  }
 
 async function addTrackMetadata(tracks, accessToken) {
     const trackIds = tracks.items.map(track => track.id);
-    const audioFeatures = await getTrackAudioFeatures(accessToken, trackIds);
-    // console.log(audioFeatures[0]);
+    var audioFeatures = await getTrackAudioFeatures(accessToken, trackIds);
+    
+    // [SPOTIFY-BUG] very few tracks don't have audio features. This is not recorded anywhere
+    audioFeatures = audioFeatures.filter(item => item !== null && item !== undefined);
+    const audioIds = audioFeatures.map(track => track.id);
+    const missingTrackIds = getItemsNotShared(trackIds, audioIds);
+    tracks.items = tracks.items.filter(track => !missingTrackIds.includes(track.id));
+
+
+
     tracks.items.forEach(obj => {
         const audioFeature = audioFeatures.find(feature => feature.id === obj.id);
         removeAudioFeatures.forEach(key => delete audioFeature[key]);

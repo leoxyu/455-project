@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../redux/typeConstants.js");
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 const currentPlaylistSlice = createSlice({
     name: 'currentPlaylist',

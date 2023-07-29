@@ -7,7 +7,7 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import "../styles/playlistTrack.css";
 
 
-const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../redux/typeConstants.js");
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
 const TrackEntry = ({ trackId, trackObjectId, trackName, artist, duration, album, isFavorite, type, link, coverUrl, releaseDate, popularity, handleDropdown = () => { } }) => {

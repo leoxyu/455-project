@@ -1,4 +1,4 @@
-import {store} from '../../../store';
+import { store } from '../../../store';
 import { getUserId, getAuthorID } from '../../../util';
 const ROOT_URL = 'http://localhost:3001';
 
@@ -26,7 +26,7 @@ const PlaylistsService = {
         const userId = getUserId();
         const response = await fetch(`${ROOT_URL}/playlists/${playlistID}`, {
             method: 'DELETE',
-            headers: {
+            headers: {  
                 'Content-Type': 'application/json',
                 'User-ID': userId,
             }
@@ -124,11 +124,11 @@ const PlaylistsService = {
     removeSong: async (playlistID, songID) => {
         const userId = getUserId();
         const response = await fetch(`${ROOT_URL}/playlists/${playlistID}/songs/${songID}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'User-ID': userId,
-        }
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'User-ID': userId,
+            }
         });
         const data = await response.json();
         if (!response.ok) {
@@ -168,6 +168,33 @@ const PlaylistsService = {
         //     { URI: 'dfwefd9df9f9', source: 'Youtube' },
         // ];
     },
+    spotifyGetManyPlaylists: async (playlists, accessToken, authorID) => {
+
+        const dataToSend = {
+            playlists: playlists,
+            accessToken: accessToken,
+            authorID: authorID
+        };
+
+        const dataToSendStringify = JSON.stringify(dataToSend);
+
+
+        console.log(JSON.stringify(playlists));
+        console.log(accessToken);
+
+        const result = await fetch(`${ROOT_URL}/playlists/importManySpotify`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: dataToSendStringify
+        });
+
+        return await result.json();
+
+
+    }
 };
 
 export default PlaylistsService;

@@ -37,6 +37,9 @@ const youtubeApiSlice = createSlice({
         setYoutubeAuthError: (state, action) => {
             state.error = action.payload;
         },
+        getYoutubePlaylists: (state, action) => {
+            state.playlists = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(youtubeLoginThunk.fulfilled, (state, action) => {
@@ -45,7 +48,13 @@ const youtubeApiSlice = createSlice({
     }
 });
 
-export const { setAccessTokenYoutube, setRefreshTokenYoutube, setYoutubeAuthError, setYoutubeProfile } = youtubeApiSlice.actions;
+export const {
+    setAccessTokenYoutube,
+    setRefreshTokenYoutube,
+    setYoutubeAuthError,
+    setYoutubeProfile,
+    getYoutubePlaylists
+} = youtubeApiSlice.actions;
 
 export default youtubeApiSlice.reducer;
 
