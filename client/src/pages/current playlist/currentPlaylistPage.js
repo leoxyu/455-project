@@ -10,13 +10,12 @@ const CurrentPlaylistPage = () => {
 
     // const currentPlaylist = useSelector(state => state.currentPlaylistPage.playlist);
     const currentPlaylist = useSelector(state => state.player.playlist);
-    const currSong = useSelector(state => state.currentPlaylistPage.currSong);
+    
     const dispatch = useDispatch();
 
     return (
         <div>
             <PlaylistContainer
-                currSong={currSong}
                 {...currentPlaylist}
             />
         </div>

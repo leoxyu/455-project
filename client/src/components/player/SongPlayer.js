@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
 import { Player } from "./Player";
-import { useSelector } from "react-redux";
+
+import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/currentPlaylistReducer";
 
 export default function SongPlayer() {
 
+  const dispatch = useDispatch();
+
   const playlist = useSelector(state => state.player.playlist);
+  const currSongID = useSelector(state => state.player.currSongID);
   const songs = playlist.songs;
 
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -14,8 +20,17 @@ export default function SongPlayer() {
   const shuffle = useRef(false);
 
   useEffect(() => {
+    if (songs && songs.length > 0) {
+      console.log("currSong changed, playing song");
+      setCurrentSongIndex(songs.findIndex(song => song.songID === currSongID));
+      playOnLoad.current = true;
+    }
+  }, [currSongID]);
+
+  useEffect(() => {
     console.log("playlist id changed, playing song");
     setCurrentSongIndex(0);
+    if (songs && songs.length > 0) dispatch(setCurrSongIdPlaylistPage(songs[0].songID));
     playOnLoad.current = true;
     shuffle.current = false;
   }, [playlist.id]);
@@ -25,7 +40,9 @@ export default function SongPlayer() {
       playOnLoad.current = true;
     }
     if (currentSongIndex < songs.length - 1) {
+      dispatch(setCurrSongIdPlaylistPage(songs[currentSongIndex + 1].songID));
       setCurrentSongIndex(currentSongIndex + 1);
+
     }
     shuffle.current = false;
   };
@@ -35,6 +52,7 @@ export default function SongPlayer() {
       playOnLoad.current = true;
     }
     if (currentSongIndex > 0) {
+      dispatch(setCurrSongIdPlaylistPage(songs[currentSongIndex - 1].songID));
       setCurrentSongIndex(currentSongIndex - 1);
     }
   };
@@ -50,6 +68,7 @@ export default function SongPlayer() {
       index = Math.floor(Math.random() * songs.length);
     } while (index === currentSongIndex);
 
+    dispatch(setCurrSongIdPlaylistPage(songs[index].songID));
     setCurrentSongIndex(index);
     shuffle.current = true;
   };

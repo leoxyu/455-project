@@ -35,10 +35,16 @@
   gap: 1.2rem;
   width: 100%;
 
-  .p {
+  .name-inactive {
     margin: 0.2em 0;
     padding: 0.2em 0;
     color: aliceblue;
+  }
+
+  .name-active {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: rgb(12, 231, 169);
   }
 
   .track-id {
