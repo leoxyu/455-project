@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/variables.css';
 import '../../styles/NavBar.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../pages/login/redux/loginReducer';
