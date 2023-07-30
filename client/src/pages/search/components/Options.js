@@ -7,25 +7,11 @@ import '../styles/Options.css';
 const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
   const dispatch = useDispatch();
-  const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
     dispatch(getPlaylistsAsync());
   }, []);
 
-  const handlePlaylistChange = (event) => {
-    setSelectedPlaylist(event.target.value);
-    // setSelectedPlaylist('wtf');
-  };
-
-
-  const handleSelection = (playlistID, event) => {
-    // Handle playlist selection
-    // console.log(`Selected playlist: ${selectedPlaylist}`);
-    // const data = {
-    //     URI: songLink,
-    //     source: platform
-    // };
-
+  const handleSelection = (playlistID) => {
     dispatch(addSongAsync({ playlistID, songBody }));
     onClose(); // Trigger the onClose callback
   };
@@ -42,7 +28,7 @@ const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) =
             key={i}
             className="options-playlist-input"
             value={playlist.playlistID}
-            onClick={(e) => handleSelection(playlist.playlistID, e)}>
+            onClick={() => handleSelection(playlist.playlistID)}>
             {playlist.name}
           </div>
         ))}
