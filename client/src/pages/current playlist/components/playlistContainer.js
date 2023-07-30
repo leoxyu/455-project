@@ -5,6 +5,8 @@ import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 
+import * as Vibrant from 'node-vibrant';
+
 import TrackEntry from './trackEntry';
 
 import "../styles/playlistContainer.css";
@@ -22,11 +24,28 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
 
     function setThumbnail(thumbnailUrl) {
         if (!thumbnailUrl && songs && songs.length > 0 && thumbnailUrl.length === 0) {
+            setHeaderGradient(songs[0].imageLink);
             return songs[0].imageLink;
-        } else if (!songs || songs.length === 0)  {
+        } else if (!songs || songs.length === 0) {
             return placeholderCover;
         } else return thumbnailUrl;
     }
+
+    function setHeaderGradient(img) {
+        Vibrant.from(img).getPalette((err, palette) => {
+            console.log(palette);
+            const lightVibrantRGB = palette.LightVibrant._rgb;
+            const darkVibrantRGB = palette.DarkVibrant._rgb;
+            const playlistHeaderComponent = document.getElementsByClassName('playlist-header')[0];
+            if (playlistHeaderComponent) playlistHeaderComponent.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 1) 
+            20%, rgba(${darkVibrantRGB[0]}, ${darkVibrantRGB[1]}, ${darkVibrantRGB[2]}, 1) 
+            60%, rgba(${lightVibrantRGB[0]}, ${lightVibrantRGB[1]}, ${lightVibrantRGB[2]}, 1) 100%)`;
+        });
+    }
+
+    useEffect(() => {
+        if (thumbnailUrl) setHeaderGradient(thumbnailUrl);
+    }, [thumbnailUrl]);
 
     return (
         <div className='background-container'>
@@ -52,9 +71,9 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
             <div className='playlist-container'>
                 {songs.map((track) => (
                     <TrackEntry
-                    key={track.songID}
-                    index={songs.findIndex(song => song.songID === track.songID)}
-                    {...track}
+                        key={track.songID}
+                        index={songs.findIndex(song => song.songID === track.songID)}
+                        {...track}
                     />
                 ))}
             </div>
