@@ -1,21 +1,27 @@
-.options-dialog {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    /* min-height: 20em; */
-    /* width: 35%; */
-    border-color: var(--background-elevated-highlight);
-    background-color: var(--background-elevated-base);
-    padding: 0.5em;
-    width: 7em;
-    /* border-radius: 1em; */
+.search-options-container.active {
+  outline: none;
+  position: fixed;
+  z-index: 10;
+  background-color: rgb(49, 49, 49);
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+
+  justify-content: space-around;
+  padding: 0.5em;
+  width: 7em;
 }
 
+.search-options-container.inactive {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+}
 
 .options-title {
-    font-size: 0.55em;
-    font-weight: bold;
-    color: var(--text-base);
+  font-size: 0.55em;
+  font-weight: bold;
+  color: var(--text-base);
 }
 
 .options-dropdown{
@@ -29,54 +35,54 @@
 
 
 .options-dropdown::-webkit-scrollbar {
-    width: 10px; /* Set the width of the scrollbar */
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+.options-dropdown::-webkit-scrollbar-track {
+  /* background-color: #333;
+    */
+    background-color: var(--background-tinted-base);
   }
-  
-  .options-dropdown::-webkit-scrollbar-track {
-    /* background-color: #333; 
-     */
-     background-color: var(--background-tinted-base);
-   }
-  
-  .options-dropdown::-webkit-scrollbar-thumb {
-    /* background-color: #666;
-     */
-     background-color: var(--background-tinted-highlight);
-  }
+
+.options-dropdown::-webkit-scrollbar-thumb {
+  /* background-color: #666;
+    */
+    background-color: var(--background-tinted-highlight);
+}
 
 
 .options-playlist-input{
   font-size: 0.55em;
   padding: 0.5em;
 }
-  
+
 .options-playlist-input:hover {
-    border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
-    background-color: var(--background-tinted-base);
-  }
+  border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
+  background-color: var(--background-tinted-base);
+}
 
 
-  .options-dialog .search-bar{
-    background-color: var(--background-tinted-base);
-    border-radius: 0rem;
-  }
+.options-dialog .search-bar{
+  background-color: var(--background-tinted-base);
+  border-radius: 0rem;
+}
 
-  .options-dialog .search-bar input {
-    font-size: 0.5em;
-    height: 1.3em;
-    padding: 0em;
-  }
+.options-dialog .search-bar input {
+  font-size: 0.5em;
+  height: 1.3em;
+  padding: 0em;
+}
 
-  .options-dialog .search-bar .search-icon {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
+.options-dialog .search-bar .search-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
 
-  .options-dialog .search-bar .clear-button {
-    width: 1.8rem;
-    height: 1.8rem;
-  }
+.options-dialog .search-bar .clear-button {
+  width: 1.8rem;
+  height: 1.8rem;
+}
 
-  .options-dialog .search-bar:hover{
-    background-color: var(--background-tinted-highlight);
-  }
+.options-dialog .search-bar:hover{
+  background-color: var(--background-tinted-highlight);
+}

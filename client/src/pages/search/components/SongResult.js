@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
@@ -15,31 +15,21 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, platform, date, isFavorite, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className, thumbnailUrl, songName, artistName, views, duration, songLink, platform, songID, releaseDate, album, isFavorite, handleAddClick = () => { }, songObject }) => {
 
-  const [showOptionsDialog, setShowOptionsDialog] = useState(false);
-  const [showIcons, setShowIcons] = useState(true);
-  const [parsedSongObject, setparsedSongObject] = useState({});
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (songObject) {
-      const parsed = {
-        name: songObject.name,
-        artist: songObject.artist,
-        type: songObject.type,
-        link: songObject.link,
-        imageLink: songObject.imageLink,
-      };
-      setparsedSongObject(parsed);
-    }
-  }, [songObject]);
 
   const handlePlay = () => {
 
     dispatch(setPlaylist({
-      id: uuid(),
-      songs: [parsedSongObject ? parsedSongObject : songObject]
+      id: uuid(), // this id doesn't actually need to be the actual song id since it's just used for recognizing when a song changes in the player
+      songs: [{
+        name: songName,
+        artist: artistName,
+        type: platform,
+        link: songLink,
+        imageLink: thumbnailUrl
+      }]
     }));
     // Handle play button click
   };
@@ -48,14 +38,42 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     // Handle favorite button click
   };
 
-  const handleOptions = () => {
-    setShowOptionsDialog(true);
-    setShowIcons(false);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [optionsTop, setOptionsTop] = useState(false);
+  const [optionsLeft, setOptionsLeft] = useState(false);
+
+  let optionsPopupRef = useRef();
+
+  useEffect(() => {
+    let optionsHandler = (e) => {
+      if (!optionsPopupRef.current.contains(e.target)) {
+        setOptionsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", optionsHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", optionsHandler);
+    }
+  });
+
+  const optionsOnClick = (top, left) => {
+    if (optionsOpen) {
+      setOptionsOpen(false);
+    } else {
+      setOptionsTop(top + 21);
+      setOptionsLeft(left - 85);
+      setOptionsOpen(true);
+    }
   };
 
-  const closeOptionsDialog = () => {
-    setShowOptionsDialog(false);
-    setShowIcons(true);
+  let optionsRef = null;
+
+  const handleOptions = () => {
+    // Handle options button click
+    const optionsLocation = optionsRef.getBoundingClientRect();
+    optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
 
@@ -73,17 +91,30 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
           <div className="artist-name">{artistName}</div>
         </div>
       </div>
-      {showIcons && (
-        <div className="stats">
-          <HeartIcon className="heart-icon" onClick={handleFavorite} />
+       <div className="stats">
+          <HeartIcon className="heart-icon" onClick={handleFavorite}/>
           <div className="duration">{duration}</div>
-          <OptionsIcon className="options-icon" onClick={handleOptions} />
-        </div>
-      )}
-
-      {showOptionsDialog && (
-        <Options songBody={parsedSongObject} onClose={closeOptionsDialog} handleAddClick={handleAddClick} />
-      )}
+          <div ref={optionsPopupRef}>
+            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+            <Options
+              open={optionsOpen}
+              top={optionsTop}
+              left={optionsLeft}
+              songBody={{
+                name: songName,
+                artist: artistName,
+                type: platform,
+                link: songLink,
+                imageLink: thumbnailUrl ? thumbnailUrl : thumbnailImage,
+                duration: duration,
+                songID: songID,
+                releaseDate: releaseDate,
+                album: album
+              }}
+              onClose={() => setOptionsOpen(false)}
+            />
+          </div>
+      </div>
     </div>
   );
 };
