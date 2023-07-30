@@ -20,7 +20,7 @@
 }
 
 .login-button {
-  background-color: #78d3ca;
+  background-color: var(--essential-bright-accent);
   color: white;
   border: none;
   padding: 10px 20px;
