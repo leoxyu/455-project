@@ -53,6 +53,7 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
                 {songs.map((track) => (
                     <TrackEntry
                     key={track.songID}
+                    index={songs.findIndex(song => song.songID === track.songID)}
                     {...track}
                     />
                 ))}

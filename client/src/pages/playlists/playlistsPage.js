@@ -108,7 +108,7 @@ const PlaylistPage = () => {
             playlistID={playlist.playlistID}
             thumbnailUrl={playlist.coverImageURL}
             playlistName={playlist.name}
-            artistName={playlist.author}
+            artistName={playlist.artist}
             songs={playlist.songs}
             deleteOnClick={() => onDelete(playlist.playlistID)}
             editOnClick={() => handleClickEdit(playlist)}
