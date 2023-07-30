@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {addSongAsync, getPlaylistsAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/Options.css';
-import SearchBar from './SearchBar';
 
-const Options = ({ open, top, left, songBody = {}, onClose=()=>{}, handleAddClick=()=>{}}) => {
+const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
   const dispatch = useDispatch();
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
@@ -34,12 +33,10 @@ const Options = ({ open, top, left, songBody = {}, onClose=()=>{}, handleAddClic
   return (
     <div className={`search-options-container ${open ? "active" : "inactive"}`} style={{ top: top, left: left }}>
       <p className='options-title'>Add to playlist:</p>
-      <SearchBar />
-        <div className="options-playlist-input" onClick={handleAddClick}>
+        {/* <div className="options-playlist-input" onClick={handleAddClick}>
           New playlist
-        </div>
+        </div> */}
       <div className="options-dropdown">
-        {/* add search bar here*/}
         {playlists.map((playlist, i) => (
           <div
             key={i}
@@ -50,7 +47,6 @@ const Options = ({ open, top, left, songBody = {}, onClose=()=>{}, handleAddClic
           </div>
         ))}
       </div>
-      {/* <button onClick={handleSelection}>Add</button> */}
     </div>
   );
 };

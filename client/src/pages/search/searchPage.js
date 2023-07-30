@@ -182,7 +182,7 @@ const SearchPage = () => {
 
       <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
-        <div className='spotify-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+        <div className='spotify-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
           {spotifyPlaylists.map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
@@ -207,7 +207,7 @@ const SearchPage = () => {
 
       <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+        <div className='youtube-video-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
           {youtubeVideos.map((song, i) => (
             <SongResult
               className={'youtube-preview'}
@@ -219,6 +219,9 @@ const SearchPage = () => {
               duration={song.duration}
               songLink={song.link}
               platform={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
+              songID={song.songID}
+              releaseDate={song.releaseDate}
+              album={song.album}
 
             // new changes
             // isFavorite={false}
@@ -230,7 +233,7 @@ const SearchPage = () => {
 
       <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
-        <div className='youtube-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+        <div className='youtube-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
           {youtubePlaylists.map((playlist, i) => (
             <PlaylistResult
               className={'youtube-playlist-preview'}

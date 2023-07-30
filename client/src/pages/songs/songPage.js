@@ -42,8 +42,7 @@ const SongPage = () => {
                         artists={song.artist}
                         duration={song.duration}
                         songLink={song.songLink}
-                        platform='Spotify'
-                        songObject={song}
+                        platform='spotify'
                     />
                 ))}
             </div>
