@@ -32,7 +32,7 @@ const SongPage = () => {
             <Filters filters={['All', 'Uni.fi', 'Spotify', 'YouTube']} />
 
             <h2 className='songs-heading'>Your Songs</h2>
-            <div className='spotify-songs' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+            <div className='spotify-songs' style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {allSongs.map((song) => (
                     <SongResult
                         className='spotify-preview'
@@ -42,8 +42,7 @@ const SongPage = () => {
                         artists={song.artist}
                         duration={song.duration}
                         songLink={song.songLink}
-                        platform='Spotify'
-                        songObject={song}
+                        platform='spotify'
                     />
                 ))}
             </div>

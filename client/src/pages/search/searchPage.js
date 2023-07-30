@@ -133,10 +133,10 @@ const SearchPage = () => {
 
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
-        {spotifyTracks.map((song) => (
+        {spotifyTracks.map((song, i) => (
           <SongResult
             className='spotify-preview'
-            key={song.link}
+            key={i}
             thumbnailUrl={song.imageLink}
             songName={song.name}
             artistName={song.artist}
@@ -156,12 +156,12 @@ const SearchPage = () => {
 
       <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+        <div className='spotify-album-list' style={{display:'flex', flexWrap: 'wrap'}}>
 
-          {spotifyAlbums.map((album) => (
+          {spotifyAlbums.map((album, i) => (
             <PlaylistResult
               className={'spotify-album-preview'}
-              key={album.originSpotifyId}
+              key={i}
               thumbnailUrl={album.coverImageURL}
               playlistName={album.name}
               artistName={album.author}
@@ -182,11 +182,11 @@ const SearchPage = () => {
 
       <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
-        <div className='spotify-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
-          {spotifyPlaylists.map((playlist) => (
+        <div className='spotify-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {spotifyPlaylists.map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
-              key={playlist.originSpotifyId}
+              key={i}
               thumbnailUrl={playlist.coverImageURL}
               playlistName={playlist.name}
               artistName={playlist.author}
@@ -207,11 +207,11 @@ const SearchPage = () => {
 
       <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
-          {youtubeVideos.map((song) => (
+        <div className='youtube-video-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {youtubeVideos.map((song, i) => (
             <SongResult
               className={'youtube-preview'}
-              key={song.link}
+              key={i}
               thumbnailUrl={song.imageLink}
               songName={song.name}
               artistName={song.artist}
@@ -219,6 +219,9 @@ const SearchPage = () => {
               duration={song.duration}
               songLink={song.link}
               platform={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
+              songID={song.songID}
+              releaseDate={song.releaseDate}
+              album={song.album}
 
             // new changes
             // isFavorite={false}
@@ -230,11 +233,11 @@ const SearchPage = () => {
 
       <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
-        <div className='youtube-playlist-list' style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
-          {youtubePlaylists.map((playlist) => (
+        <div className='youtube-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {youtubePlaylists.map((playlist, i) => (
             <PlaylistResult
               className={'youtube-playlist-preview'}
-              key={playlist.name}
+              key={i}
               thumbnailUrl={playlist.coverImageURL}
               playlistName={playlist.name}
               artistName={playlist.author}
@@ -254,14 +257,6 @@ const SearchPage = () => {
           ))}
         </div>
       </div>
-      {/*
-        <div className='unifi-playlists'>
-        <h2 className='heading'>Uni.fi Playlists</h2>
-        <div className='unifi-playlist-list' style={{display:'flex', 'flex-wrap': 'wrap'}}>
-          </div>
-        </div>
-         */}
-
     </div>
   );
 };
