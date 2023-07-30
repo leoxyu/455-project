@@ -18,7 +18,7 @@ import thumbnailImage from '../../../images/album-placeholder.png'
 
 import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 
-const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName, releaseDate, duration, artistName, isFavorite, source, type, songs = [], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
+const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName, releaseDate, duration, artistName, isFavorite, source, type, description, songs = [], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
   const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -61,6 +61,7 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
         artistName: artistName,
         isFavorite: isFavorite,
         source: source,
+        description: description,
         type: type,
         songs
       }));
@@ -99,6 +100,7 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
       artistName: artistName,
       isFavorite: isFavorite,
       source: source,
+      description: description,
       type: type,
       songs
     }));

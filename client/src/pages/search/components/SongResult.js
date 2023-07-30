@@ -49,6 +49,7 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
       artistName: artistName,
       isFavorite: isFavorite,
       source: source,
+      description: null,
       type: TYPE_TRACK,
       songs: [parsedSongObject ? parsedSongObject : songObject]
     }));

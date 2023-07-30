@@ -16,6 +16,7 @@ const initialState = {
         isFavorite: false,
         source: "",
         type: "",
+        description: "",
         songs: []
     },
     currSongID: null,

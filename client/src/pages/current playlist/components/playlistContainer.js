@@ -14,10 +14,10 @@ import "../styles/playlistContainer.css";
 import { getTotalTrackDuration } from './util';
 import placeholderCover from '../../../images/album-placeholder.png';
 
-const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
+const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
-const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorite, songs }) => {
+const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorite, description, songs }) => {
 
     const totalDuration = getTotalTrackDuration(songs);
     const thumbnailUrlSet = setThumbnail(thumbnailUrl);
@@ -45,11 +45,11 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
 
     useEffect(() => {
         if (thumbnailUrl) setHeaderGradient(thumbnailUrl);
+        console.log(description);
     }, [thumbnailUrl]);
 
     return (
         <div className='background-container'>
-
             <div className="playlist-header">
                 <div className="thumbnail-container">
                     <img className='thumbnail' src={thumbnailUrlSet} alt="Playlist Cover" />
@@ -60,9 +60,11 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
                     <div className='info-footer'>
                         {/* <img className='author-profile-cover' src={authorCoverUrl} alt="Author cover" /> */}
                         <p className='p'>{artistName} ・</p>
-                        <p className='p'>{duration} songs,</p>
-                        <p className='p'>{totalDuration} seconds</p>
+                        <p className='p'>{releaseDate} ・</p>
+                        {type === TYPE_TRACK ? null : <p className='p'>{duration} songs,</p>}
+                        <p className='p'>{totalDuration} duration</p>
                     </div>
+                    {description ? <p className='info-description'>{description}</p> : null}
                 </div>
             </div>
 

@@ -119,6 +119,7 @@ const PlaylistPage = () => {
             releaseDate={playlist.dateCreated}
             source={playlist.source}
             type={playlist.type}
+            description={playlist.description}
           />
         ))}
       </div>

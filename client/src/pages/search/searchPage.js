@@ -173,6 +173,7 @@ const SearchPage = () => {
               type={TYPE_ALBUM}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
+              description={null}
             />
           ))}
         </div>
@@ -199,6 +200,7 @@ const SearchPage = () => {
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
+              description={playlist.description}
             />
           ))}
         </div>
@@ -249,6 +251,7 @@ const SearchPage = () => {
               source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE2}
+              //description={playlist.description}
             />
           ))}
         </div>

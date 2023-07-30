@@ -42,11 +42,10 @@
     gap: 0.5em;
   }
 
-  .author-profile-cover {
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    object-fit: cover;
+  .info-description {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: rgb(173, 178, 182);
   }
 
   .p {
