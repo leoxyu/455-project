@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, signup } from './redux/loginReducer';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/variables.css';
 import '../../styles/LoginPage.css';
 import { loginAsync, registerAsync } from './/redux/thunks'
-import spotifyLogo from '../../images/spotify.svg';
+import unifiLogo from '../../images/unifilogo.svg';
 
 
 // Spotify API shit
@@ -221,10 +222,10 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <h1><img
-        src={spotifyLogo}
+        src={unifiLogo}
         alt="Spotify Logo"
         className="logo-icon"
-      />Uni.Fi</h1>
+      />Uni.fi</h1>
       <input
         type="text"
         placeholder="Username"
