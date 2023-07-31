@@ -1,4 +1,5 @@
 .playlist-header {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 5%, rgba(56, 135, 160, 1) 70%, rgba(34, 195, 180, 1) 100%);
   position: static;
   display: flex;
   align-items: left;
@@ -29,6 +30,7 @@
   align-content: flex-end;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 0rem;
 
   .info-footer {
     display: flex;
@@ -40,11 +42,10 @@
     gap: 0.5em;
   }
 
-  .author-profile-cover {
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    object-fit: cover;
+  .info-description {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: rgb(173, 178, 182);
   }
 
   .p {
@@ -59,7 +60,6 @@
 
 .background-container {
   background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 66%, rgba(56, 135, 160, 1) 90%, rgba(34, 195, 180, 1) 100%);
   position: static;
   width: auto;
   min-height: 90vh;
@@ -90,7 +90,7 @@
 
 .playlist-title-1 {
   color: aliceblue;
-  font-size: 500%;
+  font-size: 300%;
   margin: 0;
 }
 

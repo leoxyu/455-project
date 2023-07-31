@@ -3,14 +3,14 @@ var playlistsRouter = express.Router();
 const { v4: uuid } = require('uuid');
 
 const { MongoClient, ObjectId } = require("mongodb");
-const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
-const { TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY } = require("../shared/playlistTypeConstants");
+const { DATABASE_NAME, PLAYLIST_COLLECTION, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
+const {TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY} = require("../shared/playlistTypeConstants");
 // const querystring = require('querystring');
 require('dotenv').config();
 
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
-const playlistsCol = database.collection(PLAYLIST_COLLECTION);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 
 
 playlistsRouter.post('/', async (req, res, next) => {
@@ -37,8 +37,8 @@ playlistsRouter.post('/', async (req, res, next) => {
 
 function getTracksHelper(access_token, next, playlist) {
 
-  console.log("\r\ninside getTrackHelper");
-  console.log("\r\nplaylist.isAlbum: ", playlist.isAlbum);
+  // console.log("\r\ninside getTrackHelper");
+  // console.log("\r\nplaylist.isAlbum: ", playlist.isAlbum);
 
   // if next link is null, dont do anything
   return next ? fetch(next, {
@@ -60,14 +60,14 @@ function getTracksHelper(access_token, next, playlist) {
           songID: uuid(),
           artist: i.artists[0].name,
           name: i.name,
-          type: TYPE_SPOTIFY,
+          source: TYPE_SPOTIFY,
           link: i.uri,
           imageLink: playlist.coverImageURL,
           album: playlist.name,
           duration: i.duration_ms,
           releaseDate: playlist.dateCreated,
         };
-        console.log(parsedTrack);
+        // console.log(parsedTrack);
         playlist.songs.push(parsedTrack);
       } else {
         // playlist is TYPE_PLAYLIST
@@ -75,14 +75,14 @@ function getTracksHelper(access_token, next, playlist) {
           songID: uuid(),
           artist: i.track.artists[0].name,
           name: i.track.name,
-          type: TYPE_SPOTIFY,
+          source: TYPE_SPOTIFY,
           link: i.track.uri,
           imageLink: i.track.album.images[0].url,
           album: i.track.album.name,
           duration: i.track.duration_ms,
           releaseDate: i.track.album.release_date,
         };
-        console.log(parsedTrack);
+        // console.log(parsedTrack);
         playlist.songs.push(parsedTrack);
       }
 
@@ -100,8 +100,8 @@ function getTracksHelper(access_token, next, playlist) {
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 
-  console.log("inside importManySpotify");
-  console.log(req.body);
+  // console.log("inside importManySpotify");
+  // console.log(req.body);
 
 
   const { playlists, accessToken, authorID } = req.body;
@@ -115,15 +115,15 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   // console.log("\r\naccess_token: ");
   // console.log(accessToken);
 
-  console.log("\r\nauthorID: ");
-  console.log(authorID);
+  // console.log("\r\nauthorID: ");
+  // console.log(authorID);
 
 
 
   Promise.allSettled(playlists?.map(playlist => {
 
     const type = playlist.playlistType;
-    console.log(type);
+    // console.log(type);
 
     let queryUrl;
 
@@ -151,19 +151,21 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       description: data.description,
       name: data.name,
       author: new ObjectId(authorID), // TODO: objectid of the user who is importing the playlist
-
+      artist: data.type === TYPE_ALBUM ? data.artists[0]?.name : data.owner.display_name,
       isFavorited: false,
       coverImageURL: data.images[0].url,
       songs: [],
-      originSpotifyId: data.id,
+      originId: data.id,
       isAlbum: data.type === TYPE_ALBUM ? true : false,
-
+      source: TYPE_SPOTIFY,
+      type: data.type === TYPE_ALBUM ? TYPE_ALBUM : TYPE_PLAYLIST,
+      duration: data.tracks?.total,
     })
     ).then(async (playlist) => {
       // console.log(playlist);
       const result = await playlistsCol.insertOne(playlist);
       console.log(`inserted ${result.insertedId}`);
-      return playlist.originSpotifyId; // useful for frontend retry
+      return playlist.originId; // useful for frontend retry
     })
   }))
     .then(outcomes => {

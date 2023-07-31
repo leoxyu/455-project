@@ -18,7 +18,7 @@ export const store = configureStore({
     player: PlayerReducer,
     search: searchReducer,
     youtube: youtubeApiReducer,
-    currentPlaylist: currentPlaylistReducer
+    currentPlaylistPage: currentPlaylistReducer
   },
   devTools: true
-});
+})

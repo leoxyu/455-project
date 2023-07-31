@@ -108,12 +108,18 @@ const PlaylistPage = () => {
             playlistID={playlist.playlistID}
             thumbnailUrl={playlist.coverImageURL}
             playlistName={playlist.name}
-            artistName={playlist.author}
+            artistName={playlist.artist}
             songs={playlist.songs}
             deleteOnClick={() => onDelete(playlist.playlistID)}
             editOnClick={() => handleClickEdit(playlist)}
             isEditable={false}
             optionType={OPTIONS_TYPE2}
+            duration={playlist.songs?.length}
+            isFavorite={playlist.isFavorited}
+            releaseDate={playlist.dateCreated}
+            source={playlist.source}
+            type={playlist.type}
+            description={playlist.description}
           />
         ))}
       </div>

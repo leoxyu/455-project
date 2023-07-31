@@ -1,7 +1,7 @@
 var express = require('express');
 const { v4: uuid } = require('uuid');
 
-
+const {TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY} = require("../shared/playlistTypeConstants");
 
 var spotifySearchRouter = express.Router();
 
@@ -40,7 +40,7 @@ function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popul
             'songID': track.id, 
             'artist': track.artists.join(', '),
             'name': track.name,
-            'type': 'spotify',
+            'source': 'spotify',
             'link': `spotify:track:${track.id}`, // TODO: look at main
             'imageLink': (thumbnailUrl)? thumbnailUrl : track.album.images[0].url,
             'album': (album)? album: track.album.name, 
@@ -83,7 +83,7 @@ function parseSpotifyAlbums(items) {
             'tracksNextLink': album.tracks.next,
             'popularity': album.popularity,
             'uri': album.uri,
-            'type': 'spotify',
+            'source': 'spotify',
         };
 });
 }
@@ -251,7 +251,7 @@ function parseSinglePlaylist(playlist) {
         'playlistLink': playlist.href,
         'tracksNextLink': playlist.tracks.next,
         'popularity': playlist.followers.total,
-        'type': 'spotify',
+        'source': 'spotify',
     };
 }
 
@@ -277,8 +277,8 @@ function parsePlaylists(playlists) {
     return playlists.map(playlist => {
         return {
             //uuid: not created yet
-            'dateCreated': null, //none for spotify
-            'description': playlist.description, // none for spotify
+            'dateCreated': new Date(),
+            'description': playlist.description, 
             'name': playlist.name,
             'author': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
             'isFavorited': false,
@@ -290,6 +290,7 @@ function parsePlaylists(playlists) {
             // extra
             'duration': playlist.tracks.total, // convert to min
             'uri': playlist.uri,
+            'source': 'spotify'
         };
     });
 }

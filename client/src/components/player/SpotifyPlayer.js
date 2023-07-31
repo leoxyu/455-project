@@ -86,6 +86,7 @@ export default function SpotifyPlayer(props) {
   };
 
   const handlePlay = () => {
+    console.log("handlePlay");
     if (truePosition === 0) {
       controller.current.play();
     } else if (!isPlaying) {

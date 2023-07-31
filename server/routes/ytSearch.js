@@ -5,11 +5,14 @@ const { v4: uuid } = require('uuid');
 
 var ytSearchRouter = express.Router();
 
+const { DATABASE_NAME, PLAYLIST_COLLECTION, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
+const { TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY, TYPE_TRACK, TYPE_YOUTUBE } = require("../shared/playlistTypeConstants");
+
 const { MongoClient, ObjectId } = require("mongodb");
-const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
-const playlistsCol = database.collection(PLAYLIST_COLLECTION);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 // var videosNext = null;
 // var playlistsNext = null;
 
@@ -23,7 +26,7 @@ async function ytParseVideo(item) {
       'songID': item.id,
       'artist': info.author.name,
       'name': info.title,
-      'type': 'youtube',
+      'source': TYPE_YOUTUBE,
       'link': info.url,
       'imageLink': info.thumbnail,
       'album': null,
@@ -47,7 +50,7 @@ function ytParseVideoFrPlaylist(info) {
     'songID': info.videoId,
     'artist': info.author.name,
     'name': info.title,
-    'type': 'youtube',
+    'source': TYPE_YOUTUBE,
     'link': 'https://youtube.com/watch?v=' + info.videoId,
     'imageLink': info.thumbnail,
     'album': null,
@@ -108,7 +111,9 @@ async function getPlaylistData(playlistID) {
     // extra
     'duration': info.videos.length,
     'popularity': info.views,
-    'type': 'youtube',
+    'artist': info.author.name,
+    'source': TYPE_YOUTUBE,
+    'type': TYPE_PLAYLIST,
   };
 }
 
@@ -132,7 +137,9 @@ async function ytSearchPlaylist(playlistName) {
       // extra
       'previewDetails': (item.firstVideo) ? item.firstVideo.title + ' • ' + item.firstVideo.length : null,
       'duration': item.length,
-      'type': 'youtube',
+      'artist': item.owner.name,
+      'source': TYPE_YOUTUBE,
+      'type': TYPE_PLAYLIST,
     };
   });
   return searchResults;
@@ -158,7 +165,9 @@ async function ytSearchPlaylistNext(playlistsNext) {
       // extra
       'duration': info.videos.length,
       'popularity': info.views,
-      'type': 'youtube',
+      'artist': info.author.name,
+      'source': TYPE_YOUTUBE,
+      'type': TYPE_PLAYLIST,
     };
   }));
   return searchResults;

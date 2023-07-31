@@ -18,7 +18,7 @@
     fill: var(--text-base);
   }
 
-  .track-id {
+  .track-id-inactive {
     opacity: 0;
   }
 
@@ -35,13 +35,29 @@
   gap: 1.2rem;
   width: 100%;
 
-  .p {
+  .name-inactive {
     margin: 0.2em 0;
     padding: 0.2em 0;
     color: aliceblue;
   }
 
-  .track-id {
+  .name-active {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: rgb(12, 231, 169);
+  }
+
+  .track-id-active {
+    position: relative;
+    left: 0%;
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    color: aliceblue;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+
+  .track-id-inactive {
     position: relative;
     left: 0%;
     margin: 0.2em 0;
@@ -92,6 +108,20 @@
   opacity: 0;
   transition: opacity 0.1s;
   fill: aliceblue;
+  
+  /* manually position play icon over the track-id*/
+  position: relative;
+  left: -1.8rem;
+  z-index: 2;
+}
+
+.playing-icon {
+  max-width: 1.1rem;
+  max-height: 1.1rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.1s;
+  fill: rgb(12, 231, 169);;
   
   /* manually position play icon over the track-id*/
   position: relative;

@@ -131,9 +131,21 @@ const SearchPage = () => {
         {spotifyTracks.map((song, i) => (
           <SongResult
             className='spotify-preview'
-            key={i}
             songObject={song}
+            key={song.link}
+            thumbnailUrl={song.imageLink}
+            songName={song.name}
+            artistName={song.artist}
+            views={song.views + ' streams'}
+            duration={song.duration}
+            songLink={song.link}
+            source={TYPE_SPOTIFY}
             handleAddClick={handleAddClick}
+            playlistCreatorRef={playlistCreatorRef}
+            releaseDate={song.releaseDate}
+
+            // new changes
+            isFavorite={false}
           />
         ))}
       </div>
@@ -145,12 +157,13 @@ const SearchPage = () => {
           {spotifyAlbums.map((album, i) => (
             <PlaylistResult
               className={'spotify-album-preview'}
-              key={i}
+              key={album.originId}
               thumbnailUrl={album.coverImageURL}
               playlistName={album.name}
               artistName={album.author}
               views={album.popularity + ' views'}
               playlistLink={album.originId}
+              releaseDate={album.dateCreated}
 
               // new changes
               isFavorite={false}
@@ -159,6 +172,7 @@ const SearchPage = () => {
               type={TYPE_ALBUM}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
+              description={null}
             />
           ))}
         </div>
@@ -170,12 +184,13 @@ const SearchPage = () => {
           {spotifyPlaylists.map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
-              key={i}
+              key={playlist.originId}
               thumbnailUrl={playlist.coverImageURL}
               playlistName={playlist.name}
               artistName={playlist.author}
               views={0 + ' views'}
               playlistLink={playlist.originId}
+              releaseDate={playlist.dateCreated}
 
               // new changes
               isFavorite={false}
@@ -184,6 +199,7 @@ const SearchPage = () => {
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
+              description={playlist.description}
             />
           ))}
         </div>
@@ -195,8 +211,19 @@ const SearchPage = () => {
           {youtubeVideos.map((song, i) => (
             <SongResult
               className={'youtube-preview'}
-              key={i}
+              key={song.link}
               songObject={song}
+              thumbnailUrl={song.imageLink}
+              songName={song.name}
+              artistName={song.artist}
+              views={song.views + ' views'}
+              duration={song.duration}
+              songLink={song.link}
+              source={TYPE_YOUTUBE} 
+
+              // new changes
+              isFavorite={false}
+              releaseDate={song.dateCreated}
             />
           ))}
 
@@ -217,6 +244,7 @@ const SearchPage = () => {
               // views={song.views + ' views'}
               // duration={song.duration}
               playlistLink={playlist.originId}
+              // releaseDate={playlist.releaseDate}
 
               // new changes
               isFavorite={false}

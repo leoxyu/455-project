@@ -7,7 +7,6 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import '../styles/Preview.css'
 import '../styles/YtVideoPreview.css';
 import '../styles/SpSongPreview.css';
-import thumbnailImage from '../../../images/album-placeholder.png'
 import { useDispatch } from 'react-redux';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 
@@ -15,14 +14,25 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, isFavorite, songObject, handleAddClick = () => {}}) => {
+const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songObject }) => {
 
   const dispatch = useDispatch();
+
+  
 
   const handlePlay = () => {
 
     dispatch(setPlaylist({
-      id: uuid(), // this id doesn't actually need to be the actual song id since it's just used for recognizing when a song changes in the player
+      id: uuid(),
+      playlistName: songObject.name,
+      thumbnailUrl: songObject.imageLink,
+      releaseDate: songObject.releaseDate,
+      duration: songObject.duration,
+      artistName: songObject.artist,
+      isFavorite: isFavorite,
+      source: songObject.source,
+      description: null,
+      type: TYPE_TRACK,
       songs: [songObject]
     }));
     // Handle play button click
