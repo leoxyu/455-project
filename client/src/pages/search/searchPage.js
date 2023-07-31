@@ -133,6 +133,7 @@ const SearchPage = () => {
             className='spotify-preview'
             key={i}
             songObject={song}
+            handleAddClick={handleAddClick}
           />
         ))}
       </div>

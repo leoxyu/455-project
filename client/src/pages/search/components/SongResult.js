@@ -15,7 +15,7 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, isFavorite, songObject }) => {
+const SongResult = ({ className, isFavorite, songObject, handleAddClick = () => {}}) => {
 
   const dispatch = useDispatch();
 
@@ -96,6 +96,7 @@ const SongResult = ({ className, isFavorite, songObject }) => {
               left={optionsLeft}
               songBody={songObject}
               onClose={() => setOptionsOpen(false)}
+              handleAddClick={handleAddClick}
             />
           </div>
       </div>
