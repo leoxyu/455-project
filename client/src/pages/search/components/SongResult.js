@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
@@ -17,10 +17,8 @@ const { v4: uuid } = require('uuid');
 
 const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, source, releaseDate, isFavorite, handleAddClick = () => { }, songObject }) => {
 
-  const [showOptionsDialog, setShowOptionsDialog] = useState(false);
-  const [showIcons, setShowIcons] = useState(true);
-  const [parsedSongObject, setparsedSongObject] = useState({});
   const dispatch = useDispatch();
+  const [parsedSongObject, setparsedSongObject] = useState({});
 
   useEffect(() => {
     if (songObject) {
@@ -60,14 +58,42 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     // Handle favorite button click
   };
 
-  const handleOptions = () => {
-    setShowOptionsDialog(true);
-    setShowIcons(false);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [optionsTop, setOptionsTop] = useState(false);
+  const [optionsLeft, setOptionsLeft] = useState(false);
+
+  let optionsPopupRef = useRef();
+
+  useEffect(() => {
+    let optionsHandler = (e) => {
+      if (!optionsPopupRef.current.contains(e.target)) {
+        setOptionsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", optionsHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", optionsHandler);
+    }
+  });
+
+  const optionsOnClick = (top, left) => {
+    if (optionsOpen) {
+      setOptionsOpen(false);
+    } else {
+      setOptionsTop(top + 21);
+      setOptionsLeft(left - 85);
+      setOptionsOpen(true);
+    }
   };
 
-  const closeOptionsDialog = () => {
-    setShowOptionsDialog(false);
-    setShowIcons(true);
+  let optionsRef = null;
+
+  const handleOptions = () => {
+    // Handle options button click
+    const optionsLocation = optionsRef.getBoundingClientRect();
+    optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
 
@@ -75,27 +101,31 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     <div className={className}>
       <div className='essential-info'>
         <div className="thumbnail-container">
-          <img className="thumbnail" src={thumbnailUrl ? thumbnailUrl : thumbnailImage} alt="Album Thumbnail" />
+          <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
 
           <PlayIcon className="play-icon" onClick={handlePlay} />
         </div>
         <div className="details">
-          <div className="name">{songName}</div>
-          <div className="artist">{artistName}</div>
-          <div className="artist-name">{artistName}</div>
+          <div className="name">{songObject.name}</div>
+          <div className="artist">{songObject.artist}</div>
+          <div className="artist-name">{songObject.artist}</div>
         </div>
       </div>
-      {showIcons && (
-        <div className="stats">
-          <HeartIcon className="heart-icon" onClick={handleFavorite} />
-          <div className="duration">{duration}</div>
-          <OptionsIcon className="options-icon" onClick={handleOptions} />
-        </div>
-      )}
-
-      {showOptionsDialog && (
-        <Options songBody={parsedSongObject} onClose={closeOptionsDialog} handleAddClick={handleAddClick} />
-      )}
+       <div className="stats">
+          <HeartIcon className="heart-icon" onClick={handleFavorite}/>
+          <div className="duration">{songObject.duration}</div>
+          <div ref={optionsPopupRef}>
+            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+            <Options
+              open={optionsOpen}
+              top={optionsTop}
+              left={optionsLeft}
+              songBody={songObject}
+              onClose={() => setOptionsOpen(false)}
+              handleAddClick={handleAddClick}
+            />
+          </div>
+      </div>
     </div>
   );
 };

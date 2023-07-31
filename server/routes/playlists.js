@@ -13,9 +13,6 @@ const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 
 
-
-
-
 playlistsRouter.post('/', async (req, res, next) => {
   const pl = {
     playlistID: uuid(),
@@ -147,6 +144,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       } else {
         return Promise.reject(response);
       }
+
     }).then(data => getTracksHelper(accessToken, data.tracks.href, {
       playlistID: uuid(),
       dateCreated: data.type === TYPE_ALBUM ? data.release_date : new Date(), // sets to releaseDate if album. Playlist don't have a release date, so just set to import/creation time
@@ -172,7 +170,6 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   }))
     .then(outcomes => {
       if (!outcomes.some((o) => o.status === "fulfilled")) {
-        console.log(outcomes);
         return res.status(500).send(outcomes);
       }
       return res.status(200).send(outcomes);
