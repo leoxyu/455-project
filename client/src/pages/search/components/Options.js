@@ -7,9 +7,6 @@ import '../styles/Options.css';
 const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPlaylistsAsync());
-  }, []);
 
   const handleSelection = (playlistID) => {
     dispatch(addSongAsync({ playlistID, songBody }));
@@ -19,9 +16,9 @@ const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) =
   return (
     <div className={`search-options-container ${open ? "active" : "inactive"}`} style={{ top: top, left: left }}>
       <p className='options-title'>Add to playlist:</p>
-        {/* <div className="options-playlist-input" onClick={handleAddClick}>
+        {(handleAddClick) ? <div className="options-playlist-input" onClick={handleAddClick}>
           New playlist
-        </div> */}
+        </div> : null}
       <div className="options-dropdown">
         {playlists.map((playlist, i) => (
           <div
