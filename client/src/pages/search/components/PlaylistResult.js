@@ -19,7 +19,6 @@ import thumbnailImage from '../../../images/album-placeholder.png'
 import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 
 const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName, date, duration, artistName, isFavorite, source, type, songs = [], playlistLink, deleteOnClick, editOnClick, saveOnClick, optionType }) => {
-  const [ioplaylistName, setPlaylistName] = useState(playlistName);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [optionsTop, setOptionsTop] = useState(false);
@@ -65,9 +64,7 @@ const PlaylistResult = ({ playlistID = '', className, thumbnailUrl, playlistName
     }
   };
 
-  const handleInputChange = (event) => {
-    setPlaylistName(event.target.value);
-  };
+
 
   let optionsRef = null;
 

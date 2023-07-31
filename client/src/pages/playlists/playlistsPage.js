@@ -41,7 +41,7 @@ const PlaylistPage = () => {
     return () => {
       ignore = true;
     };
-  }, [lastId]);
+  }, []); // lastId here causes to query over and over
 
   useEffect(() => {
     document.title = "Uni.fi - Playlists"; // Change the webpage title
