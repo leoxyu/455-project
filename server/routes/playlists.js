@@ -37,8 +37,8 @@ playlistsRouter.post('/', async (req, res, next) => {
 
 function getTracksHelper(access_token, next, playlist) {
 
-  console.log("\r\ninside getTrackHelper");
-  console.log("\r\nplaylist.isAlbum: ", playlist.isAlbum);
+  // console.log("\r\ninside getTrackHelper");
+  // console.log("\r\nplaylist.isAlbum: ", playlist.isAlbum);
 
   // if next link is null, dont do anything
   return next ? fetch(next, {
@@ -67,7 +67,7 @@ function getTracksHelper(access_token, next, playlist) {
           duration: i.duration_ms,
           releaseDate: playlist.dateCreated,
         };
-        console.log(parsedTrack);
+        // console.log(parsedTrack);
         playlist.songs.push(parsedTrack);
       } else {
         // playlist is TYPE_PLAYLIST
@@ -82,7 +82,7 @@ function getTracksHelper(access_token, next, playlist) {
           duration: i.track.duration_ms,
           releaseDate: i.track.album.release_date,
         };
-        console.log(parsedTrack);
+        // console.log(parsedTrack);
         playlist.songs.push(parsedTrack);
       }
 
@@ -100,8 +100,8 @@ function getTracksHelper(access_token, next, playlist) {
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 
-  console.log("inside importManySpotify");
-  console.log(req.body);
+  // console.log("inside importManySpotify");
+  // console.log(req.body);
 
 
   const { playlists, accessToken, authorID } = req.body;
@@ -115,15 +115,15 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   // console.log("\r\naccess_token: ");
   // console.log(accessToken);
 
-  console.log("\r\nauthorID: ");
-  console.log(authorID);
+  // console.log("\r\nauthorID: ");
+  // console.log(authorID);
 
 
 
   Promise.allSettled(playlists?.map(playlist => {
 
     const type = playlist.playlistType;
-    console.log(type);
+    // console.log(type);
 
     let queryUrl;
 
