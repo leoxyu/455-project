@@ -75,7 +75,7 @@ const SongResult = ({ className, isFavorite, songObject }) => {
     <div className={className}>
       <div className='essential-info'>
         <div className="thumbnail-container">
-          <img className="thumbnail" src={songObject.imageLink ? songObject.imageLink : thumbnailImage} alt="Album Thumbnail" />
+          <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
 
           <PlayIcon className="play-icon" onClick={handlePlay} />
         </div>
