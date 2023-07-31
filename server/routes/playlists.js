@@ -157,7 +157,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       isFavorited: false,
       coverImageURL: data.images[0].url,
       songs: [],
-      originSpotifyId: data.id,
+      originId: data.id,
       isAlbum: data.type === TYPE_ALBUM ? true : false,
       source: TYPE_SPOTIFY,
       type: data.type === TYPE_ALBUM ? TYPE_ALBUM : TYPE_PLAYLIST,
@@ -167,7 +167,7 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       // console.log(playlist);
       const result = await playlistsCol.insertOne(playlist);
       console.log(`inserted ${result.insertedId}`);
-      return playlist.originSpotifyId; // useful for frontend retry
+      return playlist.originId; // useful for frontend retry
     })
   }))
     .then(outcomes => {

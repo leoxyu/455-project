@@ -158,7 +158,7 @@ const SearchPage = () => {
           {spotifyAlbums.map((album) => (
             <PlaylistResult
               className={'spotify-album-preview'}
-              key={album.originSpotifyId}
+              key={album.originId}
               thumbnailUrl={album.coverImageURL}
               playlistName={album.name}
               artistName={album.author}
@@ -185,7 +185,7 @@ const SearchPage = () => {
           {spotifyPlaylists.map((playlist) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
-              key={playlist.originSpotifyId}
+              key={playlist.originId}
               thumbnailUrl={playlist.coverImageURL}
               playlistName={playlist.name}
               artistName={playlist.author}
