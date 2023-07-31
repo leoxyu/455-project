@@ -7,7 +7,6 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import '../styles/Preview.css'
 import '../styles/YtVideoPreview.css';
 import '../styles/SpSongPreview.css';
-import thumbnailImage from '../../../images/album-placeholder.png'
 import { useDispatch } from 'react-redux';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 
@@ -15,41 +14,26 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, duration, songLink, source, releaseDate, isFavorite, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songObject }) => {
 
   const dispatch = useDispatch();
-  const [parsedSongObject, setparsedSongObject] = useState({});
 
-  useEffect(() => {
-    if (songObject) {
-      const parsed = {
-        name: songObject.name,
-        artist: songObject.artist,
-        source: songObject.source,
-        link: songObject.link,
-        imageLink: songObject.imageLink,
-        album: songObject.album,
-        duration: songObject.duration,
-        releaseDate: songObject.releaseDate,
-      };
-      setparsedSongObject(parsed);
-    }
-  }, [songObject]);
+  
 
   const handlePlay = () => {
 
     dispatch(setPlaylist({
       id: uuid(),
-      playlistName: songName,
-      thumbnailUrl: thumbnailUrl,
-      releaseDate: releaseDate,
-      duration: duration,
-      artistName: artistName,
+      playlistName: songObject.name,
+      thumbnailUrl: songObject.imageLink,
+      releaseDate: songObject.releaseDate,
+      duration: songObject.duration,
+      artistName: songObject.artist,
       isFavorite: isFavorite,
-      source: source,
+      source: songObject.source,
       description: null,
       type: TYPE_TRACK,
-      songs: [parsedSongObject ? parsedSongObject : songObject]
+      songs: [songObject]
     }));
     // Handle play button click
   };
@@ -101,19 +85,19 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     <div className={className}>
       <div className='essential-info'>
         <div className="thumbnail-container">
-          <img className="thumbnail" src={thumbnailUrl} alt="Album Thumbnail" />
+          <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
 
           <PlayIcon className="play-icon" onClick={handlePlay} />
         </div>
         <div className="details">
-          <div className="name">{songName}</div>
-          <div className="artist">{artists}</div>
-          <div className="artist-name">{artistName}</div>
+          <div className="name">{songObject.name}</div>
+          <div className="artist">{songObject.artist}</div>
+          <div className="artist-name">{songObject.artist}</div>
         </div>
       </div>
        <div className="stats">
           <HeartIcon className="heart-icon" onClick={handleFavorite}/>
-          <div className="duration">{duration}</div>
+          <div className="duration">{songObject.duration}</div>
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
             <Options
