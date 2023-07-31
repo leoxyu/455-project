@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { searchSpotifySongs, searchSpotifyPlaylists } from './spotifyAPI';
-// import { searchYouTubeVideos, searchYouTubePlaylists } from './youtubeAPI';
 import '../../styles/variables.css';
 
 import '../../styles/searchPage.css';
@@ -16,13 +14,10 @@ import debounce from 'lodash.debounce';
 import { createPlaylistAsync, spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2 } from '../../typeConstants';
 
-// import ScrollingComponent from './ScrollingComponent';
 
 
 
 
-//  look here later: https://github.com/dermasmid/scrapetube
-// also here: https://github.com/paulomcnally/youtube-node
 const SearchPage = () => {
 
   useEffect(() => {
@@ -137,19 +132,7 @@ const SearchPage = () => {
           <SongResult
             className='spotify-preview'
             key={i}
-            thumbnailUrl={song.imageLink}
-            songName={song.name}
-            artistName={song.artist}
-            views={song.views + ' streams'}
-            duration={song.duration}
-            songLink={song.link}
-            platform={TYPE_SPOTIFY} // !!!(TODO)!!! {TYPE_SPOTIFY}
-            handleAddClick={handleAddClick}
-            playlistCreatorRef={playlistCreatorRef}
             songObject={song}
-
-            // new changes
-            isFavorite={false}
           />
         ))}
       </div>
@@ -212,19 +195,7 @@ const SearchPage = () => {
             <SongResult
               className={'youtube-preview'}
               key={i}
-              thumbnailUrl={song.imageLink}
-              songName={song.name}
-              artistName={song.artist}
-              views={song.views + ' views'}
-              duration={song.duration}
-              songLink={song.link}
-              platform={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
-              songID={song.songID}
-              releaseDate={song.releaseDate}
-              album={song.album}
-
-            // new changes
-            // isFavorite={false}
+              songObject={song}
             />
           ))}
 
