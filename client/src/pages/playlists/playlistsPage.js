@@ -10,6 +10,7 @@ import PlaylistCreator from './components/PlaylistCreator';
 import { ReactComponent as AddIcon } from '../../images/add.svg';
 import '../search/styles/Preview.css';
 import PlaylistEditor from './components/PlaylistEditor';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 // used to determine type of popup of options menu on playlist component
@@ -22,6 +23,7 @@ const PlaylistPage = () => {
   const [firstRender, setFirstRender] = useState(true);
   const playlists = useSelector(state => state.playlists.playlists);
   const lastId = useSelector(state => state.playlists.lastId);
+  const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
 
 
@@ -31,17 +33,23 @@ const PlaylistPage = () => {
 
   // testing out pagination
   // TODO: add actual infinite scroll component
-  useEffect(() => {
-    let ignore = false;
-    setTimeout(() => {
-      if (!ignore) {
-        dispatch(getPlaylistsAsync());
-      }
-    }, 300);
-    return () => {
-      ignore = true;
-    };
-  }, [lastId]);
+  // useEffect(() => {
+  //   let ignore = false;
+  //   setTimeout(() => {
+  //     if (!ignore) {
+  //       dispatch(getPlaylistsAsync());
+  //     }
+  //   }, 300);
+  //   return () => {
+  //     ignore = true;
+  //   };
+  // }, [lastId]);
+
+  // useEffect(() => {
+
+
+
+  // }, [lastId]);
 
   useEffect(() => {
     document.title = "Uni.fi - Playlists"; // Change the webpage title
@@ -94,6 +102,13 @@ const PlaylistPage = () => {
       }
 
       <h2 className='playlists-heading'>Your Playlists</h2>
+      <InfiniteScroll
+          dataLength={playlists.length}
+          next={() => dispatch(getPlaylistsAsync())}
+          hasMore={true}
+          loader={<h4>loading</h4>}
+          style={{ overflow: "unset" }}
+        >
       <div className='unifi-playlists-list' style={{display:'flex', flexWrap: 'wrap'}}>
         <div className='adder' onClick={handleAddClick}>
           <div className='add-icon-container'>
@@ -101,22 +116,25 @@ const PlaylistPage = () => {
           </div>
           <p className='add-text'>New Playlist</p>
         </div>
-        {playlists.map((playlist) => (
-          <PlaylistResult
-            key={playlist.playlistID}
-            className={'spotify-playlist-preview'}
-            playlistID={playlist.playlistID}
-            thumbnailUrl={playlist.coverImageURL}
-            playlistName={playlist.name}
-            artistName={playlist.author}
-            songs={playlist.songs}
-            deleteOnClick={() => onDelete(playlist.playlistID)}
-            editOnClick={() => handleClickEdit(playlist)}
-            isEditable={false}
-            optionType={OPTIONS_TYPE2}
-          />
-        ))}
+
+          {playlists.map((playlist) => (
+            <PlaylistResult
+              key={playlist.playlistID}
+              className={'spotify-playlist-preview'}
+              playlistID={playlist.playlistID}
+              thumbnailUrl={playlist.coverImageURL}
+              playlistName={playlist.name}
+              artistName={playlist.author}
+              songs={playlist.songs}
+              deleteOnClick={() => onDelete(playlist.playlistID)}
+              editOnClick={() => handleClickEdit(playlist)}
+              isEditable={false}
+              optionType={OPTIONS_TYPE2}
+            />
+          ))}
+
       </div>
+      </InfiniteScroll>
     </div>
   );
 };
