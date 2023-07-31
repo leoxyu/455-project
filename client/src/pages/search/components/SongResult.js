@@ -101,19 +101,19 @@ const SongResult = ({ className, thumbnailUrl, songName, artistName, artists, du
     <div className={className}>
       <div className='essential-info'>
         <div className="thumbnail-container">
-          <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
+          <img className="thumbnail" src={thumbnailUrl} alt="Album Thumbnail" />
 
           <PlayIcon className="play-icon" onClick={handlePlay} />
         </div>
         <div className="details">
-          <div className="name">{songObject.name}</div>
-          <div className="artist">{songObject.artist}</div>
-          <div className="artist-name">{songObject.artist}</div>
+          <div className="name">{songName}</div>
+          <div className="artist">{artists}</div>
+          <div className="artist-name">{artistName}</div>
         </div>
       </div>
        <div className="stats">
           <HeartIcon className="heart-icon" onClick={handleFavorite}/>
-          <div className="duration">{songObject.duration}</div>
+          <div className="duration">{duration}</div>
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
             <Options

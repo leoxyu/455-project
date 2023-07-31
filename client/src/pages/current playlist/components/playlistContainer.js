@@ -33,6 +33,11 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
 
     function setHeaderGradient(img) {
         Vibrant.from(img).getPalette((err, palette) => {
+            if (err) {
+                console.log("\r\nError getting palette for album gradient");
+                console.log(err);
+                return;
+            }
             console.log(palette);
             const lightVibrantRGB = palette.LightVibrant._rgb;
             const darkVibrantRGB = palette.DarkVibrant._rgb;

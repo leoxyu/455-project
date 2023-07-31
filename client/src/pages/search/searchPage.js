@@ -212,16 +212,18 @@ const SearchPage = () => {
             <SongResult
               className={'youtube-preview'}
               key={song.link}
+              songObject={song}
               thumbnailUrl={song.imageLink}
               songName={song.name}
               artistName={song.artist}
               views={song.views + ' views'}
               duration={song.duration}
               songLink={song.link}
-              source={TYPE_YOUTUBE} // !!!(TODO)!!! {TYPE_YOUTUBE}
+              source={TYPE_YOUTUBE} 
 
               // new changes
-              // isFavorite={false}
+              isFavorite={false}
+              releaseDate={song.dateCreated}
             />
           ))}
 
