@@ -56,7 +56,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
         thumbnailUrl: playlistObject.coverImageURL,
         releaseDate: playlistObject.dateCreated, // 
         duration: songs.length,
-        artistName: playlistObject.artist,
+        artistName: playlistObject.author,
         isFavorite: isFavorite,
         source: playlistObject.source,
         description: playlistObject.description,
@@ -93,7 +93,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
       thumbnailUrl: playlistObject.coverImageURL,
       releaseDate: playlistObject.dateCreated, //
       duration: songs.length,
-      artistName: playlistObject.artist,
+      artistName: playlistObject.author,
       isFavorite: isFavorite,
       source: playlistObject.source,
       description: playlistObject.description,
@@ -146,7 +146,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
           </div>
           <div className="details">
             <div className="name">{playlistObject.name}</div>
-            <div className="artist">{playlistObject.artist}</div>
+            <div className="artist">{playlistObject.author}</div>
           </div>
         </div>
         <div className="stats">
