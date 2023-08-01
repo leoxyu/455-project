@@ -14,6 +14,7 @@ import { getOnePlaylist } from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from './Options2';
 import Options3 from './Options3';
+import thumbnailImage from '../../../images/album-placeholder.png'
 
 import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 
@@ -125,7 +126,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
       <div className={className}>
         <div className='essential-info'>
           <div className="thumbnail-container">
-            <img className="thumbnail" src={playlistObject.coverImageURL} alt="Album Thumbnail" />
+            <img className="thumbnail" src={playlistObject.coverImageURL?  playlistObject.coverImageURL: thumbnailImage} alt="Album Thumbnail" />
             <PlayIcon className="play-icon" onClick={handlePlay} />
           </div>
           <div className="details">
