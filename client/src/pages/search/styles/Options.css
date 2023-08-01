@@ -15,13 +15,15 @@
 .search-options-container.inactive {
   visibility: hidden;
   opacity: 0;
+  display: none;
   transform: translateY(-20px);
 }
 
 .options-title {
   font-size: 0.55em;
   font-weight: bold;
-  color: var(--text-base);
+  /* color: var(--text-base); */
+  color: aliceblue;
 }
 
 .options-dropdown{
@@ -54,6 +56,7 @@
 .options-playlist-input{
   font-size: 0.55em;
   padding: 0.5em;
+  color: aliceblue;
 }
 
 .options-playlist-input:hover {
