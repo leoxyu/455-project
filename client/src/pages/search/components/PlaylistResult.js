@@ -47,7 +47,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
     if (isLoading && songs.length) {
       setIsLoading(false);
       dispatch(setPlaylist({
-        id: playlistObject.originId,
+        id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
         playlistName: playlistObject.name,
         thumbnailUrl: playlistObject.coverImageURL,
         releaseDate: playlistObject.dateCreated, // 
@@ -80,11 +80,11 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
     // hit play for first time, load songs
     if (!songs?.length) {
       setIsLoading(true);
-      dispatch(getOnePlaylist(playlistObject.originId));
+      dispatch(getOnePlaylist((playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId));
     }
     // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
-      id: playlistObject.originId,
+      id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
       playlistName: playlistObject.name,
       thumbnailUrl: playlistObject.coverImageURL,
       releaseDate: playlistObject.dateCreated, //
@@ -134,11 +134,6 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
               <div className="date">{playlistObject.dateCreated}</div>
               <div className="artist-name">{playlistObject.artist}</div>
             </div>
-            <div className="optional-details">
-              {songs.slice(0, 3).map((song, i) => (
-                <div key={i} className="song">{song.songName}</div>
-              ))}
-            </div>
           </div>
         </div>
         <div className="stats">
@@ -147,7 +142,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
             {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} />}
-            {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
+            {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
           </div>
         </div>
       </div>
