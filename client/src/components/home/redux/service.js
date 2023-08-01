@@ -26,7 +26,7 @@ const PlaylistsService = {
         const userId = getUserId();
         const response = await fetch(`${ROOT_URL}/playlists/${playlistID}`, {
             method: 'DELETE',
-            headers: {  
+            headers: {
                 'Content-Type': 'application/json',
                 'User-ID': userId,
             }
@@ -74,6 +74,7 @@ const PlaylistsService = {
         }
 
         queryParams.append("authorID", authorID);
+        queryParams.append('isDeep', true);
         // console.log('lastid being passed', lastId);
 
         if (queryParams.toString()) {
