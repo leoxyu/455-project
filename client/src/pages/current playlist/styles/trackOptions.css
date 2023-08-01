@@ -1,13 +1,12 @@
 .track-options-container.active {
     outline: none;
-    position: fixed;
+    position: absolute;
     z-index: 9;
     background-color: rgb(49, 49, 49);
     display: flex;
     flex-direction: column;
     border-radius: 2px;
 
-    
     
     .options-item {
         color: aliceblue;

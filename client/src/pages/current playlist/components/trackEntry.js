@@ -18,7 +18,7 @@ import { setCurrSongIdPlaylistPage } from '../redux/currentPlaylistReducer';
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, imageLink, releaseDate, source, index, songObject, handleDropdown = () => { } }) => {
+const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, imageLink, releaseDate, source, index, songObject }) => {
 
     const dispatch = useDispatch();
     const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
@@ -88,7 +88,8 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
 
     const handleOptions = () => {
         const optionsLocation = optionsRef.getBoundingClientRect();
-        optionsOnClick(optionsLocation.top, optionsLocation.left);
+       
+        optionsOnClick(optionsLocation.top + window.scrollY, optionsLocation.left);
     };
 
 
@@ -109,7 +110,7 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
 
                 <div ref={optionsPopupRef}>
                     <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
-                    <TrackOptions open={optionsOpen} top={optionsTop} left={optionsLeft} songObject = {songObject} ref={el => optionsRef = el} />
+                    <TrackOptions open={optionsOpen} top={optionsTop} left={optionsLeft} songObject = {songObject} />
                 </div>
             </div>
         </div>

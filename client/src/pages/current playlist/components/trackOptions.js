@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/trackOptions.css'
 import '../../search/styles/Options.css'
 import Options from "../../search/components/Options.js";
+import TrackInfo from "./trackInfo.js";
 
 
 const TrackOptions = ({ open, top, left, songObject }) => {
@@ -11,8 +12,14 @@ const TrackOptions = ({ open, top, left, songObject }) => {
     const [optionsTop, setOptionsTop] = useState(false);
     const [optionsLeft, setOptionsLeft] = useState(false);
 
+    const [creditsVisible, setCreditsVisible] = useState(false);
+
     let optionsPopupRef = useRef();
     let optionsRef = null;
+
+    useEffect(() => {
+        console.log("\r\nActual location: ", top, left);
+    }, []);
 
     useEffect(() => {
         let optionsHandler = (e) => {
@@ -41,8 +48,13 @@ const TrackOptions = ({ open, top, left, songObject }) => {
 
     const handleAddToPlaylistClick = () => {
         const optionsLocation = optionsRef.getBoundingClientRect();
+        console.log("\r\noptionsLocation (trackOptions): ", optionsLocation.top, optionsLocation.left);
         optionsOnClick(optionsLocation.top, optionsLocation.left);
     };
+
+    const handleShowCreditsClick = () => {
+        setCreditsVisible(!creditsVisible);
+    }
 
 
     return (
@@ -56,9 +68,10 @@ const TrackOptions = ({ open, top, left, songObject }) => {
                     onClose={() => setOptionsOpen(false)}
                     handleAddClick={null}
                 />
+                {creditsVisible && <TrackInfo songObject={songObject} onClose={() => setCreditsVisible(false)} />}
                 <div className="options-item" ref={el => optionsRef = el} onClick={handleAddToPlaylistClick}>Add to playlist </div>
                 <div className="options-item" onClick={null}>Remove from playlist</div>
-                <div className="options-item" onClick={null}>Show credits</div>
+                <div className="options-item" onClick={handleShowCreditsClick}>Show credits</div>
             </div>
         </div>
     );
