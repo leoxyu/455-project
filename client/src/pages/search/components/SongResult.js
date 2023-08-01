@@ -91,7 +91,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
         </div>
         <div className="details">
           <div className="name">{songObject.name}</div>
-          <div className="artist-name">{songObject.artist}</div>
+          <div className="artist">{songObject.artist}</div>
         </div>
       </div>
        <div className="stats">

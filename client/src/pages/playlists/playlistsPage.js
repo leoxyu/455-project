@@ -167,6 +167,7 @@ const PlaylistPage = () => {
             source={playlist.source}
             type={playlist.type}
             description={playlist.description}
+            playlistObject={playlist}
           />
         ))}
       </div>

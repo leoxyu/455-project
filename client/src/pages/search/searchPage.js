@@ -127,7 +127,7 @@ const SearchPage = () => {
 
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
-        {spotifyTracks.map((song, i) => (
+        {spotifyTracks.slice(0,5).map((song, i) => (
           <SongResult
             className='spotify-preview'
             songObject={song}
@@ -153,7 +153,7 @@ const SearchPage = () => {
         <h2 className='heading'>Spotify Albums</h2>
         <div className='spotify-album-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
 
-          {spotifyAlbums.map((album, i) => (
+          {spotifyAlbums.slice(0,5).map((album, i) => (
             <PlaylistResult
               className={'spotify-album-preview'}
               key={album.originId}
@@ -172,6 +172,7 @@ const SearchPage = () => {
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               description={null}
+              playlistObject={album}
             />
           ))}
         </div>
@@ -180,7 +181,7 @@ const SearchPage = () => {
       <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
         <div className='spotify-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {spotifyPlaylists.map((playlist, i) => (
+          {spotifyPlaylists.slice(0,5).map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
               key={playlist.originId}
@@ -199,6 +200,7 @@ const SearchPage = () => {
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               description={playlist.description}
+              playlistObject={playlist}
             />
           ))}
         </div>
@@ -207,7 +209,7 @@ const SearchPage = () => {
       <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
         <div className='youtube-video-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {youtubeVideos.map((song, i) => (
+          {youtubeVideos.slice(0,5).map((song, i) => (
             <SongResult
               className={'youtube-preview'}
               key={song.link}
@@ -232,7 +234,7 @@ const SearchPage = () => {
       <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
         <div className='youtube-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {youtubePlaylists.map((playlist, i) => (
+          {youtubePlaylists.slice(0,5).map((playlist, i) => (
             <PlaylistResult
               className={'youtube-playlist-preview'}
               key={i}
@@ -251,6 +253,7 @@ const SearchPage = () => {
               source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
+              playlistObject={playlist}
               saveOnClick={saveOnClick}
             />
           ))}
