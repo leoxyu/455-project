@@ -7,6 +7,9 @@ import { Player } from "./Player";
 
 import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/currentPlaylistReducer";
 
+const {PREV_TRACK, NEXT_TRACK, USER_SELECTION} = require("./constants.js");
+
+
 export default function SongPlayer() {
 
   const dispatch = useDispatch();
@@ -20,7 +23,7 @@ export default function SongPlayer() {
   const shuffle = useRef(false);
 
   useEffect(() => {
-    if (songs && songs.length > 0) {
+    if (songs && songs.length > 0 && currSongID) {
       console.log("currSong changed, playing song");
       setCurrentSongIndex(songs.findIndex(song => song.songID === currSongID));
       playOnLoad.current = true;
