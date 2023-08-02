@@ -19,6 +19,12 @@
   margin-bottom: 10px;
 }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .login-button {
   background-color: var(--essential-bright-accent);
   color: white;
@@ -43,10 +49,34 @@
 
 .logo-icon {
   fill: #78d3ca;
-  /* Change the fill color as needed */
   width: 60px;
-  /* Adjust the width and height as needed */
   height: 60px;
   margin-right: 5px;
-  /* Adjust the margin as needed */
+}
+
+.oauth-buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.oauth-button {
+  background-color: #121212;
+  border: none;
+  cursor: pointer;
+}
+
+
+.oauth-icon-youtube {
+  background-color: #121212;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
+
+
+.oauth-icon-spotify {
+  background-color: #121212;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
 }
