@@ -9,6 +9,9 @@ import { loginAsync, registerAsync } from './/redux/thunks'
 import unifiLogo from '../../images/unifilogo.svg';
 
 
+import { ReactComponent as YoutubeIcon } from "../../images/youtube.svg"
+import { ReactComponent as SpotifyIcon } from "../../images/spotify.svg"
+
 // Spotify API shit
 import { getHashParams } from '../../components/Oauth/Spotify/spotifyUtil';
 
@@ -44,12 +47,13 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [showCreateAccount, setShowCreateAccount] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
   // OAuth states
   const [spotifyLoggedIn, setSpotifyLoggedIn] = useState(false);
   const [youtubeLoggedIn, setYoutubeLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
+
+
 
   // ===============================================================================================
   // OAuth youtube
@@ -168,7 +172,8 @@ const LoginPage = () => {
   //                                                                                           
   // ===============================================================================================
 
-  const handleLogin = () => {
+  const handleLogin = (event) => {
+    event.preventDefault();
     if (username === '' || password === '') {
       return;
     }
@@ -219,47 +224,64 @@ const LoginPage = () => {
     setShowCreateAccount(false);
   };
 
+
+  const loggedIn = spotifyLoggedIn && youtubeLoggedIn;
+
   return (
     <div className="login-page">
-      <h1><img
-        src={unifiLogo}
-        alt="Spotify Logo"
-        className="logo-icon"
-      />Uni.fi</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => {
-          setUsername(e.target.value);
-          setShowCreateAccount(false);
-          setErrorMessage('');
-        }}
-        className="login-input"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-          setShowCreateAccount(false);
-          setErrorMessage('');
-        }}
-        className="login-input"
-      />
-      <button onClick={handleLogin} className="login-button">Login/Sign up</button>
+      <h1>
+        <img src={unifiLogo} alt="Spotify Logo" className="logo-icon" />
+        Uni.fi
+      </h1>
+
+      {loggedIn ? (
+        <form onSubmit={handleLogin} className="login-form">
+          {/* Username input */}
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setShowCreateAccount(false);
+              setErrorMessage('');
+            }}
+            className="login-input"
+          />
+          {/* Password input */}
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setShowCreateAccount(false);
+              setErrorMessage('');
+            }}
+            className="login-input"
+          />
+          {/* Login button */}
+          <button type="submit" className="login-button">
+            Login/Sign up
+          </button>
+        </form>
+      ) : (
+        <p>Please link the following accounts:</p>
+      )}
+
       <br></br>
-      {!spotifyLoggedIn ? (
-        <button onClick={spotifyLogin} className="login-button">Verify Spotify Account</button>
-      ) : (
-        <p>Spotify connected</p>
-      )}
-      {!youtubeLoggedIn ? (
-        <button onClick={youtubeLogin} className="login-button">Verify Youtube Account</button>
-      ) : (
-        <p>Youtube connected</p>
-      )}
+      <div className="oauth-buttons-container">
+        {!spotifyLoggedIn && (
+          <button onClick={spotifyLogin} className="oauth-button" disabled={spotifyLoggedIn}>
+            <SpotifyIcon className="oauth-icon-spotify" fill="#1DB954" />
+          </button>
+        )}
+        {!youtubeLoggedIn && (
+          <button onClick={youtubeLogin} className="oauth-button" disabled={youtubeLoggedIn}>
+            <YoutubeIcon className="oauth-icon-youtube" fill="#FF0000" />
+          </button>
+        )}
+      </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {showCreateAccount && (
