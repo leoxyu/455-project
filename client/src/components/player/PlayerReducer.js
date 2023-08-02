@@ -105,28 +105,39 @@ const playerSlice = createSlice({
 
         lazyLoadUpdatePlaylist: (state, action) => {
             console.log("\r\nUpdating playlist from lazyload cache");
-            const isShuffleOn = action.payload.isShuffleOn;
+            const isShuffleOn = action.payload.isShuffleOn.current;
             const operation = action.payload.operation;
 
-            const currentPlaylist = state.playlist.songs;
+            const currentPlaylist = Array.from(state.playlist.songs).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));
 
             // Assume that the add/rem caches have no shared songIDs since we dealt with that possible case in the add/rem cache reducers
-            let toBeAddedCache = state.lazyloadCache.toBeAddedCache;
-            let toBeRemovedCache = state.lazyloadCache.toBeRemovedCache;
+            let toBeAddedCache = Array.from(state.lazyloadCache.toBeAddedCache).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));;
+            let toBeRemovedCache = Array.from(state.lazyloadCache.toBeRemovedCache).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));;
 
             // 1.) Calculate the position of the newCurrSong
             let newCurrSong = null;
             let newPlaylist = currentPlaylist.map((song) => song).concat(toBeAddedCache);
 
-            if (isShuffleOn) {
+            if (operation === USER_SELECTION) {
+                // user hit play on track in playlistPage manually, instantly jump to that song.
+                // i.e. we don't need to calculate newCurrSong, just jump to the songID of the song the user clicked on.
+                // That song the user set was already updated in state.currSongID, so we just use that.
+                newPlaylist = removeTracksFromPlaylist(newPlaylist, toBeRemovedCache);
+                state.playlist.songs = newPlaylist;
+                state.lazyloadCache.toBeAddedCache = [];
+                state.lazyloadCache.toBeRemovedCache = [];
+                return;
+
+            } else if (isShuffleOn === true) {
                 newPlaylist = removeTracksFromPlaylist(newPlaylist, toBeRemovedCache);
                 newCurrSong = newPlaylist[Math.floor(Math.random() * newPlaylist.length)];
+
             } else if (operation === NEXT_TRACK) {
                 let currIndex = currentPlaylist.findIndex((song) => song.songID === state.currSongID);
                 let hasLoopedOnce = false;
 
                 for (let i = currIndex; i < newPlaylist.length; i++) {
-                    if (!toBeRemovedCache.some((toBeRemovedSong) => toBeRemovedSong.songID === newPlaylist[i].songID)) {
+                    if (i !== currIndex && !toBeRemovedCache.some((toBeRemovedSong) => toBeRemovedSong.songID === newPlaylist[i].songID)) {
                         console.log("\r\nfound the next song to play: ", newPlaylist[i]);
                         newCurrSong = newPlaylist[i];
                         break;
@@ -144,7 +155,7 @@ const playerSlice = createSlice({
                 let hasLoopedOnce = false;
 
                 for (let i = currIndex; i >= 0; i--) {
-                    if (!toBeRemovedCache.some((toBeRemovedSong) => toBeRemovedSong.songID === newPlaylist[i].songID)) {
+                    if (i !== currIndex && !toBeRemovedCache.some((toBeRemovedSong) => toBeRemovedSong.songID === newPlaylist[i].songID)) {
                         console.log("\r\nfound the previous song to play: ", newPlaylist[i]);
                         newCurrSong = newPlaylist[i];
                         break;
@@ -157,16 +168,6 @@ const playerSlice = createSlice({
                 }
 
                 newPlaylist = removeTracksFromPlaylist(newPlaylist, toBeRemovedCache);
-            } else if (operation === USER_SELECTION) {
-                // user hit play on track in playlistPage manually, instantly jump to that song.
-                // i.e. we don't need to calculate newCurrSong, just jump to the songID of the song the user clicked on.
-                // That song the user set was already updated in state.currSongID, so we just use that.
-                newPlaylist = removeTracksFromPlaylist(newPlaylist, toBeRemovedCache);
-                state.playlist.songs = newPlaylist;
-                state.lazyloadCache.toBeAddedCache = [];
-                state.lazyloadCache.toBeRemovedCache = [];
-                return;
-
             } else {
                 console.log("ERROR: invalid operation in lazyLoadUpdatePlaylist");
                 newPlaylist = [];

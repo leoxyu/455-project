@@ -32,6 +32,8 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
     const [optionsTop, setOptionsTop] = useState(false);
     const [optionsLeft, setOptionsLeft] = useState(false);
 
+    const [isCurrentlyPlaying, setIsCurrentlyPlaying] = useState(false);
+
     let optionsPopupRef = useRef();
     let optionsRef = null;
 
@@ -54,7 +56,7 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
 
     // this block closes the options popup when the user clicks outside of it
     useEffect(() => {
-        
+
         let optionsHandler = (e) => {
             if (!optionsPopupRef.current.contains(e.target)) {
                 setOptionsOpen(false);
@@ -71,9 +73,7 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
 
 
     useEffect(() => {
-        if (currSongID && currSongID.songID === songID) {
-            // highlight the current track object
-        }
+        setIsCurrentlyPlaying(currSongID === songID);
     }, [currSongID]);
 
     const handlePlay = () => {
@@ -88,12 +88,11 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
 
     const handleOptions = () => {
         const optionsLocation = optionsRef.getBoundingClientRect();
-       
+
         optionsOnClick(optionsLocation.top + window.scrollY, optionsLocation.left);
     };
 
 
-    const isCurrentlyPlaying = currSongID === songID;
 
     return (
         <div className="track-container">
@@ -110,7 +109,7 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
 
                 <div ref={optionsPopupRef}>
                     <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
-                    <TrackOptions open={optionsOpen} top={optionsTop} left={optionsLeft} songObject = {songObject} />
+                    <TrackOptions open={optionsOpen} top={optionsTop} left={optionsLeft} songObject={songObject} />
                 </div>
             </div>
         </div>

@@ -42,7 +42,6 @@ const currentPlaylistSlice = createSlice({
 });
 
 export const { 
-    setCurrSongIdPlaylistPage, 
-    setPlaylistPlaylistPage } = currentPlaylistSlice.actions;
+    setCurrSongIdPlaylistPage, setPlaylistPlaylistPage } = currentPlaylistSlice.actions;
 
 export default currentPlaylistSlice.reducer;

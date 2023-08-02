@@ -9,7 +9,7 @@ import PlaylistContainer from "./components/playlistContainer.js";
 const CurrentPlaylistPage = () => {
 
     // const currentPlaylist = useSelector(state => state.currentPlaylistPage.playlist);
-    const currentPlaylist = useSelector(state => state.player.playlist);
+    const currentPlaylist = useSelector(state => state.currentPlaylistPage.playlist);
     
     const dispatch = useDispatch();
 
