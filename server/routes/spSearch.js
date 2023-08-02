@@ -75,6 +75,7 @@ function parseSpotifyAlbums(items) {
                 album.name),
             'originId': album.id,
             'isAlbum': true,
+            'type':'album',
             
             //extra
             'genres': album.genresConcat, //and union with artist genre
@@ -286,6 +287,7 @@ function parsePlaylists(playlists) {
             'songs': playlist.href, // best not to fetch while searching. better to click on it
             'originId': playlist.id,
             'isAlbum': false,
+            'type':'playlist',
 
             // extra
             'duration': playlist.tracks.total, // convert to min

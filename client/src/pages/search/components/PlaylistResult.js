@@ -162,9 +162,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
             {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
           </div>
         </div>
-        {sourceIcon(playlistObject.source)}
-        {/* {<SpotifyIcon className="source-icon" />} */}
-         {/* <OptionsIcon className="source-icon" /> */}
+        {/* {sourceIcon(playlistObject.source)} */}
       </div>
     </div>
   );

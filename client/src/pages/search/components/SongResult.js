@@ -101,7 +101,7 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
 
       <div className='essential-info'>
         <div className="thumbnail-container">
-          <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
+          <img className="thumbnail" src={songObject.imageLink} alt="Track Thumbnail" />
           <PlayIcon className="play-icon" onClick={handlePlay} />
         </div>
         <div className="details">
@@ -110,7 +110,7 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
         </div>
       </div>
        <div className="stats">
-          {sourceIcon(songObject.source)}
+          {/* {sourceIcon(songObject.source)} */}
           <HeartIcon className="heart-icon" onClick={handleFavorite}/>
           <div className="duration">{songObject.duration}</div>
           <div ref={optionsPopupRef}>
@@ -118,6 +118,7 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
           </div>
 
       </div>
+      <div ref={optionsPopupRef}>
       <Options
               open={optionsOpen}
               top={optionsTop}
@@ -126,6 +127,7 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
               onClose={() => setOptionsOpen(false)}
               handleAddClick={handleAddClick}
             />
+            </div>
     </div>
   );
 };

@@ -1,0 +1,6 @@
+
+
+.spotify-playlist-list {
+    display:flex;
+    flex-wrap: wrap;
+}
