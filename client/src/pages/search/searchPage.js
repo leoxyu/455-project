@@ -12,8 +12,7 @@ import { getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync } from '.
 import debounce from 'lodash.debounce';
 
 import { createPlaylistAsync, spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
-import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2 } from '../../typeConstants';
-
+import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2, TYPE_UNIFI } from '../../typeConstants';
 
 
 
@@ -115,6 +114,26 @@ const SearchPage = () => {
     // make API call here...
   }
 
+  // const playlist  = {
+  //   name: 'playlist name1234567789000',
+  //   originId: 'playlist origin id',
+  //   artist: 'hero 121243324234234324',
+  //   source: TYPE_UNIFI,
+
+  //   // new changes
+  //   description: 'playlist description',
+  //   duration: 'playlist duration',
+  //   dateCreated: 'playlist date created',
+  //   coverImageURL: 'https://upload.wikimedia.org/wikipedia/en/a/a4/Mobile_Suit_Gundam_Wing_Vol_1.jpg',
+  // };
+  // const song = {
+  //   name: 'song name 121243324234234324121243324234234324121243324234234324',
+  //   originId: 'song origin id121243324234234324',
+  //   artist: 'hero 121243324234234324121243324234234324121243324234234324',
+  //   duration: '1:43',
+  //   source: TYPE_SPOTIFY,
+  //   imageLink: 'https://upload.wikimedia.org/wikipedia/en/a/a4/Mobile_Suit_Gundam_Wing_Vol_1.jpg',
+  // }
 
   return (
     <div className='search-page'>
@@ -125,10 +144,48 @@ const SearchPage = () => {
           <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef} />
         </div>
       }
+      {/* <PlaylistResult
+              className={'spotify-playlist-preview'}
+              key={playlist.originId}
+              thumbnailUrl={playlist.coverImageURL}
+              playlistName={playlist.name}
+              artistName={playlist.author}
+              views={0 + ' views'}
+              playlistLink={playlist.originId}
+              releaseDate={playlist.dateCreated}
+
+              // new changes
+              isFavorited={false}
+              duration={playlist.duration}
+              source={TYPE_SPOTIFY}
+              type={TYPE_PLAYLIST}
+              optionType={OPTIONS_TYPE3}
+              saveOnClick={saveOnClick}
+              description={playlist.description}
+              playlistObject={playlist}
+            />
+      <SongResult
+            className='spotify-preview'
+            songObject={song}
+            key={song.link}
+            thumbnailUrl={song.imageLink}
+            songName={song.name}
+            artistName={song.artist}
+            views={song.views + ' streams'}
+            duration={song.duration}
+            songLink={song.link}
+            source={TYPE_SPOTIFY}
+            handleAddClick={handleAddClick}
+            playlistCreatorRef={playlistCreatorRef}
+            releaseDate={song.releaseDate}
+
+            // new changes
+            isFavorited={false}
+          /> */}
 
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
-        {spotifyTracks.map((song, i) => (
+        {spotifyTracks.slice(0,5).map((song, i) => (
           <SongResult
             className='spotify-preview'
             songObject={song}
@@ -145,18 +202,18 @@ const SearchPage = () => {
             releaseDate={song.releaseDate}
 
             // new changes
-            isFavorite={false}
+            isFavorited={false}
           />
         ))}
       </div>
 
       <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{display:'flex', flexWrap: 'wrap'}}>
+        <div className='spotify-album-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
 
-          {spotifyAlbums.map((album, i) => (
+          {spotifyAlbums.slice(0,5).map((album, i) => (
             <PlaylistResult
-              className={'spotify-album-preview'}
+              className={'spotify-playlist-preview'}
               key={album.originId}
               thumbnailUrl={album.coverImageURL}
               playlistName={album.name}
@@ -166,13 +223,14 @@ const SearchPage = () => {
               releaseDate={album.dateCreated}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               duration={album.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_ALBUM}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               description={null}
+              playlistObject={album}
             />
           ))}
         </div>
@@ -181,7 +239,7 @@ const SearchPage = () => {
       <div className='spotify-playlists'>
         <h2 className='heading'>Spotify Playlists</h2>
         <div className='spotify-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {spotifyPlaylists.map((playlist, i) => (
+          {spotifyPlaylists.slice(0,5).map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
               key={playlist.originId}
@@ -193,13 +251,14 @@ const SearchPage = () => {
               releaseDate={playlist.dateCreated}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               duration={playlist.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               description={playlist.description}
+              playlistObject={playlist}
             />
           ))}
         </div>
@@ -207,10 +266,10 @@ const SearchPage = () => {
 
       <div className='youtube-videos'>
         <h2 className='heading'>Youtube Videos</h2>
-        <div className='youtube-video-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {youtubeVideos.map((song, i) => (
+        {/* <div className='youtube-video-list' style={{ display: 'flex', flexWrap: 'wrap' }}> */}
+          {youtubeVideos.slice(0,5).map((song, i) => (
             <SongResult
-              className={'youtube-preview'}
+              className={'spotify-preview'}
               key={song.link}
               songObject={song}
               thumbnailUrl={song.imageLink}
@@ -219,23 +278,23 @@ const SearchPage = () => {
               views={song.views + ' views'}
               duration={song.duration}
               songLink={song.link}
-              source={TYPE_YOUTUBE} 
+              source={TYPE_YOUTUBE}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               releaseDate={song.dateCreated}
             />
           ))}
 
-        </div>
+        {/* </div> */}
       </div>
 
       <div className='youtube-playlists'>
         <h2 className='heading'>Youtube Playlists</h2>
         <div className='youtube-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {youtubePlaylists.map((playlist, i) => (
+          {youtubePlaylists.slice(0,5).map((playlist, i) => (
             <PlaylistResult
-              className={'youtube-playlist-preview'}
+              className={'spotify-playlist-preview'}
               key={i}
               thumbnailUrl={playlist.coverImageURL}
               playlistName={playlist.name}
@@ -247,11 +306,12 @@ const SearchPage = () => {
               // releaseDate={playlist.releaseDate}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               // duration={playlist.duration}
               source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
+              playlistObject={playlist}
               saveOnClick={saveOnClick}
             />
           ))}

@@ -4,6 +4,10 @@ import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
+import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
+import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
+import { ReactComponent as UnifiIcon } from '../../../images/unifilogo.svg';
+import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI } from '../../../typeConstants';
 import '../styles/Preview.css'
 import '../styles/YtVideoPreview.css';
 import '../styles/SpSongPreview.css';
@@ -14,11 +18,11 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songObject }) => {
 
   const dispatch = useDispatch();
 
-  
+
 
   const handlePlay = () => {
 
@@ -29,7 +33,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
       releaseDate: songObject.releaseDate,
       duration: songObject.duration,
       artistName: songObject.artist,
-      isFavorite: isFavorite,
+      isFavorited: isFavorited,
       source: songObject.source,
       description: null,
       type: TYPE_TRACK,
@@ -80,27 +84,41 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
     optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
+  function sourceIcon(source) {
+    if (source === TYPE_SPOTIFY) {
+      return <SpotifyIcon className="source-icon" />;
+    }
+    if (source === TYPE_YOUTUBE) {
+      return <YoutubeIcon className="source-icon"/>;
+    }
+    if (source === TYPE_UNIFI) {
+      return <UnifiIcon className="source-icon" />;
+    }
+  };
 
   return (
     <div className={className}>
+
       <div className='essential-info'>
         <div className="thumbnail-container">
           <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
-
           <PlayIcon className="play-icon" onClick={handlePlay} />
         </div>
         <div className="details">
           <div className="name">{songObject.name}</div>
           <div className="artist">{songObject.artist}</div>
-          <div className="artist-name">{songObject.artist}</div>
         </div>
       </div>
        <div className="stats">
+          {sourceIcon(songObject.source)}
           <HeartIcon className="heart-icon" onClick={handleFavorite}/>
           <div className="duration">{songObject.duration}</div>
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
-            <Options
+          </div>
+
+      </div>
+      <Options
               open={optionsOpen}
               top={optionsTop}
               left={optionsLeft}
@@ -108,8 +126,6 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
               onClose={() => setOptionsOpen(false)}
               handleAddClick={handleAddClick}
             />
-          </div>
-      </div>
     </div>
   );
 };

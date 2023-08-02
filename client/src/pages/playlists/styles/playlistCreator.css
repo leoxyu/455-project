@@ -69,22 +69,22 @@
     padding: 0.5rem;
     color: var(--text-base);
   }
-  
+
   .creator-button:hover {
     border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
     background-color: var(--background-elevated-highlight);
   }
 
-  
+
   .creator-button:text-content {
     width: 100%;
     border: none;
     outline: none;
-    
+
     background-color: transparent;
     color: var(--text-base);
   }
-  
+
 
   .placeholder {
     position: relative;
@@ -96,7 +96,7 @@
     /* color: #999; */
     /* display: none; */
   }
-  
+
   .placeholder.active {
     top: 5px;
     font-size: 12px;

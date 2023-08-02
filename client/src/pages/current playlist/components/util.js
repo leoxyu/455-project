@@ -32,6 +32,12 @@ export const getTotalTrackDuration = (songs) => {
     }
 
     const parsedDuration = new Date(totalDuration).toISOString().slice(11, 19);
-
-    return parsedDuration;
+    return removeHours(parsedDuration);
 }
+
+const removeHours = (str) => {
+    if (str.startsWith("00:")) {
+        return str.slice(3); // Remove the first 3 characters "00:"
+    }
+    return str; // If the string doesn't start with "00:", return it as is
+};

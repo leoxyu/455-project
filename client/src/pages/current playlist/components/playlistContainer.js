@@ -17,7 +17,7 @@ import placeholderCover from '../../../images/album-placeholder.png';
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
-const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorite, description, songs }) => {
+const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
 
     const totalDuration = getTotalTrackDuration(songs);
     const thumbnailUrlSet = setThumbnail(thumbnailUrl);
@@ -42,8 +42,8 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
             const lightVibrantRGB = palette.LightVibrant._rgb;
             const darkVibrantRGB = palette.DarkVibrant._rgb;
             const playlistHeaderComponent = document.getElementsByClassName('playlist-header')[0];
-            if (playlistHeaderComponent) playlistHeaderComponent.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 1) 
-            20%, rgba(${darkVibrantRGB[0]}, ${darkVibrantRGB[1]}, ${darkVibrantRGB[2]}, 1) 
+            if (playlistHeaderComponent) playlistHeaderComponent.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 1)
+            20%, rgba(${darkVibrantRGB[0]}, ${darkVibrantRGB[1]}, ${darkVibrantRGB[2]}, 1)
             60%, rgba(${lightVibrantRGB[0]}, ${lightVibrantRGB[1]}, ${lightVibrantRGB[2]}, 1) 100%)`;
         });
     }
