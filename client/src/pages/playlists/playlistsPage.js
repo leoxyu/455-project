@@ -171,6 +171,33 @@ const PlaylistPage = () => {
           />
         ))}
       </div>
+      <h2 className='playlists-heading'>Favorited Playlists</h2>
+      <div className='unifi-playlists-list' style={{display:'flex', flexWrap: 'wrap'}}>
+        {playlists.map((playlist, i) => (
+          <div key={i}>
+            {playlist.isFavorited && <PlaylistResult
+              key={playlist.playlistID}
+              className={'spotify-playlist-preview'}
+              playlistID={playlist.playlistID}
+              thumbnailUrl={playlist.coverImageURL}
+              playlistName={playlist.name}
+              artistName={playlist.artist}
+              songs={playlist.songs}
+              deleteOnClick={() => onDelete(playlist.playlistID)}
+              editOnClick={() => handleClickEdit(playlist)}
+              isEditable={false}
+              optionType={OPTIONS_TYPE2}
+              duration={playlist.songs?.length}
+              isFavorited={true}
+              releaseDate={playlist.dateCreated}
+              source={playlist.source}
+              type={playlist.type}
+              description={playlist.description}
+              playlistObject={playlist}
+            />}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
