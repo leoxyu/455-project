@@ -230,7 +230,7 @@ const SearchPage = () => {
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               description={null}
-              playlistObject={album}
+              playlistObject={{...album, type: 'album'}}
             />
           ))}
         </div>
@@ -258,7 +258,7 @@ const SearchPage = () => {
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               description={playlist.description}
-              playlistObject={playlist}
+              playlistObject={{...playlist, type: 'playlist' }}
             />
           ))}
         </div>
