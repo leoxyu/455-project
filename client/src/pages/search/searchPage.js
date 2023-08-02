@@ -3,8 +3,9 @@ import '../../styles/variables.css';
 
 import '../../styles/searchPage.css';
 import SearchBar from './components/SearchBar';
-import SongResult from './components/SongResult';
-import PlaylistResult from './components/PlaylistResult';
+// import SongResult from './components/SongResult';
+// import PlaylistResult from './components/PlaylistResult';
+import ResultsList from './components/ResultsList';
 import Filters from './components/Filters';
 import PlaylistCreator from '../playlists/components/PlaylistCreator';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +14,8 @@ import debounce from 'lodash.debounce';
 
 import { createPlaylistAsync, spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2, TYPE_UNIFI } from '../../typeConstants';
+import { render } from 'react-dom';
+// import { render } from 'react-dom';
 
 
 
@@ -34,6 +37,7 @@ const SearchPage = () => {
   const spotifyAlbums = useSelector(state => state.search.spotify.albums);
   const youtubeVideos = useSelector(state => state.search.youtube.videos);
   const youtubePlaylists = useSelector(state => state.search.youtube.playlists);
+  const [selectedFilter, setSelectedFilter] = useState('All');
 
   // users
   const authorID = useSelector(state => state.login.authorID);
@@ -55,7 +59,6 @@ const SearchPage = () => {
 
 
 
-  const playlistCreatorRef = useRef(null);
 
 
   const closeCreator = () => {
@@ -63,6 +66,7 @@ const SearchPage = () => {
   }
 
   const handleAddClick = () => {
+    console.log('trying to create new playlist');
     setCreatorVisible(true);
   }
 
@@ -115,91 +119,68 @@ const SearchPage = () => {
   }
 
 
+
+  const renderTrackResults = (tracks, sectionLabel=null) => {
+    return (
+      <ResultsList 
+          collection={tracks} 
+          className={'spotify-track-list'}
+          selectedFilter={(sectionLabel)? sectionLabel: selectedFilter}
+          handleAddClick={handleAddClick} />
+    )
+  };
+
+  const renderPlaylistResults = (playlists, sectionLabel=null) => {
+    return (
+      <ResultsList
+        collection={playlists}
+        className={'spotify-playlist-list'}
+        selectedFilter={(sectionLabel)? sectionLabel: selectedFilter}
+        saveOnClick={saveOnClick} />
+    )
+  };
+
+
+
+  const renderFilteredContent = () => {
+    switch (selectedFilter) {
+      case 'All':
+        return (
+          <div>
+            {renderTrackResults(spotifyTracks.slice(0,5), 'Spotify Tracks')}
+            {renderPlaylistResults(spotifyAlbums.slice(0,5), 'Spotify Albums')}
+            {renderPlaylistResults(spotifyPlaylists.slice(0,5), 'Spotify Playlists')}
+            {renderTrackResults(youtubeVideos.slice(0,5), 'YouTube Videos')}
+            {renderPlaylistResults(youtubePlaylists.slice(0,5), 'YouTube Playlists')}
+          </div>
+        );
+      case 'Spotify Tracks':
+        return (renderTrackResults(spotifyTracks));
+      case 'Spotify Albums':
+        return (renderPlaylistResults(spotifyAlbums));
+      case 'Spotify Playlists':
+        return (renderPlaylistResults(spotifyPlaylists));
+      case 'YouTube Videos':
+        return (renderTrackResults(youtubeVideos));
+      case 'YouTube Playlists':
+        return (renderPlaylistResults(youtubePlaylists));
+      default:
+        return (<div>No Results Found!</div>);
+    }
+  }
+        
+
+
   return (
     <div className='search-page'>
       <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input) => { performSearch(input) }} />
-      <Filters />
+      <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}/>
       {creatorVisible &&
         <div className='creator-dialog-overlay'>
-          <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef} />
+          <PlaylistCreator onClose={closeCreator} />
         </div>
       }
-
-      <div className='spotify-songs'>
-        <h2 className='heading'>Spotify Songs</h2>
-        {spotifyTracks.slice(0,5).map((song, i) => (
-          <SongResult
-            className='spotify-preview'
-            songObject={song}
-            handleAddClick={handleAddClick}
-            playlistCreatorRef={playlistCreatorRef}
-            // new changes
-            isFavorite={false}
-          />
-        ))}
-      </div>
-
-      <div className='spotify-albums'>
-        <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{display:'flex', flexWrap: 'wrap'}}>
-
-          {spotifyAlbums.slice(0,5).map((album, i) => (
-            <PlaylistResult
-              className={'spotify-playlist-preview'}
-              isFavorite={false}
-              optionType={OPTIONS_TYPE3}
-              saveOnClick={saveOnClick}
-              playlistObject={album}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className='spotify-playlists'>
-        <h2 className='heading'>Spotify Playlists</h2>
-        <div className='spotify-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {spotifyPlaylists.slice(0,5).map((playlist, i) => (
-            <PlaylistResult
-              className={'spotify-playlist-preview'}
-              type={TYPE_PLAYLIST}
-              optionType={OPTIONS_TYPE3}
-              saveOnClick={saveOnClick}
-              playlistObject={playlist}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className='youtube-videos'>
-        <h2 className='heading'>Youtube Videos</h2>
-        {/* <div className='youtube-video-list' style={{ display: 'flex', flexWrap: 'wrap' }}> */}
-          {youtubeVideos.slice(0,5).map((song, i) => (
-            <SongResult
-              className={'spotify-preview'}
-              songObject={song}
-              handleAddClick={handleAddClick}
-              isFavorite={false}
-              />
-          ))}
-
-        {/* </div> */}
-      </div>
-
-      <div className='youtube-playlists'>
-        <h2 className='heading'>Youtube Playlists</h2>
-        <div className='youtube-playlist-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {youtubePlaylists.slice(0,5).map((playlist, i) => (
-            <PlaylistResult
-              className={'spotify-playlist-preview'}
-              isFavorite={false}
-              type={TYPE_PLAYLIST}
-              optionType={OPTIONS_TYPE3}
-              playlistObject={playlist}
-              saveOnClick={saveOnClick}
-            />
-          ))}
-        </div>
-      </div>
+      {renderFilteredContent()}
     </div>
   );
 };

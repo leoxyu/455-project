@@ -9,6 +9,7 @@ const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) =
   const dispatch = useDispatch();
 
   const handleSelection = (playlistID) => {
+    console.log("adding song to playlist " + playlistID)
     dispatch(addSongAsync({ playlistID, songBody }));
     onClose(); // Trigger the onClose callback
   };

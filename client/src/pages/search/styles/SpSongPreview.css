@@ -25,23 +25,6 @@
         right: 0rem;
     }
 
-    /* .source-icon {
-        position: absolute;
-        top: center;
-        right: 10rem;
-        padding-right: 2rem;
-        transform: translate(0%, 0%);
-        max-width: 1.5rem;
-        max-height: 1.5rem;
-        
-
-
-        margin: 0;
-        opacity: 1;
-        z-index: 0;
-        fill: var(--essential-bright-accent);
-    } */
-
     .essential-info{
         display: flex;
         align-items: center;
@@ -167,3 +150,8 @@
 }
 
 
+.spotify-preview:hover {
+    .source-icon {
+        opacity: 40%;
+    }
+}
