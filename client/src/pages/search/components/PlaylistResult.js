@@ -11,7 +11,7 @@ import '../styles/Preview.css';
 import '../styles/SpPlaylistPreview.css';
 import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
-import { getOnePlaylist } from '../../../components/home/redux/thunks';
+import { editPlaylistAsync, getOnePlaylist } from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from './Options2';
 import Options3 from './Options3';
@@ -112,6 +112,16 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
     editOnClick();
   };
 
+  const handleSetFavorite = () => {
+    setOptionsOpen(false);
+    const playlistEdit = {
+      playlistID: playlistObject.playlistID,
+      isFavorited: !playlistObject.isFavorited
+    };
+
+    dispatch(editPlaylistAsync(playlistEdit));
+  };
+
   const handleOptions = () => {
     // Handle options button click
     const optionsLocation = optionsRef.getBoundingClientRect();
@@ -148,7 +158,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
         <div className="stats">
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
-            {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} playlistID={playlistObject.playlistID}/>}
+            {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>}
             {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
           </div>
         </div>
