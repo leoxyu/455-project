@@ -118,6 +118,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
           </div>
           
       </div>
+      <div ref={optionsPopupRef}>
       <Options
               open={optionsOpen}
               top={optionsTop}
@@ -126,6 +127,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
               onClose={() => setOptionsOpen(false)}
               handleAddClick={handleAddClick}
             />
+            </div>
     </div>
   );
 };
