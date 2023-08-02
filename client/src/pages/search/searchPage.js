@@ -112,29 +112,8 @@ const SearchPage = () => {
     }
 
 
-    // make API call here...
   }
 
-  // const playlist  = {
-  //   name: 'playlist name1234567789000',
-  //   originId: 'playlist origin id',
-  //   artist: 'hero 121243324234234324',
-  //   source: TYPE_UNIFI,
-
-  //   // new changes
-  //   description: 'playlist description',
-  //   duration: 'playlist duration',
-  //   dateCreated: 'playlist date created',
-  //   coverImageURL: 'https://upload.wikimedia.org/wikipedia/en/a/a4/Mobile_Suit_Gundam_Wing_Vol_1.jpg',
-  // };
-  // const song = {
-  //   name: 'song name 121243324234234324121243324234234324121243324234234324',
-  //   originId: 'song origin id121243324234234324',
-  //   artist: 'hero 121243324234234324121243324234234324121243324234234324',
-  //   duration: '1:43',
-  //   source: TYPE_SPOTIFY,
-  //   imageLink: 'https://upload.wikimedia.org/wikipedia/en/a/a4/Mobile_Suit_Gundam_Wing_Vol_1.jpg',
-  // }
 
   return (
     <div className='search-page'>
@@ -145,44 +124,6 @@ const SearchPage = () => {
           <PlaylistCreator onClose={closeCreator} ref={playlistCreatorRef} />
         </div>
       }
-      {/* <PlaylistResult
-              className={'spotify-playlist-preview'}
-              key={playlist.originId}
-              thumbnailUrl={playlist.coverImageURL}
-              playlistName={playlist.name}
-              artistName={playlist.author}
-              views={0 + ' views'}
-              playlistLink={playlist.originId}
-              releaseDate={playlist.dateCreated}
-
-              // new changes
-              isFavorite={false}
-              duration={playlist.duration}
-              source={TYPE_SPOTIFY}
-              type={TYPE_PLAYLIST}
-              optionType={OPTIONS_TYPE3}
-              saveOnClick={saveOnClick}
-              description={playlist.description}
-              playlistObject={playlist}
-            />
-      <SongResult
-            className='spotify-preview'
-            songObject={song}
-            key={song.link}
-            thumbnailUrl={song.imageLink}
-            songName={song.name}
-            artistName={song.artist}
-            views={song.views + ' streams'}
-            duration={song.duration}
-            songLink={song.link}
-            source={TYPE_SPOTIFY}
-            handleAddClick={handleAddClick}
-            playlistCreatorRef={playlistCreatorRef}
-            releaseDate={song.releaseDate}
-
-            // new changes
-            isFavorite={false}
-          /> */}
 
       <div className='spotify-songs'>
         <h2 className='heading'>Spotify Songs</h2>
@@ -190,18 +131,8 @@ const SearchPage = () => {
           <SongResult
             className='spotify-preview'
             songObject={song}
-            key={song.link}
-            thumbnailUrl={song.imageLink}
-            songName={song.name}
-            artistName={song.artist}
-            views={song.views + ' streams'}
-            duration={song.duration}
-            songLink={song.link}
-            source={TYPE_SPOTIFY}
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
-            releaseDate={song.releaseDate}
-
             // new changes
             isFavorite={false}
           />
@@ -215,22 +146,9 @@ const SearchPage = () => {
           {spotifyAlbums.slice(0,5).map((album, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
-              key={album.originId}
-              thumbnailUrl={album.coverImageURL}
-              playlistName={album.name}
-              artistName={album.author}
-              views={album.popularity + ' views'}
-              playlistLink={album.originId}
-              releaseDate={album.dateCreated}
-
-              // new changes
               isFavorite={false}
-              duration={album.duration}
-              source={TYPE_SPOTIFY}
-              type={TYPE_ALBUM}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
-              description={null}
               playlistObject={album}
             />
           ))}
@@ -243,22 +161,9 @@ const SearchPage = () => {
           {spotifyPlaylists.slice(0,5).map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
-              key={playlist.originId}
-              thumbnailUrl={playlist.coverImageURL}
-              playlistName={playlist.name}
-              artistName={playlist.author}
-              views={0 + ' views'}
-              playlistLink={playlist.originId}
-              releaseDate={playlist.dateCreated}
-
-              // new changes
-              isFavorite={false}
-              duration={playlist.duration}
-              source={TYPE_SPOTIFY}
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
-              description={playlist.description}
               playlistObject={playlist}
             />
           ))}
@@ -271,20 +176,10 @@ const SearchPage = () => {
           {youtubeVideos.slice(0,5).map((song, i) => (
             <SongResult
               className={'spotify-preview'}
-              key={song.link}
               songObject={song}
-              thumbnailUrl={song.imageLink}
-              songName={song.name}
-              artistName={song.artist}
-              views={song.views + ' views'}
-              duration={song.duration}
-              songLink={song.link}
-              source={TYPE_YOUTUBE} 
-
-              // new changes
+              handleAddClick={handleAddClick}
               isFavorite={false}
-              releaseDate={song.dateCreated}
-            />
+              />
           ))}
 
         {/* </div> */}
@@ -296,20 +191,7 @@ const SearchPage = () => {
           {youtubePlaylists.slice(0,5).map((playlist, i) => (
             <PlaylistResult
               className={'spotify-playlist-preview'}
-              key={i}
-              thumbnailUrl={playlist.coverImageURL}
-              playlistName={playlist.name}
-              artistName={playlist.author}
-              songs={[]}
-              // views={song.views + ' views'}
-              // duration={song.duration}
-              playlistLink={playlist.originId}
-              // releaseDate={playlist.releaseDate}
-
-              // new changes
               isFavorite={false}
-              // duration={playlist.duration}
-              source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}
               optionType={OPTIONS_TYPE3}
               playlistObject={playlist}

@@ -157,8 +157,6 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
           </div>
         </div>
         {sourceIcon(playlistObject.source)}
-        {/* {<SpotifyIcon className="source-icon" />} */}
-         {/* <OptionsIcon className="source-icon" /> */}
       </div>
     </div>
   );
