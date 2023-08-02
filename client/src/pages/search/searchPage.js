@@ -156,7 +156,7 @@ const SearchPage = () => {
               releaseDate={playlist.dateCreated}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               duration={playlist.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_PLAYLIST}
@@ -181,7 +181,7 @@ const SearchPage = () => {
             releaseDate={song.releaseDate}
 
             // new changes
-            isFavorite={false}
+            isFavorited={false}
           /> */}
 
       <div className='spotify-songs'>
@@ -203,7 +203,7 @@ const SearchPage = () => {
             releaseDate={song.releaseDate}
 
             // new changes
-            isFavorite={false}
+            isFavorited={false}
           />
         ))}
       </div>
@@ -224,7 +224,7 @@ const SearchPage = () => {
               releaseDate={album.dateCreated}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               duration={album.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_ALBUM}
@@ -252,7 +252,7 @@ const SearchPage = () => {
               releaseDate={playlist.dateCreated}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               duration={playlist.duration}
               source={TYPE_SPOTIFY}
               type={TYPE_PLAYLIST}
@@ -279,10 +279,10 @@ const SearchPage = () => {
               views={song.views + ' views'}
               duration={song.duration}
               songLink={song.link}
-              source={TYPE_YOUTUBE} 
+              source={TYPE_YOUTUBE}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               releaseDate={song.dateCreated}
             />
           ))}
@@ -307,7 +307,7 @@ const SearchPage = () => {
               // releaseDate={playlist.releaseDate}
 
               // new changes
-              isFavorite={false}
+              isFavorited={false}
               // duration={playlist.duration}
               source={TYPE_YOUTUBE}
               type={TYPE_PLAYLIST}

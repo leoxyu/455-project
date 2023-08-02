@@ -13,7 +13,7 @@ const initialState = {
         releaseDate: "",
         duration: 0,
         artistName: "",
-        isFavorite: false,
+        isFavorited: false,
         source: "",
         type: "",
         description: "",

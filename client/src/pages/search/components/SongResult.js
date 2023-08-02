@@ -18,11 +18,11 @@ import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
-const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songObject }) => {
+const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songObject }) => {
 
   const dispatch = useDispatch();
 
-  
+
 
   const handlePlay = () => {
 
@@ -33,7 +33,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
       releaseDate: songObject.releaseDate,
       duration: songObject.duration,
       artistName: songObject.artist,
-      isFavorite: isFavorite,
+      isFavorited: isFavorited,
       source: songObject.source,
       description: null,
       type: TYPE_TRACK,
@@ -98,7 +98,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
 
   return (
     <div className={className}>
-      
+
       <div className='essential-info'>
         <div className="thumbnail-container">
           <img className="thumbnail" src={songObject.imageLink} alt="Album Thumbnail" />
@@ -116,7 +116,7 @@ const SongResult = ({ className,  isFavorite, handleAddClick = () => { }, songOb
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
           </div>
-          
+
       </div>
       <Options
               open={optionsOpen}

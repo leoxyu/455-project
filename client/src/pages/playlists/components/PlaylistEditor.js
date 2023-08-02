@@ -54,7 +54,7 @@ const PlaylistEditor = ({ playlist, onClose }) => {
       }
     }
 
-    const newPlaylist = {
+    const playlistEdit = {
       playlistID: playlist.playlistID,
       name: name,
       description: description,
@@ -62,7 +62,7 @@ const PlaylistEditor = ({ playlist, onClose }) => {
       songs: newSongs
     };
 
-    dispatch(editPlaylistAsync(newPlaylist));
+    dispatch(editPlaylistAsync(playlistEdit));
     onClose();
   };
 

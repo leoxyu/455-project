@@ -48,6 +48,7 @@ main {
   position: fixed;
   bottom: 0;
   width: calc(100% - 240px);
+  z-index: 5;
 }
 
 

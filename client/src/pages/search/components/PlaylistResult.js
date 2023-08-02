@@ -21,7 +21,7 @@ import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI } from '../../../typeConstants';
 
 import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 
-const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editOnClick, saveOnClick, optionType, playlistObject }) => {
+const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, saveOnClick, optionType, playlistObject }) => {
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [optionsTop, setOptionsTop] = useState(false);
@@ -54,10 +54,10 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
         id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
         playlistName: playlistObject.name,
         thumbnailUrl: playlistObject.coverImageURL,
-        releaseDate: playlistObject.dateCreated, // 
+        releaseDate: playlistObject.dateCreated, //
         duration: songs.length,
         artistName: playlistObject.author,
-        isFavorite: isFavorite,
+        isFavorited: playlistObject.isFavorited,
         source: playlistObject.source,
         description: playlistObject.description,
         type: playlistObject.type,
@@ -94,7 +94,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
       releaseDate: playlistObject.dateCreated, //
       duration: songs.length,
       artistName: playlistObject.author,
-      isFavorite: isFavorite,
+      isFavorited: playlistObject.isFavorited,
       source: playlistObject.source,
       description: playlistObject.description,
       type: playlistObject.type,
@@ -110,10 +110,6 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
   const handleEdit = () => {
     setOptionsOpen(false);
     editOnClick();
-  };
-
-  const handleFavorite = () => {
-    // Handle favorite button click
   };
 
   const handleOptions = () => {
@@ -152,7 +148,7 @@ const PlaylistResult = ({className, isFavorite, songs = [], deleteOnClick, editO
         <div className="stats">
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
-            {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} />}
+            {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} playlistID={playlistObject.playlistID}/>}
             {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
           </div>
         </div>
