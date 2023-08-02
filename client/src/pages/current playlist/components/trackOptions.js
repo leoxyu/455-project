@@ -60,7 +60,11 @@ const TrackOptions = ({ open, top, left, songObject }) => {
     }
 
     const handleDeleteClick = () => {
-        dispatch(removeSongAsync(playlistID, songObject.songID));
+        const body = {
+            playlistID,
+            songID: songObject.songID
+        }
+        dispatch(removeSongAsync(body));
         dispatch(removeSong(songObject.songID));
         dispatch(lazyLoadRemoveSong([songObject]));
     }
