@@ -19,11 +19,13 @@ export default function SongPlayer() {
   const currSongID = useSelector(state => state.player.currSongID);
   const songs = playlist.songs;
 
+  const [ranOnce, setRanOnce] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const playOnLoad = useRef(true);
   const shuffle = useRef(false);
 
   useEffect(() => {
+    //if (ranOnce === false) {
     if (songs && songs.length > 0 && currSongID) {
       console.log("currSong changed, playing song");
       const action = {
@@ -33,7 +35,12 @@ export default function SongPlayer() {
       dispatch(lazyLoadUpdatePlaylist(action)); // updates currSongID
       setCurrentSongIndex(songs.findIndex(song => song.songID === currSongID));
       dispatch(setCurrSongIdPlaylistPage(currSongID));
+
+      //  setRanOnce(true);
+      // will trigger this hook again, but ranOnce will prevent from running twice
+
       playOnLoad.current = true;
+      // }
     }
   }, [currSongID]);
 

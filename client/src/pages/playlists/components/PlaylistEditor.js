@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { editPlaylistAsync } from '../../../components/home/redux/thunks';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
+
+import { removeSong, addSong } from '../../current playlist/redux/currentPlaylistReducer.js'
+import { lazyLoadAddSong, lazyLoadRemoveSong } from '../../../components/player/PlayerReducer';
 
 const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
@@ -25,6 +28,8 @@ const PlaylistEditor = ({ playlist, onClose }) => {
   const [description, setDescription] = useState(playlist.description);
   const [imageUrl, setImageUrl] = useState(playlist.coverImageURL);
   const [deletedSongs, setDeletedSongs] = useState([]);
+
+  const playerPlaylistID = useSelector((state) => state.player.playlistID);
 
   const dispatch = useDispatch();
 
@@ -80,6 +85,12 @@ const PlaylistEditor = ({ playlist, onClose }) => {
     const newDeletedSongs = [...deletedSongs];
     newDeletedSongs.push(index);
     setDeletedSongs(newDeletedSongs);
+
+    if (playerPlaylistID === playlist.playlistID) {
+      dispatch(lazyLoadRemoveSong([playlist.songs[index]]));
+      dispatch(removeSong(playlist.songs[index].songID));
+    }
+
   };
 
   return (

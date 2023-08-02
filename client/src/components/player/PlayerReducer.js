@@ -55,7 +55,8 @@ const playerSlice = createSlice({
             console.log(action.payload);
 
             let toBeAdded = action.payload;
-            let toBeRemovedCache = state.lazyloadCache.toBeRemovedCache;
+            let toBeRemovedCache = Array.from(state.lazyloadCache.toBeRemovedCache).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));
+            
 
             let finalResultAdd = [];
 
@@ -78,7 +79,7 @@ const playerSlice = createSlice({
             console.log(action.payload);
 
             let toBeRemoved = action.payload;
-            let toBeAddedCache = state.lazyloadCache.toBeAddedCache;
+            let toBeAddedCache = Array.from(state.lazyloadCache.toBeAddedCache).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));
 
             let finalResultRem = [];
 
@@ -133,6 +134,8 @@ const playerSlice = createSlice({
                 newCurrSong = newPlaylist[Math.floor(Math.random() * newPlaylist.length)];
 
             } else if (operation === NEXT_TRACK) {
+                // currIndex is always undefined if playlistPage hasn't set currSongID yet! 
+                // This case occurs when you first play the playlist for the first time.
                 let currIndex = currentPlaylist.findIndex((song) => song.songID === state.currSongID);
                 let hasLoopedOnce = false;
 

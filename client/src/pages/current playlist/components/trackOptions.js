@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import '../styles/trackOptions.css'
 import '../../search/styles/Options.css'
 import Options from "../../search/components/Options.js";
 import TrackInfo from "./trackInfo.js";
 
+import { removeSongAsync } from '../../../components/home/redux/thunks';
+import { lazyLoadRemoveSong } from '../../../components/player/PlayerReducer';
+import { removeSong } from '../../current playlist/redux/currentPlaylistReducer.js';
 
 const TrackOptions = ({ open, top, left, songObject }) => {
 
+    const dispatch = useDispatch();
 
     const [optionsOpen, setOptionsOpen] = useState(false);
     const [optionsTop, setOptionsTop] = useState(false);
@@ -14,12 +19,10 @@ const TrackOptions = ({ open, top, left, songObject }) => {
 
     const [creditsVisible, setCreditsVisible] = useState(false);
 
+    const playlistID = useSelector(state => state.player.playlist.id);
+
     let optionsPopupRef = useRef();
     let optionsRef = null;
-
-    useEffect(() => {
-        console.log("\r\nActual location: ", top, left);
-    }, []);
 
     useEffect(() => {
         let optionsHandler = (e) => {
@@ -56,6 +59,12 @@ const TrackOptions = ({ open, top, left, songObject }) => {
         setCreditsVisible(!creditsVisible);
     }
 
+    const handleDeleteClick = () => {
+        dispatch(removeSongAsync(playlistID, songObject.songID));
+        dispatch(removeSong(songObject.songID));
+        dispatch(lazyLoadRemoveSong([songObject]));
+    }
+
 
     return (
         <div className={`track-options-container ${open ? "active" : "inactive"}`} style={{ top: top, left: left }}>
@@ -70,7 +79,7 @@ const TrackOptions = ({ open, top, left, songObject }) => {
                 />
                 {creditsVisible && <TrackInfo songObject={songObject} onClose={() => setCreditsVisible(false)} />}
                 <div className="options-item" ref={el => optionsRef = el} onClick={handleAddToPlaylistClick}>Add to playlist </div>
-                <div className="options-item" onClick={null}>Remove from playlist</div>
+                <div className="options-item" onClick={handleDeleteClick}>Remove from playlist</div>
                 <div className="options-item" onClick={handleShowCreditsClick}>Show credits</div>
             </div>
         </div>

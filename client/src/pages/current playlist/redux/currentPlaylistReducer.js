@@ -34,6 +34,17 @@ const currentPlaylistSlice = createSlice({
             // console.log("\r\nSetting new playlist to: ");
             // console.log(action.payload);
             state.playlist = action.payload;
+        },
+        removeSong: (state, action) => {
+            console.log("\r\nRemoving song from playlist in currentPlaylistReducer");
+            let currentPlaylist = Array.from(state.playlist.songs).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));
+            state.playlist.songs = currentPlaylist.filter((song) => song.songID !== action.payload);
+        },
+        addSong: (state, action) => {
+            console.log("\r\nAdding song to playlist in currentPlaylistReducer");
+            let currentPlaylist = Array.from(state.playlist.songs).map((proxyObject) => proxyObject = Object.assign({}, proxyObject));
+            currentPlaylist.push(action.payload);
+            state.playlist.songs = currentPlaylist;
         }
     },
     extraReducers: (builder) => {
@@ -41,7 +52,11 @@ const currentPlaylistSlice = createSlice({
     }
 });
 
-export const { 
-    setCurrSongIdPlaylistPage, setPlaylistPlaylistPage } = currentPlaylistSlice.actions;
+export const {
+    setCurrSongIdPlaylistPage,
+    setPlaylistPlaylistPage,
+    removeSong,
+    addSong
+} = currentPlaylistSlice.actions;
 
 export default currentPlaylistSlice.reducer;
