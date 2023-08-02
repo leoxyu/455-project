@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {addSongAsync, getPlaylistsAsync} from '../../../components/home/redux/thunks';
+import {addSongAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/Options.css';
 
@@ -9,7 +9,6 @@ const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) =
   const dispatch = useDispatch();
 
   const handleSelection = (playlistID) => {
-    console.log("adding song to playlist " + playlistID)
     dispatch(addSongAsync({ playlistID, songBody }));
     onClose(); // Trigger the onClose callback
   };

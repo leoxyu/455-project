@@ -4,6 +4,7 @@ import '../styles/Options2.css';
 const Options3 = ({ open, top, left, playlistLink, playlistType, source, saveOnClick }) => {
 
   function handleClick() {
+    console.log("Options3: handleClick: saveOnClick:" + playlistLink + " " + playlistType + " " + source);
     saveOnClick(playlistLink, playlistType, source);
   }
 

@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/variables.css';
 
 import '../../styles/searchPage.css';
 import SearchBar from './components/SearchBar';
-// import SongResult from './components/SongResult';
-// import PlaylistResult from './components/PlaylistResult';
 import ResultsList from './components/ResultsList';
 import Filters from './components/Filters';
 import PlaylistCreator from '../playlists/components/PlaylistCreator';
@@ -12,10 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync } from './redux/thunks';
 import debounce from 'lodash.debounce';
 
-import { createPlaylistAsync, spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
-import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2, TYPE_UNIFI } from '../../typeConstants';
-import { render } from 'react-dom';
-// import { render } from 'react-dom';
+import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
+import { TYPE_SPOTIFY, TYPE_YOUTUBE} from '../../typeConstants';
 
 
 
@@ -65,7 +61,6 @@ const SearchPage = () => {
   }
 
   const handleAddClick = () => {
-    console.log('trying to create new playlist');
     setCreatorVisible(true);
   }
 
@@ -118,6 +113,15 @@ const SearchPage = () => {
   }
 
 
+  const FILTERS = {
+    'ALL':'All',
+    'SPTR':'Spotify Tracks',
+    'SPAL':'Spotify Albums',
+    'SPPL':'Spotify Playlists',
+    'YTVD':'YouTube Videos', 
+    'YTPL':'YouTube Playlists'
+  };
+
 
   const renderTrackResults = (tracks, sectionLabel=null) => {
     return (
@@ -143,25 +147,25 @@ const SearchPage = () => {
 
   const renderFilteredContent = () => {
     switch (selectedFilter) {
-      case 'All':
+      case FILTERS.ALL:
         return (
           <div>
-            {renderTrackResults(spotifyTracks.slice(0,5), 'Spotify Tracks')}
-            {renderPlaylistResults(spotifyAlbums.slice(0,5), 'Spotify Albums')}
-            {renderPlaylistResults(spotifyPlaylists.slice(0,5), 'Spotify Playlists')}
-            {renderTrackResults(youtubeVideos.slice(0,5), 'YouTube Videos')}
-            {renderPlaylistResults(youtubePlaylists.slice(0,5), 'YouTube Playlists')}
+            {renderTrackResults(spotifyTracks.slice(0,5), FILTERS.SPTR)}
+            {renderPlaylistResults(spotifyAlbums.slice(0,5), FILTERS.SPAL)}
+            {renderPlaylistResults(spotifyPlaylists.slice(0,5), FILTERS.SPPL)}
+            {renderTrackResults(youtubeVideos.slice(0,5), FILTERS.YTVD)}
+            {renderPlaylistResults(youtubePlaylists.slice(0,5), FILTERS.YTPL)}
           </div>
         );
-      case 'Spotify Tracks':
+      case FILTERS.SPTR:
         return (renderTrackResults(spotifyTracks));
-      case 'Spotify Albums':
+      case FILTERS.SPAL:
         return (renderPlaylistResults(spotifyAlbums));
-      case 'Spotify Playlists':
+      case FILTERS.SPPL:
         return (renderPlaylistResults(spotifyPlaylists));
-      case 'YouTube Videos':
+      case FILTERS.YTVD:
         return (renderTrackResults(youtubeVideos));
-      case 'YouTube Playlists':
+      case FILTERS.YTPL:
         return (renderPlaylistResults(youtubePlaylists));
       default:
         return (<div>No Results Found!</div>);
@@ -173,7 +177,7 @@ const SearchPage = () => {
   return (
     <div className='search-page'>
       <SearchBar placeholder='Search for songs, albums, artists...' searchCallback={(input) => { performSearch(input) }} />
-      <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}/>
+      <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} filters={Object.values(FILTERS)}/>
       {creatorVisible &&
         <div className='creator-dialog-overlay'>
           <PlaylistCreator onClose={closeCreator} />
