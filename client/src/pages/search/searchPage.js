@@ -20,7 +20,6 @@ import { render } from 'react-dom';
 
 
 
-
 const SearchPage = () => {
 
   useEffect(() => {

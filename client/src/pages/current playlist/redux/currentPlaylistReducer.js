@@ -12,7 +12,7 @@ const currentPlaylistSlice = createSlice({
         //     releaseDate: "",
         //     duration: 0,
         //     artistName: "",
-        //     isFavorite: false,
+        //     isFavorited: false,
         //     source: "",
         //     type: "",
         //     songs: []

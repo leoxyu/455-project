@@ -15,7 +15,7 @@ import { setCurrSongIdPlaylistPage } from '../redux/currentPlaylistReducer';
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
+const TrackEntry = ({ songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
 
     const dispatch = useDispatch();
     const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
@@ -53,7 +53,7 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorite, link, i
         <div className="track-container">
             <div className="track-container-left">
                 <p className={"track-id-" + (isCurrentlyPlaying ? 'active' : 'inactive')}>{index + 1}</p>
-                { isCurrentlyPlaying ? <img className="playing-icon" src={PlayingIcon}/> 
+                { isCurrentlyPlaying ? <img className="playing-icon" src={PlayingIcon}/>
                                         : <PlayIcon className="play-icon" onClick={handlePlay} />}
                 <img className='track-cover' src={imageLink} alt="Track Cover" />
                 <p className={"name-" + (isCurrentlyPlaying ? 'active' : 'inactive')}>{name}</p>
