@@ -47,13 +47,13 @@ const Navbar = () => {
                     <Link to="/songs">Songs</Link>
                 </h1>
                 <h1>
-                    <Link to="/currentPlaylist">Playlist</Link>
-                </h1>
-                <h1>
                     <Link to="/playlists">Playlists</Link>
                 </h1>
                 <h1>
                     <Link to="/search">Search</Link>
+                </h1>
+                <h1>
+                    <Link to="/currentPlaylist">Now Playing</Link>
                 </h1>
             </ul>
 

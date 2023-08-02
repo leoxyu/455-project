@@ -17,7 +17,6 @@ import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTI
 
 
 
-
 const SearchPage = () => {
 
   useEffect(() => {
@@ -210,7 +209,7 @@ const SearchPage = () => {
 
       <div className='spotify-albums'>
         <h2 className='heading'>Spotify Albums</h2>
-        <div className='spotify-album-list' style={{display:'flex', flexWrap: 'wrap'}}>
+        <div className='spotify-album-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
 
           {spotifyAlbums.slice(0,5).map((album, i) => (
             <PlaylistResult
@@ -279,7 +278,7 @@ const SearchPage = () => {
               views={song.views + ' views'}
               duration={song.duration}
               songLink={song.link}
-              source={TYPE_YOUTUBE} 
+              source={TYPE_YOUTUBE}
 
               // new changes
               isFavorite={false}
