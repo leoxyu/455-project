@@ -118,7 +118,8 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
           </div>
 
       </div>
-      <div ref={optionsPopupRef}>
+
+      <div className='options' ref={optionsPopupRef}>
       <Options
               open={optionsOpen}
               top={optionsTop}

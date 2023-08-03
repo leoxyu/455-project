@@ -98,6 +98,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        .options {
+            top: 1.8rem;
+            right: 2rem;
+            position: absolute;
+        }
         .options-icon {
             max-width: 1.15rem;
             max-height: 1.15rem;
