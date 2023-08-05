@@ -6,7 +6,6 @@ import thumbnailImage from '../../../images/album-placeholder.png'
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
 
-
 const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
     <div className="song-display-container">

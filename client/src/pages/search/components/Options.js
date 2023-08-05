@@ -10,7 +10,7 @@ const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) =
 
   const handleSelection = (playlistID) => {
     dispatch(addSongAsync({ playlistID, songBody }));
-    onClose(); // Trigger the onClose callback
+    onClose();
   };
 
   return (

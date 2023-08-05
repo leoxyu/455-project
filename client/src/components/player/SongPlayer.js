@@ -1,14 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-
 import { YoutubePlayer } from "./YoutubePlayer";
 import SpotifyPlayer from "./SpotifyPlayer";
 import { Player } from "./Player";
-
 import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/currentPlaylistReducer";
 
 export default function SongPlayer() {
-
   const dispatch = useDispatch();
 
   const playlist = useSelector(state => state.player.playlist);
