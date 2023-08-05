@@ -1,22 +1,38 @@
-
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import './styles/playlistPage.css';
 
 import PlaylistContainer from "./components/playlistContainer.js";
 
 const CurrentPlaylistPage = () => {
+    const { id } = useParams();
 
-    // const currentPlaylist = useSelector(state => state.currentPlaylistPage.playlist);
-    const currentPlaylist = useSelector(state => state.player.playlist);
-    
-    const dispatch = useDispatch();
+    // this is needed for current playlist page for single song
+    const foundPlaylist = useSelector(state => state.playlists.playlists.find(p => id === p.playlistID));
+    const currentlyPlaying = useSelector(state => state.player.playlist);
+    let playlist;
+    if (!foundPlaylist) {
+        playlist = currentlyPlaying;
+    } else {
+        playlist = {
+            id: foundPlaylist.playlistID ?? foundPlaylist.originId,
+            playlistName: foundPlaylist.name,
+            thumbnailUrl: foundPlaylist.coverImageURL,
+            releaseDate: foundPlaylist.dateCreated,
+            duration: foundPlaylist.songs.length,
+            artistName: foundPlaylist.author,
+            isFavorited: foundPlaylist.isFavorited,
+            source: foundPlaylist.source,
+            type: foundPlaylist.type,
+            description: foundPlaylist.description,
+            songs: foundPlaylist.songs,
+        };
+    }
 
     return (
         <div>
             <PlaylistContainer
-                {...currentPlaylist}
+                {...playlist}
             />
         </div>
     );

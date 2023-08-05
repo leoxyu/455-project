@@ -176,7 +176,7 @@ playlistsRouter.get('/', async (req, res, next) => {
       .find(query)
       .sort(sortField, sortDir) // TODO: sorting by sort field should revert the cursor to start. add $gt for the sort field, id is just default.
       .project(isDeep ? {} : { songs: 0 })
-      .limit(1) // TODO: set proper limit
+      .limit(5) // TODO: set proper limit
       .toArray();
     if (!isDeep) page.forEach(p => p.songs = []);
     return res
