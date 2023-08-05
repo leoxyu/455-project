@@ -99,7 +99,7 @@
         align-items: center;
         justify-content: space-between;
         .options {
-            top: 1.8rem;
+            top: 2rem;
             right: 2rem;
             position: absolute;
         }
@@ -112,7 +112,7 @@
             opacity: 0;
             position: absolute;
             bottom: 80%;
-            left: 83%;
+            left: 95%;
             rotate: 90deg;
         }
     }
