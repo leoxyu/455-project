@@ -47,8 +47,6 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
       startFromTop: true,
     }));
     // Handle play button click
-    console.log(currSongID);
-    console.log(songObject.songID);
   };
 
   const handleFavorite = () => {
