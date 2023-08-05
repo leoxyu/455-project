@@ -13,7 +13,15 @@
     flex-grow: 1;
     font-size: 17px;
     flex:1;
-    overflow: hidden;
+
+    .options{
+        position: absolute;
+        right: 2rem;
+        top: 1rem;
+        margin: 0.5rem;
+        /* opacity: 0; */
+        transition: opacity 0.3s; /* Add transition for smooth effect */
+    }
 
     .source-icon {
         position: absolute;

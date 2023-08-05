@@ -1,12 +1,11 @@
 .search-options-container.active {
   outline: none;
-  position: fixed;
+  position: sticky;
   z-index: 10;
   background-color: rgb(49, 49, 49);
   display: flex;
   flex-direction: column;
   border-radius: 2px;
-
   justify-content: space-around;
   padding: 0.5em;
   width: 7em;
