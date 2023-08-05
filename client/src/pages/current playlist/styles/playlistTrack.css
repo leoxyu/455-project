@@ -44,7 +44,7 @@
   .name-active {
     margin: 0.2em 0;
     padding: 0.2em 0;
-    color: rgb(12, 231, 169);
+    color: var(--name-active);
   }
 
   .track-id-active {
@@ -121,7 +121,7 @@
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.1s;
-  fill: rgb(12, 231, 169);;
+  fill: var(--name-active);
   
   /* manually position play icon over the track-id*/
   position: relative;

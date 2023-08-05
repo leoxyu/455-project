@@ -3,6 +3,7 @@ import SongResult from './SongResult';
 import PlaylistResult from './PlaylistResult';
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2, TYPE_UNIFI } from '../../../typeConstants';
 import '../styles/ResultsList.css';
+import { Link } from 'react-router-dom';
 
 const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorRef,
     setSelectedFilter = () => {}, handleAddClick = () => { }, saveOnClick = () => {}}) => {
@@ -12,6 +13,9 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
       {(className === 'spotify-playlist-list') ? 
       <div className='spotify-playlist-list'>
       {collection.map((album, i) => (
+        <Link to={`/playlists/${album.originId}`}
+        style={{ color: 'inherit', textDecoration: 'inherit'}}
+      >
             <PlaylistResult
               className={'spotify-playlist-preview'}
               isFavorite={false}
@@ -19,6 +23,7 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
               saveOnClick={saveOnClick}
               playlistObject={album}
             />
+            </Link>
           ))}
         </div>
       :
