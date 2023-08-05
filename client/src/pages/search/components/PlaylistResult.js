@@ -128,6 +128,12 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
     optionsOnClick(optionsLocation.top, optionsLocation.left);
   };
 
+  const handleAddPlaylist = () => {
+    const playlistLink = playlistObject.playlistID ? playlistObject.playlistID: playlistObject.originId;
+    setOptionsOpen(false);
+    saveOnClick(playlistLink, playlistObject.type, playlistObject.source);
+  };
+
   //  TODO avoid rendering if we use none in css
 
   function sourceIcon(source) {
@@ -159,7 +165,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
             {optionType === OPTIONS_TYPE2 && <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>}
-            {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
+            {optionType === OPTIONS_TYPE3 && <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={handleAddPlaylist} />}
           </div>
         </div>
         {/* {sourceIcon(playlistObject.source)} */}
