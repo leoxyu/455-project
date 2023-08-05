@@ -98,3 +98,8 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.filter-button[data-selected="true"] {
+  background-color: var(--text-base);
+  color: var(--decorative-subdued);
+}

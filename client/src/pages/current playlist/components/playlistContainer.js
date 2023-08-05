@@ -80,6 +80,7 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
                     <TrackEntry
                         key={track.songID}
                         index={songs.findIndex(song => song.songID === track.songID)}
+                        parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
                         {...track}
                     />
                 ))}

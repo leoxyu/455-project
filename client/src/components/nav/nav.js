@@ -11,6 +11,7 @@ const Navbar = () => {
     const [dynamicProfilePicture, setDynamicProfilePicture] = useState(null);
     const userId = useSelector((state) => state.login.id);
     const spotifyProfile = useSelector((state) => state.spotify.profile);
+    const currentPlaylistId = useSelector((state) => state.player.playlist.id);
 
     useEffect(() => {
         try {
@@ -53,7 +54,7 @@ const Navbar = () => {
                     <Link to="/search">Search</Link>
                 </h1>
                 <h1>
-                    <Link to="/currentPlaylist">Now Playing</Link>
+                    <Link to={`/playlists/${currentPlaylistId}`}>Now Playing</Link>
                 </h1>
             </ul>
 

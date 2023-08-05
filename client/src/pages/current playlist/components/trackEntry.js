@@ -9,17 +9,19 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import PlayingIcon from "../../../images/playingWave.gif";
 import "../styles/playlistTrack.css";
 
-import {setCurrSongID} from "../../../components/player/PlayerReducer.js";
+import { setCurrSongID, setPlaylist } from "../../../components/player/PlayerReducer.js";
 import { setCurrSongIdPlaylistPage } from '../redux/currentPlaylistReducer';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
+const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
 
     const dispatch = useDispatch();
     const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
+    const currPlayingPlaylistID = useSelector(state => state.player.playlist.id);
     const trackDuration = convertMsToDuration(duration);
+    const [inPlaylistTransition, setInPlaylistTransition] = useState(false);
 
     function convertMsToDuration(duration) {
         if (typeof (duration) === 'number') {
@@ -28,13 +30,22 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorited, link, 
     }
 
     useEffect(() => {
-        if (currSongID && currSongID.songID === songID) {
-            // highlight the current track object
+        console.log(inPlaylistTransition);
+        if (inPlaylistTransition) {
+            console.log(`song id after is ${songID}`)
+            dispatch(setCurrSongID(songID));
+            dispatch(setCurrSongIdPlaylistPage(songID));
+            setInPlaylistTransition(false);
         }
-    }, [currSongID]);
+    }, [currPlayingPlaylistID]);
 
     const handlePlay = () => {
         // Handle play button click
+        if (currPlayingPlaylistID !== parentPlaylist.id) {
+            console.log(`song id before is ${songID}`)
+            setInPlaylistTransition(true);
+            dispatch(setPlaylist({ playlist: parentPlaylist, startFromTop: false }));
+        }
         dispatch(setCurrSongID(songID));
         dispatch(setCurrSongIdPlaylistPage(songID));
     };
