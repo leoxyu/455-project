@@ -3,5 +3,6 @@
 .spotify-playlist-list {
     display:flex;
     flex-wrap: wrap;
-    padding: 0.5em;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 }
