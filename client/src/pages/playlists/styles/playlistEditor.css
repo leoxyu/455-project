@@ -19,10 +19,16 @@
     margin: 0.5em 0 0.75em;
 }
 
+.playlist-editor-image-container {
+    object-fit: cover;
+}
+
 .playlist-editor-image {
+    width: 5em;
+    height: 5em;
+    object-fit: cover;
+    border-radius: 5px;
     margin-right: 0.5em;
-    border-radius: 2px;
-    width: 25%;
     background-size: cover; /* Ensure the image covers the container */
     background-position: center; /* Center the image within the container */
     background-repeat: no-repeat;

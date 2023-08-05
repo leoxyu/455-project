@@ -60,6 +60,11 @@
     color: white;
     font-weight: bold;
     margin-bottom: 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .song-artist {
