@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../styles/variables.css';
 import { useSelector, useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -24,10 +24,9 @@ const PlaylistPage = () => {
   const [creatorVisible, setCreatorVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [playlistToEdit, setPlaylistToEdit] = useState(false);
-  const [firstRender, setFirstRender] = useState(true);
+  const initialFetched = useRef(false);
   const [searchTerm, setSearchTerm] = useState('');
   const playlists = useSelector(state => state.playlists.playlists);
-  const lastId = useSelector(state => state.playlists.lastId);
   const dispatch = useDispatch();
 
   const filteredPlaylists = playlists.filter((playlist) => {
@@ -49,10 +48,16 @@ const PlaylistPage = () => {
 
   useEffect(() => {
     document.title = "Uni.fi - Playlists"; // Change the webpage title
-    if (firstRender) setFirstRender(false);
     // Clean up the effect
   }, []);
 
+  useEffect(() => {
+    // initial fetch without having to scroll
+    if (!initialFetched.current) {
+      dispatch(getPlaylistsAsync());
+    }
+    return () => initialFetched.current = true
+  }, []);
 
   const handleAddClick = () => {
     setCreatorVisible(true);
@@ -114,49 +119,52 @@ const PlaylistPage = () => {
       }
 
       <h2 className='playlists-heading'>Your Playlists</h2>
-      <InfiniteScroll
-          dataLength={playlists.length}
-          next={() => dispatch(getPlaylistsAsync())}
-          hasMore={true}
-          scrollableTarget={'your-playlists'}
-          // loader={<h4>loading</h4>}
-          style={{ overflow: "unset" }}
-      >
-        <div className='unifi-playlists-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
-          <div className='adder' onClick={handleAddClick}>
-            <div className='add-icon-container'>
-              <AddIcon className='add-icon' />
+      {initialFetched.current &&
+        <InfiniteScroll
+            dataLength={playlists.length}
+            next={() => dispatch(getPlaylistsAsync())}
+            hasMore={true}
+            scrollableTarget={'your-playlists'}
+            // loader={<h4>loading</h4>}
+            style={{ overflow: "unset" }}
+            // scrollThreshold={0.5}
+        >
+          <div className='unifi-playlists-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className='adder' onClick={handleAddClick}>
+              <div className='add-icon-container'>
+                <AddIcon className='add-icon' />
+              </div>
+              <p className='add-text'>New Playlist</p>
             </div>
-            <p className='add-text'>New Playlist</p>
+            {filteredPlaylists.map((playlist) => (
+              <Link to={`/playlists/${playlist.playlistID}`}
+                style={{ color: 'inherit', textDecoration: 'inherit'}}
+              >
+                <PlaylistResult
+                  key={playlist.playlistID}
+                  className={'spotify-playlist-preview'}
+                  playlistID={playlist.playlistID}
+                  thumbnailUrl={playlist.coverImageURL}
+                  playlistName={playlist.name}
+                  artistName={playlist.artist}
+                  songs={playlist.songs}
+                  deleteOnClick={() => onDelete(playlist.playlistID)}
+                  editOnClick={() => handleClickEdit(playlist)}
+                  isEditable={false}
+                  optionType={OPTIONS_TYPE2}
+                  duration={playlist.songs?.length}
+                  isFavorite={playlist.isFavorited}
+                  releaseDate={playlist.dateCreated}
+                  source={playlist.source}
+                  type={playlist.type}
+                  description={playlist.description}
+                  playlistObject={playlist}
+                />
+              </Link>
+            ))}
           </div>
-          {filteredPlaylists.map((playlist) => (
-            <Link to={`/playlists/${playlist.playlistID}`}
-              style={{ color: 'inherit', textDecoration: 'inherit'}}
-            >
-              <PlaylistResult
-                key={playlist.playlistID}
-                className={'spotify-playlist-preview'}
-                playlistID={playlist.playlistID}
-                thumbnailUrl={playlist.coverImageURL}
-                playlistName={playlist.name}
-                artistName={playlist.artist}
-                songs={playlist.songs}
-                deleteOnClick={() => onDelete(playlist.playlistID)}
-                editOnClick={() => handleClickEdit(playlist)}
-                isEditable={false}
-                optionType={OPTIONS_TYPE2}
-                duration={playlist.songs?.length}
-                isFavorite={playlist.isFavorited}
-                releaseDate={playlist.dateCreated}
-                source={playlist.source}
-                type={playlist.type}
-                description={playlist.description}
-                playlistObject={playlist}
-              />
-            </Link>
-          ))}
-        </div>
-      </InfiniteScroll>
+        </InfiniteScroll>
+      }
     </div>
   );
 };

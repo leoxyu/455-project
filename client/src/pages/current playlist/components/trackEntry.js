@@ -30,7 +30,6 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
     }
 
     useEffect(() => {
-        console.log(inPlaylistTransition);
         if (inPlaylistTransition) {
             console.log(`song id after is ${songID}`)
             dispatch(setCurrSongID(songID));
