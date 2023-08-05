@@ -26,18 +26,21 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
 
   const handlePlay = () => {
 
-    dispatch(setPlaylist({
-      id: uuid(),
-      playlistName: songObject.name,
-      thumbnailUrl: songObject.imageLink,
-      releaseDate: songObject.releaseDate,
-      duration: songObject.duration,
-      artistName: songObject.artist,
-      isFavorited: isFavorited,
-      source: songObject.source,
-      description: null,
-      type: TYPE_TRACK,
-      songs: [songObject]
+    dispatch(setPlaylist({ 
+      playlist: {
+        id: uuid(),
+        playlistName: songObject.name,
+        thumbnailUrl: songObject.imageLink,
+        releaseDate: songObject.releaseDate,
+        duration: songObject.duration,
+        artistName: songObject.artist,
+        isFavorited: isFavorited,
+        source: songObject.source,
+        description: null,
+        type: TYPE_TRACK,
+        songs: [songObject]
+      },
+      startFromTop: true,
     }));
     // Handle play button click
   };

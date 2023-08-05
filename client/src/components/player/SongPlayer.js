@@ -12,6 +12,7 @@ export default function SongPlayer() {
   const dispatch = useDispatch();
 
   const playlist = useSelector(state => state.player.playlist);
+  const startFromTop = useSelector(state => state.player.startFromTop);
   const currSongID = useSelector(state => state.player.currSongID);
   const songs = playlist.songs;
 
@@ -28,11 +29,13 @@ export default function SongPlayer() {
   }, [currSongID]);
 
   useEffect(() => {
-    console.log("playlist id changed, playing song");
-    setCurrentSongIndex(0);
-    if (songs && songs.length > 0) dispatch(setCurrSongIdPlaylistPage(songs[0].songID));
-    playOnLoad.current = true;
-    shuffle.current = false;
+    if (startFromTop) {
+      console.log("playlist id changed, playing song");
+      setCurrentSongIndex(0);
+      if (songs && songs.length > 0) dispatch(setCurrSongIdPlaylistPage(songs[0].songID));
+      playOnLoad.current = true;
+      shuffle.current = false;
+    }
   }, [playlist.id]);
 
   const nextSong = () => {
