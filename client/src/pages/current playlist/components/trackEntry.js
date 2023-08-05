@@ -7,6 +7,7 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 // import { ReactComponent as PlayingIcon } from "../../../images/playingWave.gif";
 
 import PlayingIcon from "../../../images/playingWave.gif";
+import "../../../styles/variables.css"
 import "../styles/playlistTrack.css";
 
 import { setCurrSongID, setPlaylist } from "../../../components/player/PlayerReducer.js";
