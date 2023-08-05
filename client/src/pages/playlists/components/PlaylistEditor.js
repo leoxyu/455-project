@@ -5,17 +5,18 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
 
+
 const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
     <div className="song-display-container">
       <div className="song-info-container">
-        <img src={image} alt="" width="48px" height="48px"/>
+        <img src={image} alt="" width="48px" height="48px" />
         <div className="song-info">
           <div className="song-title">{name}</div>
           <div className="song-artist">{artist}</div>
         </div>
       </div>
-      <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete}/>
+      <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete} />
     </div>
   );
 };
@@ -85,35 +86,37 @@ const PlaylistEditor = ({ playlist, onClose }) => {
   return (
     <div className='modal-container'>
       <h2 className='playlist-editor-title'>Playlist Editor</h2>
-
       <div className='playlist-editor-title-container'>
-        <img src={imageUrl} className="playlist-editor-image" alt="" width="40px" height="40px"/>
-        <input
-          className='playlist-editor-input'
-          type="text"
-          value={imageUrl}
-          onChange={handleUrlChange}
-          id="titleField"
-          placeholder='Cover Image Link'
-        />
+        <img src={imageUrl} className="playlist-editor-image" alt="" />
+        <div className='playlist-editor-title-container-input'>
+          <input
+            className='playlist-editor-input-name'
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+            id="titleField"
+            placeholder='Name'
+          />
+          <input
+            className='playlist-editor-input'
+            value={description}
+            onChange={handleDescriptionChange}
+            id='descriptionField'
+            onInput={handleInputResize}
+            placeholder='Description'
+          />
+          <input
+            className='playlist-editor-input'
+            type="text"
+            value={imageUrl}
+            onChange={handleUrlChange}
+            id="titleField"
+            placeholder='Cover Image Link'
+          />
+        </div>
       </div>
-      <input
-        className='playlist-editor-input'
-        type="text"
-        value={name}
-        onChange={handleNameChange}
-        id="titleField"
-        placeholder='Name'
-      />
+
       <div>
-        <textarea
-          className='playlist-editor-input'
-          value={description}
-          onChange={handleDescriptionChange}
-          id='descriptionField'
-          onInput={handleInputResize}
-          placeholder='Description'
-        />
         <div className="songs-editor-container">
           {playlist.songs.map((song, i) => {
             return (

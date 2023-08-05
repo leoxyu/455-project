@@ -6,6 +6,7 @@ const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = re
 // id: "",
 // songs: []
 const initialState = {
+    startFromTop: true,
     playlist: {
         id: "",
         playlistName: "",
@@ -27,8 +28,10 @@ const playerSlice = createSlice({
     initialState: initialState,
     reducers: {
         setPlaylist: (state, action) => {
+            const { playlist, startFromTop } = action.payload;
             console.log(action.payload);
-            state.playlist = action.payload;
+            state.playlist = playlist;
+            state.startFromTop = startFromTop;
         },
         setCurrSongID: (state, action) => {
             console.log("\r\nChanging currSongID in playerReducer");

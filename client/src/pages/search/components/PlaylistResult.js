@@ -51,17 +51,20 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
     if (isLoading && songs.length) {
       setIsLoading(false);
       dispatch(setPlaylist({
-        id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
-        playlistName: playlistObject.name,
-        thumbnailUrl: playlistObject.coverImageURL,
-        releaseDate: playlistObject.dateCreated, //
-        duration: songs.length,
-        artistName: playlistObject.author,
-        isFavorited: playlistObject.isFavorited,
-        source: playlistObject.source,
-        description: playlistObject.description,
-        type: playlistObject.type,
-        songs: songs
+        playlist: {
+          id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
+          playlistName: playlistObject.name,
+          thumbnailUrl: playlistObject.coverImageURL,
+          releaseDate: playlistObject.dateCreated, //
+          duration: songs.length,
+          artistName: playlistObject.author,
+          isFavorited: playlistObject.isFavorited,
+          source: playlistObject.source,
+          description: playlistObject.description,
+          type: playlistObject.type,
+          songs: songs
+        },
+        startFromTop: true,
       }));
     }
   }, [songs]); // dep array only needs songs
@@ -88,17 +91,20 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
     }
     // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
-      id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
-      playlistName: playlistObject.name,
-      thumbnailUrl: playlistObject.coverImageURL,
-      releaseDate: playlistObject.dateCreated, //
-      duration: songs.length,
-      artistName: playlistObject.author,
-      isFavorited: playlistObject.isFavorited,
-      source: playlistObject.source,
-      description: playlistObject.description,
-      type: playlistObject.type,
-      songs: songs
+      playlist: {
+        id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
+        playlistName: playlistObject.name,
+        thumbnailUrl: playlistObject.coverImageURL,
+        releaseDate: playlistObject.dateCreated, //
+        duration: songs.length,
+        artistName: playlistObject.author,
+        isFavorited: playlistObject.isFavorited,
+        source: playlistObject.source,
+        description: playlistObject.description,
+        type: playlistObject.type,
+        songs: songs
+      },
+      startFromTop: true,
     }));
   };
 
@@ -148,15 +154,14 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
         <div className='essential-info'> 
           <div className="thumbnail-container">
             <img className="thumbnail" src={playlistObject.coverImageURL?  playlistObject.coverImageURL: thumbnailImage} alt="Album Thumbnail" />
-            <PlayIcon className="play-icon" onClick={handlePlay} />
+            <PlayIcon className="play-icon" onClick={(e) => { e.preventDefault(); handlePlay() }} />
           </div>
           <div className="details">
             <div className="name">{playlistObject.name}</div>
             <div className="artist">{playlistObject.author}</div>
           </div>
         </div>
-        <div className="stats">
-          
+        <div className="stats"> 
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
             <div className='options' ref={optionsPopupRef}>
             {(optionType === OPTIONS_TYPE2)? 

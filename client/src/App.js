@@ -36,7 +36,7 @@ const App = () => {
                       <Route path="/search" element={<SearchPage />} />
                       <Route path="/songs" element={<SongPage />} />
                       <Route path="/playlists" element={<PlaylistsPage />} />
-                      <Route path="/currentPlaylist" element={<CurrentPlaylistPage />} />
+                      <Route path="/playlists/:id" element={<CurrentPlaylistPage />} />
                     </Routes>
                   </main>
                   <footer className="general-player">

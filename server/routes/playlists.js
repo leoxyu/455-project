@@ -100,39 +100,19 @@ function getTracksHelper(access_token, next, playlist) {
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
 playlistsRouter.post('/importManySpotify', async (req, res, next) => {
 
-  // console.log("inside importManySpotify");
-  // console.log(req.body);
-
-
   const { playlists, accessToken, authorID } = req.body;
-
-  // console.log("\r\nreq body: ");
-  // console.log(req.body);
-
-  // console.log("\r\nplaylistIDs: ");
-  // console.log(playlists);
-
-  // console.log("\r\naccess_token: ");
-  // console.log(accessToken);
-
-  // console.log("\r\nauthorID: ");
-  // console.log(authorID);
-
-
 
   Promise.allSettled(playlists?.map(playlist => {
 
     const type = playlist.playlistType;
-    // console.log(type);
-
+  
     let queryUrl;
 
     if (type === TYPE_PLAYLIST) queryUrl = `https://api.spotify.com/v1/playlists/${playlist.id}`;
     else if (type === TYPE_ALBUM) queryUrl = `https://api.spotify.com/v1/albums/${playlist.id}`;
     else {
-      return res.status(400).send({ error: "one of the playlists ID's had invalid type (not playlist or album)" });
+      return Promise.reject({ error: "one of the playlists ID's had invalid type (not playlist or album)" });
     }
-
 
     return fetch(queryUrl, {
       method: "GET",
@@ -196,7 +176,7 @@ playlistsRouter.get('/', async (req, res, next) => {
       .find(query)
       .sort(sortField, sortDir) // TODO: sorting by sort field should revert the cursor to start. add $gt for the sort field, id is just default.
       .project(isDeep ? {} : { songs: 0 })
-      .limit(1) // TODO: set proper limit
+      .limit(5) // TODO: set proper limit
       .toArray();
     if (!isDeep) page.forEach(p => p.songs = []);
     return res
