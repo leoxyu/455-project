@@ -17,6 +17,7 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
         style={{ color: 'inherit', textDecoration: 'inherit'}}
       >
             <PlaylistResult
+              key={album.source + album.originId + i}
               className={'spotify-playlist-preview'}
               isFavorite={false}
               optionType={OPTIONS_TYPE3}
@@ -30,6 +31,7 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
         <div className='spotify-song-list'>
         {collection.map((song, i) => (
           <SongResult
+            key={(song.source + song.songId + i)}
             className='spotify-preview'
             songObject={song}
             handleAddClick={handleAddClick}
