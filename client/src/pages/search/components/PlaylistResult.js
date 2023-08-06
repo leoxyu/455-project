@@ -151,7 +151,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
   return (
     <div>
       <div className={className}>
-        <div className='essential-info'> 
+        <div className='essential-info'>
           <div className="thumbnail-container">
             <img className="thumbnail" src={playlistObject.coverImageURL?  playlistObject.coverImageURL: thumbnailImage} alt="Album Thumbnail" />
             <PlayIcon className="play-icon" onClick={(e) => { e.preventDefault(); handlePlay() }} />
@@ -164,14 +164,13 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
         <div className="stats">
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={(e) => { e.preventDefault(); handleOptions(); }} ref={el => optionsRef = el} />
+            <div className='options' ref={optionsPopupRef}>
+              {(optionType === OPTIONS_TYPE2) ?
+                <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>
+                :
+                <Options3 close={() => setOptionsOpen(false) } open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
             </div>
-        </div>
-        <div className='options' ref={optionsPopupRef}> 
-        {(optionType === OPTIONS_TYPE2) ? 
-            <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>
-            :
-            <Options3 close={() => setOptionsOpen(false) } open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
-          
+          </div>
         </div>
         {/* {sourceIcon(playlistObject.source)} */}
       </div>

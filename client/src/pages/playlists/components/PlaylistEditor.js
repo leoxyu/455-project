@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editPlaylistAsync } from '../../../components/home/redux/thunks';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import thumbnailImage from '../../../images/album-placeholder.png';
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
 
@@ -16,7 +17,9 @@ const SongDisplay = ({ name, artist, image, onDelete }) => {
           <div className="song-artist">{artist}</div>
         </div>
       </div>
-      <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete} />
+      <div className="song-delete-container">
+        <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete} />
+      </div>
     </div>
   );
 };
@@ -87,7 +90,9 @@ const PlaylistEditor = ({ playlist, onClose }) => {
     <div className='modal-container'>
       <h2 className='playlist-editor-title'>Playlist Editor</h2>
       <div className='playlist-editor-title-container'>
-        <img src={imageUrl} className="playlist-editor-image" alt="" />
+        <div className="playlist-editor-image-container">
+          <img src={imageUrl ? imageUrl : thumbnailImage} className="playlist-editor-image" alt="" />
+        </div>
         <div className='playlist-editor-title-container-input'>
           <input
             className='playlist-editor-input-name'
