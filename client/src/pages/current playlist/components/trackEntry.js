@@ -100,10 +100,8 @@ const TrackEntry = ({ parentPlaylist, songObject, songID, name, artist, duration
                 <img className='track-cover' src={imageLink} alt="Track Cover" />
                 <p className={"name-" + (isCurrentlyPlaying ? 'active' : 'inactive')}>{name}</p>
             </div>
-            <div className="track-container-right">
-                <p className="track-duration">{trackDuration}</p>
-            </div>
             <div className="track-stats">
+                <p className="track-duration">{trackDuration}</p>
                 <div ref={optionsPopupRef}>
                     <OptionsIcon className="track-options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
                     <div className='track-options' ref={optionsPopupRef}>

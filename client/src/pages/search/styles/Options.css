@@ -53,6 +53,7 @@
 .options-playlist-input{
   font-size: 0.55em;
   padding: 0.5em;
+  color: var(--text-base);
 }
 
 .options-playlist-input:hover {

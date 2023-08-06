@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
-import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
 import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
