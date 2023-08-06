@@ -9,9 +9,7 @@
 }
 
 .options-container.inactive {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-20px);
+    display: none;
 }
 
 .options-item {

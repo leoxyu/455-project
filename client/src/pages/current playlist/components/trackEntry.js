@@ -15,7 +15,8 @@ import Options from '../../search/components/Options';
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index }) => {
+const TrackEntry = ({ songObject, index, handleAddClick }) => {
+  const { songID, name, duration, imageLink } = songObject;
 
   const dispatch = useDispatch();
   const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
@@ -93,14 +94,14 @@ const TrackEntry = ({ songID, name, artist, duration, album, isFavorited, link, 
         <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el} />
       </div>
       <div ref={optionsPopupRef}>
-        {/* <Options
+        <Options
           open={optionsOpen}
           top={optionsTop}
           left={optionsLeft}
           songBody={songObject}
           onClose={() => setOptionsOpen(false)}
           handleAddClick={handleAddClick}
-        /> */}
+        />
       </div>
     </div>
   );
