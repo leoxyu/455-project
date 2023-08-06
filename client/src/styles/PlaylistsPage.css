@@ -21,14 +21,13 @@
   padding: 0.5rem;
   transition: border-color 0.3s; /* Add transition for smooth effect */
   font-size: 1.1rem;
-  min-width: 11rem;
-  max-width: 11rem;
+  width: 11rem;
+  /* max-width: 11rem; */
   /* max-width: 40rem; */
-  max-height: 15rem;
-  flex-grow: 1;
+  height: 14rem;
+  /* flex-grow: 1; */
   font-size: 17px;
   flex:1;
-  flex-basis: 25%;
   margin-left: 0.20rem;
 }
 
@@ -37,6 +36,8 @@
   align-items: center;
   justify-content: center;
   background-color: var(--background-tinted-base);
+  position: absolute;
+  top: 1.3rem;
   width: 10em;
   height: 10em; /* Set the desired height for the adder container */
   border-radius: 10px;
@@ -44,13 +45,12 @@
 
 .playlists-page .add-text {
   color: var(--text-base);
-  font-size: 22px;
+  font-size: 1.2rem;
   overflow: hidden; /* Hide any overflowing content */
   text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
   position: absolute;
-  bottom: 0.4em; /* Set the desired distance from the bottom */
-  left: 1.4em;
-  /* top: 6em; */
+  bottom: 0em; /* Set the desired distance from the bottom */
+  left: 2.5rem;
 }
 
 .adder:hover {
