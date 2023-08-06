@@ -14,7 +14,7 @@
 
 .playlists-page .adder {
   position: relative;
-  /* display: flex; */
+  display: flex;
   align-items: center;
   background-color: var(--background-base);
   justify-content: space-between;
@@ -22,13 +22,13 @@
   transition: border-color 0.3s; /* Add transition for smooth effect */
   font-size: 1.1rem;
   width: 11rem;
-  /* max-width: 11rem; */
-  /* max-width: 40rem; */
-  height: 14rem;
-  /* flex-grow: 1; */
+  max-width: 11rem;
+  height: 15rem;
+  flex-grow: 1;
   font-size: 17px;
   flex:1;
-  margin-left: 0.20rem;
+  flex-basis: 25%;
+  /* margin-left: 0.20rem; */
 }
 
 .playlists-page .add-icon-container {
@@ -36,8 +36,10 @@
   align-items: center;
   justify-content: center;
   background-color: var(--background-tinted-base);
-  position: absolute;
-  top: 1.3rem;
+  position: relative;
+  bottom: 1.3rem;
+  object-fit: cover;
+  margin-left: 0px !important;
   width: 10em;
   height: 10em; /* Set the desired height for the adder container */
   border-radius: 10px;
@@ -51,6 +53,7 @@
   position: absolute;
   bottom: 0em; /* Set the desired distance from the bottom */
   left: 2.5rem;
+  max-width: 10rem;
 }
 
 .adder:hover {
