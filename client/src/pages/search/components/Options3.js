@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/Options2.css';
 
-const Options3 = ({ open, top, left, playlistLink, playlistType, source, saveOnClick }) => {
+const Options3 = ({ open, top, left, playlistLink, playlistType, source, saveOnClick, close }) => {
 
   function handleClick() {
     saveOnClick(playlistLink, playlistType, source);
@@ -9,7 +9,7 @@ const Options3 = ({ open, top, left, playlistLink, playlistType, source, saveOnC
 
   return (
     <div className={`options-container ${open ? "active" : "inactive"}`} style={{ top: top, left: left }}>
-      <div className="options-item" onClick={handleClick}>Save to library</div>
+      <div className="options-item" onClick={(e) => { e.preventDefault(); close(); handleClick(); }}>Save to library</div>
     </div>
   );
 }
