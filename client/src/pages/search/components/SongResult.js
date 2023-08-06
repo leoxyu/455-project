@@ -30,7 +30,7 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
 
   const handlePlay = () => {
 
-    dispatch(setPlaylist({ 
+    dispatch(setPlaylist({
       playlist: {
         id: uuid(),
         playlistName: songObject.name,
@@ -47,10 +47,6 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
       startFromTop: true,
     }));
     // Handle play button click
-  };
-
-  const handleFavorite = () => {
-    // Handle favorite button click
   };
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -111,9 +107,9 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
       <div className='essential-info'>
         <div className="thumbnail-container">
           <img className="thumbnail" src={songObject.imageLink} alt="Track Thumbnail" />
-          { isCurrentlyPlaying ? 
+          { isCurrentlyPlaying ?
           <img className="playing-icon" src={PlayingIcon}/>
-          : 
+          :
           <PlayIcon className="play-icon" onClick={handlePlay} />}
         </div>
         <div className="details">
@@ -123,7 +119,6 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
       </div>
        <div className="stats">
           {/* {sourceIcon(songObject.source)} */}
-          <HeartIcon className="heart-icon" onClick={handleFavorite}/>
           <div className="duration">{songObject.duration}</div>
           <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>

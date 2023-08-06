@@ -12,11 +12,12 @@ import "../styles/playlistTrack.css";
 
 import { setCurrSongID, setPlaylist } from "../../../components/player/PlayerReducer.js";
 import { setCurrSongIdPlaylistPage } from '../redux/currentPlaylistReducer';
+import Options from '../../search/components/Options';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
+const TrackEntry = ({ parentPlaylist, songObject, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
 
     const dispatch = useDispatch();
     const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
@@ -29,6 +30,44 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
             return new Date(duration).toISOString().slice(11, 19);
         } else return duration;
     }
+
+    const [optionsOpen, setOptionsOpen] = useState(false);
+    const [optionsTop, setOptionsTop] = useState(false);
+    const [optionsLeft, setOptionsLeft] = useState(false);
+
+    let optionsPopupRef = useRef();
+
+    useEffect(() => {
+        let optionsHandler = (e) => {
+            if (!optionsPopupRef.current.contains(e.target)) {
+                setOptionsOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", optionsHandler);
+
+        return () => {
+            document.removeEventListener("mousedown", optionsHandler);
+        }
+    });
+
+    const optionsOnClick = (top, left) => {
+        if (optionsOpen) {
+            setOptionsOpen(false);
+        } else {
+            setOptionsTop(top + 21);
+            setOptionsLeft(left - 85);
+            setOptionsOpen(true);
+        }
+    };
+
+    let optionsRef = null;
+
+    const handleOptions = () => {
+        // Handle options button click
+        const optionsLocation = optionsRef.getBoundingClientRect();
+        optionsOnClick(optionsLocation.top, optionsLocation.left);
+    };
 
     useEffect(() => {
         if (inPlaylistTransition) {
@@ -50,14 +89,6 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
         dispatch(setCurrSongIdPlaylistPage(songID));
     };
 
-    const handleFavorite = () => {
-        // Handle favorite button click
-    };
-
-    const handleOptions = () => {
-    };
-
-
     const isCurrentlyPlaying = currSongID === songID;
 
     return (
@@ -70,19 +101,25 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
                 <p className={"name-" + (isCurrentlyPlaying ? 'active' : 'inactive')}>{name}</p>
             </div>
             <div className="track-container-right">
-                <HeartIcon className="heart-icon" onClick={handleFavorite} />
                 <p className="track-duration">{trackDuration}</p>
-                <OptionsIcon className="options-icon" onClick={handleOptions} />
+            </div>
+            <div className="track-stats">
+                <div ref={optionsPopupRef}>
+                    <OptionsIcon className="track-options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+                    <div className='track-options' ref={optionsPopupRef}>
+                    <Options
+                        open={optionsOpen}
+                        top={optionsTop}
+                        left={optionsLeft}
+                        songBody={songObject}
+                        onClose={() => setOptionsOpen(false)}
+                        // handleAddClick={handleAddClick}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
-
-
-
-
-
-
     );
-
 }
 
 export default TrackEntry;

@@ -1,6 +1,3 @@
-
-
-
 .track-container {
   display: flex;
   justify-content: space-between;
@@ -21,11 +18,9 @@
   .track-id-inactive {
     opacity: 0;
   }
-
 }
 
 .track-container-left {
-
   display: flex;
   align-items: center;
   align-content: center;
@@ -88,6 +83,31 @@
   }
 }
 
+.track-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .track-options-icon {
+      max-width: 1.15rem;
+      max-height: 1.15rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 3rem;
+      right: 1rem;
+      rotate: 90deg;
+  }
+}
+
+.track-options {
+  top: 3rem;
+  right: 2.5rem;
+  position: absolute;
+}
+
 .info-track-container {
   width: auto;
   max-height: 9rem;
@@ -108,7 +128,7 @@
   opacity: 0;
   transition: opacity 0.1s;
   fill: aliceblue;
-  
+
   /* manually position play icon over the track-id*/
   position: relative;
   left: -1.8rem;
@@ -122,7 +142,7 @@
   opacity: 1;
   transition: opacity 0.1s;
   fill: var(--name-active);
-  
+
   /* manually position play icon over the track-id*/
   position: relative;
   left: -1.8rem;
@@ -138,7 +158,7 @@
   fill: aliceblue;
 }
 
-.options-icon {
+/* .track-options-icon {
   max-width: 1.15rem;
   max-height: 1.15rem;
   cursor: pointer;
@@ -148,4 +168,4 @@
   transition: opacity 0.2s;
   rotate: 90deg;
   fill: aliceblue;
-}
+} */
