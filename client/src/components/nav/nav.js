@@ -46,30 +46,39 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-menu">
-                    <Link to="/home">
-                        <HomeIcon className='home-icon' alt='Home'></HomeIcon>
-                        <div>Home</div>
-                    </Link>
-                    <Link to="/search">
-                        <SearchIcon className='search-icon' alt='Search'></SearchIcon>
-                        <div>Search</div>
-                    </Link>
-                    <Link to="/playlists">
-                        <PlaylistsIcon className='playlists-icon'></PlaylistsIcon>
-                        <div>Library</div>
-                    </Link>
+                    <div className='nav-link'>
+                        <Link to="/home">
+                            <HomeIcon className='home-icon' alt='Home'></HomeIcon>
+                            Home
+                        </Link>
+                    </div>
+                    <div className='nav-link'>
+                        <Link to="/search">
+                            <SearchIcon className='search-icon' alt='Search'></SearchIcon>
+                            Search
+                        </Link>
+                    </div>
+                    <div className='nav-link'>
+                        <Link to="/playlists">
+                        
+                            <PlaylistsIcon className='playlists-icon'></PlaylistsIcon>
+                            Library
+                        </Link>
+                    </div>
                     {currentPlaylistId !== '' && 
-                    <Link to={`/playlists/${currentPlaylistId}`}>
-                        <PlaylistIcon className='playlist-icon'></PlaylistIcon>
-                        <div>Playing</div>
-                    </Link>
+                    <div className='nav-link'>
+                        <Link to={`/playlists/${currentPlaylistId}`}>
+                            
+                            <PlaylistIcon className='playlist-icon'></PlaylistIcon>
+                            Playing
+                        </Link>
+                    </div>
                     }
             </div>
-
-            <div className="navbar-bottom">
-                <div>
-                <SignOutIcon className="signout-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
-                <div>Log Out</div>
+            <div className='nav-link'>
+                <div className="navbar-bottom">
+                    <SignOutIcon className="signout-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
+                    Log Out
                 </div>
             </div>
         </nav>

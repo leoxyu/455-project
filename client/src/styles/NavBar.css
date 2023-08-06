@@ -77,7 +77,6 @@
 .search-icon {
     width: 2rem;
     height: 2rem;
-    fill: #181717;
     align-self: center;
 }
 
@@ -92,15 +91,14 @@
     height: 1.5rem;
     align-self: center;
     position: relative;
-    left: 0.8rem;
-    fill: #181717;
-    cursor: pointer;
+    left: 0.1rem;
 }
 
 
 .navbar-menu a {
     text-decoration: none;
-    color: #181717;
+    color: var(--background-base);
+    fill:  var(--background-base);
     font-size: 0.8rem;
     align-self: center;
     align-content: center;
@@ -108,6 +106,17 @@
     display: flex;
     flex-direction: column;
     padding-bottom: 1rem;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+
+.nav-link :hover {
+    /* background-color: aquamarine; */
+    color: var(--text-base);
+    fill:  var(--text-base);
 }
 
 .navbar-bottom {
@@ -122,3 +131,4 @@
     font-size: 0.8rem;
     color: #181717;
 }
+
