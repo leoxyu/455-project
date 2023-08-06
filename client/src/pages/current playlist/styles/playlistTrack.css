@@ -1,19 +1,24 @@
-
-
-
 .track-container {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   border-radius: 5px;
+  position: relative;
+
+  .track-options {
+    position: absolute;
+    right: 2rem;
+    top: 1.5rem;
+    margin: 0.5rem;
+    transition: opacity 0.3s;
+  }
 }
 
 .track-container:hover {
   background-color: var(--background-elevated-base);
 
   .play-icon,
-  .heart-icon,
-  .options-icon {
+  .track-options-icon {
     opacity: 1;
     fill: var(--text-base);
   }
@@ -21,11 +26,9 @@
   .track-id-inactive {
     opacity: 0;
   }
-
 }
 
 .track-container-left {
-
   display: flex;
   align-items: center;
   align-content: center;
@@ -73,18 +76,28 @@
   }
 }
 
-.track-container-right {
+.track-stats {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  align-content: center;
   justify-content: space-between;
-  gap: 0.9em;
+  padding-right: 1.5em;
 
   .track-duration {
     margin: 0.2em 0;
-    padding: 0.2em 0;
+    padding: 0.2em;
+    margin-right: 1.5em;
     color: aliceblue;
+  }
+
+  .track-options-icon {
+    margin-top: 0.5rem;
+    max-width: 1.15rem;
+    max-height: 1.15rem;
+    cursor: pointer;
+    margin-left: 0;
+    opacity: 0;
+    rotate: 90deg;
+    z-index: 2;
   }
 }
 
@@ -100,7 +113,6 @@
   }
 }
 
-
 .play-icon {
   max-width: 1.1rem;
   max-height: 1.1rem;
@@ -108,7 +120,7 @@
   opacity: 0;
   transition: opacity 0.1s;
   fill: aliceblue;
-  
+
   /* manually position play icon over the track-id*/
   position: relative;
   left: -1.8rem;
@@ -122,30 +134,9 @@
   opacity: 1;
   transition: opacity 0.1s;
   fill: var(--name-active);
-  
+
   /* manually position play icon over the track-id*/
   position: relative;
   left: -1.8rem;
   z-index: 2;
-}
-
-.heart-icon {
-  max-width: 1.1rem;
-  max-height: 1.1rem;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s;
-  fill: aliceblue;
-}
-
-.options-icon {
-  max-width: 1.15rem;
-  max-height: 1.15rem;
-  cursor: pointer;
-  margin-right: 0;
-  margin-left: 0;
-  opacity: 0;
-  transition: opacity 0.2s;
-  rotate: 90deg;
-  fill: aliceblue;
 }

@@ -24,8 +24,6 @@ import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, saveOnClick, optionType, playlistObject }) => {
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [optionsTop, setOptionsTop] = useState(false);
-  const [optionsLeft, setOptionsLeft] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -68,20 +66,6 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
       }));
     }
   }, [songs]); // dep array only needs songs
-
-  const optionsOnClick = (top, left) => {
-    if (optionsOpen) {
-      setOptionsOpen(false);
-    } else {
-      setOptionsTop(top + 21);
-      setOptionsLeft(left - 45);
-      setOptionsOpen(true);
-    }
-  };
-
-
-
-  let optionsRef = null;
 
   const handlePlay = async () => {
     // hit play for first time, load songs
@@ -129,9 +113,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
   };
 
   const handleOptions = () => {
-    // Handle options button click
-    const optionsLocation = optionsRef.getBoundingClientRect();
-    optionsOnClick(optionsLocation.top, optionsLocation.left);
+    setOptionsOpen(!optionsOpen);
   };
 
   //  TODO avoid rendering if we use none in css
@@ -163,12 +145,12 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
         </div>
         <div className="stats">
           <div ref={optionsPopupRef}>
-            <OptionsIcon className="options-icon" onClick={(e) => { e.preventDefault(); handleOptions(); }} ref={el => optionsRef = el} />
+            <OptionsIcon className="options-icon" onClick={(e) => { e.preventDefault(); handleOptions(); }} />
             <div className='options' ref={optionsPopupRef}>
               {(optionType === OPTIONS_TYPE2) ?
-                <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>
+                <Options2 open={optionsOpen} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>
                 :
-                <Options3 close={() => setOptionsOpen(false) } open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
+                <Options3 close={() => setOptionsOpen(false) } open={optionsOpen} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
             </div>
           </div>
         </div>
