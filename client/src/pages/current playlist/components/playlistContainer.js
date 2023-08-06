@@ -13,14 +13,24 @@ import "../styles/playlistContainer.css";
 
 import { getTotalTrackDuration } from './util';
 import placeholderCover from '../../../images/album-placeholder.png';
+import PlaylistCreator from '../../playlists/components/PlaylistCreator';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
 const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
+    const [creatorVisible, setCreatorVisible] = useState(false);
 
     const totalDuration = getTotalTrackDuration(songs);
     const thumbnailUrlSet = setThumbnail(thumbnailUrl);
+
+    const closeCreator = () => {
+        setCreatorVisible(false);
+    }
+
+    const handleAddClick = () => {
+        setCreatorVisible(true);
+    }
 
     function setThumbnail(thumbnailUrl) {
         if (!thumbnailUrl && songs && songs.length > 0 && thumbnailUrl.length === 0) {
@@ -82,15 +92,17 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
                         index={songs.findIndex(song => song.songID === track.songID)}
                         parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
                         songObject={track}
+                        handleAddClick={handleAddClick}
                         {...track}
                     />
                 ))}
             </div>
-
+            {creatorVisible &&
+                <div className='creator-dialog-overlay'>
+                    <PlaylistCreator onClose={closeCreator} />
+                </div>
+            }
         </div>
-
-
-
     );
 }
 

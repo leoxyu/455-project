@@ -49,8 +49,6 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
   };
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [optionsTop, setOptionsTop] = useState(false);
-  const [optionsLeft, setOptionsLeft] = useState(false);
 
   let optionsPopupRef = useRef();
 
@@ -68,22 +66,8 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
     }
   });
 
-  const optionsOnClick = (top, left) => {
-    if (optionsOpen) {
-      setOptionsOpen(false);
-    } else {
-      setOptionsTop(top + 21);
-      setOptionsLeft(left - 85);
-      setOptionsOpen(true);
-    }
-  };
-
-  let optionsRef = null;
-
   const handleOptions = () => {
-    // Handle options button click
-    const optionsLocation = optionsRef.getBoundingClientRect();
-    optionsOnClick(optionsLocation.top, optionsLocation.left);
+    setOptionsOpen(!optionsOpen);
   };
 
   function sourceIcon(source) {
@@ -120,12 +104,10 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
         {/* {sourceIcon(songObject.source)} */}
         <div className="duration">{songObject.duration}</div>
         <div ref={optionsPopupRef}>
-          <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+          <OptionsIcon className="options-icon" onClick={handleOptions} />
           <div className='options' ref={optionsPopupRef}>
             <Options
               open={optionsOpen}
-              top={optionsTop}
-              left={optionsLeft}
               songBody={songObject}
               onClose={() => setOptionsOpen(false)}
               handleAddClick={handleAddClick}

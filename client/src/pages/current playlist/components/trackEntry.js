@@ -17,7 +17,7 @@ import Options from '../../search/components/Options';
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ parentPlaylist, songObject, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
+const TrackEntry = ({ parentPlaylist, songObject, handleAddClick, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
 
     const dispatch = useDispatch();
     const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
@@ -32,8 +32,6 @@ const TrackEntry = ({ parentPlaylist, songObject, songID, name, artist, duration
     }
 
     const [optionsOpen, setOptionsOpen] = useState(false);
-    const [optionsTop, setOptionsTop] = useState(false);
-    const [optionsLeft, setOptionsLeft] = useState(false);
 
     let optionsPopupRef = useRef();
 
@@ -51,22 +49,8 @@ const TrackEntry = ({ parentPlaylist, songObject, songID, name, artist, duration
         }
     });
 
-    const optionsOnClick = (top, left) => {
-        if (optionsOpen) {
-            setOptionsOpen(false);
-        } else {
-            setOptionsTop(top + 21);
-            setOptionsLeft(left - 85);
-            setOptionsOpen(true);
-        }
-    };
-
-    let optionsRef = null;
-
     const handleOptions = () => {
-        // Handle options button click
-        const optionsLocation = optionsRef.getBoundingClientRect();
-        optionsOnClick(optionsLocation.top, optionsLocation.left);
+        setOptionsOpen(!optionsOpen);
     };
 
     useEffect(() => {
@@ -103,15 +87,13 @@ const TrackEntry = ({ parentPlaylist, songObject, songID, name, artist, duration
             <div className="track-stats">
                 <p className="track-duration">{trackDuration}</p>
                 <div ref={optionsPopupRef}>
-                    <OptionsIcon className="track-options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+                    <OptionsIcon className="track-options-icon" onClick={handleOptions} />
                     <div className='track-options' ref={optionsPopupRef}>
                     <Options
                         open={optionsOpen}
-                        top={optionsTop}
-                        left={optionsLeft}
                         songBody={songObject}
                         onClose={() => setOptionsOpen(false)}
-                        // handleAddClick={handleAddClick}
+                        handleAddClick={handleAddClick}
                         />
                     </div>
                 </div>
