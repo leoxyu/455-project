@@ -16,7 +16,9 @@ const SongDisplay = ({ name, artist, image, onDelete }) => {
           <div className="song-artist">{artist}</div>
         </div>
       </div>
-      <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete} />
+      <div className="song-delete-container">
+        <AiOutlineCloseCircle size="24px" className="song-delete-button" onClick={onDelete} />
+      </div>
     </div>
   );
 };
@@ -117,7 +119,6 @@ const PlaylistEditor = ({ playlist, onClose }) => {
           />
         </div>
       </div>
-
       <div>
         <div className="songs-editor-container">
           {playlist.songs.map((song, i) => {

@@ -77,19 +77,32 @@ export const Player = ({ name, artist, image, playing, played, loop, shuffle, vo
           </div>
 
           <div className="player-audio">
-            {!muted && volume > 0.6 && <BiSolidVolumeFull size="24px" className="react-icon" onClick={onToggleMute} />}
-            {!muted && volume > 0.2 && volume <= 0.6 && <BiSolidVolumeLow size="24px" className="react-icon" onClick={onToggleMute} />}
-            {!muted && (volume <= 0.2 && volume > 0) && <BiSolidVolume size="24px" className="react-icon" onClick={onToggleMute} />}
-            {(muted || volume === 0) && <BiSolidVolumeMute size="24px" className="react-icon-mute" onClick={onToggleMute} />}
-            <input
-              className="volume-slider"
-              type='range'
-              min={0}
-              max={1}
-              step='any'
-              value={muted ? 0 : volume}
-              onChange={onVolumeChange}
-            />
+            {type !== "spotify" && <>
+              {!muted && volume > 0.6 && <BiSolidVolumeFull size="24px" className="react-icon" onClick={onToggleMute} />}
+              {!muted && volume > 0.2 && volume <= 0.6 && <BiSolidVolumeLow size="24px" className="react-icon" onClick={onToggleMute} />}
+              {!muted && (volume <= 0.2 && volume > 0) && <BiSolidVolume size="24px" className="react-icon" onClick={onToggleMute} />}
+              {(muted || volume === 0) && <BiSolidVolumeMute size="24px" className="react-icon-mute" onClick={onToggleMute} />}
+              <input
+                className="volume-slider"
+                type='range'
+                min={0}
+                max={1}
+                step='any'
+                value={muted ? 0 : volume}
+                onChange={onVolumeChange}
+              />
+            </>}
+            {type === "spotify" && <>
+              <BiSolidVolumeFull size="24px" className="react-icon-disabled" />
+              <input
+                className="volume-slider-disabled"
+                type='range'
+                min={0}
+                max={1}
+                value={1}
+                onChange={() => null}
+              />
+            </>}
           </div>
         </div>
       }

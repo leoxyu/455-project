@@ -24,8 +24,8 @@
 }
 
 .playlist-editor-image {
-    width: 5em;
-    height: 5em;
+    width: 5.5em;
+    height: 5.5em;
     object-fit: cover;
     border-radius: 5px;
     margin-right: 0.5em;
@@ -37,31 +37,30 @@
 .playlist-editor-input {
     width: 100%;
     min-height: 2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
     border-radius: 0.5em;
     border: none;
     background-color: var(--background-elevated-base);
     color: var(--text-base);
     padding-left: 0.5em;
     font-family: 'Roboto', sans-serif;
-    max-height: 6em;
+    max-height: 4em;
     overflow: scroll;
 }
 
 .playlist-editor-input-name {
     width: 100%;
-    min-height: 2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    min-height: 50px;
+    margin-bottom: 0.2em;
     border-radius: 0.5em;
     border: none;
     background-color: var(--background-elevated-base);
     color: var(--text-base);
     font-family: 'Roboto', sans-serif;
-    font-size: 40px;
+    font-size: 25px;
     font-weight: bold;
-    max-height: 6em;
+    max-height: 5em;
     overflow: scroll;
 }
 
@@ -76,6 +75,7 @@
     flex-direction: column;
     max-height: 7em;
     overflow: scroll;
+    margin-top: 0.5em;
     margin-bottom: 1.5em;
     overflow-x: hidden;
 }
@@ -101,6 +101,10 @@
 .song-artist {
     color: white;
     font-size: small;
+}
+
+.song-delete-container {
+    width: 9%;
 }
 
 .song-delete-button {

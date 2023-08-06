@@ -18,6 +18,7 @@ const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = re
 
 
 const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
+    console.log(songs);
 
     const totalDuration = getTotalTrackDuration(songs);
     const thumbnailUrlSet = setThumbnail(thumbnailUrl);
