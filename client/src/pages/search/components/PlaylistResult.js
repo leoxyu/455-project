@@ -170,7 +170,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
         {(optionType === OPTIONS_TYPE2) ? 
             <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>
             :
-            <Options3 open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
+            <Options3 close={() => setOptionsOpen(false) } open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
           
         </div>
         {/* {sourceIcon(playlistObject.source)} */}

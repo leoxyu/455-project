@@ -1,19 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="-2 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    
-    <title>home [#1392]</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-
-</defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Dribbble-Light-Preview" transform="translate(-381.000000, -720.000000)" fill="#000000">
-            <g id="icons" transform="translate(56.000000, 160.000000)">
-                <path d="M339.875,578.013 L336.6875,578.013 L336.6875,574.013 L330.3125,574.013 L330.3125,578.013 L327.125,578.013 L327.125,568.799 L333.489375,562.809 L339.875,568.819 L339.875,578.013 Z M341.94475,568.013 L333.47025,560 L325,567.999 L325,580.013 L332.4375,580.013 L332.4375,576.013 L334.5625,576.013 L334.5625,580.013 L342,580.013 L342,579.983 L342,568.013 L341.94475,568.013 Z" id="home-[#1392]">
-
-</path>
-            </g>
-        </g>
-    </g>
+<svg height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 420.477 420.477" xml:space="preserve">
+<g>
+	<g>
+		<path style="fill:#010002;" d="M350.462,418.058H70.019c-6.587,0-11.934-5.346-11.934-11.934V224.588H11.937
+			c-4.827,0-9.177-2.906-11.027-7.369c-1.85-4.457-0.829-9.589,2.59-13.002L201.803,5.914c4.654-4.66,12.214-4.66,16.874,0
+			L416.98,204.211c3.413,3.413,4.433,8.545,2.59,13.002c-1.85,4.463-6.2,7.369-11.027,7.369h-46.148v181.542
+			C362.395,412.717,357.049,418.058,350.462,418.058z M81.953,394.19h256.575V212.654c0-6.587,5.346-11.934,11.934-11.934h29.273
+			L210.24,31.225L40.745,200.72h29.273c6.587,0,11.934,5.346,11.934,11.934V394.19z"/>
+	</g>
+</g>
 </svg>

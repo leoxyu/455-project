@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/variables.css';
 import '../../styles/NavBar.css';
+import {ReactComponent as HomeIcon} from '../../images/home.svg';
+import {ReactComponent as SearchIcon} from '../../images/search_nav.svg';
+import {ReactComponent as PlaylistIcon} from '../../images/current_playlist.svg';
+import {ReactComponent as PlaylistsIcon} from '../../images/playlists.svg';
+import {ReactComponent as SignOutIcon} from '../../images/sign_out.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../pages/login/redux/loginReducer';
 
@@ -36,22 +41,36 @@ const Navbar = () => {
             <div className="navbar-top">
                 <div className="user-profile">
                     <img className="profile-picture" src={dynamicProfilePicture || defaultProfilePicture} alt="Profile" />
-                    <h1 className="username">{userId}</h1>
+                    {/* <h1 className="username">{userId}</h1> */}
                 </div>
             </div>
 
             <div className="navbar-menu">
-                    <Link to="/home"><h1>Home</h1></Link>
-                    <Link to="/songs"><h1>Songs</h1></Link>
-                    <Link to="/playlists"><h1>Playlists</h1></Link>
-                    <Link to="/search"><h1>Search</h1></Link>
-                    <Link to={`/playlists/${currentPlaylistId}`}><h1>Now Playing</h1></Link>
+                    <Link to="/home">
+                        <HomeIcon className='home-icon' alt='Home'></HomeIcon>
+                        <div>Home</div>
+                    </Link>
+                    <Link to="/search">
+                        <SearchIcon className='search-icon' alt='Search'></SearchIcon>
+                        <div>Search</div>
+                    </Link>
+                    <Link to="/playlists">
+                        <PlaylistsIcon className='playlists-icon'></PlaylistsIcon>
+                        <div>Library</div>
+                    </Link>
+                    {currentPlaylistId !== '' && 
+                    <Link to={`/playlists/${currentPlaylistId}`}>
+                        <PlaylistIcon className='playlist-icon'></PlaylistIcon>
+                        <div>Playing</div>
+                    </Link>
+                    }
             </div>
 
             <div className="navbar-bottom">
-                <button className="signout-button" onClick={handleSignOut}>
-                    Sign Out
-                </button>
+                <div>
+                <SignOutIcon className="signout-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
+                <div>Log Out</div>
+                </div>
             </div>
         </nav>
     );

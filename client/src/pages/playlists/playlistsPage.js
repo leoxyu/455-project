@@ -84,6 +84,8 @@ const PlaylistPage = () => {
     setEditVisible(true);
   };
 
+  // TODO
+  // <Link to="/songs"><h1>Songs</h1></Link>
   return (
     <div className='playlists-page'>
 
