@@ -162,13 +162,16 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
           </div>
         </div>
         <div className="stats">
-          <div className='options' ref={optionsPopupRef}>
+          <div ref={optionsPopupRef}>
             <OptionsIcon className="options-icon" onClick={(e) => { e.preventDefault(); handleOptions(); }} ref={el => optionsRef = el} />
-            {(optionType === OPTIONS_TYPE2) ? 
+            </div>
+        </div>
+        <div className='options' ref={optionsPopupRef}> 
+        {(optionType === OPTIONS_TYPE2) ? 
             <Options2 open={optionsOpen} top={optionsTop} left={optionsLeft} deleteOnClick={handleDelete} editOnClick={handleEdit} isFavorited={playlistObject.isFavorited} handleSetFavorite={handleSetFavorite}/>
             :
             <Options3 close={() => setOptionsOpen(false) } open={optionsOpen} top={optionsTop} left={optionsLeft} playlistLink={(playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId} playlistType={playlistObject.type} source={playlistObject.source} saveOnClick={saveOnClick} />}
-          </div>
+          
         </div>
         {/* {sourceIcon(playlistObject.source)} */}
       </div>

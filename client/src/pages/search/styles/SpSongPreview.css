@@ -56,6 +56,17 @@
                 margin: 0;
                 opacity: 0;
             }
+            .playing-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 1.5rem;
+                max-height: 1.5rem;
+                cursor: pointer;
+                margin: 0;
+                opacity: 1;
+            }
         }
         
         .details {
@@ -66,8 +77,16 @@
             /* max-width: 40em;
              */
              max-width: 30vw;
-            .name {
+            .name-inactive {
                 color: var(--text-base);
+                overflow: hidden; 
+                text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
+                white-space: nowrap;
+                 /* max-width: 80%; */
+                 max-width: 25vw;
+            }
+            .name-active {
+                color: var(--name-active);
                 overflow: hidden; 
                 text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
                 white-space: nowrap;

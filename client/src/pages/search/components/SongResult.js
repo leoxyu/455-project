@@ -7,18 +7,22 @@ import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
 import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
 import { ReactComponent as UnifiIcon } from '../../../images/unifilogo.svg';
+import PlayingIcon from "../../../images/playingWave.gif";
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI } from '../../../typeConstants';
 import '../styles/Preview.css'
 import '../styles/YtVideoPreview.css';
 import '../styles/SpSongPreview.css';
-import { useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
 const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songObject }) => {
+
+  const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
 
   const dispatch = useDispatch();
 
@@ -99,16 +103,21 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
     }
   };
 
+  const isCurrentlyPlaying = currSongID === songObject.songID;
+
   return (
     <div className={className}>
 
       <div className='essential-info'>
         <div className="thumbnail-container">
           <img className="thumbnail" src={songObject.imageLink} alt="Track Thumbnail" />
-          <PlayIcon className="play-icon" onClick={handlePlay} />
+          { isCurrentlyPlaying ? 
+          <img className="playing-icon" src={PlayingIcon}/>
+          : 
+          <PlayIcon className="play-icon" onClick={handlePlay} />}
         </div>
         <div className="details">
-          <div className="name">{songObject.name}</div>
+          <div className={"name-"+ ((isCurrentlyPlaying)? "active":"inactive")}>{songObject.name}</div>
           <div className="artist">{songObject.artist}</div>
         </div>
       </div>
