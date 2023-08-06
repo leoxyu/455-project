@@ -117,17 +117,13 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
           <div className="artist">{songObject.artist}</div>
         </div>
       </div>
-       <div className="stats">
-          {/* {sourceIcon(songObject.source)} */}
-          <div className="duration">{songObject.duration}</div>
-          <div ref={optionsPopupRef}>
-            <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
-          </div>
-
-      </div>
-
-      <div className='options' ref={optionsPopupRef}>
-      <Options
+      <div className="stats">
+        {/* {sourceIcon(songObject.source)} */}
+        <div className="duration">{songObject.duration}</div>
+        <div ref={optionsPopupRef}>
+          <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+          <div className='options' ref={optionsPopupRef}>
+            <Options
               open={optionsOpen}
               top={optionsTop}
               left={optionsLeft}
@@ -135,7 +131,9 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
               onClose={() => setOptionsOpen(false)}
               handleAddClick={handleAddClick}
             />
-            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

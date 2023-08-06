@@ -1,5 +1,6 @@
 .song-player {
     width: 100%;
+    overflow: auto;
 }
 
 .react-player {
@@ -60,11 +61,21 @@
     color: white;
     font-weight: bold;
     margin-bottom: 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .song-artist {
     color: white;
     font-size: small;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .player-main {
