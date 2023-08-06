@@ -10,7 +10,7 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
   return (
     <div>
       <h2 className='heading'>{selectedFilter}</h2>
-      {(className === 'spotify-playlist-list') ? 
+      {(className === 'spotify-playlist-list') ?
       <div className='spotify-playlist-list'>
       {collection.map((album, i) => (
         <Link to={`/playlists/${album.originId}`}
@@ -19,7 +19,7 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
             <PlaylistResult
               key={album.source + album.originId + i}
               className={'spotify-playlist-preview'}
-              isFavorite={false}
+              isFavorited={false}
               optionType={OPTIONS_TYPE3}
               saveOnClick={saveOnClick}
               playlistObject={album}
@@ -36,7 +36,7 @@ const ResultsList = ({collection=[], selectedFilter, className, playlistCreatorR
             songObject={song}
             handleAddClick={handleAddClick}
             playlistCreatorRef={playlistCreatorRef}
-            isFavorite={false}
+            isFavorited={false}
           />
         ))}
         </div>}
