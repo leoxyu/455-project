@@ -53,9 +53,11 @@ const Navbar = () => {
                 <h1>
                     <Link to="/search">Search</Link>
                 </h1>
-                <h1>
-                    <Link to={`/playlists/${currentPlaylistId}`}>Now Playing</Link>
-                </h1>
+                {currentPlaylistId !== '' && (
+                    <h1>
+                        <Link to={`/playlists/${currentPlaylistId}`}>Now Playing</Link>
+                    </h1>
+                )}
             </ul>
 
             <div className="navbar-bottom">
