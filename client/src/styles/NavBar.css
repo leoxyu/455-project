@@ -39,19 +39,12 @@
 .profile-picture {
     width: 3.5rem;
     height: 3.5rem;
-    /* min-width: 5rem;
-    min-height: 5rem; */
     margin-top: 1rem;
     border-radius: 50%;
     object-fit: cover;
     margin-left: 0.5rem;
 }
 
-.username {
-    font-weight: bold;
-    /* margin: 10px; */
-    font-size: (2vw + 0.35vh);
-}
 
 .edit-button {
     background-color: #181717;

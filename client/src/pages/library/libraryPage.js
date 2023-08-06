@@ -17,11 +17,9 @@ const LibraryPage = () => {
       <div className='page-selector'>
         <div className='library-button' onClick={() => handlePageChange('Playlists')} data-selected={selectedPage === 'Playlists' ? 'true' : 'false'}>
           <PlaylistIcon className='playlist-library-icon' />
-          {/* <span className='library-page-text'>Playlists</span> */}
         </div>
         <div className='library-button' onClick={() => handlePageChange('Songs')} data-selected={selectedPage === 'Songs' ? 'true' : 'false'}>
           <SongIcon className='song-library-icon' />
-          {/* <span className='library-page-text'>Songs</span> */}
         </div>
       </div>
       {selectedPage === 'Playlists' ? <PlaylistsPage /> : <SongPage />}

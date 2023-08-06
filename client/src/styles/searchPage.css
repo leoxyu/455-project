@@ -1,13 +1,9 @@
 .search-page {
   background-color: var(--background-base);
   min-height: 100vh;
-  /* display: flex; */
-  /* flex-direction: column; */
   align-items: left;
-  /* justify-content: center; */
   padding: 20px 20px 4.5rem 20px;
   position: relative;
   font-size: calc(10px + 2vmin);
   color: var(--text-base);
-  /* padding-left: 250px; */
 }

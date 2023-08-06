@@ -49,7 +49,6 @@ const Navbar = () => {
             <div className="navbar-top">
                 <div className="user-profile">
                     <img className="profile-picture" src={dynamicProfilePicture || defaultProfilePicture} alt="Profile" />
-                    {/* <h1 className="username">{userId}</h1> */}
                 </div>
             </div>
 

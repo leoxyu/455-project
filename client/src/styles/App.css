@@ -37,7 +37,6 @@ body {
   width: calc(100% - 240px);
   display: flex;
   flex-direction: column;
-  /* margin-left: 240px; */
   margin-left: 2rem;
 }
 
