@@ -1,5 +1,5 @@
 body {
-  background-color: #181717;
+  background-color: var(--background-base);
 }
 
 .App-header {
@@ -37,7 +37,8 @@ body {
   width: calc(100% - 240px);
   display: flex;
   flex-direction: column;
-  margin-left: 240px;
+  /* margin-left: 240px; */
+  margin-left: 2rem;
 }
 
 main {

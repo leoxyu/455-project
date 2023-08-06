@@ -3,9 +3,10 @@
   min-height: 100vh;
   /* display: flex; */
   /* flex-direction: column; */
-  align-items: center;
+  align-items: left;
   /* justify-content: center; */
-  padding: 20px;
+  padding: 3rem 2rem 5rem 0rem;
+  position: relative;
   font-size: calc(10px + 2vmin);
   color: var(--text-base);
   /* padding-left: 250px; */

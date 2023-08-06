@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
-
+import './styles/variables.css';
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';

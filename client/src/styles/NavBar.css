@@ -2,21 +2,31 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 200px;
+    width: 10%;
     background-color: var(--essential-bright-accent);
     color: rgba(236, 236, 236, 0.829);
-    padding: 20px;
-    position: fixed;
+    padding: 1rem 2rem 1rem 1rem;
+    position: relative;
     top: 0;
     left: 0;
     bottom: 0;
 }
 
 .navbar-top {
+    position: fixed;
     align-self: center;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.navbar-menu {
+    position: fixed;
+    align-self: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    top: 15rem;
 }
 
 .user-profile {
@@ -26,8 +36,10 @@
 }
 
 .profile-picture {
-    width: 100px;
-    height: 100px;
+    width: 8vw;
+    height: 8vw;
+    min-width: 5rem;
+    min-height: 5rem;
     margin: 10px;
     border-radius: 50%;
     object-fit: cover;
@@ -35,35 +47,34 @@
 
 .username {
     font-weight: bold;
-    margin: 10px;
+    /* margin: 10px; */
+    font-size: (2vw + 0.35vh);
 }
 
 .edit-button {
     background-color: #181717;
     color: white;
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
-    margin-bottom: 10px;
+    position: sticky;
 }
 
-.navbar-menu ul {
-    list-style-type: none;
-    padding: 0;
-}
 
-.navbar-menu li {
-    margin-bottom: 10px;
-}
 
 .navbar-menu a {
     text-decoration: none;
     color: rgba(236, 236, 236, 0.829);
+    font-size: 1.25vw + 0.25vh;
+    align-self: center;
+    align-content: center;
 }
 
 .navbar-bottom {
     margin-top: auto;
     align-items: center;
+    align-self: center;
+    position: fixed;
+    top: 42rem;
 }
 
 .signout-button {
@@ -71,6 +82,8 @@
     background-color: #181717;
     color: rgb(255, 255, 255);
     border: none;
-    padding: 10px 20px;
+    padding: 1vw + .25vh;
+    font-size: 1.5vw + .25vh;
     cursor: pointer;
+    border-radius: 10px;
 }

@@ -40,23 +40,13 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <ul className="navbar-menu">
-                <h1>
-                    <Link to="/home">Home</Link>
-                </h1>
-                <h1>
-                    <Link to="/songs">Songs</Link>
-                </h1>
-                <h1>
-                    <Link to="/playlists">Playlists</Link>
-                </h1>
-                <h1>
-                    <Link to="/search">Search</Link>
-                </h1>
-                <h1>
-                    <Link to={`/playlists/${currentPlaylistId}`}>Now Playing</Link>
-                </h1>
-            </ul>
+            <div className="navbar-menu">
+                    <Link to="/home"><h1>Home</h1></Link>
+                    <Link to="/songs"><h1>Songs</h1></Link>
+                    <Link to="/playlists"><h1>Playlists</h1></Link>
+                    <Link to="/search"><h1>Search</h1></Link>
+                    <Link to={`/playlists/${currentPlaylistId}`}><h1>Now Playing</h1></Link>
+            </div>
 
             <div className="navbar-bottom">
                 <button className="signout-button" onClick={handleSignOut}>
