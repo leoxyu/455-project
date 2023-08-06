@@ -7,6 +7,7 @@ import SearchPage from './pages/search/searchPage';
 import PlaylistsPage from './pages/playlists/playlistsPage';
 import CurrentPlaylistPage from './pages/current playlist/currentPlaylistPage';
 import SongPage from './pages/songs/songPage';
+import LibraryPage from './pages/library/libraryPage';
 
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
@@ -34,8 +35,9 @@ const App = () => {
                     <Routes>
                       <Route path="/home" element={<HomePage />} />
                       <Route path="/search" element={<SearchPage />} />
-                      <Route path="/songs" element={<SongPage />} />
-                      <Route path="/playlists" element={<PlaylistsPage />} />
+                      {/* <Route path="/songs" element={<SongPage />} />
+                      <Route path="/playlists" element={<PlaylistsPage />} /> */}
+                      <Route path="/library" element={<LibraryPage />} />
                       <Route path="/playlists/:id" element={<CurrentPlaylistPage />} />
                     </Routes>
                   </main>

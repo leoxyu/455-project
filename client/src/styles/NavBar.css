@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 3rem;
+    width: 2.5rem;
     background-color: var(--essential-bright-accent);
     color: rgba(236, 236, 236, 0.829);
-    padding: 1rem 2rem 1rem 1rem;
+    padding: 1rem 1.75rem 1rem 1rem;
     position: relative;
     top: 0;
     left: 0;
@@ -62,31 +62,31 @@
 }
 
 
-.home-icon {
+.home-nav-icon {
     width: 2rem;
     height: 2rem;
     align-self: center;
 }
 
-.playlists-icon {
+.library-nav-icon {
     width: 2rem;
     height: 2rem;
     align-self: center;
 }
 
-.search-icon {
+.search-nav-icon {
     width: 2rem;
     height: 2rem;
     align-self: center;
 }
 
-.playlist-icon {
+.playlist-nav-icon {
     width: 2rem;
     height: 2rem; 
     align-self: center;
 }
 
-.signout-icon{
+.signout-nav-icon{
     width: 1.5rem;
     height: 1.5rem;
     align-self: center;
@@ -131,4 +131,19 @@
     font-size: 0.8rem;
     color: #181717;
 }
+
+.nav-link.active {
+    /* display: none; */
+    /* Add styles to highlight active links */
+    color: var(--text-base); /* Change the text color to indicate active link */
+    fill:  var(--text-base);
+    /* You can also add background color, underline, or any other styling */
+    [class$="-nav-icon"] {
+        color: var(--text-base);
+        fill:  var(--text-base);
+    }
+    .nav-text {
+        color: var(--text-base);
+    }
+  }
 

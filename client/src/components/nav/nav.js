@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import '../../styles/variables.css';
 import '../../styles/NavBar.css';
 import {ReactComponent as HomeIcon} from '../../images/home.svg';
 import {ReactComponent as SearchIcon} from '../../images/search_nav.svg';
 import {ReactComponent as PlaylistIcon} from '../../images/current_playlist.svg';
-import {ReactComponent as PlaylistsIcon} from '../../images/playlists.svg';
+import {ReactComponent as LibraryIcon} from '../../images/library.svg';
 import {ReactComponent as SignOutIcon} from '../../images/sign_out.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../pages/login/redux/loginReducer';
@@ -36,6 +36,14 @@ const Navbar = () => {
         dispatch(logout());
     };
 
+    // Get the current location object using useLocation hook
+    const location = useLocation();
+
+    // Function to determine if a link should be considered active
+    const isLinkActive = (pathname) => {
+        return location.pathname === pathname;
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-top">
@@ -46,38 +54,38 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-menu">
-                    <div className='nav-link'>
+                    <div className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`}>
                         <Link to="/home">
-                            <HomeIcon className='home-icon' alt='Home'></HomeIcon>
-                            Home
+                            <HomeIcon className='home-nav-icon' alt='Home'></HomeIcon>
+                            <span className='nav-text'>Home</span>
                         </Link>
                     </div>
-                    <div className='nav-link'>
+                    <div className={`nav-link ${isLinkActive('/search') ? 'active' : ''}`}>
                         <Link to="/search">
-                            <SearchIcon className='search-icon' alt='Search'></SearchIcon>
-                            Search
+                            <SearchIcon className='search-nav-icon' alt='Search'></SearchIcon>
+                            <span className='nav-text'>Search</span>
                         </Link>
                     </div>
-                    <div className='nav-link'>
-                        <Link to="/playlists">
+                    <div className={`nav-link ${isLinkActive('/library') ? 'active' : ''}`}>
+                        <Link to="/library">
                         
-                            <PlaylistsIcon className='playlists-icon'></PlaylistsIcon>
-                            Library
+                            <LibraryIcon className='library-nav-icon'></LibraryIcon>
+                            <span className='nav-text'>Library</span>
                         </Link>
                     </div>
                     {currentPlaylistId !== '' && 
-                    <div className='nav-link'>
+                    <div className={`nav-link ${isLinkActive(`/playlists/${currentPlaylistId}`) ? 'active' : ''}`}>
                         <Link to={`/playlists/${currentPlaylistId}`}>
                             
-                            <PlaylistIcon className='playlist-icon'></PlaylistIcon>
-                            Playing
+                            <PlaylistIcon className='playlist-nav-icon'></PlaylistIcon>
+                            <span className='nav-text'>Playing</span>
                         </Link>
                     </div>
                     }
             </div>
             <div className='nav-link'>
                 <div className="navbar-bottom">
-                    <SignOutIcon className="signout-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
+                    <SignOutIcon className="signout-nav-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
                     Log Out
                 </div>
             </div>
