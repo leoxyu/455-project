@@ -14,13 +14,13 @@ let refresh_token = null;
 let youtube_profile = null;
 
 const { MongoClient, ObjectId } = require("mongodb");
-const { DATABASE_NAME, PLAYLIST_COLLECTION } = require("../shared/mongoConstants");
+const { DATABASE_NAME, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
 
 const YOUTUBE_URL = `https://www.youtube.com/watch?v=`
 
 const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
-const playlistsCol = database.collection(PLAYLIST_COLLECTION);
+const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 
 // const querystring = require('querystring');
 require('dotenv').config();
@@ -51,6 +51,8 @@ router.get('/playlists', async (req, res) => {
   }
   const token = accessToken.split(' ')[1];
   const playlists = await getYoutubePlaylists(token, req.query.authorID);
+
+  console.log(playlists);
 
   for (let i = 0; i < playlists.length; i++) {
     try {
@@ -125,13 +127,14 @@ async function getYoutubePlaylists(token, author) {
       playlistDataList[i].etag,
       playlistDataList[i].snippet.publishedAt,
       playlistDataList[i].snippet.description,
-      playlistDataList[i].snippet.title,
+      playlistDataList[i].snippet.title, // name
       new ObjectId(author),
+      '',
       false,
       playlistDataList[i].snippet.thumbnails.medium.url,
       songList,
       null,
-      null
+      playlistDataList[i].etag,
     );
 
     playlistList.push(playlist);
@@ -154,7 +157,7 @@ function formatSong(
   songID,
   artist,
   name,
-  type,
+  source,
   link,
   imageLink,
   album,
@@ -166,7 +169,7 @@ function formatSong(
     songID: songID,
     artist: artist,
     name: name,
-    type: type,
+    source: source,
     link: link,
     imageLink: imageLink,
     album: album,
@@ -181,24 +184,30 @@ function formatPlaylist(
   description,
   name,
   author,
+  artist,
   isFavorited,
   coverImageURL,
   songs,
-  originSpotifyId,
-  isAlbum
+  duration,
+  originId
 ) {
   const formattedReleaseDate = reformatTime(dateCreated);
   return {
     playlistID: playlistID,
+    name: name,
     dateCreated: formattedReleaseDate,
     description: description,
-    name: name,
     author: author,
+    isAlbum: false,
+    artist: artist,
+    artistImage: '',
     isFavorited: isFavorited,
     coverImageURL: coverImageURL,
     songs: songs,
-    originSpotifyId: originSpotifyId,
-    isAlbum: isAlbum,
+    source: 'youtube',
+    type: 'playlist',
+    duration: duration,
+    originId: originId
   };
 }
 

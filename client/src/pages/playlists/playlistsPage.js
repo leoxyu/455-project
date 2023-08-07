@@ -42,6 +42,7 @@ const PlaylistPage = () => {
 
     // Check if searchTerm is present in the playlist name or artist name
     const searchTermInName = playlist.name.toLowerCase().includes(searchTerm.toLowerCase());
+    console.log(playlist);
     const searchTermInArtist = playlist.artist.toLowerCase().includes(searchTerm.toLowerCase());
     return searchTermInName || searchTermInArtist;
   });
@@ -108,7 +109,7 @@ const PlaylistPage = () => {
         )}
       </div>
 
-      <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} filters={['All', 'Favorited', 'Uni.fi', 'Spotify', 'YouTube']}/>
+      <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} filters={['All', 'Favorited', 'Uni.fi', 'Spotify', 'YouTube']} />
 
       {creatorVisible &&
         <div className='creator-dialog-overlay'>
@@ -127,13 +128,13 @@ const PlaylistPage = () => {
       <h2 className='playlists-heading'>Your Playlists</h2>
       {initialFetched.current &&
         <InfiniteScroll
-            dataLength={playlists.length}
-            next={() => dispatch(getPlaylistsAsync({ isDeep: false }))}
-            hasMore={true}
-            scrollableTarget={'your-playlists'}
-            // loader={<h4>loading</h4>}
-            style={{ overflow: "unset" }}
-            // scrollThreshold={0.5}
+          dataLength={playlists.length}
+          next={() => dispatch(getPlaylistsAsync({ isDeep: false }))}
+          hasMore={true}
+          scrollableTarget={'your-playlists'}
+          // loader={<h4>loading</h4>}
+          style={{ overflow: "unset" }}
+        // scrollThreshold={0.5}
         >
           <div className='unifi-playlists-list' style={{ display: 'flex', flexWrap: 'wrap' }}>
             <div className='adder' onClick={handleAddClick}>
@@ -144,7 +145,7 @@ const PlaylistPage = () => {
             </div>
             {filteredPlaylists.map((playlist) => (
               <Link to={`/playlists/${playlist.playlistID}`}
-                style={{ color: 'inherit', textDecoration: 'inherit'}}
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
               >
                 <PlaylistResult
                   key={playlist.playlistID}

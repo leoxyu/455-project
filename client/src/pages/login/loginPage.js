@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, signup } from './redux/loginReducer';
+import { useDispatch } from 'react-redux';
 import CreateAccount from './createAccount';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/variables.css';
@@ -183,7 +182,7 @@ const LoginPage = () => {
         const status = response.payload.status;
         switch (status) {
           case LOGIN_STATUS.LogInSuccess:
-            navigate('/home');
+            navigate('/preload');
             break;
           case LOGIN_STATUS.LogInFailed:
             setErrorMessage('Login failed. Please check your credentials.');
@@ -206,7 +205,7 @@ const LoginPage = () => {
         const status = response.payload.status;
         switch (status) {
           case LOGIN_STATUS.RegisterSuccess:
-            navigate('/home');
+            navigate('/preload');
             break;
           case LOGIN_STATUS.RegisterFailed:
             setErrorMessage('Account registration failed. Please try again.');

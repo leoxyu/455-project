@@ -12,7 +12,7 @@ import LibraryPage from './pages/library/libraryPage';
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
 import SongPlayer from './components/player/SongPlayer';
-
+import Preload from './pages/login/preload';
 import Menu from './components/nav/navBar';
 
 const App = () => {
@@ -33,6 +33,7 @@ const App = () => {
                 <div className="main-container">
                   <main>
                     <Routes>
+                      <Route path="/preload" element={<Preload />} />
                       <Route path="/home" element={<HomePage />} />
                       <Route path="/search" element={<SearchPage />} />
                       <Route path="/library" element={<LibraryPage />} />

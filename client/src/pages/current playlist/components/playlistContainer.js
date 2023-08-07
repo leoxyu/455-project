@@ -97,9 +97,9 @@ const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, arti
                             {...track}
                         />
                     ))
-                :
+                    :
                     <div className='spinner-container'>
-                        <Spinner/>
+                        <Spinner />
                     </div>
                 }
             </div>
