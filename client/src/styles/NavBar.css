@@ -2,21 +2,32 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 200px;
+    width: 2.5rem;
     background-color: var(--essential-bright-accent);
     color: rgba(236, 236, 236, 0.829);
-    padding: 20px;
-    position: fixed;
+    padding: 1rem 1.75rem 1rem 1rem;
+    position: relative;
     top: 0;
     left: 0;
     bottom: 0;
 }
 
 .navbar-top {
+    position: fixed;
     align-self: center;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.navbar-menu {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 16rem;
+    align-self: center;
+    align-content: space-between;
+    align-items: space-between;
 }
 
 .user-profile {
@@ -26,51 +37,106 @@
 }
 
 .profile-picture {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-top: 1rem;
     border-radius: 50%;
     object-fit: cover;
+    margin-left: 0.5rem;
 }
 
-.username {
-    font-weight: bold;
-    margin: 10px;
-}
 
 .edit-button {
     background-color: #181717;
     color: white;
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
-    margin-bottom: 10px;
+    position: sticky;
 }
 
-.navbar-menu ul {
-    list-style-type: none;
-    padding: 0;
+
+.home-nav-icon {
+    width: 2rem;
+    height: 2rem;
+    align-self: center;
 }
 
-.navbar-menu li {
-    margin-bottom: 10px;
+.library-nav-icon {
+    width: 2rem;
+    height: 2rem;
+    align-self: center;
 }
+
+.search-nav-icon {
+    width: 2rem;
+    height: 2rem;
+    align-self: center;
+}
+
+.playlist-nav-icon {
+    width: 2rem;
+    height: 2rem; 
+    align-self: center;
+}
+
+.signout-nav-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    align-self: center;
+    position: relative;
+    left: 0.1rem;
+}
+
 
 .navbar-menu a {
     text-decoration: none;
-    color: rgba(236, 236, 236, 0.829);
+    color: var(--background-base);
+    fill:  var(--background-base);
+    font-size: 0.8rem;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+
+.nav-link :hover {
+    /* background-color: aquamarine; */
+    color: var(--text-base);
+    fill:  var(--text-base);
 }
 
 .navbar-bottom {
     margin-top: auto;
     align-items: center;
+    align-self: center;
+    align-content: center;
+    position: fixed;
+    bottom: 6.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    color: #181717;
 }
 
-.signout-button {
-    align-self: center;
-    background-color: #181717;
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
+.nav-link.active {
+    /* display: none; */
+    /* Add styles to highlight active links */
+    color: var(--text-base); /* Change the text color to indicate active link */
+    fill:  var(--text-base);
+    /* You can also add background color, underline, or any other styling */
+    [class$="-nav-icon"] {
+        color: var(--text-base);
+        fill:  var(--text-base);
+    }
+    .nav-text {
+        color: var(--text-base);
+    }
+  }
+
