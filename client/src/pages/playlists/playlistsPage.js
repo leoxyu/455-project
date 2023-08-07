@@ -25,6 +25,7 @@ const PlaylistPage = () => {
   const [editVisible, setEditVisible] = useState(false);
   const [playlistToEdit, setPlaylistToEdit] = useState(false);
   const initialFetched = useRef(false);
+  const [initialFetchDone, setInitialFetchDone] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const playlists = useSelector(state => state.playlists.playlists);
   const dispatch = useDispatch();
@@ -57,11 +58,15 @@ const PlaylistPage = () => {
       if (!initialFetched.current) {
         for (let i = 0; i < 5; i++) {
           await dispatch(getPlaylistsAsync({ isDeep: i === 0 ? true : false })).unwrap();
+          setInitialFetchDone(true); // just triggers rerender
         }
       }
     }
-    fetchData();
-
+    if (!playlists.length) {
+      fetchData();
+    } else {
+      setInitialFetchDone(true); // just triggers rerender
+    }
     return () => initialFetched.current = true
   }, []);
 
