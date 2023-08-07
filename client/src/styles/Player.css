@@ -50,6 +50,7 @@
 .song-info-container {
     display: flex;
     align-items: center;
+    max-width: 30%;
 }
 
 .song-info {
