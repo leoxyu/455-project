@@ -40,8 +40,8 @@ export const editPlaylistAsync = createAsyncThunk(
 
 export const getPlaylistsAsync = createAsyncThunk(
     actionTypes.GET_PLAYLISTS,
-    async () => {
-        return await PlaylistsService.getPlaylists();
+    async ({ isDeep = false }) => {
+        return await PlaylistsService.getPlaylists(isDeep);
     }
 );
 
