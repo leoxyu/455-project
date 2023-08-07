@@ -11,7 +11,7 @@ import { useLazyLoadSongs } from '../../../util';
 const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
     <div className="song-display-container">
-      <div className="song-info-container">
+      <div className="song-info-container-editor">
         <img src={image} alt="" width="48px" height="48px" />
         <div className="song-info">
           <div className="song-title">{name}</div>
