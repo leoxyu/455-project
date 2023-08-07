@@ -3,6 +3,7 @@ export const actionTypes = {
     GET_NEXT_YOUTUBE: 'youtube/getNextVideos',
     GET_SPOTIFY: 'spotify/get',
     GET_YOUTUBE: 'youtube/get',
+    GET_SPOTIFY_PLAYLIST_BY_ID: 'spotify/playlist/get',
     GET_YOUTUBE_PLAYLIST_BY_ID: 'youtube/playlist/get',
     GET_UNIFI: 'unifi/get',
     SET_SEARCH_TERM: 'searchTerm/set',

@@ -11,18 +11,51 @@ import '../styles/Preview.css';
 import '../styles/SpPlaylistPreview.css';
 import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
+import { getYoutubePlaylistByIDAsync } from '../redux/thunks';
 import { editPlaylistAsync, getOnePlaylist } from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from './Options2';
 import Options3 from './Options3';
 import thumbnailImage from '../../../images/album-placeholder.png'
-import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI } from '../../../typeConstants';
+import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI, TYPE_PLAYLIST, TYPE_ALBUM } from '../../../typeConstants';
 
 
 import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
 
+const RESULT_TYPES = {
+  SPOTIFY_PLAYLIST:TYPE_SPOTIFY + TYPE_PLAYLIST,
+  SPOTIFY_ALBUM:TYPE_SPOTIFY + TYPE_ALBUM,
+  YOUTUBE_PLAYLIST:TYPE_YOUTUBE + TYPE_PLAYLIST,
+  UNIFI_PLAYLIST:TYPE_UNIFI,
+};  
+
 const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, saveOnClick, optionType, playlistObject }) => {
 
+  
+  const determineType = () => {
+    // no handling required
+    if (optionType === OPTIONS_TYPE2) {
+      return RESULT_TYPES.UNIFI_PLAYLIST;
+    }
+    if (playlistObject.source === TYPE_SPOTIFY) {
+      if (typeof(playlistObject) === 'string') {
+        return RESULT_TYPES.SPOTIFY_PLAYLIST;
+      }
+      else if (playlistObject.tracksNextLink) {
+        return RESULT_TYPES.SPOTIFY_ALBUM;
+      }
+      return RESULT_TYPES.UNIFI_PLAYLIST;
+    }
+    else {
+      if (typeof(playlistObject.songs) === 'string') {
+        return RESULT_TYPES.YOUTUBE_PLAYLIST;
+      }
+      return RESULT_TYPES.UNIFI_PLAYLIST;
+    }
+  };
+
+  // to get things to work for search page
+  const resultType = determineType();
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,6 +81,8 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
   useEffect(() => {
     if (isLoading && songs.length) {
       setIsLoading(false);
+      console.log('dispatching playlist');
+      console.log(playlistObject);
       dispatch(setPlaylist({
         playlist: {
           id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
@@ -69,11 +104,23 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
 
   const handlePlay = async () => {
     // hit play for first time, load songs
-    if (!songs?.length) {
-      setIsLoading(true);
-      dispatch(getOnePlaylist((playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId));
+
+    if (resultType === RESULT_TYPES.UNIFI_PLAYLIST) {
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getOnePlaylist((playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId));
+      }
+      // if songs already loaded, dispatch to player
+    } else if (resultType === RESULT_TYPES.SPOTIFY_ALBUM) {
+      //
+    } else if (resultType === RESULT_TYPES.SPOTIFY_PLAYLIST) {
+      //
+    } else if (resultType === RESULT_TYPES.YOUTUBE_PLAYLIST) {
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getYoutubePlaylistByIDAsync(playlistObject.originId));
+      }
     }
-    // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
       playlist: {
         id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,

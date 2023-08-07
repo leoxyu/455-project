@@ -194,12 +194,11 @@ async function pushPlaylistToDatabase(playlist) {
 
 ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, res) => {
   try {
-    const pushToDatabase = req.query.pushToDatabase;
     const playlistID = req.params.playlistID;
+    const author = req.query.authorID;
     playlistDetails = await getPlaylistData(playlistID);
 
-    if (pushToDatabase == 'true') {
-      const author = req.query.authorID;
+    if (author) {
       playlistDetails.author = new ObjectId(author);
       playlistDetails.playlistID = playlistID;
       await pushPlaylistToDatabase(playlistDetails);
@@ -219,7 +218,7 @@ ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, re
 // type is either 'videos', 'playlists', or 'all'
 ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
   try {
-    const searchTerm = req.query.q; // Get the search term from the query parameters
+    const searchTerm = req.query.query; // Get the search term from the query parameters
     const searchType = req.query.type || 'all'; // Get the search type from the query parameters (default to 'all')
 
     if (!searchTerm) {

@@ -4,7 +4,7 @@ import './styles/playlistPage.css';
 import PlaylistContainer from "./components/playlistContainer.js";
 import { useLazyLoadSongs } from '../../util';
 
-const CurrentPlaylistPage = () => {
+const CurrentPlaylistPage = (external=false) => {
     const { id } = useParams();
 
     // this is needed for current playlist page for single song

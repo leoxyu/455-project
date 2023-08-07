@@ -135,6 +135,22 @@ const searchSlice = createSlice({
             state.setSearchTerm = REQUEST_STATE.REJECTED;
             state.errors = action.payload;
         });
+        builder.addCase(getYoutubePlaylistByIDAsync.pending, (state, action) => {
+            state.getYoutubePlaylistByID = REQUEST_STATE.PENDING;
+        });
+        builder.addCase(getYoutubePlaylistByIDAsync.fulfilled, (state, action) => {
+            state.getYoutubePlaylistByID = REQUEST_STATE.FULFILLED;
+            const playlist = action.payload;
+            const index = state.youtube.playlists.findIndex(
+                (item) => item.originId === playlist.originId);
+            if (index !== -1) {
+                state.youtube.playlists[index] = playlist;
+            }
+        });
+        builder.addCase(getYoutubePlaylistByIDAsync.rejected, (state, action) => {
+            state.getYoutubePlaylistByID = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        });
         
 
         // builder.addCase(getYoutubePlaylistByIDAsync.fulfilled, (state, action) => {

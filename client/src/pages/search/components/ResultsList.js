@@ -8,6 +8,7 @@ import '../styles/ResultsList.css';
 import { Link } from 'react-router-dom';
 import { REQUEST_STATE } from '../redux/utils';
 import Spinner from '../../../components/spinner/spinner';
+import { render } from 'react-dom';
 
 const ResultsList = ({collection=[], selectedFilter, className, source, playlistCreatorRef,
      setSelectedFilter=()=>{}, handleAddClick = () => { }, saveOnClick = () => {}}) => {
@@ -34,50 +35,78 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
   }, [spotifyFetchStatus, youtubeFetchStatus]);
 
 
-  return (
-    <div className='results-list'>
-      <h2 className='results-heading' onClick={() => setSelectedFilter(selectedFilter)}>{selectedFilter}</h2>
-      {
-        failed ?
-          <div className='error-message'>
-            <h5>Sorry, we couldn't find any results for that search.</h5>
-          </div>
-          :
-          isLoading?
-            <Spinner></Spinner>
-            :
-            (className === 'spotify-playlist-list') ?
-              <div className='spotify-playlist-list'>
+
+  const lazyLoadedSongs = (songs) => {
+    if (typeof(songs) === 'string') {
+      return [];
+    }
+    return songs;
+  }
+
+  const renderPlaylistResults = () => {
+    return (
+      <div className={className}>
               {collection.map((album, i) => (
                 <Link 
                 key={album.source + album.originId + i + 'link'}
                 to={`/playlists/${album.originId}`}
-                style={{ color: 'inherit', textDecoration: 'inherit'}}
-              >
-                    <PlaylistResult
-                      key={album.source + album.originId + i}
-                      className={'spotify-playlist-preview'}
-                      isFavorited={false}
-                      optionType={OPTIONS_TYPE3}
-                      saveOnClick={saveOnClick}
-                      playlistObject={album}
-                    />
-                    </Link>
-                  ))}
-                </div>
-            :
-              <div className='spotify-song-list'>
-              {collection.map((song, i) => (
-                <SongResult
-                  key={(song.source + song.songId + i)}
-                  className='spotify-preview'
-                  songObject={song}
-                  handleAddClick={handleAddClick}
-                  playlistCreatorRef={playlistCreatorRef}
-                  isFavorited={false}
-                />
+                style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                  <PlaylistResult
+                    key={album.source + album.originId + i}
+                    className={'spotify-playlist-preview'}
+                    isFavorited={false}
+                    optionType={OPTIONS_TYPE3}
+                    saveOnClick={saveOnClick}
+                    playlistObject={album}
+                    songs={lazyLoadedSongs(album.songs)}
+                  />
+                </Link>
               ))}
-              </div>}
+      </div>)
+  };
+
+  const renderSongResults = () => {
+    return (
+      <div className={className}>
+        {collection.map((song, i) => (
+          <SongResult
+            key={(song.source + song.songId + i)}
+            className='spotify-preview'
+            songObject={song}
+            handleAddClick={handleAddClick}
+            playlistCreatorRef={playlistCreatorRef}
+            isFavorited={false}/>
+        ))}
+      </div>);
+  };
+
+
+  const renderResults = () => {
+    if (className === 'spotify-playlist-list') {
+      return renderPlaylistResults();
+    }
+    return renderSongResults();
+  };
+
+
+  const renderContent = () => {
+    if (failed) {
+      return (
+        <div className='error-message'>
+          <h5>Sorry, we couldn't find any results for that search.</h5>
+        </div>
+      );
+    } else if (isLoading) {
+      return <Spinner></Spinner>;
+    } else {
+      return renderResults();
+    }
+  };
+
+  return (
+    <div className='results-list'>
+      <h2 className='results-heading' onClick={() => setSelectedFilter(selectedFilter)}>{selectedFilter}</h2>
+      {renderContent()}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import ResultsList from './components/ResultsList';
 import Filters from './components/Filters';
 import PlaylistCreator from '../playlists/components/PlaylistCreator';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync, setSearchTermAsync } from './redux/thunks';
+import { getSpotifyAsync, getYoutubeAsync, importYoutubePlaylistByIDAsync, setSearchTermAsync } from './redux/thunks';
 import Previews from './components/Previews';
 import debounce from 'lodash.debounce';
 
@@ -64,6 +64,7 @@ const SearchPage = () => {
     setCreatorVisible(true);
   }
 
+  // TODO: this should be moved into playlistResult
   const saveOnClick = (playlistLink, playlistType, source) => {
 
     console.log("Inside saveOnClick()");
@@ -99,7 +100,7 @@ const SearchPage = () => {
         console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
       }
     } else if (source === TYPE_YOUTUBE) {
-      dispatch(getYoutubePlaylistByIDAsync(playlistLink))
+      dispatch(importYoutubePlaylistByIDAsync(playlistLink))
         .then((res) => {
           console.log("res: ");
           console.log(res.payload);

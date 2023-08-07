@@ -34,12 +34,27 @@ export const getNextYoutubeAsync = createAsyncThunk(
     }
 );
 
-export const getYoutubePlaylistByIDAsync = createAsyncThunk(
+export const importYoutubePlaylistByIDAsync = createAsyncThunk(
     actionTypes.GET_YOUTUBE_PLAYLIST_BY_ID,
     async (id) => {
         return await UserService.getYoutubePlaylistByID(id, true);
     }
 );
+
+export const getYoutubePlaylistByIDAsync = createAsyncThunk(
+    actionTypes.GET_YOUTUBE_PLAYLIST_BY_ID,
+    async (id) => {
+        return await UserService.getYoutubePlaylistByID(id, false);
+    }
+);
+
+export const getSpotifyPlaylistByIDAsync = createAsyncThunk(
+    actionTypes.GET_SPOTIFY_PLAYLIST_BY_ID,
+    async (id) => {
+        return await UserService.getSpotifyPlaylistByID(id);
+    }
+);
+
 
 export const setSearchTermAsync = createAsyncThunk(
     actionTypes.SET_SEARCH_TERM,
