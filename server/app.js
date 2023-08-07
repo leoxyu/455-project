@@ -127,6 +127,22 @@ async function setupCollections() {
               },
             },
           },
+          source: {
+            bsonType: "string",
+            description: "youtube or spotify",
+          },
+          type: {
+            bsonType: "string",
+            description: "playlist or album",
+          },
+          duration: {
+            bsonType: "string",
+            description: "lenght of playlist",
+          },
+          originId: {
+            bsonType: "string",
+            description: "original ID",
+          },
         },
       },
     };
