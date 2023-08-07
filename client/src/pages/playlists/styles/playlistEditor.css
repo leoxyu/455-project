@@ -80,7 +80,7 @@
     overflow-x: hidden;
 }
 
-.song-info-container {
+.song-info-container-editor {
     display: flex;
     align-items: center;
     margin-bottom: 7px;
