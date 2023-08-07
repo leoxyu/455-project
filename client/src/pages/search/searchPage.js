@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/variables.css';
-
 import '../../styles/searchPage.css';
 import SearchBar from './components/SearchBar';
 import ResultsList from './components/ResultsList';
@@ -9,6 +8,8 @@ import PlaylistCreator from '../playlists/components/PlaylistCreator';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync } from './redux/thunks';
 import debounce from 'lodash.debounce';
+import LoadingIcon from "../../images/loading.gif";
+import { REQUEST_STATE } from './redux/utils';
 
 import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
 import { TYPE_SPOTIFY, TYPE_YOUTUBE} from '../../typeConstants';
@@ -25,6 +26,7 @@ const SearchPage = () => {
 
   const [creatorVisible, setCreatorVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = useSelector(state => state.spotify.access_token);
   const spotifyTracks = useSelector(state => state.search.spotify.tracks);
@@ -32,6 +34,8 @@ const SearchPage = () => {
   const spotifyAlbums = useSelector(state => state.search.spotify.albums);
   const youtubeVideos = useSelector(state => state.search.youtube.videos);
   const youtubePlaylists = useSelector(state => state.search.youtube.playlists);
+  const spotifyFetchStatus = useSelector(state => state.search.getSpotify);
+  const youtubeFetchStatus = useSelector(state => state.search.getYoutube);
   const [selectedFilter, setSelectedFilter] = useState('All');
 
   // users
@@ -44,12 +48,21 @@ const SearchPage = () => {
     setSearchTerm(in_searchTerm);
   }, 400);
 
+  // fetching search results
   useEffect(() => {
     if (searchTerm === '') return; // make it load sample queries
     dispatch(getSpotifyAsync({ accessToken: accessToken, query: searchTerm }));
     dispatch(getYoutubeAsync({ query: searchTerm }));
   }, [searchTerm]);
 
+  //displaying loading
+  useEffect(() => {
+    if (spotifyFetchStatus === REQUEST_STATE.PENDING || youtubeFetchStatus === REQUEST_STATE.PENDING) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [spotifyFetchStatus, youtubeFetchStatus]);
 
 
 
@@ -143,7 +156,6 @@ const SearchPage = () => {
   };
 
 
-
   const renderFilteredContent = () => {
     switch (selectedFilter) {
       case FILTERS.ALL:
@@ -169,7 +181,17 @@ const SearchPage = () => {
       default:
         return (<div>No Results Found!</div>);
     }
-  }
+  };
+
+  const renderContent = () => {
+    if (isLoading) {
+      // return (<img src={LoadingIcon} alt="Loading..." /> )
+      return (<div>Loading...</div>)
+    }
+    return renderFilteredContent();
+  };
+  
+  
         
 
 
@@ -182,7 +204,8 @@ const SearchPage = () => {
           <PlaylistCreator onClose={closeCreator} />
         </div>
       }
-      {(searchTerm ==='')? <div></div>: renderFilteredContent()}
+      {(searchTerm ==='')? <div></div>:
+      renderContent()}
     </div>
   );
 };
