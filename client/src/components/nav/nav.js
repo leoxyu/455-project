@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import '../../styles/variables.css';
 import '../../styles/NavBar.css';
+import {ReactComponent as HomeIcon} from '../../images/home.svg';
+import {ReactComponent as SearchIcon} from '../../images/search_nav.svg';
+import {ReactComponent as PlaylistIcon} from '../../images/current_playlist.svg';
+import {ReactComponent as LibraryIcon} from '../../images/library.svg';
+import {ReactComponent as SignOutIcon} from '../../images/sign_out.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../pages/login/redux/loginReducer';
 
@@ -31,39 +36,57 @@ const Navbar = () => {
         dispatch(logout());
     };
 
+    // Get the current location object using useLocation hook
+    const location = useLocation();
+
+    // Function to determine if a link should be considered active
+    const isLinkActive = (pathname) => {
+        return location.pathname === pathname;
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-top">
                 <div className="user-profile">
                     <img className="profile-picture" src={dynamicProfilePicture || defaultProfilePicture} alt="Profile" />
-                    <h1 className="username">{userId}</h1>
                 </div>
             </div>
 
-            <ul className="navbar-menu">
-                <h1>
-                    <Link to="/home">Home</Link>
-                </h1>
-                <h1>
-                    <Link to="/songs">Songs</Link>
-                </h1>
-                <h1>
-                    <Link to="/playlists">Playlists</Link>
-                </h1>
-                <h1>
-                    <Link to="/search">Search</Link>
-                </h1>
-                {currentPlaylistId !== '' && (
-                    <h1>
-                        <Link to={`/playlists/${currentPlaylistId}`}>Now Playing</Link>
-                    </h1>
-                )}
-            </ul>
-
-            <div className="navbar-bottom">
-                <button className="signout-button" onClick={handleSignOut}>
-                    Sign Out
-                </button>
+            <div className="navbar-menu">
+                    <div className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`}>
+                        <Link to="/home">
+                            <HomeIcon className='home-nav-icon' alt='Home'></HomeIcon>
+                            <span className='nav-text'>Home</span>
+                        </Link>
+                    </div>
+                    <div className={`nav-link ${isLinkActive('/search') ? 'active' : ''}`}>
+                        <Link to="/search">
+                            <SearchIcon className='search-nav-icon' alt='Search'></SearchIcon>
+                            <span className='nav-text'>Search</span>
+                        </Link>
+                    </div>
+                    <div className={`nav-link ${isLinkActive('/library') ? 'active' : ''}`}>
+                        <Link to="/library">
+                        
+                            <LibraryIcon className='library-nav-icon'></LibraryIcon>
+                            <span className='nav-text'>Library</span>
+                        </Link>
+                    </div>
+                    {currentPlaylistId !== '' && 
+                    <div className={`nav-link ${isLinkActive(`/playlists/${currentPlaylistId}`) ? 'active' : ''}`}>
+                        <Link to={`/playlists/${currentPlaylistId}`}>
+                            
+                            <PlaylistIcon className='playlist-nav-icon'></PlaylistIcon>
+                            <span className='nav-text'>Playing</span>
+                        </Link>
+                    </div>
+                    }
+            </div>
+            <div className='nav-link'>
+                <div className="navbar-bottom">
+                    <SignOutIcon className="signout-nav-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
+                    Log Out
+                </div>
             </div>
         </nav>
     );

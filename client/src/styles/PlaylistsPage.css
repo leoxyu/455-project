@@ -8,7 +8,7 @@
   padding: 20px;
   font-size: calc(10px + 2vmin);
   color: var(--text-base);
-  padding-left: 250px;
+  /* padding-left: 250px; */
 }
 
 
@@ -28,7 +28,6 @@
   font-size: 17px;
   flex:1;
   flex-basis: 25%;
-  /* margin-left: 0.20rem; */
 }
 
 .playlists-page .add-icon-container {
@@ -64,18 +63,6 @@
   }
 }
 
-/*
-  .playlists-page .add-icon {
-    position:relative;
-    align-content: center;
-    width: 3rem;
-    fill: var(--text-base);
-    stroke: var(--text-subdued);
-    font-size: 1.5em;
-    margin-right: 0.5em;
-    left: 50%;
-  }
- */
 
 
 .playlists-page .add-icon {
