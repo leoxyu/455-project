@@ -5,4 +5,5 @@ export const actionTypes = {
     GET_YOUTUBE: 'youtube/get',
     GET_YOUTUBE_PLAYLIST_BY_ID: 'youtube/playlist/get',
     GET_UNIFI: 'unifi/get',
+    SET_SEARCH_TERM: 'searchTerm/set',
 }

@@ -40,3 +40,10 @@ export const getYoutubePlaylistByIDAsync = createAsyncThunk(
         return await UserService.getYoutubePlaylistByID(id, true);
     }
 );
+
+export const setSearchTermAsync = createAsyncThunk(
+    actionTypes.SET_SEARCH_TERM,
+    async (searchTerm) => {
+        return await UserService.setSearchTermAsync(searchTerm);
+    }
+);
