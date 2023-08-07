@@ -92,6 +92,8 @@ const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, arti
                             key={track.songID}
                             index={songs.findIndex(song => song.songID === track.songID)}
                             parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
+                            songObject={track}
+                            handleAddClick={handleAddClick}
                             {...track}
                         />
                     ))
