@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
@@ -13,12 +12,13 @@ import "../styles/playlistContainer.css";
 
 import { getTotalTrackDuration } from './util';
 import placeholderCover from '../../../images/album-placeholder.png';
+import Spinner from '../../../components/spinner/spinner';
 import PlaylistCreator from '../../playlists/components/PlaylistCreator';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
-const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
+const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
     const [creatorVisible, setCreatorVisible] = useState(false);
 
     const totalDuration = getTotalTrackDuration(songs);
@@ -86,16 +86,22 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
             <br></br>
 
             <div className='playlist-container'>
-                {songs.map((track) => (
-                    <TrackEntry
-                        key={track.songID}
-                        index={songs.findIndex(song => song.songID === track.songID)}
-                        parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
-                        songObject={track}
-                        handleAddClick={handleAddClick}
-                        {...track}
-                    />
-                ))}
+                {!loading ?
+                    songs.map((track) => (
+                        <TrackEntry
+                            key={track.songID}
+                            index={songs.findIndex(song => song.songID === track.songID)}
+                            parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
+                            songObject={track}
+                            handleAddClick={handleAddClick}
+                            {...track}
+                        />
+                    ))
+                :
+                    <div className='spinner-container'>
+                        <Spinner/>
+                    </div>
+                }
             </div>
             {creatorVisible &&
                 <div className='creator-dialog-overlay'>

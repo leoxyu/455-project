@@ -57,16 +57,16 @@ const PlaylistsService = {
         }
         return data;
     },
-    getPlaylists: async (searchParam) => {
+    getPlaylists: async (isDeep) => {
         let url = `${ROOT_URL}/playlists`;
         const userId = getUserId();
         const authorID = getAuthorID();
 
         // TODO: Build the query string with search parameters
         const queryParams = new URLSearchParams();
-        if (searchParam) {
-            queryParams.append('name', searchParam);
-        }
+        // if (searchParam) {
+        //     queryParams.append('name', searchParam);
+        // }
         const lastId = store.getState().playlists.lastId;
 
         if (lastId) {
@@ -74,7 +74,7 @@ const PlaylistsService = {
         }
 
         queryParams.append("authorID", authorID);
-        queryParams.append('isDeep', true);
+        if (isDeep) queryParams.append('isDeep', true);
         // console.log('lastid being passed', lastId);
 
         if (queryParams.toString()) {

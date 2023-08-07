@@ -52,10 +52,16 @@ const PlaylistPage = () => {
   }, []);
 
   useEffect(() => {
-    // initial fetch without having to scroll
-    if (!initialFetched.current) {
-      dispatch(getPlaylistsAsync());
+    async function fetchData() {
+      // initial fetch some pages sequentially without having to scroll
+      if (!initialFetched.current) {
+        for (let i = 0; i < 5; i++) {
+          await dispatch(getPlaylistsAsync({ isDeep: i === 0 ? true : false })).unwrap();
+        }
+      }
     }
+    fetchData();
+
     return () => initialFetched.current = true
   }, []);
 
@@ -112,7 +118,7 @@ const PlaylistPage = () => {
       {editVisible &&
         <div className='creator-dialog-overlay'>
           <PlaylistEditor
-            playlist={playlistToEdit}
+            pl={playlistToEdit}
             onClose={() => setEditVisible(false)}
           />
         </div>
@@ -122,7 +128,7 @@ const PlaylistPage = () => {
       {initialFetched.current &&
         <InfiniteScroll
             dataLength={playlists.length}
-            next={() => dispatch(getPlaylistsAsync())}
+            next={() => dispatch(getPlaylistsAsync({ isDeep: false }))}
             hasMore={true}
             scrollableTarget={'your-playlists'}
             // loader={<h4>loading</h4>}

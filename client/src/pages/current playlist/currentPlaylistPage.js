@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './styles/playlistPage.css';
-
 import PlaylistContainer from "./components/playlistContainer.js";
+import { useLazyLoadSongs } from '../../util';
 
 const CurrentPlaylistPage = () => {
     const { id } = useParams();
@@ -28,11 +28,12 @@ const CurrentPlaylistPage = () => {
             songs: foundPlaylist.songs,
         };
     }
-
+    const loading = useLazyLoadSongs(playlist, playlist.id);
     return (
         <div>
             <PlaylistContainer
                 {...playlist}
+                loading={loading}
             />
         </div>
     );
