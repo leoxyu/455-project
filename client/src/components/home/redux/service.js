@@ -74,7 +74,7 @@ const PlaylistsService = {
         }
 
         queryParams.append("authorID", authorID);
-        queryParams.append('isDeep', true);
+        // queryParams.append('isDeep', true);
         // console.log('lastid being passed', lastId);
 
         if (queryParams.toString()) {

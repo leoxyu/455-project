@@ -112,7 +112,7 @@ const PlaylistPage = () => {
       {editVisible &&
         <div className='creator-dialog-overlay'>
           <PlaylistEditor
-            playlist={playlistToEdit}
+            pl={playlistToEdit}
             onClose={() => setEditVisible(false)}
           />
         </div>

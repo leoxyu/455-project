@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
@@ -13,11 +12,12 @@ import "../styles/playlistContainer.css";
 
 import { getTotalTrackDuration } from './util';
 import placeholderCover from '../../../images/album-placeholder.png';
+import Spinner from '../../../components/spinner/spinner';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
-const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
+const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
 
     const totalDuration = getTotalTrackDuration(songs);
     const thumbnailUrlSet = setThumbnail(thumbnailUrl);
@@ -76,20 +76,22 @@ const PlaylistContainer = ({ id, playlistLink, playlistName, type, artistName, r
             <br></br>
 
             <div className='playlist-container'>
-                {songs.map((track) => (
-                    <TrackEntry
-                        key={track.songID}
-                        index={songs.findIndex(song => song.songID === track.songID)}
-                        parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
-                        {...track}
-                    />
-                ))}
+                {!loading ?
+                    songs.map((track) => (
+                        <TrackEntry
+                            key={track.songID}
+                            index={songs.findIndex(song => song.songID === track.songID)}
+                            parentPlaylist={{ id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }}
+                            {...track}
+                        />
+                    ))
+                :
+                    <div className='spinner-container'>
+                        <Spinner/>
+                    </div>
+                }
             </div>
-
         </div>
-
-
-
     );
 }
 
