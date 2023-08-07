@@ -10,3 +10,7 @@
 .results-list{
     min-height: 30vh;
 }
+
+.results-heading {
+    cursor: pointer;
+}

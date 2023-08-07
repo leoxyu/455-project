@@ -10,7 +10,7 @@ import { REQUEST_STATE } from '../redux/utils';
 import Spinner from '../../../components/spinner/spinner';
 
 const ResultsList = ({collection=[], selectedFilter, className, source, playlistCreatorRef,
-     handleAddClick = () => { }, saveOnClick = () => {}}) => {
+     setSelectedFilter=()=>{}, handleAddClick = () => { }, saveOnClick = () => {}}) => {
     
     
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,7 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
 
   return (
     <div className='results-list'>
-      <h2 className='heading'>{selectedFilter}</h2>
+      <h2 className='results-heading' onClick={() => setSelectedFilter(selectedFilter)}>{selectedFilter}</h2>
       {
         failed ?
           <div className='error-message'>

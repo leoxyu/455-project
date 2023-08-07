@@ -50,7 +50,6 @@ const SearchPage = () => {
     }
   }, 400);
 
-  //displaying loading
   
 
 
@@ -140,6 +139,7 @@ const SearchPage = () => {
           collection={tracks} 
           className={'spotify-track-list'}
           selectedFilter={sectionLabel}
+          setSelectedFilter={setSelectedFilter}
           handleAddClick={handleAddClick}
           source={source}
           />
@@ -153,6 +153,7 @@ const SearchPage = () => {
         collection={playlists}
         className={'spotify-playlist-list'}
         selectedFilter={sectionLabel}
+        setSelectedFilter={setSelectedFilter}
         saveOnClick={saveOnClick} 
         source={source}
         />
