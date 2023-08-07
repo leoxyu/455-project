@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/variables.css';
 import '../../styles/searchPage.css';
 import SearchBar from './components/SearchBar';
@@ -41,7 +41,7 @@ const SearchPage = () => {
   const dispatch = useDispatch();
 
   const performSearch = debounce((in_searchTerm) => {
-    if (in_searchTerm != searchTerm) {
+    if (in_searchTerm !== searchTerm) {
       dispatch(setSearchTermAsync(in_searchTerm));
       console.log('disptching search ' + searchTerm)
       if (in_searchTerm === '') return; // make it load sample queries
