@@ -117,12 +117,17 @@ async function getYoutubePlaylistByID(id, pushToDatabase = false) {
     return data;
 }
 
+async function setSearchTermAsync(searchTerm) {
+    return searchTerm;
+}
+
 
 export default {
     getSpotify,
     getSpotifyNext,
     getYoutube,
     getYoutubeNext,
-    getYoutubePlaylistByID
+    getYoutubePlaylistByID,
+    setSearchTermAsync
 };
 
