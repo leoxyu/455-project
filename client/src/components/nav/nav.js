@@ -46,13 +46,14 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className="navbar-top">
-                <div className="user-profile">
-                    <img className="profile-picture" src={dynamicProfilePicture || defaultProfilePicture} alt="Profile" />
+            <div className="navbar-container">
+                <div className="navbar-top">
+                    <div className="user-profile">
+                        <img className="profile-picture" src={dynamicProfilePicture || defaultProfilePicture} alt="Profile" />
+                    </div>
                 </div>
-            </div>
-
-            <div className="navbar-menu">
+                <div className="navbar-separator-top"/>
+                <div className="navbar-menu">
                     <div className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`}>
                         <Link to="/home">
                             <HomeIcon className='home-nav-icon' alt='Home'></HomeIcon>
@@ -67,26 +68,28 @@ const Navbar = () => {
                     </div>
                     <div className={`nav-link ${isLinkActive('/library') ? 'active' : ''}`}>
                         <Link to="/library">
-                        
                             <LibraryIcon className='library-nav-icon'></LibraryIcon>
                             <span className='nav-text'>Library</span>
                         </Link>
                     </div>
-                    {currentPlaylistId !== '' && 
-                    <div className={`nav-link ${isLinkActive(`/playlists/${currentPlaylistId}`) ? 'active' : ''}`}>
-                        <Link to={`/playlists/${currentPlaylistId}`}>
-                            
-                            <PlaylistIcon className='playlist-nav-icon'></PlaylistIcon>
-                            <span className='nav-text'>Playing</span>
-                        </Link>
-                    </div>
+                    {currentPlaylistId !== '' &&
+                        <div className={`nav-link ${isLinkActive(`/playlists/${currentPlaylistId}`) ? 'active' : ''}`}>
+                            <Link to={`/playlists/${currentPlaylistId}`}>
+
+                                <PlaylistIcon className='playlist-nav-icon'></PlaylistIcon>
+                                <span className='nav-text'>Playing</span>
+                            </Link>
+                        </div>
                     }
-            </div>
-            <div className='nav-link'>
-                <div className="navbar-bottom">
-                    <SignOutIcon className="signout-nav-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
-                    Log Out
                 </div>
+                <div className="navbar-separator-bottom"/>
+                <div className="navbar-bottom">
+                    <div className='nav-link'>
+                        <SignOutIcon className="signout-nav-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
+                        Log Out
+                    </div>
+                </div>
+                <div className="navbar-separator-end"/>
             </div>
         </nav>
     );

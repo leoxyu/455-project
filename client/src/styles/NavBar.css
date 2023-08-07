@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: 2.5rem;
     background-color: var(--essential-bright-accent);
     color: rgba(236, 236, 236, 0.829);
@@ -12,6 +12,13 @@
     bottom: 0;
 }
 
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: fixed;
+}
+
 .navbar-top {
     position: fixed;
     align-self: center;
@@ -20,14 +27,28 @@
     margin-bottom: 20px;
 }
 
+.navbar-separator-top {
+    height: 30%;
+    min-height: 130px;
+    flex: 1;
+}
+
+.navbar-separator-bottom {
+    height: 100px;
+    min-height: 20px;
+    flex: 1;
+}
+
+.navbar-separator-end {
+    height: 100px;
+    min-height: 30px;
+}
+
 .navbar-menu {
-    position: fixed;
     display: flex;
     flex-direction: column;
-    top: 16rem;
     align-self: center;
     align-content: space-between;
-    align-items: space-between;
 }
 
 .user-profile {
@@ -45,7 +66,6 @@
     margin-left: 0.5rem;
 }
 
-
 .edit-button {
     background-color: #181717;
     color: white;
@@ -53,7 +73,6 @@
     cursor: pointer;
     position: sticky;
 }
-
 
 .home-nav-icon {
     width: 2rem;
@@ -75,7 +94,7 @@
 
 .playlist-nav-icon {
     width: 2rem;
-    height: 2rem; 
+    height: 2rem;
     align-self: center;
 }
 
@@ -86,7 +105,6 @@
     position: relative;
     left: 0.1rem;
 }
-
 
 .navbar-menu a {
     text-decoration: none;
@@ -102,27 +120,27 @@
 }
 
 .nav-link {
+    text-align: center;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #181717;
 }
 
-
 .nav-link :hover {
-    /* background-color: aquamarine; */
     color: var(--text-base);
     fill:  var(--text-base);
 }
 
 .navbar-bottom {
-    margin-top: auto;
-    align-items: center;
-    align-self: center;
-    align-content: center;
-    position: fixed;
-    bottom: 6.5rem;
-    display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
-    color: #181717;
+    bottom: 6rem;
+}
+
+.navbar-bottom :hover {
+    color: var(--text-base);
+    fill:  var(--text-base);
 }
 
 .nav-link.active {
@@ -138,5 +156,4 @@
     .nav-text {
         color: var(--text-base);
     }
-  }
-
+}
