@@ -40,13 +40,12 @@ const SearchPage = () => {
   // artists
   const dispatch = useDispatch();
 
-  const performSearch = debounce((searchTerm) => {
-    setSearchTerm(searchTerm);
+  const performSearch = debounce((in_searchTerm) => {
+    setSearchTerm(in_searchTerm);
   }, 400);
 
   useEffect(() => {
-    console.log("calling it with " + searchTerm)
-    if (searchTerm === '') return; // make it load recommended songs from spotify
+    if (searchTerm === '') return; // make it load sample queries
     dispatch(getSpotifyAsync({ accessToken: accessToken, query: searchTerm }));
     dispatch(getYoutubeAsync({ query: searchTerm }));
   }, [searchTerm]);
@@ -112,7 +111,7 @@ const SearchPage = () => {
 
   }
 
-
+  // if search bar is empty and if there are no results, show sample queries
   const FILTERS = {
     'ALL':'All',
     'SPTR':'Spotify Tracks',
@@ -183,7 +182,7 @@ const SearchPage = () => {
           <PlaylistCreator onClose={closeCreator} />
         </div>
       }
-      {renderFilteredContent()}
+      {(searchTerm ==='')? <div></div>: renderFilteredContent()}
     </div>
   );
 };
