@@ -68,18 +68,18 @@
                 opacity: 1;
             }
         }
-        
+
         .details {
             display: grid;
             align-items: column;
             justify-content: space-between;
-            
+
             /* max-width: 40em;
              */
              max-width: 30vw;
             .name-inactive {
                 color: var(--text-base);
-                overflow: hidden; 
+                overflow: hidden;
                 text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
                 white-space: nowrap;
                  /* max-width: 80%; */
@@ -87,7 +87,7 @@
             }
             .name-active {
                 color: var(--name-active);
-                overflow: hidden; 
+                overflow: hidden;
                 text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
                 white-space: nowrap;
                  /* max-width: 80%; */
@@ -98,19 +98,19 @@
                 align-items: left;
                 left: 47%;
                 color: var(--text-subdued);
-                overflow: hidden; 
+                overflow: hidden;
                 text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
                 white-space: nowrap;
                 /* max-width: 30%; */
                 max-width: 25vw;
             }
-            overflow: hidden; 
+            overflow: hidden;
             text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
             white-space: nowrap;
         }
     }
-    
-    
+
+
     @media (max-width: 1079px) {
         .essential-info .details {
             /* .name {
@@ -129,7 +129,7 @@
     /* @media (max-width: 799px) {
         .stats .source-icon {
             position: absolute;
-            
+
         }
     } */
 
@@ -138,30 +138,21 @@
             display: none;
         }
     }
-    
-    
+
+
     .stats {
         position: absolute;
         right: 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
-        .heart-icon {
-            max-width: 1.1rem;
-            max-height: 1.1rem;
-            cursor: pointer;
-            opacity: 0;
-            margin-top: 0.2rem;
-            margin-right: 0.65rem;
-        }
-    
+
         .duration {
             text-align: center;
             color: var(--text-subdued);
             margin: 0 1.5rem;
         }
-        
+
         .options-icon {
             margin-top: 0.5rem;
             max-width: 1.15rem;

@@ -12,11 +12,12 @@ import "../styles/playlistTrack.css";
 
 import { setCurrSongID, setPlaylist } from "../../../components/player/PlayerReducer.js";
 import { setCurrSongIdPlaylistPage } from '../redux/currentPlaylistReducer';
+import Options from '../../search/components/Options';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM } = require("../../../typeConstants.js");
 
 
-const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
+const TrackEntry = ({ parentPlaylist, songObject, handleAddClick, songID, name, artist, duration, album, isFavorited, link, imageLink, releaseDate, source, index, handleDropdown = () => { } }) => {
 
     const dispatch = useDispatch();
     const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
@@ -29,6 +30,28 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
             return new Date(duration).toISOString().slice(11, 19);
         } else return duration;
     }
+
+    const [optionsOpen, setOptionsOpen] = useState(false);
+
+    let optionsPopupRef = useRef();
+
+    useEffect(() => {
+        let optionsHandler = (e) => {
+            if (!optionsPopupRef.current.contains(e.target)) {
+                setOptionsOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", optionsHandler);
+
+        return () => {
+            document.removeEventListener("mousedown", optionsHandler);
+        }
+    });
+
+    const handleOptions = () => {
+        setOptionsOpen(!optionsOpen);
+    };
 
     useEffect(() => {
         if (inPlaylistTransition) {
@@ -50,14 +73,6 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
         dispatch(setCurrSongIdPlaylistPage(songID));
     };
 
-    const handleFavorite = () => {
-        // Handle favorite button click
-    };
-
-    const handleOptions = () => {
-    };
-
-
     const isCurrentlyPlaying = currSongID === songID;
 
     return (
@@ -69,20 +84,22 @@ const TrackEntry = ({ parentPlaylist, songID, name, artist, duration, album, isF
                 <img className='track-cover' src={imageLink} alt="Track Cover" />
                 <p className={"name-" + (isCurrentlyPlaying ? 'active' : 'inactive')}>{name}</p>
             </div>
-            <div className="track-container-right">
-                <HeartIcon className="heart-icon" onClick={handleFavorite} />
+            <div className="track-stats">
                 <p className="track-duration">{trackDuration}</p>
-                <OptionsIcon className="options-icon" onClick={handleOptions} />
+                <div ref={optionsPopupRef}>
+                    <OptionsIcon className="track-options-icon" onClick={handleOptions} />
+                    <div className='track-options' ref={optionsPopupRef}>
+                    <Options
+                        open={optionsOpen}
+                        songBody={songObject}
+                        onClose={() => setOptionsOpen(false)}
+                        handleAddClick={handleAddClick}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
-
-
-
-
-
-
     );
-
 }
 
 export default TrackEntry;

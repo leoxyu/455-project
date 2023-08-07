@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Options from './Options';
 import '../../../styles/variables.css';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
-import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
 import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
@@ -50,8 +49,6 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
   };
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [optionsTop, setOptionsTop] = useState(false);
-  const [optionsLeft, setOptionsLeft] = useState(false);
 
   let optionsPopupRef = useRef();
 
@@ -69,22 +66,8 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
     }
   });
 
-  const optionsOnClick = (top, left) => {
-    if (optionsOpen) {
-      setOptionsOpen(false);
-    } else {
-      setOptionsTop(top + 21);
-      setOptionsLeft(left - 85);
-      setOptionsOpen(true);
-    }
-  };
-
-  let optionsRef = null;
-
   const handleOptions = () => {
-    // Handle options button click
-    const optionsLocation = optionsRef.getBoundingClientRect();
-    optionsOnClick(optionsLocation.top, optionsLocation.left);
+    setOptionsOpen(!optionsOpen);
   };
 
   function sourceIcon(source) {
@@ -121,12 +104,10 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
         {/* {sourceIcon(songObject.source)} */}
         <div className="duration">{songObject.duration}</div>
         <div ref={optionsPopupRef}>
-          <OptionsIcon className="options-icon" onClick={handleOptions} ref={el => optionsRef = el}/>
+          <OptionsIcon className="options-icon" onClick={handleOptions} />
           <div className='options' ref={optionsPopupRef}>
             <Options
               open={optionsOpen}
-              top={optionsTop}
-              left={optionsLeft}
               songBody={songObject}
               onClose={() => setOptionsOpen(false)}
               handleAddClick={handleAddClick}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as HeartIcon } from '../../../images/favorite.svg';
@@ -13,14 +13,24 @@ import "../styles/playlistContainer.css";
 import { getTotalTrackDuration } from './util';
 import placeholderCover from '../../../images/album-placeholder.png';
 import Spinner from '../../../components/spinner/spinner';
+import PlaylistCreator from '../../playlists/components/PlaylistCreator';
 
 const { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_PLAYLIST, TYPE_ALBUM, TYPE_TRACK } = require("../../../typeConstants.js");
 
 
 const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, artistName, releaseDate, thumbnailUrl, duration, isFavorited, description, songs }) => {
+    const [creatorVisible, setCreatorVisible] = useState(false);
 
     const totalDuration = getTotalTrackDuration(songs);
     const thumbnailUrlSet = setThumbnail(thumbnailUrl);
+
+    const closeCreator = () => {
+        setCreatorVisible(false);
+    }
+
+    const handleAddClick = () => {
+        setCreatorVisible(true);
+    }
 
     function setThumbnail(thumbnailUrl) {
         if (!thumbnailUrl && songs && songs.length > 0 && thumbnailUrl.length === 0) {
@@ -91,6 +101,11 @@ const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, arti
                     </div>
                 }
             </div>
+            {creatorVisible &&
+                <div className='creator-dialog-overlay'>
+                    <PlaylistCreator onClose={closeCreator} />
+                </div>
+            }
         </div>
     );
 }

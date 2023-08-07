@@ -4,7 +4,7 @@ import {addSongAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/Options.css';
 
-const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) => {
+const Options = ({ open, songBody, onClose, handleAddClick=()=>{}}) => {
   const playlists = useSelector((state) => state.playlists.playlists);
   const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const Options = ({ open, top, left, songBody, onClose, handleAddClick=()=>{}}) =
   };
 
   return (
-    <div className={`search-options-container ${open ? "active" : "inactive"}`} style={{ top: top, left: left }}>
+    <div className={`search-options-container ${open ? "active" : "inactive"}`}>
       <p className='options-title'>Add to playlist:</p>
         {(handleAddClick) ? <div className="options-playlist-input" onClick={handleAddClick}>
           New playlist
