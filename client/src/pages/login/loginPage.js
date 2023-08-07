@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, signup } from './redux/loginReducer';
 import CreateAccount from './createAccount';
@@ -227,6 +227,8 @@ const LoginPage = () => {
 
   const loggedIn = spotifyLoggedIn && youtubeLoggedIn;
 
+  let passwordInput = useRef();
+
   return (
     <div className="login-page">
       <h1>
@@ -246,10 +248,12 @@ const LoginPage = () => {
               setShowCreateAccount(false);
               setErrorMessage('');
             }}
+            onKeyUp={(e) => { if (e.key === 'Enter') passwordInput.current.focus(); }}
             className="login-input"
           />
           {/* Password input */}
           <input
+          ref={passwordInput}
             type="password"
             placeholder="Password"
             value={password}

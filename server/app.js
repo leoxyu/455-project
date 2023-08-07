@@ -3,7 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const { DATABASE_NAME, PLAYLIST_COLLECTION, PLAYLIST_COLLECTION_TEST } = require('./shared/mongoConstants');
+const { DATABASE_NAME, PLAYLIST_COLLECTION_TEST } = require('./shared/mongoConstants');
 const { v4: uuid } = require('uuid');
 
 var indexRouter = require('./routes/index');
@@ -82,10 +82,10 @@ async function setupCollections() {
               bsonType: "object",
               required: ["songID", "artist", "name", "type", "link"],
               properties: {
-                addedBy: {
-                  bsonType: "objectid",
-                  description: "ObjectId of the unifi user who added this song to the playlist",
-                },
+                // addedBy: {
+                //   bsonType: "objectid",
+                //   description: "ObjectId of the unifi user who added this song to the playlist",
+                // },
                 songID: {
                   bsonType: "string",
                   description: "uuid",
@@ -110,7 +110,7 @@ async function setupCollections() {
                   bsonType: "string",
                   description: "Name of the song",
                 },
-                type: {
+                source: {
                   bsonType: "string",
                   enum: ["spotify", "youtube"],
                   description: "Type of the song (spotify or youtube)",
@@ -123,6 +123,7 @@ async function setupCollections() {
                   bsonType: "string",
                   description: "image link",
                 },
+
               },
             },
           },
@@ -130,13 +131,13 @@ async function setupCollections() {
       },
     };
 
-    if (collectionNames.includes(PLAYLIST_COLLECTION)) {
-      console.log(`collection ${PLAYLIST_COLLECTION} exists`);
+    if (collectionNames.includes(PLAYLIST_COLLECTION_TEST)) {
+      console.log(`collection ${PLAYLIST_COLLECTION_TEST} exists`);
     } else {
-      await database.createCollection(PLAYLIST_COLLECTION, {
+      await database.createCollection(PLAYLIST_COLLECTION_TEST, {
         validator,
       });
-      console.log(`collection ${PLAYLIST_COLLECTION} exists`);
+      console.log(`collection ${PLAYLIST_COLLECTION_TEST} exists`);
     }
 
     // insert test data
