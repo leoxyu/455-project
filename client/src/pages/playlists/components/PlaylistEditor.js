@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { editPlaylistAsync } from '../../../components/home/redux/thunks';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import thumbnailImage from '../../../images/album-placeholder.png';
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
+import { useLazyLoadSongs } from '../../../util';
 
 
 const SongDisplay = ({ name, artist, image, onDelete }) => {
@@ -24,13 +25,16 @@ const SongDisplay = ({ name, artist, image, onDelete }) => {
   );
 };
 
-const PlaylistEditor = ({ playlist, onClose }) => {
+const PlaylistEditor = ({ pl, onClose }) => {
+  const playlist = useSelector(state => state.playlists.playlists.find(p => p.playlistID === pl.playlistID));
   const [name, setName] = useState(playlist.name);
   const [description, setDescription] = useState(playlist.description);
   const [imageUrl, setImageUrl] = useState(playlist.coverImageURL);
   const [deletedSongs, setDeletedSongs] = useState([]);
-
+  
   const dispatch = useDispatch();
+
+  const loading = useLazyLoadSongs(playlist, playlist.playlistID);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
