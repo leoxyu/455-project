@@ -53,38 +53,96 @@ const SearchPage = () => {
   // artists
   const dispatch = useDispatch();
 
-  const dispatchSearch = (in_searchTerm) => {
+  useEffect(() => {
+    var newHist;
     switch (selectedFilter) {
       case(SEARCH_FILTERS.ALL):
+        newHist = {}
+        for (const value of Object.values(SEARCH_FILTERS)) {
+          newHist[value] = searchTerm; // You can set any value as the key's value
+        }
+        setTermFilterHistory(newHist);
+        return;
+      case(SEARCH_FILTERS.SPAL):
+        newHist = termFilterHistory;
+        newHist[SEARCH_FILTERS.SPAL] = searchTerm;
+        setTermFilterHistory(newHist);
+        return;
+      case(SEARCH_FILTERS.SPPL):
+        newHist = termFilterHistory;
+        newHist[SEARCH_FILTERS.SPPL] = searchTerm;
+        setTermFilterHistory(newHist);
+        return;
+      case(SEARCH_FILTERS.SPTR):
+        newHist = termFilterHistory;
+        newHist[SEARCH_FILTERS.SPTR] = searchTerm;
+        setTermFilterHistory(newHist);
+        return;
+      case(SEARCH_FILTERS.YTPL):
+        newHist = termFilterHistory;
+        newHist[SEARCH_FILTERS.YTPL] = searchTerm;
+        setTermFilterHistory(newHist);
+        return;
+      default:
+        newHist = termFilterHistory;
+        newHist[SEARCH_FILTERS.YTVD] = searchTerm;
+        setTermFilterHistory(newHist);
+        return;
+    } 
+  }, [searchTerm]);
+
+  function allValuesEqual(object, term) {
+    for (const value of Object.values(object)) {
+      if (value !== term) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const dispatchSearch = (in_searchTerm) => {
+    console.log('disptching search ' + in_searchTerm)
+    if (in_searchTerm === '') return;
+    switch (selectedFilter) {
+      case(SEARCH_FILTERS.ALL):
+        if (allValuesEqual(termFilterHistory,in_searchTerm)) return;
         dispatch(getSpotifyAsync({ accessToken: accessToken, query: in_searchTerm }));
         dispatch(getYoutubeAsync({ query: in_searchTerm, userID: authorID }));
         return;
       case(SEARCH_FILTERS.SPAL):
+        if (termFilterHistory[SEARCH_FILTERS.SPAL] === in_searchTerm) return;
         dispatch(getSpotifyAsync({ accessToken: accessToken, query: in_searchTerm, type:'album' }));
         return;
       case(SEARCH_FILTERS.SPPL):
+        if (termFilterHistory[SEARCH_FILTERS.SPPL] === in_searchTerm) return;
         dispatch(getSpotifyAsync({ accessToken: accessToken, query: in_searchTerm, type:'playlist' }));
         return;
       case(SEARCH_FILTERS.SPTR):
+        if (termFilterHistory[SEARCH_FILTERS.SPTR] === in_searchTerm) return;
         dispatch(getSpotifyAsync({ accessToken: accessToken, query: in_searchTerm, type:'track' }));
         return;
       case(SEARCH_FILTERS.YTPL):
+        if (termFilterHistory[SEARCH_FILTERS.YTPL] === in_searchTerm) return;
         dispatch(getYoutubeAsync({ query: in_searchTerm, userID: authorID, type:'playlist'}));
         return;
       default:
+        if (termFilterHistory[SEARCH_FILTERS.YTVD] === in_searchTerm) return;
         dispatch(getYoutubeAsync({query: in_searchTerm, userID: authorID, type:'video'}));
         return;
     } 
   }
+
+
   const performSearch = debounce((in_searchTerm) => {
     if (in_searchTerm !== searchTerm) {
       dispatch(setSearchTermAsync(in_searchTerm));
-      console.log('disptching search ' + searchTerm)
-      if (in_searchTerm === '') return; // make it load sample queries
       dispatchSearch(in_searchTerm);
     }
   }, 400);
 
+  useEffect(() => {
+    dispatchSearch(searchTerm);
+  }, [selectedFilter]);
   
 
 

@@ -1,6 +1,7 @@
 var express = require('express');
 
 var spotifySearchRouter = express.Router();
+const NO_THUMBNAIL_PLACEHOLDER = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/1200px-YouTube_play_button_square_%282013-2017%29.svg.png'
 
 // Function to delay the next request by 3 seconds
 const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
@@ -339,7 +340,7 @@ function parsePlaylists(playlists) {
             'name': playlist.name,
             'author': (playlist.owner.display_name) ? playlist.owner.display_name : playlist.owner.id,
             'isFavorited': false,
-            'coverImageURL': playlist.images[0].url,
+            'coverImageURL': (playlist.images)? playlist.images[0].url : NO_THUMBNAIL_PLACEHOLDER, // !!!
             'songs': playlist.href, // best not to fetch while searching. better to click on it
             'originId': playlist.id,
             'isAlbum': false,
