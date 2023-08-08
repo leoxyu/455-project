@@ -46,7 +46,7 @@ const SearchPage = () => {
       console.log('disptching search ' + searchTerm)
       if (in_searchTerm === '') return; // make it load sample queries
       dispatch(getSpotifyAsync({ accessToken: accessToken, query: in_searchTerm }));
-      dispatch(getYoutubeAsync({ query: in_searchTerm }));
+      dispatch(getYoutubeAsync({ query: in_searchTerm, userID: authorID }));
     }
   }, 400);
 

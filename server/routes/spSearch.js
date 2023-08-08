@@ -1,11 +1,28 @@
 var express = require('express');
-const { v4: uuid } = require('uuid');
-
-const {TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY} = require("../shared/playlistTypeConstants");
-const e = require('express');
 
 var spotifySearchRouter = express.Router();
 
+// Function to delay the next request by 3 seconds
+const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+
+
+// Middleware to enforce rate limit of 3 seconds
+const rateLimitMiddleware = async (req, res, next) => {
+    await delay(2000);
+    next();
+  };
+
+// Middleware to extract Bearer token from Authorization header
+const extractBearerToken = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      req.accessToken = authHeader.substring(7); // Remove 'Bearer ' to get the token
+    }
+    next();
+  };
+
+spotifySearchRouter.use(rateLimitMiddleware);
+spotifySearchRouter.use(extractBearerToken);
 
 
 
@@ -434,15 +451,6 @@ const getSpotifyNext = async (accessToken, nextQuery, types) => {
 
 
 
-// Function to delay the next request by 3 seconds
-const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-
-
-// Middleware to enforce rate limit of 3 seconds
-const rateLimitMiddleware = async (req, res, next) => {
-    await delay(2000);
-    next();
-  };
 
 function parseEndpoint(endpoint) {
     const url = new URL(endpoint);
@@ -454,11 +462,11 @@ function parseEndpoint(endpoint) {
 }
   
 //  q is search query
-spotifySearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
+spotifySearchRouter.get('/', async (req, res) => {
     try {
       const searchTerm = req.query.query; // Get the search term from the query parameters
       const searchType = req.query.type || 'all'; // Get the search type from the query parameters (default to 'all')
-      const accessToken = req.query.accessToken;  
+      const accessToken = req.accessToken;  
       const offset = req.query.offset;
       const limit = req.query.limit;
       if (!accessToken) {
@@ -499,13 +507,13 @@ spotifySearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
   }
   
   
-  spotifySearchRouter.get('/:type/:id/tracks', rateLimitMiddleware, async (req, res) => {
+  spotifySearchRouter.get('/:type/:id/tracks', async (req, res) => {
     try {
         const id = req.params.id; // Get the search term from the query parameters
         const type = req.params.type;
         const offset = req.params.offset;
         const limit = req.params.limit;
-        const accessToken = req.query.accessToken;
+        const accessToken = req.accessToken;
         if (!accessToken) {
             return res.status(400).json({ error: 'Spotify access token is missing.' });
         }

@@ -1,8 +1,6 @@
 var express = require('express');
 const ytsr = require('ytsr');
 const yts = require('yt-search');
-const cookie = require('cookie');
-const { v4: uuid } = require('uuid');
 
 var ytSearchRouter = express.Router();
 
@@ -18,6 +16,21 @@ const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 // var playlistsNext = null;
 
 const NO_THUMBNAIL_PLACEHOLDER = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/1200px-YouTube_play_button_square_%282013-2017%29.svg.png'
+
+
+
+// Function to delay the next request by 3 seconds
+const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+
+
+// Middleware to enforce rate limit of 3 seconds
+const rateLimitMiddleware = async (req, res, next) => {
+  await delay(2000);
+  next();
+};
+
+ytSearchRouter.use(rateLimitMiddleware);
+
 
 async function ytParseVideo(item) {
   try {
@@ -170,16 +183,6 @@ async function ytSearchPlaylistNext(playlistsNext) {
   return searchResults;
 }
 
-// Function to delay the next request by 3 seconds
-const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-
-
-// Middleware to enforce rate limit of 3 seconds
-const rateLimitMiddleware = async (req, res, next) => {
-  await delay(2000);
-  next();
-};
-
 
 async function pushPlaylistToDatabase(playlist) {
   if ((await (playlistsCol.find({ ['playlistID']: playlist.playlistID })).toArray()).length == 0) {
@@ -189,10 +192,10 @@ async function pushPlaylistToDatabase(playlist) {
   }
 }
 
-ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, res) => {
+ytSearchRouter.get('/playlists/:playlistID', async (req, res) => {
   try {
     const playlistID = req.params.playlistID;
-    const author = req.query.authorID;
+    const author = req.headers.authorid;
     playlistDetails = await getPlaylistData(playlistID);
 
     if (author) {
@@ -229,7 +232,7 @@ function expandSearchParamsInOrder(queryParams) {
 }
 //  q is search query
 // type is either 'videos', 'playlists', or 'all'
-ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
+ytSearchRouter.get('/', async (req, res) => {
   try {
     const searchTerm = req.query.query; // Get the search term from the query parameters
     const searchType = req.query.type || 'all'; // Get the search type from the query parameters (default to 'all')
