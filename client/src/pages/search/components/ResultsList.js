@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SongResult from './SongResult';
 import PlaylistResult from './PlaylistResult';
 import '../../../styles/variables.css';
@@ -8,16 +8,52 @@ import '../styles/ResultsList.css';
 import { Link } from 'react-router-dom';
 import { REQUEST_STATE } from '../redux/utils';
 import Spinner from '../../../components/spinner/spinner';
-import { render } from 'react-dom';
+import { SEARCH_FILTERS } from '../searchPage';
+import { getNextSpotifyAsync, getNextYoutubeAsync } from '../redux/thunks';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-const ResultsList = ({collection=[], selectedFilter, className, source, playlistCreatorRef,
+const ResultsList = ({collection=[], selectedFilter, className, source, stopPagination=false, playlistCreatorRef,
      setSelectedFilter=()=>{}, handleAddClick = () => { }, saveOnClick = () => {}}) => {
     
-    
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const spotifyFetchStatus = useSelector(state => state.search.getSpotify);
   const youtubeFetchStatus = useSelector(state => state.search.getYoutube);
+  
+  // want to find a better way than this ...
+  const accessToken = useSelector(state => state.spotify.access_token);
+  const userID = useSelector(state => state.login.authorID);
+  const albumNext = useSelector(state => state.search.spotify.albumsNext);
+  const playlistNext = useSelector(state => state.search.spotify.playlistsNext);
+  const trackNext = useSelector(state => state.search.spotify.tracksNext);
+  const youtubePlaylistNext = useSelector(state => state.search.youtube.playlistsNext);
+  const youtubeVideoNext = useSelector(state => state.search.youtube.videosNext);
+
+  let loadMoreFunction;
+  switch (selectedFilter) {
+    case SEARCH_FILTERS.SPAL:
+      loadMoreFunction= (() => {dispatch(getNextSpotifyAsync({accessToken:accessToken, nextEndpoint:albumNext}))});
+      break;
+    case SEARCH_FILTERS.SPPL:
+      loadMoreFunction = (() => {dispatch(getNextSpotifyAsync({accessToken:accessToken, nextEndpoint:playlistNext}))});
+      break;
+    case SEARCH_FILTERS.SPTR:
+      loadMoreFunction = (() => {dispatch(getNextSpotifyAsync({accessToken:accessToken, nextEndpoint:trackNext}))});
+      break;
+    case SEARCH_FILTERS.YTPL:
+      loadMoreFunction=(() => {dispatch(getNextYoutubeAsync({nextEndpoint:youtubePlaylistNext, userID:userID}))});
+      break;
+    case SEARCH_FILTERS.YTVD:
+      loadMoreFunction=(() => {dispatch(getNextYoutubeAsync({nextEndpoint:youtubeVideoNext, userID:userID}))});
+      break;
+    default:
+      break;
+  }
+
+
+
   useEffect(() => {
     if (spotifyFetchStatus === REQUEST_STATE.PENDING || youtubeFetchStatus === REQUEST_STATE.PENDING) {
       setIsLoading(true);
@@ -46,6 +82,15 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
   const renderPlaylistResults = () => {
     return (
       <div className={className}>
+                <InfiniteScroll
+                className={className}
+                dataLength={collection.length}
+                next={loadMoreFunction}
+                hasMore={!stopPagination}
+                loader={<Spinner/>}
+                scrollableTarget={className}
+
+                >
               {collection.map((album, i) => (
                 <Link 
                 key={album.source + album.originId + i + 'link'}
@@ -62,12 +107,23 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
                   />
                 </Link>
               ))}
+              </InfiniteScroll>
       </div>)
   };
 
   const renderSongResults = () => {
     return (
       <div className={className}>
+        <InfiniteScroll
+
+          dataLength={collection.length}
+          next={loadMoreFunction}
+          hasMore={!stopPagination}
+          loader={<Spinner/>}
+          scrollableTarget={className}
+
+        >
+
         {collection.map((song, i) => (
           <SongResult
             key={(song.source + song.songId + i)}
@@ -77,11 +133,13 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
             playlistCreatorRef={playlistCreatorRef}
             isFavorited={false}/>
         ))}
+        </InfiniteScroll>
       </div>);
   };
 
 
   const renderResults = () => {
+
     if (className === 'spotify-playlist-list') {
       return renderPlaylistResults();
     }
@@ -89,6 +147,7 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
   };
 
 
+  
   const renderContent = () => {
     if (failed) {
       return (
@@ -99,7 +158,10 @@ const ResultsList = ({collection=[], selectedFilter, className, source, playlist
     } else if (isLoading) {
       return <Spinner></Spinner>;
     } else {
-      return renderResults();
+      return (
+        renderResults()
+        
+        );
     }
   };
 

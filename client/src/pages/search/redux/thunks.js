@@ -14,6 +14,7 @@ export const getSpotifyAsync = createAsyncThunk(
 export const getNextSpotifyAsync = createAsyncThunk(
     actionTypes.GET_NEXT_SPOTIFY,
     async ({ accessToken, nextEndpoint }) => {
+        if (!nextEndpoint) return Promise.resolve({});
         return await UserService.getSpotifyNext(accessToken, nextEndpoint);
     }
 );
@@ -51,6 +52,7 @@ export const getYoutubeAsync = createAsyncThunk(
 export const getNextYoutubeAsync = createAsyncThunk(
     actionTypes.GET_NEXT_YOUTUBE,
     async ({ nextEndpoint, userID}) => {
+        if (!nextEndpoint) return Promise.resolve({});
         return await UserService.getYoutubeNext(nextEndpoint, userID);
     }
 );

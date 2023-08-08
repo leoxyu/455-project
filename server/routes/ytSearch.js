@@ -1,6 +1,10 @@
 var express = require('express');
 const ytsr = require('ytsr');
 const yts = require('yt-search');
+const { Mutex } = require('async-mutex');
+
+// Create a mutex
+const continuationMapMutex = new Mutex();
 
 var ytSearchRouter = express.Router();
 
@@ -28,6 +32,18 @@ const rateLimitMiddleware = async (req, res, next) => {
   await delay(2000);
   next();
 };
+
+const continuationMap = {};
+function deleteContinuationsWithPrefix(req, res, next) {
+  const prefix = req.headers.userid;
+  const continuationsToDelete = Object.keys(continuationMap).filter(name => name.startsWith(prefix));
+  
+  continuationsToDelete.forEach(con => {
+    delete continuationMap[con];
+  });
+  next()
+}
+
 
 ytSearchRouter.use(rateLimitMiddleware);
 
@@ -217,19 +233,16 @@ ytSearchRouter.get('/playlists/:playlistID', async (req, res) => {
 
 
 // Assuming you have access to the 'res' object
-function deleteCookiesWithPrefix(req, res, prefix) {
-
-  const cookieNamesToDelete = Object.keys(req.cookies).filter(name => name.startsWith(prefix));
-  
-  cookieNamesToDelete.forEach(cookieName => {
-    res.cookie(cookieName, '', { expires: new Date(0) });
-  });
-}
 
 
 function expandSearchParamsInOrder(queryParams) {
   return queryParams.get('query') + queryParams.get('type') + queryParams.get('offset');
 }
+
+
+
+
+
 //  q is search query
 // type is either 'videos', 'playlists', or 'all'
 ytSearchRouter.get('/', async (req, res) => {
@@ -238,12 +251,17 @@ ytSearchRouter.get('/', async (req, res) => {
     const searchType = req.query.type || 'all'; // Get the search type from the query parameters (default to 'all')
     const offset = req.query.offset;
     const userID = req.headers.userid;
+
+    let release;
     if (!searchTerm) {
       return res.status(400).json({ error: 'Youtube Search term is missing.' });
     }
     if (!offset) {
-      deleteCookiesWithPrefix(req, res, userID);
+      release = await continuationMapMutex.acquire();
+      deleteContinuationsWithPrefix(req, res,()=>{});
+      release();
     }
+
     const searchResults = {};
     // Call a function to fetch YouTube search results using the YouTube Data API
     if (searchType === 'video' || searchType === 'all') {
@@ -256,7 +274,10 @@ ytSearchRouter.get('/', async (req, res) => {
           queryParams.append('type', 'video');
           queryParams.append('offset', 1);
           const nextVideoCookie = userID + expandSearchParamsInOrder(queryParams);
-          res.cookie(nextVideoCookie, videoResults.continuation);
+          // res.cookie(nextVideoCookie, videoResults.continuation);
+          release = await continuationMapMutex.acquire();
+          continuationMap[nextVideoCookie] = videoResults.continuation;
+          release();
           searchResults.videos = {
             'items': videoResults.items,
             'next': queryParams.toString(),
@@ -273,14 +294,21 @@ ytSearchRouter.get('/', async (req, res) => {
         queryParams.append('type', 'video');
         queryParams.append('offset', offset);
         const cookieId = userID + expandSearchParamsInOrder(queryParams);
-        const continuation = req.cookies[cookieId];
+        // const continuation = req.cookies[cookieId];
+        release = await continuationMapMutex.acquire();
+        const continuation = continuationMap[cookieId];
+        release();
+
         const videoResults = await ytSearchVideoNext(continuation);
 
         if (videoResults.continuation){
           queryParams.set('offset', (parseInt(queryParams.get('offset')) + 1));
 
           const nextCookieId = userID + expandSearchParamsInOrder(queryParams);
-          res.cookie(nextCookieId, videoResults.continuation);
+          // res.cookie(nextCookieId, videoResults.continuation);
+          release = await continuationMapMutex.acquire();
+          continuationMap[nextCookieId] = videoResults.continuation;
+          release();
           searchResults.videos = {
             'items': videoResults.items,
             'next': queryParams.toString(),
@@ -305,7 +333,10 @@ ytSearchRouter.get('/', async (req, res) => {
           queryParams.append('type', 'playlist');
           queryParams.append('offset', 1);
           const nextPlaylistCookie = userID + expandSearchParamsInOrder(queryParams);
-          res.cookie(nextPlaylistCookie, playlistResults.continuation);
+          // res.cookie(nextPlaylistCookie, playlistResults.continuation);
+          release = await continuationMapMutex.acquire();
+          continuationMap[nextPlaylistCookie] = playlistResults.continuation;
+          release();
           searchResults.playlists = {
             'items': playlistResults.items,
             'next': queryParams.toString(),
@@ -322,7 +353,10 @@ ytSearchRouter.get('/', async (req, res) => {
         queryParams.append('type', 'playlist');
         queryParams.append('offset', offset);
         const cookieId = userID + expandSearchParamsInOrder(queryParams);
-        const continuation = req.cookies[cookieId];
+        // const continuation = req.cookies[cookieId];
+        release = await continuationMapMutex.acquire();
+        const continuation = continuationMap[cookieId];
+        release();
         const playlistResults = await ytSearchPlaylistNext(continuation);
 
 
@@ -330,7 +364,10 @@ ytSearchRouter.get('/', async (req, res) => {
           queryParams.set('offset', (parseInt(queryParams.get('offset')) + 1));
 
           const nextCookieId = userID + expandSearchParamsInOrder(queryParams);
-          res.cookie(nextCookieId, playlistResults.continuation);
+          // res.cookie(nextCookieId, playlistResults.continuation);
+          release = await continuationMapMutex.acquire();
+          continuationMap[nextCookieId] = playlistResults.continuation;
+          release();
           searchResults.playlists = {
             'items': playlistResults.items,
             'next': queryParams.toString(),
