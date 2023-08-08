@@ -1,6 +1,7 @@
 var express = require('express');
 const ytsr = require('ytsr');
 const yts = require('yt-search');
+const cookie = require('cookie');
 const { v4: uuid } = require('uuid');
 
 var ytSearchRouter = express.Router();
@@ -21,7 +22,6 @@ const NO_THUMBNAIL_PLACEHOLDER = 'https://upload.wikimedia.org/wikipedia/commons
 async function ytParseVideo(item) {
   try {
     const info = await yts({ videoId: item.id });
-    // console.log('finished parsing ' + item.id);
     return {
       'songID': item.id,
       'artist': info.author.name,
@@ -38,7 +38,6 @@ async function ytParseVideo(item) {
     };
   }
   catch (e) {
-    console.log('failed ' + item.id);
     return null;
   }
 
@@ -72,8 +71,6 @@ async function ytSearchVideoNext(videosNext) {
   searchResults.items = searchResults.items.filter((item) => item.type === 'video');
   searchResults.items = await Promise.all(searchResults.items.map(ytParseVideo));
   searchResults.items = searchResults.items.filter((item) => item !== null);
-  // console.log(searchResults);
-  // when none left, then { continuation: null, items: [] }
   return searchResults;
 }
 
@@ -214,43 +211,134 @@ ytSearchRouter.get('/playlists/:playlistID', rateLimitMiddleware, async (req, re
   }
 });
 
+
+
+// Assuming you have access to the 'res' object
+function deleteCookiesWithPrefix(req, res, prefix) {
+
+  const cookieNamesToDelete = Object.keys(req.cookies).filter(name => name.startsWith(prefix));
+  
+  cookieNamesToDelete.forEach(cookieName => {
+    res.cookie(cookieName, '', { expires: new Date(0) });
+  });
+}
+
+
+function expandSearchParamsInOrder(queryParams) {
+  return queryParams.get('query') + queryParams.get('type') + queryParams.get('offset');
+}
 //  q is search query
 // type is either 'videos', 'playlists', or 'all'
 ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
   try {
     const searchTerm = req.query.query; // Get the search term from the query parameters
     const searchType = req.query.type || 'all'; // Get the search type from the query parameters (default to 'all')
-
+    const offset = req.query.offset;
+    const userID = req.headers.userid;
     if (!searchTerm) {
       return res.status(400).json({ error: 'Youtube Search term is missing.' });
     }
+    if (!offset) {
+      deleteCookiesWithPrefix(req, res, userID);
+    }
     const searchResults = {};
-
     // Call a function to fetch YouTube search results using the YouTube Data API
     if (searchType === 'video' || searchType === 'all') {
-      const videoResults = await ytSearchVideo(searchTerm);
-      // searchResults.videos = videoResults.items;
-      const nextVideoCookie = uuid();
-      res.cookie(nextVideoCookie, videoResults.continuation);
-      // searchResults.nextVideoCookie = nextVideoCookie;
+      if (!offset) {
+        const videoResults = await ytSearchVideo(searchTerm);
 
-      searchResults.videos = {
-        'items': videoResults.items,
-        'next': nextVideoCookie,
-      };
+        if (videoResults.continuation) {
+          const queryParams = new URLSearchParams();
+          queryParams.append('query', searchTerm);
+          queryParams.append('type', 'video');
+          queryParams.append('offset', 1);
+          const nextVideoCookie = userID + expandSearchParamsInOrder(queryParams);
+          res.cookie(nextVideoCookie, videoResults.continuation);
+          searchResults.videos = {
+            'items': videoResults.items,
+            'next': queryParams.toString(),
+          };
+        } else {
+          searchResults.videos = {
+            'items': videoResults.items,
+            'next': null,
+          };
+        }
+      } else {
+        const queryParams = new URLSearchParams();
+        queryParams.append('query', searchTerm);
+        queryParams.append('type', 'video');
+        queryParams.append('offset', offset);
+        const cookieId = userID + expandSearchParamsInOrder(queryParams);
+        const continuation = req.cookies[cookieId];
+        const videoResults = await ytSearchVideoNext(continuation);
+
+        if (videoResults.continuation){
+          queryParams.set('offset', (parseInt(queryParams.get('offset')) + 1));
+
+          const nextCookieId = userID + expandSearchParamsInOrder(queryParams);
+          res.cookie(nextCookieId, videoResults.continuation);
+          searchResults.videos = {
+            'items': videoResults.items,
+            'next': queryParams.toString(),
+          };
+        } else {
+          searchResults.videos = {
+            'items': videoResults.items,
+            'next': null,
+          };
+        }
+      }
     }
 
     if (searchType === 'playlist' || searchType === 'all') {
-      const playlistResults = await ytSearchPlaylist(searchTerm);
-      // searchResults.playlists = playlistResults.items;
-      const nextPlaylistCookie = uuid();
-      res.cookie(nextPlaylistCookie, playlistResults.continuation);
-      // searchResults.nextPlaylistCookie = nextPlaylistCookie;
 
-      searchResults.playlists = {
-        'items': playlistResults.items,
-        'next': nextPlaylistCookie,
-      };
+      if (!offset) {
+        const playlistResults = await ytSearchPlaylist(searchTerm);
+
+        if (playlistResults.continuation) {
+          const queryParams = new URLSearchParams();
+          queryParams.append('query', searchTerm);
+          queryParams.append('type', 'playlist');
+          queryParams.append('offset', 1);
+          const nextPlaylistCookie = userID + expandSearchParamsInOrder(queryParams);
+          res.cookie(nextPlaylistCookie, playlistResults.continuation);
+          searchResults.playlists = {
+            'items': playlistResults.items,
+            'next': queryParams.toString(),
+          };
+        } else {
+          searchResults.playlists = {
+            'items': playlistResults.items,
+            'next': null,
+          };
+        }
+      } else {
+        const queryParams = new URLSearchParams();
+        queryParams.append('query', searchTerm);
+        queryParams.append('type', 'playlist');
+        queryParams.append('offset', offset);
+        const cookieId = userID + expandSearchParamsInOrder(queryParams);
+        const continuation = req.cookies[cookieId];
+        const playlistResults = await ytSearchPlaylistNext(continuation);
+
+
+        if (playlistResults.continuation){
+          queryParams.set('offset', (parseInt(queryParams.get('offset')) + 1));
+
+          const nextCookieId = userID + expandSearchParamsInOrder(queryParams);
+          res.cookie(nextCookieId, playlistResults.continuation);
+          searchResults.playlists = {
+            'items': playlistResults.items,
+            'next': queryParams.toString(),
+          };
+        } else {
+          searchResults.playlists = {
+            'items': playlistResults.items,
+            'next': null,
+          };
+        }
+      }
     }
     return res
       .setHeader('Content-Type', 'application/json')
@@ -262,59 +350,5 @@ ytSearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
   }
 });
 
-
-// type is either 'videos', 'playlists', or 'all'
-ytSearchRouter.get('/next', rateLimitMiddleware, async (req, res) => {
-  try {
-    const searchType = req.query.type;
-    const cookieId = req.query.cookieId;
-    const continuation = req.cookies[cookieId];
-
-    // Check if the cookieId is provided in the query parameters
-    if (!cookieId) {
-      return res.status(400).json({ error: 'Missing cookieId in the request.' });
-    }
-
-    // Check if the continuation is null or missing
-    if (!continuation) {
-      return res.status(400).json({ error: 'Invalid or expired continuation token.' });
-    }
-
-    if (!searchType) {
-      return res.status(400).json({ error: 'No search type specified.' });
-    }
-    const searchResults = {};
-
-    // Call a function to fetch YouTube search results using the YouTube Data API
-    if (cookieId && (searchType === 'video')) {
-      const videoResults = await ytSearchVideoNext(continuation);
-      // searchResults.videos = videoResults.items;
-      res.cookie(cookieId, videoResults.continuation);
-      // searchResults.nextVideoCookie = cookieId;
-      searchResults.videos = {
-        'items': videoResults.items,
-        'next': cookieId,
-      };
-    }
-
-    if (cookieId && (searchType === 'playlist')) {
-      const playlistResults = await ytSearchPlaylistNext(continuation);
-      // searchResults.playlists = playlistResults.items;
-      res.cookie(cookieId, playlistResults.continuation);
-      // searchResults.nextPlaylistCookie = cookieId;
-      searchResults.playlists = {
-        'items': playlistResults.items,
-        'next': cookieId,
-      };
-    }
-    return res
-      .setHeader('Content-Type', 'application/json')
-      .status(200)
-      .send(searchResults);
-  } catch (error) {
-    console.error('Error fetching YouTube search results:', error);
-    res.status(500).json({ error: 'Something went wrong with YouTube.' });
-  }
-});
 
 module.exports = ytSearchRouter;

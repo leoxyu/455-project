@@ -60,7 +60,6 @@ function parseSpotifyTracks(items, thumbnailUrl=false, release_date=false, popul
 
 function parseSingleAlbum(album) {
     const genres = [... new Set([...album.genres, ...album.tracks.items.map(track => track.genresConcat).flat()])];
-    console.log(album);
     return {
         // uuid: not created yet
         'dateCreated': album.release_date, 
@@ -376,7 +375,6 @@ const getSpotify = async (accessToken, query, types=['album', 'playlist', 'track
     }
 
     if (types.includes('playlist')) {
-        // console.log(data.playlists);
         data.playlists.items = filterOutNulls(data.playlists.items); 
         data.playlists.items = parsePlaylists(data.playlists.items);
         removeSharedFeatures.forEach(key => delete data.playlists[key]);
@@ -410,7 +408,6 @@ const getSpotifyNext = async (accessToken, nextQuery, types) => {
                 data.tracks.items = data.tracks.items.map(track => track.track);
             }
         }
-        console.log(data.tracks);
         await addTrackMetadata(data.tracks, accessToken);
         if (types.includes('album-track')) {
             data.tracks.items = parseSpotifyTracks(data.tracks.items, '', '');
@@ -427,7 +424,6 @@ const getSpotifyNext = async (accessToken, nextQuery, types) => {
     }
 
     if (types.includes('playlist')) {
-        // console.log(data.playlists);
         data.playlists.items = filterOutNulls(data.playlists.items); 
         data.playlists.items = parsePlaylists(data.playlists.items);
         removeSharedFeatures.forEach(key => delete data.playlists[key]);
@@ -477,7 +473,6 @@ spotifySearchRouter.get('/', rateLimitMiddleware, async (req, res) => {
       searchResults = await getSpotify(accessToken, searchTerm, (searchType==='all')? ['track','album','playlist']:[searchType], offset, limit);
       
       for (let key in searchResults) {
-        console.log(searchResults[key].next);
         if (searchResults[key].next) {
             searchResults[key].next = parseEndpoint(searchResults[key].next);
         }
