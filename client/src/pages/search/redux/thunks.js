@@ -28,7 +28,7 @@ export const getSpotifyPlaylistByIDAsync = createAsyncThunk(
 export const getSpotifyAlbumByIDAsync = createAsyncThunk(
     actionTypes.GET_SPOTIFY_ALBUM_BY_ID,
     async ({accessToken, id}) => {
-        return await UserService.getSpotifyCollectionByID(accessToken, id, 'album');
+        return await UserService.getSpotifyCollectionByID(accessToken, id, 'albums');
     }
 );
 

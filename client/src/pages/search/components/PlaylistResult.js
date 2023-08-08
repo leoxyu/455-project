@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../../styles/variables.css';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
@@ -9,9 +9,8 @@ import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
 import { ReactComponent as UnifiIcon } from '../../../images/unifilogo.svg';
 import '../styles/Preview.css';
 import '../styles/SpPlaylistPreview.css';
-import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
-import { getYoutubePlaylistByIDAsync } from '../redux/thunks';
+import { getYoutubePlaylistByIDAsync, getSpotifyAlbumByIDAsync, getSpotifyPlaylistByIDAsync } from '../redux/thunks';
 import { editPlaylistAsync, getOnePlaylist } from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from './Options2';
@@ -38,19 +37,13 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
       return RESULT_TYPES.UNIFI_PLAYLIST;
     }
     if (playlistObject.source === TYPE_SPOTIFY) {
-      if (typeof(playlistObject) === 'string') {
+      if (playlistObject.type === TYPE_PLAYLIST) {
         return RESULT_TYPES.SPOTIFY_PLAYLIST;
       }
-      else if (playlistObject.tracksNextLink) {
-        return RESULT_TYPES.SPOTIFY_ALBUM;
-      }
-      return RESULT_TYPES.UNIFI_PLAYLIST;
+      return RESULT_TYPES.SPOTIFY_ALBUM;
     }
     else {
-      if (typeof(playlistObject.songs) === 'string') {
-        return RESULT_TYPES.YOUTUBE_PLAYLIST;
-      }
-      return RESULT_TYPES.UNIFI_PLAYLIST;
+      return RESULT_TYPES.YOUTUBE_PLAYLIST;
     }
   };
 
@@ -58,6 +51,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
   const resultType = determineType();
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const accessToken = useSelector(state => state.spotify.access_token);
 
   const dispatch = useDispatch();
 
@@ -81,8 +75,6 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
   useEffect(() => {
     if (isLoading && songs.length) {
       setIsLoading(false);
-      console.log('dispatching playlist');
-      console.log(playlistObject);
       dispatch(setPlaylist({
         playlist: {
           id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
@@ -112,9 +104,15 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
       }
       // if songs already loaded, dispatch to player
     } else if (resultType === RESULT_TYPES.SPOTIFY_ALBUM) {
-      //
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getSpotifyAlbumByIDAsync({accessToken:accessToken, id:playlistObject.originId}));
+      }
     } else if (resultType === RESULT_TYPES.SPOTIFY_PLAYLIST) {
-      //
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getSpotifyPlaylistByIDAsync({accessToken:accessToken, id:playlistObject.originId}));
+      }
     } else if (resultType === RESULT_TYPES.YOUTUBE_PLAYLIST) {
       if (!songs?.length) {
         setIsLoading(true);
