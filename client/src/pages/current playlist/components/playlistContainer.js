@@ -76,7 +76,7 @@ const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, arti
                         {/* <img className='author-profile-cover' src={authorCoverUrl} alt="Author cover" /> */}
                         <p className='p'>{artistName} ・</p>
                         <p className='p'>{releaseDate} ・</p>
-                        {type === TYPE_TRACK ? null : <p className='p'>{duration} songs,</p>}
+                        {type === TYPE_TRACK ? null : <p className='p'>{duration + (duration === 1 ? " song," : " songs,")}</p>}
                         <p className='p'>{totalDuration} duration</p>
                     </div>
                     {description ? <p className='info-description'>{description}</p> : null}
