@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
-import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
+import { ReactComponent as YoutubeIcon } from '../../../images/youtube-music.svg';
 import { ReactComponent as UnifiIcon } from '../../../images/unifilogo.svg';
 import '../styles/Preview.css';
 import '../styles/SpPlaylistPreview.css';
@@ -19,7 +19,7 @@ import thumbnailImage from '../../../images/album-placeholder.png'
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI, TYPE_PLAYLIST, TYPE_ALBUM } from '../../../typeConstants';
 
 
-import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
+import { OPTIONS_TYPE2 } from '../../../typeConstants';
 
 const RESULT_TYPES = {
   SPOTIFY_PLAYLIST:TYPE_SPOTIFY + TYPE_PLAYLIST,
@@ -199,7 +199,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
             </div>
           </div>
         </div>
-        {/* {sourceIcon(playlistObject.source)} */}
+        {(optionType===OPTIONS_TYPE2)? sourceIcon(playlistObject.source):<></>}
       </div>
     </div>
   );
