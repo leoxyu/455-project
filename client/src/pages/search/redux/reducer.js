@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './utils';
-import { getNextSpotifyAsync, getNextYoutubeAsync, getSpotifyAsync, getYoutubeAsync, getYoutubePlaylistByIDAsync, setSearchTermAsync } from './thunks';
+import {getSpotifyAsync, getNextSpotifyAsync, getSpotifyAlbumByIDAsync, getSpotifyPlaylistByIDAsync, getYoutubeAsync, getNextYoutubeAsync, setSearchTermAsync, getYoutubePlaylistByIDAsync, importYoutubePlaylistByIDAsync } from './thunks';
 
 
-// because we get rate limited and have limited search results, we need to query for all possible data
-// then filter on server side, then return to client side due to filters
 const INITIAL_STATE = {
     spotify: {
         'tracks': [],
@@ -13,18 +11,25 @@ const INITIAL_STATE = {
         'tracksNext': null,
         'albumsNext': null,
         'playlistsNext': null,
-    }, // TODO add artists
+    }, 
     youtube: {
         'videos': [],
         'playlists': [],
         'videosNext': null,
         'playlistsNext': null,
     },
-    unifi: { playlists: [] }, // TODO: add users
+    unifi: { playlists: [] }, 
     getSpotify: REQUEST_STATE.IDLE,
     getSpotifyNext: REQUEST_STATE.IDLE,
+    getSpotifyCollectionByID: REQUEST_STATE.IDLE,
+    getNextSpotifyCollectionByID: REQUEST_STATE.IDLE,
+
     getYoutube: REQUEST_STATE.IDLE,
     getYoutubeNext: REQUEST_STATE.IDLE,
+    getYoutubePlaylistByID: REQUEST_STATE.IDLE,
+    importYoutubePlaylistByID: REQUEST_STATE.IDLE,
+
+
     getUnifi: REQUEST_STATE.IDLE,
     searchTerm: '',
     setSearchTerm: REQUEST_STATE.IDLE,
@@ -88,6 +93,40 @@ const searchSlice = createSlice({
             state.getSpotifyNext = REQUEST_STATE.REJECTED;
             state.errors = action.payload;
         });
+        builder.addCase(getSpotifyAlbumByIDAsync.pending, (state, action) => {
+            state.getSpotifyCollectionByID = REQUEST_STATE.PENDING;
+        });
+        builder.addCase(getSpotifyAlbumByIDAsync.fulfilled, (state, action) => {
+            state.getSpotifyCollectionByID = REQUEST_STATE.FULFILLED;
+            const album = action.payload;
+            const index = state.spotify.albums.findIndex(
+                (item) => item.originId === album.originId);
+            if (index !== -1) {
+                state.spotify.albums[index] = album;
+            }
+        });
+        builder.addCase(getSpotifyAlbumByIDAsync.rejected, (state, action) => {
+            state.getSpotifyCollectionByID = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        });
+        builder.addCase(getSpotifyPlaylistByIDAsync.pending, (state, action) => {
+            state.getSpotifyCollectionByID = REQUEST_STATE.PENDING;
+        });
+        builder.addCase(getSpotifyPlaylistByIDAsync.fulfilled, (state, action) => {
+            state.getSpotifyCollectionByID = REQUEST_STATE.FULFILLED;
+            const playlist = action.payload;
+            const index = state.spotify.playlists.findIndex(
+                (item) => item.originId === playlist.originId);
+            if (index !== -1) {
+                state.spotify.playlists[index] = playlist;
+            }
+        });
+        builder.addCase(getSpotifyPlaylistByIDAsync.rejected, (state, action) => {
+            state.getSpotifyCollectionByID = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        });
+
+
         builder.addCase(getYoutubeAsync.pending, (state, action) => {
             state.getYoutube = REQUEST_STATE.PENDING;
         });
@@ -135,11 +174,38 @@ const searchSlice = createSlice({
             state.setSearchTerm = REQUEST_STATE.REJECTED;
             state.errors = action.payload;
         });
-        
-
-        // builder.addCase(getYoutubePlaylistByIDAsync.fulfilled, (state, action) => {
-        // this is prob not needed
-        // });
+        builder.addCase(getYoutubePlaylistByIDAsync.pending, (state, action) => {
+            state.getYoutubePlaylistByID = REQUEST_STATE.PENDING;
+        });
+        builder.addCase(getYoutubePlaylistByIDAsync.fulfilled, (state, action) => {
+            state.getYoutubePlaylistByID = REQUEST_STATE.FULFILLED;
+            const playlist = action.payload;
+            const index = state.youtube.playlists.findIndex(
+                (item) => item.originId === playlist.originId);
+            if (index !== -1) {
+                state.youtube.playlists[index] = playlist;
+            }
+        });
+        builder.addCase(getYoutubePlaylistByIDAsync.rejected, (state, action) => {
+            state.getYoutubePlaylistByID = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        });
+        builder.addCase(importYoutubePlaylistByIDAsync.pending, (state, action) => {
+            state.importYoutubePlaylistByID = REQUEST_STATE.PENDING;
+        });
+        builder.addCase(importYoutubePlaylistByIDAsync.fulfilled, (state, action) => {
+            state.importYoutubePlaylistByID = REQUEST_STATE.FULFILLED;
+            const playlist = action.payload;
+            const index = state.youtube.playlists.findIndex(
+                (item) => item.originId === playlist.originId);
+            if (index !== -1) {
+                state.youtube.playlists[index] = playlist;
+            }
+        });
+        builder.addCase(importYoutubePlaylistByIDAsync.rejected, (state, action) => {
+            state.importYoutubePlaylistByID = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        });
 
         // builder.addCase(getUnifiAsync.pending, (state, action) => {
         //     state.getUnifi = REQUEST_STATE.PENDING;

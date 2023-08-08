@@ -1,30 +1,57 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../../styles/variables.css';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as PlayIcon } from '../../../images/play.svg';
 import { ReactComponent as OptionsIcon } from '../../../images/options.svg';
 import { ReactComponent as SpotifyIcon } from '../../../images/spotify.svg';
-import { ReactComponent as YoutubeIcon } from '../../../images/youtube.svg';
+import { ReactComponent as YoutubeIcon } from '../../../images/youtube-music.svg';
 import { ReactComponent as UnifiIcon } from '../../../images/unifilogo.svg';
 import '../styles/Preview.css';
 import '../styles/SpPlaylistPreview.css';
-import { useRef } from "react";
 import '../styles/YtPlaylistPreview.css';
+import { getYoutubePlaylistByIDAsync, getSpotifyAlbumByIDAsync, getSpotifyPlaylistByIDAsync } from '../redux/thunks';
 import { editPlaylistAsync, getOnePlaylist } from '../../../components/home/redux/thunks';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import Options2 from './Options2';
 import Options3 from './Options3';
 import thumbnailImage from '../../../images/album-placeholder.png'
-import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI } from '../../../typeConstants';
+import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI, TYPE_PLAYLIST, TYPE_ALBUM } from '../../../typeConstants';
 
 
-import { OPTIONS_TYPE2, OPTIONS_TYPE3 } from '../../../typeConstants';
+import { OPTIONS_TYPE2 } from '../../../typeConstants';
+
+const RESULT_TYPES = {
+  SPOTIFY_PLAYLIST:TYPE_SPOTIFY + TYPE_PLAYLIST,
+  SPOTIFY_ALBUM:TYPE_SPOTIFY + TYPE_ALBUM,
+  YOUTUBE_PLAYLIST:TYPE_YOUTUBE + TYPE_PLAYLIST,
+  UNIFI_PLAYLIST:TYPE_UNIFI,
+};  
 
 const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, saveOnClick, optionType, playlistObject }) => {
 
+  
+  const determineType = () => {
+    // no handling required
+    if (optionType === OPTIONS_TYPE2) {
+      return RESULT_TYPES.UNIFI_PLAYLIST;
+    }
+    if (playlistObject.source === TYPE_SPOTIFY) {
+      if (playlistObject.type === TYPE_PLAYLIST) {
+        return RESULT_TYPES.SPOTIFY_PLAYLIST;
+      }
+      return RESULT_TYPES.SPOTIFY_ALBUM;
+    }
+    else {
+      return RESULT_TYPES.YOUTUBE_PLAYLIST;
+    }
+  };
+
+  // to get things to work for search page
+  const resultType = determineType();
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const accessToken = useSelector(state => state.spotify.access_token);
 
   const dispatch = useDispatch();
 
@@ -69,11 +96,29 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
 
   const handlePlay = async () => {
     // hit play for first time, load songs
-    if (!songs?.length) {
-      setIsLoading(true);
-      dispatch(getOnePlaylist((playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId));
+
+    if (resultType === RESULT_TYPES.UNIFI_PLAYLIST) {
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getOnePlaylist((playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId));
+      }
+      // if songs already loaded, dispatch to player
+    } else if (resultType === RESULT_TYPES.SPOTIFY_ALBUM) {
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getSpotifyAlbumByIDAsync({accessToken:accessToken, id:playlistObject.originId}));
+      }
+    } else if (resultType === RESULT_TYPES.SPOTIFY_PLAYLIST) {
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getSpotifyPlaylistByIDAsync({accessToken:accessToken, id:playlistObject.originId}));
+      }
+    } else if (resultType === RESULT_TYPES.YOUTUBE_PLAYLIST) {
+      if (!songs?.length) {
+        setIsLoading(true);
+        dispatch(getYoutubePlaylistByIDAsync(playlistObject.originId));
+      }
     }
-    // if songs already loaded, dispatch to player
     dispatch(setPlaylist({
       playlist: {
         id: (playlistObject.playlistID)? playlistObject.playlistID: playlistObject.originId,
@@ -154,7 +199,7 @@ const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, save
             </div>
           </div>
         </div>
-        {/* {sourceIcon(playlistObject.source)} */}
+        {(optionType===OPTIONS_TYPE2)? sourceIcon(playlistObject.source):<></>}
       </div>
     </div>
   );
