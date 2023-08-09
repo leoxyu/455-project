@@ -2,14 +2,22 @@
   background-color: var(--background-base);
 }
 
-.page-selector{
+.page-selector-container {
+  display: flex;
+  position: fixed;
+  right: 5rem;
+  width: 100%;
+}
+.page-selector-separator {
+  min-width: 530px;
+  flex: 1;
+}
+.page-selector {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  position: absolute;
-  right: 5rem;
 }
 
 [class$="library-button"] {
