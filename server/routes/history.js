@@ -1,7 +1,7 @@
 var express = require('express');
 var historyRouter = express.Router();
 const { MongoClient, ObjectId } = require("mongodb");
-const { DATABASE_NAME, HISTORY_COLLECTION, PLAYLIST_COLLECTION_TEST, USER_COLLECTION, SG_ANALYSIS_COLLECTION, PL_ANALYSIS_COLLECTION } = require("../shared/mongoConstants");
+const { DATABASE_NAME, HISTORY_COLLECTION, PLAYLIST_COLLECTION_TEST, USER_COLLECTION, SG_ANALYSIS_COLLECTION, PL_ANALYSIS_COLLECTION, SIMILARITY_COLLECTION, RECOMMENDATION_COLLECTION, SIMILARITY_MAPPING_COLLECTION } = require("../shared/mongoConstants");
 require('dotenv').config();
 
 const client = new MongoClient(process.env.MONGO_URI);
@@ -11,7 +11,8 @@ const playlistCol = database.collection(PLAYLIST_COLLECTION_TEST);
 const userCol = database.collection(USER_COLLECTION);
 const playlistsAnalysisCol = database.collection(PL_ANALYSIS_COLLECTION);
 const songsAnalysisCol = database.collection(SG_ANALYSIS_COLLECTION);
-
+const similarityCol = database.collection(SIMILARITY_COLLECTION);
+const similarityMappingCol = database.collection(SIMILARITY_MAPPING_COLLECTION);
 
 // Middleware to extract Bearer token from Authorization header
 const extractBearerToken = (req, res, next) => {
@@ -167,19 +168,19 @@ const extractBearerToken = (req, res, next) => {
 }
 
 
-    async function generateMetadataSpotify(songIds, accessToken, unifiIds) {
+    async function generateMetadataSpotify(songIds, accessToken, unifiSongObjs) {
         const url = 'https://api.spotify.com/v1/tracks?';
 
         const chunkSizes = calculateChunks(songIds.length);
         const res = [];
 
-        const unifiIdChunks = chunkArray(unifiIds, chunkSizes);
+        const unifiSongChunks = chunkArray(unifiSongObjs, chunkSizes);
         
         for (const [i,chunk] of chunkArray(songIds, chunkSizes).entries()) {
-            const currUnifiChunk = unifiIdChunks[i];
-            const originIdToUnifiId = {};
+            const currUnifiChunk = unifiSongChunks[i];
+            const originIdToUnifiSong = {};
             for (const [j,originId] of chunk.entries()) {
-                originIdToUnifiId[originId] = currUnifiChunk[j];
+                originIdToUnifiSong[originId] = currUnifiChunk[j];
             }
 
 
@@ -198,7 +199,7 @@ const extractBearerToken = (req, res, next) => {
             await annotateTrackMetadata(data.tracks, accessToken);
             // console.log(data.tracks);
 
-            res.push(...parseSpotifyTracks(data.tracks, originIdToUnifiId));
+            res.push(...parseSpotifyTracks(data.tracks, originIdToUnifiSong));
 
             await new Promise(resolve => setTimeout(resolve, 200)); // timy timeout for rate limiting
         }
@@ -222,14 +223,12 @@ const extractBearerToken = (req, res, next) => {
 
 
 
-function parseSpotifyTracks(items, originIdToUnifiId) {
+function parseSpotifyTracks(items, originIdToUnifiSong) {
     items = filterOutNulls(items);
     return items.map((track,i) => {
+        const unifiSong = originIdToUnifiSong[track.id];
         return {
-            'songID': originIdToUnifiId[track.id],
-            'originID': track.id, 
-            'source': 'spotify',
-            'popularity': track.popularity,
+            ...unifiSong,
             'genres': track.genresConcat,
             ...track.audioFeatures,
         };
@@ -276,7 +275,7 @@ const NUMERIC_AUDIO_FEATURES = [
     "valence",
     "tempo",
     "time_signature",
-]
+];
 
 const PLAYLIST_AUDIO_FEATURES = [...NUMERIC_AUDIO_FEATURES, "genres"];
 
@@ -321,7 +320,7 @@ function chunkArray(arr, lengths) {
 // annotate all spotify songs and throw into a collection if not already there
 historyRouter.put('/analyze_playlists',extractAdminPWD, async (req, res, next) => {
     if (req.adminPwd !== process.env.ML_PWD)
-        return res.status(401).send("Access token incorrect");
+        return res.status(401).send("Admin token incorrect");
 
     const accessToken = req.accessToken;
     if (!accessToken) {
@@ -336,9 +335,8 @@ historyRouter.put('/analyze_playlists',extractAdminPWD, async (req, res, next) =
         const spotifyPlaylistLengths = spotifyPlaylists.map((playlist) => playlist.songs.length);
         const spotifySongs = spotifyPlaylists.reduce((rsf, obj) => rsf.concat(obj.songs), []);
         const spotifyIds = spotifySongs.map((song) => parseSpotifyTrackOriginID(song.link));
-        const unifiIds = spotifySongs.map((song)=>song.songID);
         
-        const resultSpotifySongs = await generateMetadataSpotify(spotifyIds, accessToken, unifiIds);
+        const resultSpotifySongs = await generateMetadataSpotify(spotifyIds, accessToken, spotifySongs);
         const chunkedSpotifySongs = chunkArray(resultSpotifySongs, spotifyPlaylistLengths);
         const resultSpotifyPlaylists = createPlaylistObjects(chunkedSpotifySongs, spotifyPlaylists);
 
@@ -361,6 +359,20 @@ historyRouter.put('/analyze_playlists',extractAdminPWD, async (req, res, next) =
 });
 
 
+historyRouter.put('/recommender', extractAdminPWD, async (req, res, next) => {
+    if (req.adminPwd !== process.env.ML_PWD)
+        return res.status(401).send("Admin token incorrect");
+    try {
+        await precomputeAndSaveRecommender();
+        return res.status(200).send("Success");
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).send("Internal server error");
+    }
+});
+
+
 function parseSpotifyTrackOriginID(trackLink) {
     return trackLink.split('spotify:track:')[1];
 }
@@ -371,42 +383,26 @@ function parseYoutubeVideoOriginID(trackLink) {
 }
 
 historyRouter.post('/:id', async (req, res, next) => {
-    const song = req.body.song;
-    const source = song.source;
+    const songID = req.body.songID;
+    const source = req.body.source;
     const userID = req.params.id;
-    const accessToken = req.accessToken;
     try {
-        let annotatedData;
         let result;
-        let originId;
-        if (source === 'spotify') {
-
-            if (!accessToken) {
-                return res.status(401).send("Access token not provided");
-            }
-            originId = parseSpotifyTrackOriginID(song.link);
-
-            const parsedAnnotations = await generateMetadataSpotify([originId], accessToken, [song.songID]);
-            
-            if (parsedAnnotations.length === 0 || Object.keys(parsedAnnotations[0]).length === 0) {
-                return res.status(400).send("Invalid song ID");
-            }       
-            annotatedData = parsedAnnotations[0]; 
+        if (source === 'spotify' && songID) {
 
             result = await historyCol.updateOne(
                 { userID: new ObjectId(userID) },
-                { $push: { spotifySongs: annotatedData } },
+                { $push: { spotifySongs: songID} },
                 { upsert: true}
                 );
 
             if (!result.modifiedCount) {
                 return res.status(404).json({ message: `user ${userID} not found` });
             }
-            return res.status(200).send({ userID, annotatedData });
+            return res.status(200).send({ songID });
         } else {
-
             // youtube functions ...
-            throw new Error("Youtube not implemented.");
+            throw new Error("History currently only set up for ");
         }
     } catch (e) {
         if (e.codeName === "DocumentValidationFailure" || e.code === 121) {
@@ -416,9 +412,163 @@ historyRouter.post('/:id', async (req, res, next) => {
     }
   });
 
+historyRouter.get('/recommendations/:id', async (req, res, next) => {
+    const userID = req.params.id;
+    let limit = req.params.limit;
+    if (!limit) {
+        limit = 5;
+    }
+    try {
+        const user = await userCol.findOne({ _id: new ObjectId(userID) });
+        const userHistory = await historyCol.findOne({ userID: new ObjectId(userID) });
+        if (!user || !userHistory) {
+            return res.status(404).json({ message: `user ${userID} not found` });
+        }
+        // Initialize an empty array to store the recommendations
+        // Use Promise.all to run recommendations for each songID in parallel
+        if (userHistory.spotifySongs.length === 0) {
+            return res.status(200).json({});
+        }
+
+        // return 5 recommendations per watched song
+        userHistory.spotifySongs = userHistory.spotifySongs.slice(0, Math.floor(limit/5));
+
+        const recommendationsPromises = userHistory.spotifySongs.map(async (songID) => {
+            return recommendSimilarSongs(songID, 5);
+            });
+
+        const recommendationsArrays = await Promise.all(recommendationsPromises);
+        const closestSongIds = [...new Set(recommendationsArrays.flat())];
+        const recommendedSongs = await songsAnalysisCol.find({ songID: { $in: closestSongIds } }).toArray();
+        return res.status(200).json(recommendedSongs);
+    } catch (e) {
+        if (e.codeName === "DocumentValidationFailure" || e.code === 121) {
+            return res.status(400).send(e);
+        }
+            return res.status(500).send(e);
+    }
+});
+
+historyRouter.get('/:id', async (req, res, next) => {
+    const userID = req.params.id;
+    try {
+        const user = await userCol.findOne({ _id: new ObjectId(userID) });
+        const userHistory = await historyCol.findOne({ userID: new ObjectId(userID) });
+        if (!user || !userHistory) {
+            return res.status(404).json({ message: `user ${userID} not found` });
+        }
+        const songs = await songsAnalysisCol.find({ songID: { $in: userHistory.spotifySongs } }).toArray();
+        return res.status(200).json(songs);
+    } catch (e) {
+        if (e.codeName === "DocumentValidationFailure" || e.code === 121) {
+            return res.status(400).send(e);
+        }
+            return res.status(500).send(e);
+    }
+});
 
 
-//   function recommendSongs
+const { Matrix } = require('ml-matrix');
+
+
+function preComputeSongSimilarityMatrix(songs) {
+    // Extract features into a matrix
+    const featureMatrix = new Matrix(songs.map(song => 
+    {
+        return NUMERIC_AUDIO_FEATURES.map(feature => song[feature]);
+    }));
+
+    // Compute the cosine similarity matrix
+    return computeCosineSimilarityMatrix(featureMatrix);
+}
+
+
+// Function to compute the cosine similarity matrix
+function computeCosineSimilarityMatrix(matrix) {
+  const numRows = matrix.rows;
+  const similarityMatrix = new Matrix(numRows, numRows);
+
+  for (let i = 0; i < numRows; i++) {
+    for (let j = i; j < numRows; j++) {
+      const cosineSimilarity = cosineSimilarityBetweenRows(matrix.getRow(i), matrix.getRow(j));
+      similarityMatrix.set(i, j, cosineSimilarity);
+      similarityMatrix.set(j, i, cosineSimilarity);
+    }
+  }
+
+  return similarityMatrix;
+}
+
+
+
+// Function to compute the cosine similarity between two rows
+function cosineSimilarityBetweenRows(rowA, rowB) {
+  const dotProduct = rowA.reduce((sum, valueA, index) => sum + valueA * rowB[index], 0);
+  const normA = Math.sqrt(rowA.reduce((sum, value) => sum + value * value, 0));
+  const normB = Math.sqrt(rowB.reduce((sum, value) => sum + value * value, 0));
+
+  return dotProduct / (normA * normB);
+}
+
+
+
+// Function to find index of a song ID in the list
+function findSongIndex(songIDs, songID) {
+    return songIDs.indexOf(songID);
+  }
+
+
+  function findKMostSimilar(scores, k) {
+    console.log('findining the most similar');
+    // Create an array of indices [0, 1, 2, ...] to keep track of song indices
+    const indices = scores.map((score, index) => index);
+    // Sort indices based on the similarity scores in descending order
+    indices.sort((a, b) => scores[b] - scores[a]);
+    // Return the first k indices
+    return indices.slice(0, k);
+}
+
+
+
+
+
+async function recommendSimilarSongs(songID, k) {
+    let similarityScores = await similarityCol.findOne({songID: songID });
+    if (!similarityScores) {
+        throw new Error("Song not found in recommender database");
+    }
+    // Find the k most similar songs
+    const mostSimilarIndices = findKMostSimilar(similarityScores.similarities, k+1); // in case it is itself
+    const mostSimilarSongIDPromises = mostSimilarIndices.map(async (index) => 
+        await similarityMappingCol.findOne({index: index}));
+
+    const mostSimilarSongIDs = (await Promise.all(mostSimilarSongIDPromises)).map(obj => obj.songID);
+    return mostSimilarSongIDs.filter(id => id !== songID);
+}
+
+
+async function precomputeAndSaveRecommender() {
+    // mongoDB query to get all songs
+    const songs = await songsAnalysisCol.find({}).toArray();
+    const featureRowNames = songs.map(song => song.songID);
+    const similarityMatrix = await preComputeSongSimilarityMatrix(songs);
+    const idMappings = [];
+    for (let i = 0; i < featureRowNames.length; i++) {
+        idMappings.push({
+            "songID":featureRowNames[i],
+            "similarities":similarityMatrix.getRow(i)
+        });
+    }
+
+    const idxSongIDMappings = featureRowNames.map((songID, index) => { return {index: index, songID: songID}});
+    await similarityCol.deleteMany({});
+    await similarityMappingCol.deleteMany({});
+    await similarityMappingCol.insertMany(idxSongIDMappings);
+    await similarityCol.insertMany(idMappings);
+    
+    
+}
+
 
 
 module.exports = historyRouter;
