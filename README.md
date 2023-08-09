@@ -88,7 +88,12 @@ Leo<br>
 I initially worked on setting up the user objects, including registering and logging in with a Uni.fi account. The credentials are encrypted and stored in our database, and is used to establish a link between users and playlists. I also implemented the song page, which calls all the songs from the imported playlists, and loads them into the UI. There are standard search/filter options for these. I also implemented the auto import from YouTube, which uses an intermediate component when you load into the application to prefetch data using the YouTube APIs. This data is then verified against the database for duplicates, and is saved as a playlist inside the user's Uni.fi account.
 
 Alex<br>
-// placeholder
+- Playlists page (Your Library)
+- Playlists and songs REST endpoints w/ database queries
+- Backend cursor pagination & frontend infinite scroll
+- Database schema validator
+- data fetch and lazy loading optimization
+- Spotify batch import endpoint
   
 Moses<br>
 // placeholder
