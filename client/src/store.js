@@ -9,7 +9,6 @@ import youtubeApiReducer from './components/Oauth/youtubeApiReducer';
 import currentPlaylistReducer from './pages/current playlist/redux/currentPlaylistReducer';
 import histoyReducer from './components/player/historyRedux/reducer';
 
-
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -23,4 +22,4 @@ export const store = configureStore({
     history: histoyReducer,
   },
   devTools: true
-})
+});

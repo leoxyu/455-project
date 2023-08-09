@@ -13,26 +13,21 @@ import debounce from 'lodash.debounce';
 import { spotifyGetManyPlaylistsThunk } from '../../components/home/redux/thunks';
 import { TYPE_SPOTIFY, TYPE_YOUTUBE} from '../../typeConstants';
 
-
 // if search bar is empty and if there are no results, show sample queries
 export const SEARCH_FILTERS = {
   'ALL':'All',
   'SPTR':'Spotify Tracks',
   'SPAL':'Spotify Albums',
   'SPPL':'Spotify Playlists',
-  'YTVD':'YouTube Videos', 
+  'YTVD':'YouTube Videos',
   'YTPL':'YouTube Playlists'
 };
 
 const SPOTIFY_SEARCH_FILTERS = [SEARCH_FILTERS.ALL, SEARCH_FILTERS.SPTR, SEARCH_FILTERS.SPAL, SEARCH_FILTERS.SPPL];
 
-
-
 const SearchPage = () => {
-
   useEffect(() => {
     document.title = "Uni.fi - Search"; // Change the webpage title
-
   }, []);
 
   const [creatorVisible, setCreatorVisible] = useState(false);
@@ -88,7 +83,7 @@ const SearchPage = () => {
         newHist[SEARCH_FILTERS.YTVD] = searchTerm;
         setTermFilterHistory(newHist);
         return;
-    } 
+    }
   }, [searchTerm]);
 
   function allValuesEqual(object, term) {
@@ -101,7 +96,6 @@ const SearchPage = () => {
   }
 
   const dispatchSearch = (in_searchTerm) => {
-    console.log('disptching search ' + in_searchTerm)
     if (in_searchTerm === '') return;
     switch (selectedFilter) {
       case(SEARCH_FILTERS.ALL):
@@ -129,9 +123,8 @@ const SearchPage = () => {
         if (termFilterHistory[SEARCH_FILTERS.YTVD] === in_searchTerm) return;
         dispatch(getYoutubeAsync({query: in_searchTerm, userID: authorID, type:'video'}));
         return;
-    } 
+    }
   }
-
 
   const performSearch = debounce((in_searchTerm) => {
     if (in_searchTerm !== searchTerm) {
@@ -143,11 +136,6 @@ const SearchPage = () => {
   useEffect(() => {
     dispatchSearch(searchTerm);
   }, [selectedFilter]);
-  
-
-
-
-
 
   const closeCreator = () => {
     setCreatorVisible(false);
@@ -159,10 +147,6 @@ const SearchPage = () => {
 
   // TODO: this should be moved into playlistResult
   const saveOnClick = (playlistLink, playlistType, source) => {
-
-    console.log("Inside saveOnClick()");
-    console.log(playlistLink);
-    console.log(playlistType);
     if (source === TYPE_SPOTIFY) {
       if (playlistLink && playlistType && typeof (playlistLink) === 'string') {
 
@@ -173,9 +157,7 @@ const SearchPage = () => {
         const parsedPlaylistObject = {
           id: spotifyID,
           playlistType: playlistType,
-        }
-        console.log(parsedPlaylistObject);
-        console.log(accessToken);
+        };
 
         const parsedParam = {
           playlists: [parsedPlaylistObject],
@@ -184,29 +166,15 @@ const SearchPage = () => {
         };
 
         dispatch(spotifyGetManyPlaylistsThunk(parsedParam))
-          .then((res) => {
-            console.log("res: ");
-            console.log(res);
-          });
-
       } else {
         console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
       }
     } else if (source === TYPE_YOUTUBE) {
       dispatch(importYoutubePlaylistByIDAsync(playlistLink))
-        .then((res) => {
-          console.log("res: ");
-          console.log(res.payload);
-          // dispatch(createPlaylistAsync(res.payload));
-        })
     } else {
       console.log(`Unexpected platform [${source}] for playlist`);
     }
-
-
   }
-
-  
 
   const determineQueryPlatform = (sectionLabel) => {
     if (sectionLabel in SPOTIFY_SEARCH_FILTERS) {
@@ -218,22 +186,24 @@ const SearchPage = () => {
 
   const renderTrackResults = (tracks, sectionLabel, stopPagination=false) => {
     const source = determineQueryPlatform(sectionLabel);
+
     return (
-      <ResultsList 
-          id='sectionLabel'
-          collection={tracks} 
-          className={'spotify-track-list'}
-          selectedFilter={sectionLabel}
-          setSelectedFilter={setSelectedFilter}
-          handleAddClick={handleAddClick}
-          source={source}
-          stopPagination={stopPagination}
-          />
+      <ResultsList
+        id='sectionLabel'
+        collection={tracks}
+        className={'spotify-track-list'}
+        selectedFilter={sectionLabel}
+        setSelectedFilter={setSelectedFilter}
+        handleAddClick={handleAddClick}
+        source={source}
+        stopPagination={stopPagination}
+      />
     )
   };
 
   const renderPlaylistResults = (playlists, sectionLabel, stopPagination=false) => {
     const source = determineQueryPlatform(sectionLabel);
+
     return (
       <ResultsList
         id={sectionLabel}
@@ -241,13 +211,12 @@ const SearchPage = () => {
         className={'spotify-playlist-list'}
         selectedFilter={sectionLabel}
         setSelectedFilter={setSelectedFilter}
-        saveOnClick={saveOnClick} 
+        saveOnClick={saveOnClick}
         source={source}
         stopPagination={stopPagination}
-        />
+      />
     )
   };
-
 
   const renderFilteredContent = () => {
     switch (selectedFilter) {
@@ -280,10 +249,6 @@ const SearchPage = () => {
         return (<div>No Results Found!</div>);
     }
   };
-  
-  
-        
-
 
   return (
     <div className='search-page'>
@@ -292,22 +257,21 @@ const SearchPage = () => {
           <PlaylistCreator onClose={closeCreator} />
         </div>
       }
-      {(searchTerm ==='')? 
-      <>
-      {/* needed to pull searchBar into here to add the text from preview when updated + maintain a fast search bar using local state vs redux store */}
-      <SearchBar key='preview' placeholder='Search for songs, albums, artists...' overrideSearchTerm={searchTerm} searchCallback={(input) => { performSearch(input) }} />
-      <Previews setSearchTerm={(searchTerm) => performSearch(searchTerm)}></Previews>
-      </>
-      :
-      <>
-      <SearchBar key='search' placeholder='Search for songs, albums, artists...' overrideSearchTerm={searchTerm} searchCallback={(input) => { performSearch(input) }} />
-      <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} filters={Object.values(SEARCH_FILTERS)}/>
-      {renderFilteredContent()}
-      </>
+      {(searchTerm ==='') ?
+        <>
+          {/* needed to pull searchBar into here to add the text from preview when updated + maintain a fast search bar using local state vs redux store */}
+          <SearchBar key='preview' placeholder='Search for songs, albums, artists...' overrideSearchTerm={searchTerm} searchCallback={(input) => { performSearch(input) }} />
+          <Previews setSearchTerm={(searchTerm) => performSearch(searchTerm)}></Previews>
+        </>
+        :
+        <>
+          <SearchBar key='search' placeholder='Search for songs, albums, artists...' overrideSearchTerm={searchTerm} searchCallback={(input) => { performSearch(input) }} />
+          <Filters selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} filters={Object.values(SEARCH_FILTERS)}/>
+          {renderFilteredContent()}
+        </>
       }
     </div>
   );
 };
-
 
 export default SearchPage;

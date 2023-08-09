@@ -1,9 +1,7 @@
-
-
 const SPOTIFY_CONSTANTS = {
-    LogInSuccess: "logInSuccess",
+  LogInSuccess: "logInSuccess",
 }
 
 module.exports = {
-    SPOTIFY_CONSTANTS
+  SPOTIFY_CONSTANTS
 };

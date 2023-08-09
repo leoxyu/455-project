@@ -5,7 +5,6 @@ import { ReactComponent as SearchIcon } from '../../../images/search.svg';
 import { ReactComponent as ClearIcon } from '../../../images/clear.svg';
 
 function SearchBar({placeholder='Search for songs, albums, artists...', overrideSearchTerm='', searchCallback=()=>{}}) {
-
   const [searchTerm, setSearchTerm] = useState(overrideSearchTerm);
 
   const handleSearch = (event) => {

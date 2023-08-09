@@ -1,15 +1,23 @@
 .library-page {
     background-color: var(--background-base);
   }
-  
-  .page-selector{
+
+  .page-selector-container {
+    display: flex;
+    position: fixed;
+    right: 5rem;
+    width: 100%;
+  }
+  .page-selector-separator {
+    min-width: 530px;
+    flex: 1;
+  }
+  .page-selector {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
-    position: absolute;
-    right: 5rem;
   }
 
   [class$="library-button"] {
@@ -36,20 +44,60 @@
     color: var(--text-base);
     fill:  var(--text-base);
 }
-  
+
 [class$="library-button"][data-selected="false"]:hover .library-page-text {
     color: var(--text-base); /* Set the text color back to the default on hover */
   }
-  
 
-  [class$="library-button"][data-selected="true"] {
-    background-color: var(--text-base);
-    color: var(--text-base);
-    fill: var(--decorative-subdued);
-    [class$="library-icon"] {
-        fill: var(--decorative-subdued);
-    }
-    .library-page-text {
-        color: var(--decorative-subdued);
-    }
+
+.page-selector{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  position: absolute;
+  right: 5rem;
+}
+
+[class$="library-button"] {
+  display: flex;
+  flex-direction: column;
+  [class$="library-icon"] {
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    fill: var(--text-subdued);
+    padding: 1rem;
+    border: 1px solid; /* Add a 1px solid black border around the icons */
+    display: flex;
+    flex-basis: auto;
   }
+  color: var(--text-subdued);
+  margin-left: 1rem;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+
+[class$="library-button"] :hover {
+  color: var(--text-base);
+  fill:  var(--text-base);
+}
+
+[class$="library-button"][data-selected="false"]:hover .library-page-text {
+  color: var(--text-base); /* Set the text color back to the default on hover */
+}
+
+
+[class$="library-button"][data-selected="true"] {
+  background-color: var(--text-base);
+  color: var(--text-base);
+  fill: var(--decorative-subdued);
+  [class$="library-icon"] {
+      fill: var(--decorative-subdued);
+  }
+  .library-page-text {
+      color: var(--decorative-subdued);
+  }
+}

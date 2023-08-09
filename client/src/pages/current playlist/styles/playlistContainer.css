@@ -53,10 +53,7 @@
     padding: 0.2em 0;
     color: aliceblue;
   }
-
 }
-
-
 
 .background-container {
   background: rgb(0, 0, 0);
@@ -86,14 +83,10 @@
   }
 }
 
-
-
 .playlist-type {
   color: aliceblue;
   font-size: 100%;
 }
-
-
 
 .playlist-title-1 {
   color: aliceblue;

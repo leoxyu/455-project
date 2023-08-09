@@ -1,4 +1,4 @@
-const ROOT_URL = 'http://localhost:3001';
+const ROOT_URL = process.env.REACT_APP_SERVER_URL;
 
 export async function spotifyLogin() {
   const result = await fetch(`${ROOT_URL}/spotify/login`, {

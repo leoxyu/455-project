@@ -2,14 +2,14 @@ var express = require('express');
 const ytsr = require('ytsr');
 const yts = require('yt-search');
 const { Mutex } = require('async-mutex');
-
+require('dotenv').config();
 // Create a mutex
 const continuationMapMutex = new Mutex();
 
 var ytSearchRouter = express.Router();
 
-const { DATABASE_NAME, PLAYLIST_COLLECTION, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
-const { TYPE_ALBUM, TYPE_PLAYLIST, TYPE_SPOTIFY, TYPE_TRACK, TYPE_YOUTUBE } = require("../shared/playlistTypeConstants");
+const { DATABASE_NAME, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
+const {  TYPE_PLAYLIST, TYPE_YOUTUBE } = require("../shared/playlistTypeConstants");
 
 const { MongoClient, ObjectId } = require("mongodb");
 
@@ -22,10 +22,8 @@ const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 const NO_THUMBNAIL_PLACEHOLDER = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/1200px-YouTube_play_button_square_%282013-2017%29.svg.png'
 
 
-
 // Function to delay the next request by 3 seconds
 const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-
 
 // Middleware to enforce rate limit of 3 seconds
 const rateLimitMiddleware = async (req, res, next) => {
@@ -34,10 +32,11 @@ const rateLimitMiddleware = async (req, res, next) => {
 };
 
 const continuationMap = {};
+
 function deleteContinuationsWithPrefix(req, res, next) {
   const prefix = req.headers.userid;
   const continuationsToDelete = Object.keys(continuationMap).filter(name => name.startsWith(prefix));
-  
+
   continuationsToDelete.forEach(con => {
     delete continuationMap[con];
   });
@@ -69,9 +68,7 @@ async function ytParseVideo(item) {
   catch (e) {
     return null;
   }
-
 }
-
 
 function ytParseVideoFrPlaylist(info) {
   return {
@@ -102,7 +99,6 @@ async function ytSearchVideoNext(videosNext) {
   searchResults.items = searchResults.items.filter((item) => item !== null);
   return searchResults;
 }
-
 
 async function ytSearchVideo(videoName) {
   const filters1 = await ytsr.getFilters(videoName);
@@ -171,7 +167,6 @@ async function ytSearchPlaylist(playlistName) {
   return searchResults;
 }
 
-
 async function ytSearchPlaylistNext(playlistsNext) {
   const searchResults = await ytsr.continueReq(playlistsNext, { pages: 1 });
   searchResults.items = await Promise.all(searchResults.items.map(async (item) => {
@@ -198,7 +193,6 @@ async function ytSearchPlaylistNext(playlistsNext) {
   }));
   return searchResults;
 }
-
 
 async function pushPlaylistToDatabase(playlist) {
   if ((await (playlistsCol.find({ ['playlistID']: playlist.playlistID })).toArray()).length == 0) {
@@ -230,18 +224,11 @@ ytSearchRouter.get('/playlists/:playlistID', async (req, res) => {
   }
 });
 
-
-
 // Assuming you have access to the 'res' object
-
 
 function expandSearchParamsInOrder(queryParams) {
   return queryParams.get('query') + queryParams.get('type') + queryParams.get('offset');
 }
-
-
-
-
 
 //  q is search query
 // type is either 'videos', 'playlists', or 'all'
@@ -323,7 +310,6 @@ ytSearchRouter.get('/', async (req, res) => {
     }
 
     if (searchType === 'playlist' || searchType === 'all') {
-
       if (!offset) {
         const playlistResults = await ytSearchPlaylist(searchTerm);
 
@@ -389,6 +375,5 @@ ytSearchRouter.get('/', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong with YouTube.' });
   }
 });
-
 
 module.exports = ytSearchRouter;

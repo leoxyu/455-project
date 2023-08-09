@@ -9,7 +9,6 @@ const TYPE_UNIFI = "unifi";
 const OPTIONS_TYPE2 = "LIBRARY_PLAYLIST";
 const OPTIONS_TYPE3 = "SEARCH_RESULT_PLAYLIST";
 
-
 module.exports = {
     TYPE_SPOTIFY,
     TYPE_YOUTUBE,
@@ -20,4 +19,4 @@ module.exports = {
 
     OPTIONS_TYPE2,
     OPTIONS_TYPE3
-}
+};

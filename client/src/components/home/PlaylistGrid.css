@@ -1,62 +1,42 @@
 .playlist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 20px;
-  }
-  
-  /* .playlist-card {
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: box-shadow 0.3s;
-    margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
 
-  } */
-  
-  .playlist-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
+.playlist-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-  /* .playlist-image {
-    width: 80%;
-    border: 4px;
+.playlist-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
 
-    object-fit: cover;
-  }
-   */
+.playlist-image {
+  width: 80%; /* Adjust the width of the image as desired */
+  height: auto;
+  border: 4px solid #fff; /* Add a border around the image */
+  border-radius: 4px; /* Adjust the border radius to match the image border */
+  margin-top: 10%;
+}
 
-   .playlist-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: box-shadow 0.3s;
-  }
-  
-  .playlist-image {
-    width: 80%; /* Adjust the width of the image as desired */
-    height: auto;
-    border: 4px solid #fff; /* Add a border around the image */
-    border-radius: 4px; /* Adjust the border radius to match the image border */
-    margin-top: 10%;
-    
-  }
+.playlist-details {
+  padding: 12px;
+}
 
-  .playlist-details {
-    padding: 12px;
-  }
-  
-  .playlist-name {
-    font-weight: bold;
-    margin-bottom: 4px;
-  }
-  
-  .playlist-creator {
-    color: #888888;
-    font-size: 14px;
-  }
-  
+.playlist-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.playlist-creator {
+  color: #888888;
+  font-size: 14px;
+}

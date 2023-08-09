@@ -9,7 +9,6 @@ import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/cu
 import { postListenAsync } from "./historyRedux/thunks";
 
 export default function SongPlayer() {
-
   const dispatch = useDispatch();
 
   const playlist = useSelector(state => state.player.playlist);
@@ -23,7 +22,6 @@ export default function SongPlayer() {
 
   useEffect(() => {
     if (songs && songs.length > 0) {
-      console.log("currSong changed, playing song");
       setCurrentSongIndex(songs.findIndex(song => song.songID === currSongID));
       playOnLoad.current = true;
       dispatch(postListenAsync(songs[currentSongIndex]));
@@ -32,7 +30,6 @@ export default function SongPlayer() {
 
   useEffect(() => {
     if (startFromTop) {
-      console.log("playlist id changed, playing song");
       setCurrentSongIndex(0);
       if (songs && songs.length > 0) dispatch(setCurrSongIdPlaylistPage(songs[0].songID));
       playOnLoad.current = true;

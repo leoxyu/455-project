@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editPlaylistAsync } from '../../../components/home/redux/thunks';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -6,7 +6,6 @@ import thumbnailImage from '../../../images/album-placeholder.png';
 import '../../../styles/variables.css';
 import '../styles/playlistEditor.css';
 import { useLazyLoadSongs } from '../../../util';
-
 
 const SongDisplay = ({ name, artist, image, onDelete }) => {
   return (
@@ -31,7 +30,7 @@ const PlaylistEditor = ({ pl, onClose }) => {
   const [description, setDescription] = useState(playlist.description);
   const [imageUrl, setImageUrl] = useState(playlist.coverImageURL);
   const [deletedSongs, setDeletedSongs] = useState([]);
-  
+
   const dispatch = useDispatch();
 
   const loading = useLazyLoadSongs(playlist, playlist.playlistID);

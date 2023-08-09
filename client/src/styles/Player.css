@@ -1,144 +1,145 @@
 .song-player {
-    width: 100%;
-    overflow: auto;
+  width: 100%;
+  overflow: auto;
 }
 
 .react-player {
-    display: none;
+  display: none;
 }
 
 .iframe-container {
-    width: 0;
-    height: 0;
+  width: 0;
+  height: 0;
 }
 
 .player-button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .react-icon {
-    color: white;
+  color: white;
 }
 
 .react-icon-disabled {
-    color: rgb(105, 105, 105);
+  color: rgb(105, 105, 105);
 }
 
 .react-icon:hover {
-    cursor: pointer;
-    color: rgb(105, 105, 105);
+  cursor: pointer;
+  color: rgb(105, 105, 105);
 }
 
 .react-icon-mute {
-    color: rgb(105, 105, 105);
+  color: rgb(105, 105, 105);
 }
 
 .react-icon-mute:hover {
-    cursor: pointer;
-    color: white;
+  cursor: pointer;
+  color: white;
 }
 
 .player-container {
-    display: flex;
-    background-color: black;
-    height: 80px;
-    justify-content: center;
-    align-items: center;
-    min-width: 550px;
+  display: flex;
+  background-color: black;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  min-width: 550px;
 }
 
 .song-info-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  max-width: 30%;
 }
 
 .song-info {
-    margin-top: 12px;
-    margin-left: 12px;
+  margin-top: 12px;
+  margin-left: 12px;
 }
 
 .song-title {
-    color: white;
-    font-weight: bold;
-    margin-bottom: 4px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .song-artist {
-    color: white;
-    font-size: small;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  color: white;
+  font-size: small;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .player-main {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 0 32px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 32px;
 }
 
 .player-controls {
-    display: flex;
-    align-items: center;
-    margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto 10px;
 }
 
 .player-audio {
-    display: flex;
-    align-items: center;
-    margin-top: 32px;
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
 }
 
 .song-slider, .song-slider-disabled {
-    margin-bottom: 6px;
-    width: 350px;
-    max-width: 400px;
-    min-width: 220px;
+  margin-bottom: 6px;
+  width: 350px;
+  max-width: 400px;
+  min-width: 220px;
 }
 
 .volume-slider, .volume-slider-disabled {
-    width: 90px;
+  width: 90px;
 }
 
 .song-slider::-webkit-slider-thumb, .volume-slider::-webkit-slider-thumb {
-    background-color: #1db954;
+  background-color: #1db954;
 }
 
 .song-slider-disabled::-webkit-slider-thumb, .volume-slider-disabled::-webkit-slider-thumb {
-    background-color: #50555C;
+  background-color: #50555C;
 }
 
 input[type=range] {
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 input[type=range]:focus {
-    outline: none;
+  outline: none;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 5px;
-    background: #50555C;
-    border-radius: 10px;
+  width: 100%;
+  height: 5px;
+  background: #50555C;
+  border-radius: 10px;
 }
 
 input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    margin-top: -5px;
-    border-radius: 7px;
-    height: 14px;
-    width: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5px;
+  border-radius: 7px;
+  height: 14px;
+  width: 14px;
 }

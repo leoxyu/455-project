@@ -1,142 +1,158 @@
 .navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 2.5rem;
-    background-color: var(--essential-bright-accent);
-    color: rgba(236, 236, 236, 0.829);
-    padding: 1rem 1.75rem 1rem 1rem;
-    position: relative;
-    top: 0;
-    left: 0;
-    bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 2.5rem;
+  background-color: var(--essential-bright-accent);
+  color: rgba(236, 236, 236, 0.829);
+  padding: 1rem 1.75rem 1rem 1rem;
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: fixed;
 }
 
 .navbar-top {
-    position: fixed;
-    align-self: center;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  position: fixed;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.navbar-separator-top {
+  height: 30%;
+  min-height: 130px;
+  flex: 1;
+}
+
+.navbar-separator-bottom {
+  height: 100px;
+  min-height: 20px;
+  flex: 1;
+}
+
+.navbar-separator-end {
+  height: 100px;
+  min-height: 30px;
 }
 
 .navbar-menu {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    top: 16rem;
-    align-self: center;
-    align-content: space-between;
-    align-items: space-between;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-content: space-between;
 }
 
 .user-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-picture {
-    width: 3.5rem;
-    height: 3.5rem;
-    margin-top: 1rem;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: 0.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-top: 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 0.5rem;
 }
-
 
 .edit-button {
-    background-color: #181717;
-    color: white;
-    border: none;
-    cursor: pointer;
-    position: sticky;
+  background-color: #181717;
+  color: white;
+  border: none;
+  cursor: pointer;
+  position: sticky;
 }
 
-
 .home-nav-icon {
-    width: 2rem;
-    height: 2rem;
-    align-self: center;
+  width: 2rem;
+  height: 2rem;
+  align-self: center;
 }
 
 .library-nav-icon {
-    width: 2rem;
-    height: 2rem;
-    align-self: center;
+  width: 2rem;
+  height: 2rem;
+  align-self: center;
 }
 
 .search-nav-icon {
-    width: 2rem;
-    height: 2rem;
-    align-self: center;
+  width: 2rem;
+  height: 2rem;
+  align-self: center;
 }
 
 .playlist-nav-icon {
-    width: 2rem;
-    height: 2rem; 
-    align-self: center;
+  width: 2rem;
+  height: 2rem;
+  align-self: center;
 }
 
 .signout-nav-icon{
-    width: 1.5rem;
-    height: 1.5rem;
-    align-self: center;
-    position: relative;
-    left: 0.1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  align-self: center;
+  position: relative;
+  left: 0.1rem;
 }
 
-
 .navbar-menu a {
-    text-decoration: none;
-    color: var(--background-base);
-    fill:  var(--background-base);
-    font-size: 0.8rem;
-    align-self: center;
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 1rem;
+  text-decoration: none;
+  color: var(--background-base);
+  fill:  var(--background-base);
+  font-size: 0.8rem;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
 }
 
 .nav-link {
-    cursor: pointer;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #181717;
 }
 
-
 .nav-link :hover {
-    /* background-color: aquamarine; */
-    color: var(--text-base);
-    fill:  var(--text-base);
+  color: var(--text-base);
+  fill:  var(--text-base);
 }
 
 .navbar-bottom {
-    margin-top: auto;
-    align-items: center;
-    align-self: center;
-    align-content: center;
-    position: fixed;
-    bottom: 6.5rem;
-    display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
-    color: #181717;
+  bottom: 6rem;
+}
+
+.navbar-bottom :hover {
+  color: var(--text-base);
+  fill:  var(--text-base);
 }
 
 .nav-link.active {
-    /* display: none; */
-    /* Add styles to highlight active links */
-    color: var(--text-base); /* Change the text color to indicate active link */
+  /* Add styles to highlight active links */
+  color: var(--text-base); /* Change the text color to indicate active link */
+  fill:  var(--text-base);
+  /* You can also add background color, underline, or any other styling */
+  [class$="-nav-icon"] {
+    color: var(--text-base);
     fill:  var(--text-base);
-    /* You can also add background color, underline, or any other styling */
-    [class$="-nav-icon"] {
-        color: var(--text-base);
-        fill:  var(--text-base);
-    }
-    .nav-text {
-        color: var(--text-base);
-    }
   }
-
+  .nav-text {
+    color: var(--text-base);
+  }
+}
