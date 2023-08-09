@@ -39,7 +39,6 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(getHistoryAsync());
     dispatch(getRecommendationsAsync());
-
   }, []);
 
 
