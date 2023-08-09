@@ -97,7 +97,7 @@ Will<br>
 I implemented all of the search page frontend components with their styling which includes the search bar, playlist divs, filter divs, initial options div, and song divs. I implemented all of the spotify and youtube search engine backend to include querying for playlists, songs, albums, their annotation with metadata, and paginated endpoints. Also heavily edited frontend to include lazy loading on demand of different data types, infinite scroll, previews of search queries, hover animations, integration with the playlist view when clicking on a playlist div, integration with playlist playing when clicking on the play button, active color changes, and svg assets.
 
 David<br>
-// placeholder
+I worked on planning out the relationship structure of our react components, planning out and creating diagrams to assist in the design phase of the project. I added the OAuth verification flow for both Spotify and Youtube to allow users to access their respective APIs, as well as the token retrieval system. Lastly, I implemented the *now playing* page, and implemented lazy loading for adding & removing songs while a playlist is currently playing.
 
 
 ## Prototypes
