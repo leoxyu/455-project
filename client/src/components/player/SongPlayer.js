@@ -6,7 +6,7 @@ import SpotifyPlayer from "./SpotifyPlayer";
 import { Player } from "./Player";
 
 import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/currentPlaylistReducer";
-import { postListenAsync } from "./redux/thunks";
+import { postListenAsync } from "./historyRedux/thunks";
 
 export default function SongPlayer() {
 
