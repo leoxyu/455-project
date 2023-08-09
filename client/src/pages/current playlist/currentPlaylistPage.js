@@ -52,7 +52,6 @@ const CurrentPlaylistPage = () => {
       songs: (typeof(foundPlaylist.songs) === 'string') ? [] : foundPlaylist.songs,
     };
   }
-  console.log(playlist.id, id);
   const loading = useLazyLoadSongs(playlist, (playlist.id)? playlist.id: id, type, source);
 
   return (

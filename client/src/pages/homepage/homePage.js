@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import '../../styles/HomePage.css'; // Create a new CSS file for homepage styles
 
+// This imports some essential css
+import PlaylistGrid from '../../components/home/PlaylistGrid';
+
 // Spotify
 import { spotifyProfileThunk } from '../../components/Oauth/Spotify/spotifyApiThunks';
 import { setSpotifyProfile } from '../../components/Oauth/spotifyApiReducer';

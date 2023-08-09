@@ -24,8 +24,6 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
   };
 
   const createPlaylist = () => {
-    // Replace this with your logic to create a new playlist
-    // console.log(`Creating playlist: ${playlistName}`);
     const data = {
         name: playlistName,
         songs: [],

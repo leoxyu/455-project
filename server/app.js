@@ -158,7 +158,6 @@ async function setupCollections() {
 
     // insert test data
     if (false) {
-
       // delete your playlists
       const playlistTestCol = database.collection(PLAYLIST_COLLECTION_TEST);
       // put your user id here

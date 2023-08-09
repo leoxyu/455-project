@@ -17,8 +17,6 @@ let spotify_profile = null;
 router.use(cors());
 
 router.get('/login', function (req, res) { // handle login request from the hyperlink on html page
-  console.log("In spotify login");
-
   // request authorization - automatically redirects to callback
   const scope = 'user-read-private user-read-email user-library-read user-top-read playlist-read-collaborative';
   const redirect_url = 'https://accounts.spotify.com/authorize?' +

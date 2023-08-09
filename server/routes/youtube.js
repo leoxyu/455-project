@@ -45,8 +45,6 @@ router.get('/playlists', async (req, res) => {
   const token = accessToken.split(' ')[1];
   const playlists = await getYoutubePlaylists(token, req.query.authorID);
 
-  console.log(playlists);
-
   for (let i = 0; i < playlists.length; i++) {
     try {
       const playlist = playlists[i];

@@ -189,9 +189,6 @@ const PlaylistsService = {
 
     const dataToSendStringify = JSON.stringify(dataToSend);
 
-    console.log(JSON.stringify(playlists));
-    console.log(accessToken);
-
     const result = await fetch(`${ROOT_URL}/playlists/importManySpotify`, {
       method: "POST",
       headers: {

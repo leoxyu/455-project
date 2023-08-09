@@ -9,8 +9,6 @@ const loginSlice = createSlice({
   },
   reducers: {
     logout: (state) => {
-      console.log('inside reducer')
-      console.log(state)
       state.id = null;
       state.authorID = null;
     },

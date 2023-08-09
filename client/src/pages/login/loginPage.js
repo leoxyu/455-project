@@ -139,7 +139,6 @@ const LoginPage = () => {
     const response = dispatch(spotifyLoginThunk());
 
     response.then((reply) => {
-      console.log(reply.payload);
       window.location.href = reply.payload.redirect_url;
     });
   };
@@ -148,7 +147,6 @@ const LoginPage = () => {
     const response = dispatch(youtubeLoginThunk());
 
     response.then((reply) => {
-      console.log(reply.payload);
       window.location.href = reply.payload.redirect_url;
     });
   };

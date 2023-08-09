@@ -23,7 +23,6 @@ playlistsRouter.post('/', async (req, res, next) => {
   };
   try {
     const result = await playlistsCol.insertOne(pl);
-    console.log(`inserted ${result.insertedId}`);
     return res.status(200).send(pl);
   } catch (error) {
     if (error.codeName === "DocumentValidationFailure" || error.code === 121) {
@@ -132,7 +131,6 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
     })
     ).then(async (playlist) => {
       const result = await playlistsCol.insertOne(playlist);
-      console.log(`inserted ${result.insertedId}`);
       return playlist.originId; // useful for frontend retry
     })
   }))

@@ -78,7 +78,6 @@ const playlistsSlice = createSlice({
     });
 
     builder.addCase(spotifyGetManyPlaylistsThunk.fulfilled, (state, action) => {
-      console.log(action.payload);
     });
   }
 });

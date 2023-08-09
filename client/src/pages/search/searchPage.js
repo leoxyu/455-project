@@ -96,7 +96,6 @@ const SearchPage = () => {
   }
 
   const dispatchSearch = (in_searchTerm) => {
-    console.log('disptching search ' + in_searchTerm)
     if (in_searchTerm === '') return;
     switch (selectedFilter) {
       case(SEARCH_FILTERS.ALL):
@@ -148,10 +147,6 @@ const SearchPage = () => {
 
   // TODO: this should be moved into playlistResult
   const saveOnClick = (playlistLink, playlistType, source) => {
-
-    console.log("Inside saveOnClick()");
-    console.log(playlistLink);
-    console.log(playlistType);
     if (source === TYPE_SPOTIFY) {
       if (playlistLink && playlistType && typeof (playlistLink) === 'string') {
 
@@ -162,9 +157,7 @@ const SearchPage = () => {
         const parsedPlaylistObject = {
           id: spotifyID,
           playlistType: playlistType,
-        }
-        console.log(parsedPlaylistObject);
-        console.log(accessToken);
+        };
 
         const parsedParam = {
           playlists: [parsedPlaylistObject],

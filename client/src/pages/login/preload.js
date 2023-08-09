@@ -26,7 +26,6 @@ const Preload = () => {
   }, []);
 
   useEffect(() => {
-    console.log(playlists)
     if (playlists != null) {
       navigate('/home');
     }

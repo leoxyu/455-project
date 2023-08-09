@@ -24,7 +24,6 @@ const playerSlice = createSlice({
   reducers: {
     setPlaylist: (state, action) => {
       const { playlist, startFromTop } = action.payload;
-      console.log(action.payload);
       state.playlist = playlist;
       state.startFromTop = startFromTop;
     },

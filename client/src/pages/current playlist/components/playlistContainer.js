@@ -43,7 +43,6 @@ const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, arti
         return;
       }
 
-      console.log(palette);
       const lightVibrantRGB = palette.LightVibrant._rgb;
       const darkVibrantRGB = palette.DarkVibrant._rgb;
       const playlistHeaderComponent = document.getElementsByClassName('playlist-header')[0];
@@ -56,7 +55,6 @@ const PlaylistContainer = ({ loading, id, playlistLink, playlistName, type, arti
 
   useEffect(() => {
     if (thumbnailUrl) setHeaderGradient(thumbnailUrl);
-    console.log(description);
   }, [thumbnailUrl]);
 
   return (

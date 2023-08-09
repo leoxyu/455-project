@@ -18,7 +18,6 @@ export const useLazyLoadSongs = (playlist, id, type=null, source=null) => {
   const firstLoad = useRef(true);
   const dispatch = useDispatch();
 
-  console.log('inside util ' + id);
   useEffect(() => {
     if (!playlist?.songs?.length && firstLoad.current) {
       firstLoad.current = false;
