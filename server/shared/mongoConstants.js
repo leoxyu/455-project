@@ -3,6 +3,9 @@ const DATABASE_NAME = 'unifi';
 const USER_COLLECTION = 'users';
 const PLAYLIST_COLLECTION = 'playlists';
 const PLAYLIST_COLLECTION_TEST = 'playlists_test';
+const HISTORY_COLLECTION = 'history';
+const SG_ANALYSIS_COLLECTION = 'songs_analysis';
+const PL_ANALYSIS_COLLECTION = 'playlists_analysis';
 
 const LOGIN_KEY = 'b897fe5fd46ae0ecab7b63838fb41c4b4df2b116';
 // Export the variables as an object
@@ -11,5 +14,8 @@ module.exports = {
   USER_COLLECTION,
   PLAYLIST_COLLECTION,
   PLAYLIST_COLLECTION_TEST,
-  LOGIN_KEY
+  LOGIN_KEY,
+  HISTORY_COLLECTION,
+  PL_ANALYSIS_COLLECTION,
+  SG_ANALYSIS_COLLECTION
 };
