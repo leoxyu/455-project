@@ -2,7 +2,7 @@ var express = require('express');
 const ytsr = require('ytsr');
 const yts = require('yt-search');
 const { Mutex } = require('async-mutex');
-
+require('dotenv').config();
 // Create a mutex
 const continuationMapMutex = new Mutex();
 

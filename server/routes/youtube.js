@@ -1,13 +1,12 @@
 const express = require('express');
 var router = express.Router();
-
 const querystring = require('querystring');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+require('dotenv').config();
 const client_id = '27604080756-2btdk60i5tahi5i4687pokqj56bavkcb.apps.googleusercontent.com';
 const client_secret = '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'; // important to protect this one
-const callback_uri = 'http://localhost:3000/login';
+const callback_uri = `${process.env.CLIENT_URL}/login`;
 
 let access_token = null;
 let refresh_token = null;

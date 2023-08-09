@@ -1,19 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import './styles/variables.css';
 import HomePage from './pages/homepage/homePage';
 import LoginPage from './pages/login/loginPage';
 import SearchPage from './pages/search/searchPage';
-import PlaylistsPage from './pages/playlists/playlistsPage';
 import CurrentPlaylistPage from './pages/current playlist/currentPlaylistPage';
-import SongPage from './pages/songs/songPage';
 import LibraryPage from './pages/library/libraryPage';
 
 import { useSelector } from 'react-redux';
 import Navbar from './components/nav/nav';
 import SongPlayer from './components/player/SongPlayer';
 import Preload from './pages/login/preload';
-import Menu from './components/nav/navBar';
 
 const App = () => {
   const userId = useSelector(state => state.login.id);
