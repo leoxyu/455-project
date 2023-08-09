@@ -20,7 +20,37 @@ async function postListen(song) {
     return data;
 }
 
+async function getHistory() {
+    const userID = getUserId();
+    var url = BASE_URL + 'history/' + userID;
+    const response = await fetch(url, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+    }
+    return data;
+}
+
+async function getRecommendations() {
+    const userID = getUserId();
+    var url = BASE_URL + 'recommendations/' + userID;
+    const response = await fetch(url, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+    }
+    return data;
+}
+
 export default {
-    postListen
+    postListen,
+    getHistory,
+    getRecommendations
 };
 

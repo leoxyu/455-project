@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './utils';
-import {postListenAsync } from './thunks';
+import {postListenAsync, getHistoryAsync, getRecommendationsAsync } from './thunks';
 
 
 const INITIAL_STATE = {
+    historySongs: [],
+    recommendationSongs: [],
     postListen: REQUEST_STATE.IDLE,
+    getHistory: REQUEST_STATE.IDLE,
+    getRecommendations: REQUEST_STATE.IDLE,
     errors: null
 };
 
@@ -25,6 +29,24 @@ const searchSlice = createSlice({
             state.postListen = REQUEST_STATE.REJECTED;
             state.errors = action.payload;
         });
+        builder.addCase(getHistoryAsync.pending, (state, action) => {
+            state.getHistory = REQUEST_STATE.PENDING;
+        }
+        );
+        builder.addCase(getHistoryAsync.fulfilled, (state, action) => {
+            state.getHistory = REQUEST_STATE.FULFILLED;
+            state.historySongs = action.payload;
+        }
+        );
+        builder.addCase(getHistoryAsync.rejected, (state, action) => {
+            state.getHistory = REQUEST_STATE.REJECTED;
+            state.errors = action.payload;
+        }
+        );
+        builder.addCase(getRecommendationsAsync.pending, (state, action) => {
+            state.getRecommendations = REQUEST_STATE.PENDING;
+        }
+        );
     }
 });
 
