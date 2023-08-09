@@ -6,6 +6,7 @@ import SpotifyPlayer from "./SpotifyPlayer";
 import { Player } from "./Player";
 
 import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/currentPlaylistReducer";
+import { postListenAsync } from "./redux/thunks";
 
 export default function SongPlayer() {
 
@@ -25,6 +26,7 @@ export default function SongPlayer() {
       console.log("currSong changed, playing song");
       setCurrentSongIndex(songs.findIndex(song => song.songID === currSongID));
       playOnLoad.current = true;
+      dispatch(postListenAsync(songs[currentSongIndex]));
     }
   }, [currSongID]);
 

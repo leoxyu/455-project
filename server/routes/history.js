@@ -197,7 +197,6 @@ const extractBearerToken = (req, res, next) => {
             
 
             await annotateTrackMetadata(data.tracks, accessToken);
-            // console.log(data.tracks);
 
             res.push(...parseSpotifyTracks(data.tracks, originIdToUnifiSong));
 
@@ -254,7 +253,6 @@ historyRouter.put('/',extractAdminPWD, async (req, res, next) => {
         await historyCol.insertMany(historyElems);
     }
     catch (err) {
-        console.log(err);
         return res.status(500).send("Internal server error");
     }
     return res.status(200).send("Success");
@@ -352,7 +350,6 @@ historyRouter.put('/analyze_playlists',extractAdminPWD, async (req, res, next) =
 
     }
     catch (err) {
-        console.log(err);
         return res.status(500).send("Internal server error");
     }
     return res.status(200).send("Success");
@@ -367,7 +364,6 @@ historyRouter.put('/recommender', extractAdminPWD, async (req, res, next) => {
         return res.status(200).send("Success");
     }
     catch (err) {
-        console.log(err);
         return res.status(500).send("Internal server error");
     }
 });
@@ -519,7 +515,6 @@ function findSongIndex(songIDs, songID) {
 
 
   function findKMostSimilar(scores, k) {
-    console.log('findining the most similar');
     // Create an array of indices [0, 1, 2, ...] to keep track of song indices
     const indices = scores.map((score, index) => index);
     // Sort indices based on the similarity scores in descending order

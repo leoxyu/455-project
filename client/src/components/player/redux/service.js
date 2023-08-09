@@ -1,16 +1,15 @@
-import { getUserId, getAccessToken} from "../../../util";
+import { getUserId, getAccessToken, getAuthorID} from "../../../util";
 const BASE_URL = 'http://localhost:3001/';
 
 async function postListen(song) {
-    const userID = getUserId();
+    const userID = getAuthorID();
     var url = BASE_URL + 'history/' + userID;
-
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${getAccessToken()}`);
     const response = await fetch(url, {
         method: 'POST',
-        body: JSON.stringify({ song: song }),
-        headers: headers
+        body: JSON.stringify(song),
+        headers: {
+            'Content-Type': 'application/json' // Set the Content-Type header
+        }
     });
     const data = await response.json();
     if (!response.ok) {
@@ -21,7 +20,7 @@ async function postListen(song) {
 }
 
 async function getHistory() {
-    const userID = getUserId();
+    const userID = getAuthorID();
     var url = BASE_URL + 'history/' + userID;
     const response = await fetch(url, {
         method: 'GET',
@@ -35,7 +34,7 @@ async function getHistory() {
 }
 
 async function getRecommendations() {
-    const userID = getUserId();
+    const userID = getAuthorID();
     var url = BASE_URL + 'recommendations/' + userID;
     const response = await fetch(url, {
         method: 'GET',
