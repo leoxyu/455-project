@@ -130,7 +130,7 @@ const PlaylistPage = () => {
       }
 
       <h2 className='playlists-heading'>Your Playlists</h2>
-      {initialFetched.current &&
+      {initialFetchDone &&
         <InfiniteScroll
           dataLength={playlists.length}
           next={() => dispatch(getPlaylistsAsync({ isDeep: false }))}
