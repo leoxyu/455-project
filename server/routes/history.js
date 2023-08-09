@@ -410,7 +410,8 @@ historyRouter.post('/:id', async (req, res, next) => {
 
 historyRouter.get('/recommendations/:id', async (req, res, next) => {
     const userID = req.params.id;
-    let limit = req.params.limit;
+    let limit = req.query.limit;
+    console.log(limit);
     if (!limit) {
         limit = 5;
     }
