@@ -23,44 +23,44 @@ The application will store the following types of data:
 ### Minimal Requirements
 
 1. Sign in 
-   - Allow user to sign in/sign out ✅
-   - Develop functionality to fetch songs and playlists from the APIs ✅
-   - Store the imported data in the application's database ✅
+✅ Allow user to sign in/sign out
+✅ Develop functionality to fetch songs and playlists from the APIs
+✅ Store the imported data in the application's database
 
 2. Creating custom playlists of songs
-   - Design and implement a user-friendly interface for creating playlists ✅
-   - Allow users to add songs from the imported data or search for new songs ✅
-   - Enable saving and managing custom playlists ✅
+✅ Design and implement a user-friendly interface for creating playlists
+✅ Allow users to add songs from the imported data or search for new songs
+✅ Enable saving and managing custom playlists
 
 3. Playback
-   - Be able to play songs inside the application ✅
+✅ Be able to play songs inside the application
      
 ### Standard Requirements
 
 1. Authentication & user login with OAuth
-   - Implement OAuth authentication for users to log in with their Spotify or YouTube accounts ✅
-   - Store and manage user credentials securely ✅
-   - Enable personalized features and data retrieval based on user authentication ✅
+✅ Implement OAuth authentication for users to log in with their Spotify or YouTube accounts
+✅ Store and manage user credentials securely
+✅ Enable personalized features and data retrieval based on user authentication
 
 2. Direct song search from Spotify and YouTube using APIs
-   - Integrate the Spotify and YouTube APIs to enable direct song searching ✅
-   - Provide search functionality within the application for users to find songs from both platforms ✅
+✅ Integrate the Spotify and YouTube APIs to enable direct song searching 
+✅ Provide search functionality within the application for users to find songs from both platforms
 
 3. Allow importing playlists from YT or Spotify
-   - Auto import from these services into our database ✅
-   - Search for these playlists and import into user's playlists ✅
+✅ Auto import from these services into our database
+✅ Search for these playlists and import into user's playlists
    
 ### Stretch Requirements
 
 1. Applying machine learning models for tagging YouTube videos
-   - Develop or integrate machine learning models to analyze YouTube videos and apply relevant tags to facilitate sorting and categorization ❌
+❌ Develop or integrate machine learning models to analyze YouTube videos and apply relevant tags to facilitate sorting and categorization
 
 2. Support for other music streaming services
-   - Investigate the possibility of integrating additional music streaming services such as Apple Music, allowing users to import and manage playlists from those services as well ❌
+❌ Investigate the possibility of integrating additional music streaming services such as Apple Music, allowing users to import and manage playlists from those services as well
   
 3. Interact with other Uni.fi users
-   - Implement the ability for users to like and follow playlists and other users ❌
-   - Track and display users' liked playlists and followed users ❌
+❌ Implement the ability for users to like and follow playlists and other users
+❌ Track and display users' liked playlists and followed users
 
 ## Prototypes
 
