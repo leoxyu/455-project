@@ -4,11 +4,9 @@ var router = express.Router();
 const querystring = require('querystring');
 const cors = require('cors');
 
-const ROOT_URL = 'http://localhost:3001';
-
 const client_id = 'e44db89e494a47529355c4401180f251';
 const client_secret = '4b1f65eda5464bfabb44593e87284d9f'; // important to protect this one
-const redirect_uri = `${ROOT_URL}/spotify/callback`;
+const redirect_uri = `${process.env.SERVER_URL}/spotify/callback`;
 
 let access_token = null;
 let refresh_token = null;
@@ -43,7 +41,7 @@ router.get('/callback', function (req, res) {
     },
     body: `code=${code}&redirect_uri=${redirect_uri}&grant_type=authorization_code`,
     json: true
-};
+  };
 
 fetch('https://accounts.spotify.com/api/token', authOptions) // make request to token endpoint for our tokens
   .then((response) => {

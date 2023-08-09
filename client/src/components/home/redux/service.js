@@ -1,6 +1,7 @@
 import { store } from '../../../store';
 import { getUserId, getAuthorID } from '../../../util';
-const ROOT_URL = 'http://localhost:3001';
+
+const ROOT_URL = process.env.REACT_APP_SERVER_URL;
 
 // TODO probably follow what was from class to be safe if we have extra time
 const PlaylistsService = {

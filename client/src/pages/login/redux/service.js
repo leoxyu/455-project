@@ -1,4 +1,4 @@
-const ROOT_URL = "http://localhost:3001"
+const ROOT_URL = process.env.REACT_APP_SERVER_URL
 
 const login = async (username, password) => {
   const response = await fetch(ROOT_URL + '/login', {

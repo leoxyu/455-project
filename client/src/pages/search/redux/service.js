@@ -1,5 +1,6 @@
 import { getAuthorID } from "../../../util";
-const BASE_URL = 'http://localhost:3001/';
+
+const BASE_URL = `${process.env.REACT_APP_SERVER_URL}/`;
 async function getSpotify(accessToken, query, type) {
   var url = BASE_URL + 'sp-search';
   // Build the query string with search parameters
@@ -65,7 +66,6 @@ async function getYoutube(query, type, userID) {
 
   const headers = new Headers();
   headers.append('userid', userID);
-
   const response = await fetch(url, {
     method: 'GET',
     headers: headers
