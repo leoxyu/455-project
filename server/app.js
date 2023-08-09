@@ -153,54 +153,6 @@ async function setupCollections() {
       await database.createCollection(PLAYLIST_COLLECTION_TEST, {
         validator,
       });
-      console.log(`collection ${PLAYLIST_COLLECTION_TEST} exists`);
-    }
-
-    // insert test data
-    if (false) {
-      // delete your playlists
-      const playlistTestCol = database.collection(PLAYLIST_COLLECTION_TEST);
-      // put your user id here
-      const delRes = await playlistTestCol.deleteMany({ author: new ObjectId('64b23ae964a775d33d53d832')});
-      console.log(`deleted ${delRes.deletedCount}`);
-
-      // generate new playlists
-      const docs = [];
-      for (let i = 0; i < 100; i++) {
-        docs.push({
-          artist: 'Spotify',
-          playlistID: i.toString(),
-          dateCreated: new Date(),
-          description: '...',
-          name: 'Otonashi',
-          // put your user id here
-          author: new ObjectId('64b23ae964a775d33d53d832'),
-          isFavorited: false,
-          coverImageURL: 'https://i.scdn.co/image/ab67616d0000b27304a31825fa7261e702f17f7d',
-          songs: [
-            {
-              songID: uuid(),
-              artist: 'SHOW-GO',
-              name: 'Otonashi',
-              type: 'spotify',
-              link: 'spotify:track:3W8gOphVnFTHFiE22pO08y',
-              imageLink: 'https://i.scdn.co/image/ab67616d0000b27304a31825fa7261e702f17f7d',
-              album: 'Otonashi',
-              duration: 197730,
-              releaseDate: '2022-08-26'
-            }
-          ],
-          originSpotifyId: '7AtfIT67WGJMOoCfFeoqgr',
-          isAlbum: true
-        })
-
-      }
-
-      const res = await playlistTestCol.insertMany(docs);
-
-      if (res.insertedCount) {
-        console.log(`inserted ${res.insertedCount} items`);
-      }
     }
   } finally {
     // Ensures that the client will close when you finish/error

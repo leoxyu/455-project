@@ -28,9 +28,6 @@ const playerSlice = createSlice({
       state.startFromTop = startFromTop;
     },
     setCurrSongID: (state, action) => {
-      console.log("\r\nChanging currSongID in playerReducer");
-      console.log("\r\nSetting new currSong to: ");
-      console.log(action.payload);
       state.currSongID = action.payload;
     }
   }

@@ -65,10 +65,8 @@ const LoginPage = () => {
     const token_type = urlParams.get('token_type');
     const error = urlParams.get('error');
 
-    console.log('youtube OAuth token type: ', token_type);
-
     if (error) {
-      console.log("youtube OAuth error: ", error);
+      console.log(error);
       return;
     } else if (access_token && token_type === 'Bearer') {
       dispatch(setAccessTokenYoutube(access_token));
@@ -76,10 +74,9 @@ const LoginPage = () => {
       sessionStorage.setItem(SESSION_STORAGE_KEYS.youtubeAccessToken, access_token);
 
       setYoutubeLoggedIn(true);
-      console.log('youtube successfully logged in');
 
     } else {
-      console.log("youtube OAuth tokens not found in Uri");
+      console.log("Youtube OAuth tokens not found in Uri");
     }
 
   }, []);
@@ -112,11 +109,9 @@ const LoginPage = () => {
     const type = urlParams.get('type');
 
     if (!error) {
-      console.log("not logged in yet.");
-
+      console.log("Not logged in yet.");
     } else if (error === "ERROR_INVALID_TOKEN" && type) {
       console.log("invalid spotify token recieved during OAuth");
-
     } else if (type === "spotify") {
       dispatch(setAccessTokenSpotify(access_token));
       dispatch(setRefreshTokenSpotify(refresh_token));
@@ -126,7 +121,6 @@ const LoginPage = () => {
       sessionStorage.setItem(SESSION_STORAGE_KEYS.spotifyRefreshToken, refresh_token);
 
       setSpotifyLoggedIn(true);
-      console.log('spotify successfully logged in');
 
     } else {
       console.log("spotify OAuth tokens not found in Uri");

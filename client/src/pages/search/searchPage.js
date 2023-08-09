@@ -166,19 +166,11 @@ const SearchPage = () => {
         };
 
         dispatch(spotifyGetManyPlaylistsThunk(parsedParam))
-          .then((res) => {
-            console.log("res: ");
-            console.log(res);
-          });
       } else {
         console.log("invalid playlist link or type (SAVE PLAYLIST ERROR inside saveOnClick()");
       }
     } else if (source === TYPE_YOUTUBE) {
       dispatch(importYoutubePlaylistByIDAsync(playlistLink))
-        .then((res) => {
-          console.log("res: ");
-          console.log(res.payload);
-        })
     } else {
       console.log(`Unexpected platform [${source}] for playlist`);
     }

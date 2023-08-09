@@ -15,13 +15,9 @@ export const getTotalTrackDuration = (songs) => {
         const seconds = parseInt(splitArray[2]);
 
         totalDuration += 1000 * ((hours * 60 * 60) + (minutes * 60) + seconds);
-      } else {
-        console.log('Weird duration format when trying to split string duration (1)');
       }
     } else if (typeof (songs[i].duration) === 'number') {
       totalDuration += songs[i].duration;
-    } else {
-      console.log('Weird duration format when trying to split string duration (2)');
     }
   }
 

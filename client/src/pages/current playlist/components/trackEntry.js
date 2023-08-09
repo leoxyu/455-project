@@ -49,7 +49,6 @@ const TrackEntry = ({ parentPlaylist, songObject, handleAddClick, songID, name, 
 
   useEffect(() => {
     if (inPlaylistTransition) {
-      console.log(`song id after is ${songID}`)
       dispatch(setCurrSongID(songID));
       dispatch(setCurrSongIdPlaylistPage(songID));
       setInPlaylistTransition(false);
@@ -58,7 +57,6 @@ const TrackEntry = ({ parentPlaylist, songObject, handleAddClick, songID, name, 
 
   const handlePlay = () => {
     if (currPlayingPlaylistID !== parentPlaylist.id) {
-      console.log(`song id before is ${songID}`)
       setInPlaylistTransition(true);
       dispatch(setPlaylist({ playlist: parentPlaylist, startFromTop: false }));
     }

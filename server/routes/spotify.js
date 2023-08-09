@@ -49,7 +49,6 @@ fetch('https://accounts.spotify.com/api/token', authOptions) // make request to 
   .then((response) => {
     if (response.status === 200) {
       response.json().then((data) => {
-        console.log("token successfully retrieved");
         access_token = data.access_token
         refresh_token = data.refresh_token
         res.redirect(`http://localhost:3000/login?access_token=${access_token}&refresh_token=${refresh_token}&type=${"spotify"}&error=${"NO_ERROR"}`);
@@ -107,7 +106,6 @@ router.get('/profile', function (req, res) {
     }).then(response => {
       if (response.status === 200) {
         response.json().then((data) => {
-          console.log("Profile successfully retrieved");
           spotify_profile = data;
           res.send(spotify_profile);
         });

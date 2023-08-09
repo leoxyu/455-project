@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../styles/variables.css';
 import '../../styles/NavBar.css';
-import {ReactComponent as HomeIcon} from '../../images/home.svg';
-import {ReactComponent as SearchIcon} from '../../images/search_nav.svg';
-import {ReactComponent as PlaylistIcon} from '../../images/current_playlist.svg';
-import {ReactComponent as LibraryIcon} from '../../images/library.svg';
-import {ReactComponent as SignOutIcon} from '../../images/sign_out.svg';
+import { ReactComponent as HomeIcon } from '../../images/home.svg';
+import { ReactComponent as SearchIcon } from '../../images/search_nav.svg';
+import { ReactComponent as PlaylistIcon } from '../../images/current_playlist.svg';
+import { ReactComponent as LibraryIcon } from '../../images/library.svg';
+import { ReactComponent as SignOutIcon } from '../../images/sign_out.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../pages/login/redux/loginReducer';
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             <img className="profile-picture" src={dynamicProfilePicture || defaultProfilePicture} alt="Profile" />
           </div>
         </div>
-        <div className="navbar-separator-top"/>
+        <div className="navbar-separator-top" />
         <div className="navbar-menu">
           <div className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`}>
             <Link to="/home">
@@ -81,14 +81,14 @@ const Navbar = () => {
             </div>
           }
         </div>
-        <div className="navbar-separator-bottom"/>
+        <div className="navbar-separator-bottom" />
         <div className="navbar-bottom">
           <div className='nav-link'>
-              <SignOutIcon className="signout-nav-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
-              Log Out
+            <SignOutIcon className="signout-nav-icon" alt="Sign Out" onClick={handleSignOut}> Log Out</SignOutIcon>
+            Log Out
           </div>
         </div>
-        <div className="navbar-separator-end"/>
+        <div className="navbar-separator-end" />
       </div>
     </nav>
   );
