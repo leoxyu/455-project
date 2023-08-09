@@ -91,7 +91,7 @@ Alex<br>
 I initially designed the UI and established a Spotify-inspired grid layout for the playlists page. Utilizing Redux Toolkit, I constructed the playlists and songs store, connecting it to async thunks that interfaced with a REST API. I enhanced the API with cursor pagination, filtering, and sorting, and addressed mongo schema inconsistencies by introducing a playlists collection validator. Additionally, I improved frontend performance by implementing lazy loading for songs and reducing unnecessary API requests.
   
 Moses<br>
-// placeholder
+I researched and implemented the entire player component, including both the Youtube player and the Spotify player. I built and maintained most of the playlist editor and the options popup menu. I implemented the favouriting system and separated playlists between users. I also worked a lot on the UI, including the navbar and the song page.
 
 Will<br>
 I implemented all of the search page frontend components with their styling which includes the search bar, playlist divs, filter divs, initial options div, and song divs. I implemented all of the spotify and youtube search engine backend to include querying for playlists, songs, albums, their annotation with metadata, and paginated endpoints. Also heavily edited frontend to include lazy loading on demand of different data types, infinite scroll, previews of search queries, hover animations, integration with the playlist view when clicking on a playlist div, integration with playlist playing when clicking on the play button, active color changes, and svg assets.
