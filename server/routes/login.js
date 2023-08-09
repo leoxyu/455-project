@@ -43,8 +43,6 @@ async function authenticateLogin(username, password) {
 }
 
 router.post('/', function (req, res, next) {
-  console.log("In regular login");
-
   if (!req.body) {
     return res.status(400).send({ message: 'Missing call body!' })
   }
@@ -76,7 +74,7 @@ router.post('/', function (req, res, next) {
           return res.status(400).send({
             message: 'Unknown status when trying to authenticate credentials.',
           });
-      }
+        }
     })
     .catch((error) => {
       return res.status(500).send({

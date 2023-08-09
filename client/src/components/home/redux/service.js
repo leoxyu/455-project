@@ -29,11 +29,11 @@ const PlaylistsService = {
   deletePlaylist: async (playlistID) => {
     const userId = getUserId();
     const response = await fetch(`${ROOT_URL}/playlists/${playlistID}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-ID': userId,
-      }
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'User-ID': userId,
+        }
     });
 
     const data = await response.json();
@@ -109,8 +109,8 @@ const PlaylistsService = {
     const data = await response.json();
 
     if (!response.ok) {
-      const errorMsg = data?.message;
-      throw new Error(errorMsg);
+        const errorMsg = data?.message;
+        throw new Error(errorMsg);
     }
 
     return data;

@@ -14,7 +14,6 @@ export async function youtubeGetPlaylists(access_token) {
   let url = `${ROOT_URL}/youtube/playlists`;
   const authorID = getAuthorID();
 
-  console.log(authorID);
   const queryParams = new URLSearchParams();
   queryParams.append("authorID", authorID);
 
@@ -27,9 +26,7 @@ export async function youtubeGetPlaylists(access_token) {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-
   });
 
   return await result.json();
 }
-

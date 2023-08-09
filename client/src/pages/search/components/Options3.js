@@ -12,6 +12,6 @@ const Options3 = ({ open, playlistLink, playlistType, source, saveOnClick, close
       <div className="options-item" onClick={(e) => { e.preventDefault(); close(); handleClick(); }}>Save to library</div>
     </div>
   );
-}
+};
 
 export default Options3;

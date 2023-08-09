@@ -1,22 +1,64 @@
 .spotify-playlist-preview {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background-color: var(--background-base);
-    justify-content: space-between;
-    padding: 0.5rem;
-    transition: border-color 0.3s; /* Add transition for smooth effect */
-    font-size: 1.1rem;
-    width: 11rem;  
-    /* max-width: 11rem; */
-    /* max-width: 40rem; */
-    height: 15rem;
-    flex-grow: 1;
-    font-size: 17px;
-    flex:1;
-    flex-basis: 25%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--background-base);
+  justify-content: space-between;
+  padding: 0.5rem;
+  transition: border-color 0.3s; /* Add transition for smooth effect */
+  font-size: 1.1rem;
+  width: 11rem;
+  height: 15rem;
+  flex-grow: 1;
+  font-size: 17px;
+  flex:1;
+  flex-basis: 25%;
 
-    .play-icon {
+  .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    cursor: pointer;
+    margin: 0;
+    opacity: 1;
+  }
+
+  .source-icon {
+    position: absolute;
+    bottom: 25%;
+    left: 5%;
+    transform: translate(0%, 0%);
+    max-width: 2rem;
+    max-height: 2rem;
+    margin: 0;
+    opacity: 0.7;
+    fill: #1db954;
+    background-color: var(--background-base);
+    border-radius: 50%;
+  }
+
+  .essential-info{
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0.20rem;
+
+    .thumbnail-container {
+      position: relative;
+      object-fit: cover;
+      margin-left: 0px !important;
+
+      .thumbnail {
+        width: 10em;
+        height: 10em;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .play-icon {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -25,106 +67,61 @@
         max-height: 1.5rem;
         cursor: pointer;
         margin: 0;
-        opacity: 1;
+        opacity: 0;
+      }
     }
 
-    .source-icon {
-        position: absolute;
-        bottom: 25%;
-        left: 5%;
-        transform: translate(0%, 0%);
-        max-width: 2rem; 
-        max-height: 2rem; 
-        margin: 0;
-        opacity: 0.7;
-        fill: #1db954;
-        background-color: var(--background-base);
-        border-radius: 50%;
-    }
+    .details {
+      max-width: 10em;
 
-    .essential-info{
-        display: grid;
-        align-items: center;
-        justify-content: space-between;
-        margin-left: 0.20rem;
-        .thumbnail-container {
-            position: relative;
-            /* margin-right: 1rem; */
-            object-fit: cover;
-            margin-left: 0px !important;
-            
-            .thumbnail {
-                width: 10em;
-                height: 10em; 
-                object-fit: cover;
-                border-radius: 10px;
-            }
-            .play-icon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                max-width: 1.5rem;
-                max-height: 1.5rem;
-                cursor: pointer;
-                margin: 0;
-                opacity: 0;
-            }
-        }
-        
-        .details {
-            /* max-width: 28em; */
-            max-width: 10em;
-            .name {
-                color: var(--text-base);
-                font-size: 1.2rem;
-                overflow: hidden; /* Hide any overflowing content */
-                text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
-            }
-            .artist {
-                color: var(--text-subdued);
-                font-size: 1rem;
-                overflow: hidden; /* Hide any overflowing content */
-                text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
-            }
-            overflow: hidden; /* Hide any overflowing content */
-            text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
-            white-space: nowrap;
-        }
-    }
+      .name {
+        color: var(--text-base);
+        font-size: 1.2rem;
+        overflow: hidden; /* Hide any overflowing content */
+        text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
+      }
 
+      .artist {
+        color: var(--text-subdued);
+        font-size: 1rem;
+        overflow: hidden; /* Hide any overflowing content */
+        text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
+      }
 
-    
-    
-    .stats {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .options-icon {
-            max-width: 1.15rem;
-            max-height: 1.15rem;
-            cursor: pointer;
-            margin-right: 0.5rem; 
-            margin-left: 0;
-            opacity: 0;
-            position: absolute;
-            top: 3rem;
-            right: 1rem;
-            rotate: 90deg;
-        }
+      overflow: hidden; /* Hide any overflowing content */
+      text-overflow: ellipsis; /* Display an ellipsis (...) for the truncated text */
+      white-space: nowrap;
     }
+  }
 
-    .options {
-        top: 3rem;
-        right: 2.5rem;
-        position: absolute;
+  .stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .options-icon {
+      max-width: 1.15rem;
+      max-height: 1.15rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 3rem;
+      right: 1rem;
+      rotate: 90deg;
     }
+  }
+
+  .options {
+    top: 3rem;
+    right: 2.5rem;
+    position: absolute;
+  }
 }
 
-
-
 .spotify-playlist-preview:hover {
-    .source-icon {
-        opacity: 1;
-    }
+  .source-icon {
+    opacity: 1;
+  }
 }

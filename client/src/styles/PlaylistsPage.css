@@ -1,16 +1,11 @@
 .playlists-page {
   background-color: var(--background-base);
   min-height: 100vh;
-  /* display: flex; */
-  /* flex-direction: column; */
   align-items: center;
-  /* justify-content: center; */
   padding: 20px;
   font-size: calc(10px + 2vmin);
   color: var(--text-base);
-  /* padding-left: 250px; */
 }
-
 
 .playlists-page .adder {
   position: relative;
@@ -63,8 +58,6 @@
   }
 }
 
-
-
 .playlists-page .add-icon {
   fill: var(--text-base);
   stroke: var(--text-subdued);
@@ -73,7 +66,6 @@
   margin-right: 0.5em;
   transform: translateX(.25em); /* Move the add icon to the horizontal center */
 }
-
 
 .creator-dialog-overlay {
   z-index: 10;

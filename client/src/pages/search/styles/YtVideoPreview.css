@@ -1,189 +1,184 @@
 .youtube-preview {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--background-base);
+  justify-content: space-between;
+  padding: 0.5rem;
+  transition: border-color 0.3s; /* Add transition for smooth effect */
+  font-size: 1.1rem;
+  max-width: 30em;
+  height: 9rem;
+  flex-grow: 1;
+  font-size: 17px;
+  flex:1;
+  flex-basis: 25%;
+
+  .essential-info{
     display: flex;
     align-items: center;
-    background-color: var(--background-base);
     justify-content: space-between;
-    padding: 0.5rem;
-    transition: border-color 0.3s; /* Add transition for smooth effect */
-    font-size: 1.1rem;
-    /* min-width: 250px;   */
-    max-width: 30em;
-    /* max-height: 15rem; */
-    height: 9rem;
-    flex-grow: 1;
-    font-size: 17px;
-    flex:1;
-    /* max-width: 600px; */
-    flex-basis: 25%;
 
-    .essential-info{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .thumbnail-container {
-            position: relative;
-            margin-right: 1rem;
-            
-            .thumbnail {
-                width: 14.4em;
-                height: 8.08em; 
-                object-fit: cover;
-                border-radius: 20px;
-            }
-            .play-icon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                max-width: 1.5rem;
-                max-height: 1.5rem;
-                cursor: pointer;
-                margin: 0;
-                opacity: 0;
-            }
-        }
-        
-        .details {
-            display: grid;
-            align-items: column;
-            justify-content: space-between;
-            /* max-width: 28em; */
-            max-width: 15vw;
-            .name {
-                color: var(--text-base);
-                font-size: 22px;
-                overflow: hidden; /* Hide any overflowing content */
-                text-overflow: ellipsis;
-            }
-            .views {
-                color: var(--text-subdued);
-                overflow: hidden; /* Hide any overflowing content */
-                text-overflow: ellipsis;
-            }
-            .artist-name {
-                color: var(--text-subdued);
-                overflow: hidden; /* Hide any overflowing content */
-                text-overflow: ellipsis;
-            }
-            white-space: nowrap;
-        }
+    .thumbnail-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .thumbnail {
+        width: 14.4em;
+        height: 8.08em;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+
+      .play-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 1.5rem;
+        max-height: 1.5rem;
+        cursor: pointer;
+        margin: 0;
+        opacity: 0;
+      }
     }
 
+    .details {
+      display: grid;
+      align-items: column;
+      justify-content: space-between;
+      max-width: 15vw;
+
+      .name {
+        color: var(--text-base);
+        font-size: 22px;
+        overflow: hidden; /* Hide any overflowing content */
+        text-overflow: ellipsis;
+      }
+
+      .views {
+        color: var(--text-subdued);
+        overflow: hidden; /* Hide any overflowing content */
+        text-overflow: ellipsis;
+      }
+
+      .artist-name {
+        color: var(--text-subdued);
+        overflow: hidden; /* Hide any overflowing content */
+        text-overflow: ellipsis;
+      }
+
+      white-space: nowrap;
+    }
+  }
+
+  .essential-info .details .views {
+    position: inherit;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+
+  .views {
+    display: none;
+  }
+
+  @media (max-width: 1499px) {
     .essential-info .details .views {
-        /* display: none; */
-        /* position: relative; */
-        position: inherit;
-        /* display: none; */
-        display: flex;
-        align-items: inherit;
-        justify-content: inherit;
+      position: inherit;
+      display: inherit;
+      align-items: inherit;
+      justify-content: inherit;
     }
+
     .views {
-        display: none;
+      display: none;
+    }
+  }
+
+  @media (max-width: 1399px) {
+    .essential-info .thumbnail-container  .thumbnail {
+      width: 10.8em;
+      height: 6.06em;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 1099px) {
+    .essential-info .thumbnail-container  .thumbnail {
+      width: 8.28em;
+      height: 4.646em;
+      object-fit: cover;
+    }
+  }
+
+
+  @media (max-width: 619px) {
+    .essential-info .thumbnail-container  .thumbnail {
+      width: 7.2em;
+      height: 4.04em;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 926px) {
+    .essential-info .details {
+      max-width: 25vw;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .essential-info .details {
+      max-width: 20vw;
+    }
+  }
+
+  @media (max-width: 630px) {
+    .essential-info .details {
+      max-width: 40vw;
+    }
+  }
+
+
+
+  .stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .heart-icon {
+      max-width: 1.1rem;
+      max-height: 1.1rem;
+      cursor: pointer;
+      opacity: 0;
+
+      position: absolute;
+      bottom: 10%;
+      left: 90%;
     }
 
-    @media (max-width: 1499px) {
-        .essential-info .details .views {
-            /* display: none; */
-            /* position: relative; */
-            position: inherit;
-            display: inherit;
-            align-items: inherit;
-            justify-content: inherit;
-        }
-        .views {
-            display: none;
-        }
+    .duration {
+      text-align: center;
+      color: var(--text-subdued);
+      margin: 0 1.5rem;
+
+
+      position: absolute;
+      bottom: 1.5vw;
+      left: 0vw;
     }
 
-    @media (max-width: 1399px) {
-        .essential-info .thumbnail-container  .thumbnail {
-            width: 10.8em;
-            height: 6.06em; 
-            object-fit: cover;
-        }
+    .options-icon {
+      max-width: 1.15rem;
+      max-height: 1.15rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-left: 0;
+      opacity: 0;
+      position: absolute;
+      bottom: 80%;
+      left: 90%;
+      rotate: 90deg;
     }
-
-    @media (max-width: 1099px) {
-        .essential-info .thumbnail-container  .thumbnail {
-            width: 8.28em;
-            height: 4.646em; 
-            object-fit: cover;
-        }
-    }
-
-
-    @media (max-width: 619px) {
-        .essential-info .thumbnail-container  .thumbnail {
-                    width: 7.2em;
-                    height: 4.04em; 
-                    object-fit: cover;
-        }
-    }
-    
-    @media (max-width: 926px) {
-        .essential-info .details {
-            max-width: 25vw;
-        }
-    }
-
-    @media (max-width: 800px) {
-        .essential-info .details {
-            max-width: 20vw;
-        }
-    }
-
-    @media (max-width: 630px) {
-        .essential-info .details {
-            max-width: 40vw;
-        }
-    }
-
-    
-    
-    .stats {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .heart-icon {
-            max-width: 1.1rem;
-            max-height: 1.1rem;
-            cursor: pointer;
-            opacity: 0;
-
-
-            position: absolute;
-            bottom: 10%;
-            left: 90%;
-        }
-    
-        .duration {
-            text-align: center;
-            color: var(--text-subdued);
-            margin: 0 1.5rem;
-
-
-            position: absolute;
-            bottom: 1.5vw;
-            left: 0vw;
-        }
-        
-        .options-icon {
-            max-width: 1.15rem;
-            max-height: 1.15rem;
-            cursor: pointer;
-            margin-right: 0.5rem; 
-            margin-left: 0;
-            opacity: 0;
-            position: absolute;
-            bottom: 80%;
-            left: 90%;
-            rotate: 90deg;
-        }
-    }
-
-  
-
-    
+  }
 }

@@ -43,7 +43,6 @@ const PlaylistPage = () => {
 
     // Check if searchTerm is present in the playlist name or artist name
     const searchTermInName = playlist.name.toLowerCase().includes(searchTerm.toLowerCase());
-    console.log(playlist);
     const searchTermInArtist = playlist.artist.toLowerCase().includes(searchTerm.toLowerCase());
     return searchTermInName || searchTermInArtist;
   });
@@ -180,7 +179,5 @@ const PlaylistPage = () => {
     </div>
   );
 };
-
-
 
 export default PlaylistPage;

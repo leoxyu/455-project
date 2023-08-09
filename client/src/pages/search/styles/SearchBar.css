@@ -1,71 +1,70 @@
 /* SearchBar.css */
 
 .search-bar {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-elevated-base);
-    padding: 0.5rem;
-    border-radius: 20px;
-    border: 1px solid var(--background-elevated-base); /* Set initial border color */
-    transition: border-color 0.3s; /* Add transition for smooth effect */
-    max-width: 20rem;
-  }
-  
-  .search-bar:hover {
-    border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
-    background-color: var(--background-elevated-highlight);
-  }
+  display: flex;
+  align-items: center;
+  background-color: var(--background-elevated-base);
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--background-elevated-base); /* Set initial border color */
+  transition: border-color 0.3s; /* Add transition for smooth effect */
+  max-width: 20rem;
+}
 
-  .search-bar:hover .search-icon {
-    fill: var(--text-base); /* Change fill color to lighter gray on hover */
-  }
+.search-bar:hover {
+  border-color: var(--essential-subdued); /* Change border color to lighter gray on hover */
+  background-color: var(--background-elevated-highlight);
+}
 
-  .search-bar:hover .clear-button {
-    fill: var(--text-base); /* Change fill color to lighter gray on hover */
-  }
-  
-  
-  .search-bar input {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    padding: 0.5rem;
-    background-color: transparent;
-    color: var(--text-base);
-    height: 1.5rem; /* Adjust the height to scale the icon */
-    box-sizing: border-box;
-  }
-  
-  .search-bar .search-icon {
-    width: 2rem; /* Adjust the width to scale the icon */
-    height: 2rem; /* Adjust the height to scale the icon */
-    margin-right: 0.5rem; /* Adjust the margin as needed */
-    fill: var(--text-subdued); /* Set the initial fill color of the icon */
-    transition: fill 0.3s; /* Add transition for smooth effect */
-  }
-  
-  .search-bar .clear-button {
-    width: 2.25rem; /* Adjust the width to scale the icon */
-    height: 2.25rem; /* Adjust the height to scale the icon */
-    margin-left: 0.5rem; /* Adjust the margin as needed */
-    fill: var(--text-subdued); /* Set the initial fill color of the icon */
-    transition: fill 0.3s; /* Add transition for smooth effect */
-    background-color: transparent;
-    border-color: transparent;
-  }
-  
+.search-bar:hover .search-icon {
+  fill: var(--text-base); /* Change fill color to lighter gray on hover */
+}
 
-  
-  .search-bar input::placeholder {
-    color: var(--text-subdued);
-    opacity: 0.8;
-  }
-  
+.search-bar:hover .clear-button {
+  fill: var(--text-base); /* Change fill color to lighter gray on hover */
+}
 
-  .search-bar:hover .search-icon {
-    fill: var(--text-base); /* Change fill color to lighter gray on hover */
-  }
+.search-bar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  color: var(--text-base);
+  height: 1.5rem; /* Adjust the height to scale the icon */
+  box-sizing: border-box;
+}
+
+.search-bar .search-icon {
+  width: 2rem; /* Adjust the width to scale the icon */
+  height: 2rem; /* Adjust the height to scale the icon */
+  margin-right: 0.5rem; /* Adjust the margin as needed */
+  fill: var(--text-subdued); /* Set the initial fill color of the icon */
+  transition: fill 0.3s; /* Add transition for smooth effect */
+}
+
+.search-bar .clear-button {
+  width: 2.25rem; /* Adjust the width to scale the icon */
+  height: 2.25rem; /* Adjust the height to scale the icon */
+  margin-left: 0.5rem; /* Adjust the margin as needed */
+  fill: var(--text-subdued); /* Set the initial fill color of the icon */
+  transition: fill 0.3s; /* Add transition for smooth effect */
+  background-color: transparent;
+  border-color: transparent;
+}
+
+
+
+.search-bar input::placeholder {
+  color: var(--text-subdued);
+  opacity: 0.8;
+}
+
+
+.search-bar:hover .search-icon {
+  fill: var(--text-base); /* Change fill color to lighter gray on hover */
+}
 
 
 @media (max-width: 367px) {

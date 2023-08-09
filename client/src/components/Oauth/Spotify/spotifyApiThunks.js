@@ -14,4 +14,3 @@ export const spotifyProfileThunk = createAsyncThunk(
     return await spotifyGetProfile();
   }
 );
-

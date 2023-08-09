@@ -25,10 +25,11 @@ const register = async (username, password) => {
       pass: password,
     })
   });
+
   return response.json();
 };
 
 export default {
   login,
   register
-}
+};

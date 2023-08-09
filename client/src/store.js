@@ -8,7 +8,6 @@ import searchReducer from './pages/search/redux/reducer';
 import youtubeApiReducer from './components/Oauth/youtubeApiReducer';
 import currentPlaylistReducer from './pages/current playlist/redux/currentPlaylistReducer';
 
-
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -21,4 +20,4 @@ export const store = configureStore({
     currentPlaylistPage: currentPlaylistReducer
   },
   devTools: true
-})
+});

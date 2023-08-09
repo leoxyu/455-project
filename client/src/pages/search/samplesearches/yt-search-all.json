@@ -1,41 +1,41 @@
 {
-    "videos": {
-        "items": [
-            {
-                "songID": "S5_5aYk4WMo",
-                "artist": "PlayOverwatch",
-                "name": "GENESIS – PART THREE: REBIRTH | OVERWATCH ANIME SHORT",
-                "type": "youtube",
-                "link": "https://youtube.com/watch?v=S5_5aYk4WMo",
-                "imageLink": "https://i.ytimg.com/vi/S5_5aYk4WMo/hqdefault.jpg",
-                "album": null,
-                "duration": "6:59",
-                "releaseDate": "2023-7-20",
-                "views": 400874,
-                "genres": [
-                    "gaming"
-                ]
-            }
-        ],
-        "next": "4ba3c16a-0e4e-45e8-8dbc-c0369774e775"
-    },
-    "playlists": {
-        "items": [
-            {
-                "dateCreated": null,
-                "description": null,
-                "name": "KPOP 2023 - K-POP Songs 2023 - KPop Playlist",
-                "author": "#NewMusic Top Charts",
-                "isFavorited": false,
-                "coverImageURL": "https://i.ytimg.com/vi/7HDeem-JaSY/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDNu4yr-ZzE2TCs3TS0HfgWiN8sqg",
-                "songs": "PLOHoVaTp8R7dfrJW5pumS0iD_dhlXKv17",
-                "originId": "PLOHoVaTp8R7dfrJW5pumS0iD_dhlXKv17",
-                "isAlbum": false,
-                "previewDetails": "(여자)아이들((G)I-DLE) - '퀸카 (Queencard)' Official Music Video • 3:31",
-                "duration": 150,
-                "type": "youtube"
-            }
-        ],
-        "next": "9043db20-aa75-442e-b228-d72f9afce33f"
-    }
+  "videos": {
+    "items": [
+      {
+        "songID": "S5_5aYk4WMo",
+        "artist": "PlayOverwatch",
+        "name": "GENESIS – PART THREE: REBIRTH | OVERWATCH ANIME SHORT",
+        "type": "youtube",
+        "link": "https://youtube.com/watch?v=S5_5aYk4WMo",
+        "imageLink": "https://i.ytimg.com/vi/S5_5aYk4WMo/hqdefault.jpg",
+        "album": null,
+        "duration": "6:59",
+        "releaseDate": "2023-7-20",
+        "views": 400874,
+        "genres": [
+          "gaming"
+        ]
+      }
+    ],
+    "next": "4ba3c16a-0e4e-45e8-8dbc-c0369774e775"
+  },
+  "playlists": {
+    "items": [
+      {
+        "dateCreated": null,
+        "description": null,
+        "name": "KPOP 2023 - K-POP Songs 2023 - KPop Playlist",
+        "author": "#NewMusic Top Charts",
+        "isFavorited": false,
+        "coverImageURL": "https://i.ytimg.com/vi/7HDeem-JaSY/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDNu4yr-ZzE2TCs3TS0HfgWiN8sqg",
+        "songs": "PLOHoVaTp8R7dfrJW5pumS0iD_dhlXKv17",
+        "originId": "PLOHoVaTp8R7dfrJW5pumS0iD_dhlXKv17",
+        "isAlbum": false,
+        "previewDetails": "(여자)아이들((G)I-DLE) - '퀸카 (Queencard)' Official Music Video • 3:31",
+        "duration": 150,
+        "type": "youtube"
+      }
+    ],
+    "next": "9043db20-aa75-442e-b228-d72f9afce33f"
+  }
 }

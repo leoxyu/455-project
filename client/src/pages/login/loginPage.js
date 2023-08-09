@@ -7,12 +7,8 @@ import '../../styles/LoginPage.css';
 import { loginAsync, registerAsync } from './/redux/thunks'
 import unifiLogo from '../../images/unifilogo.svg';
 
-
 import { ReactComponent as YoutubeIcon } from "../../images/youtube.svg"
 import { ReactComponent as SpotifyIcon } from "../../images/spotify.svg"
-
-// Spotify API shit
-import { getHashParams } from '../../components/Oauth/Spotify/spotifyUtil';
 
 // spotify
 import { spotifyLoginThunk } from '../../components/Oauth/Spotify/spotifyApiThunks';
@@ -20,8 +16,7 @@ import { setAccessTokenSpotify, setRefreshTokenSpotify, setSpotifyAuthError } fr
 
 // youtube
 import { youtubeLoginThunk } from '../../components/Oauth/Youtube/youtubeApiThunks';
-import { setAccessTokenYoutube, setRefreshTokenYoutube, setYoutubeAuthError } from '../../components/Oauth/youtubeApiReducer';
-
+import { setAccessTokenYoutube } from '../../components/Oauth/youtubeApiReducer';
 
 const LOGIN_STATUS = {
   LogInSuccess: "logInSuccess",
@@ -52,8 +47,6 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
 
-
-
   // ===============================================================================================
   // OAuth youtube
   // ===============================================================================================
@@ -62,37 +55,28 @@ const LoginPage = () => {
     const urlParams = new URLSearchParams(window.location.hash);
 
     const youtube_token_session = sessionStorage.getItem(SESSION_STORAGE_KEYS.youtubeAccessToken);
-    // const youtube_rtoken_session = sessionStorage.getItem(SESSION_STORAGE_KEYS.youtubeRefreshToken);
 
     if (youtube_token_session) {
       dispatch(setAccessTokenYoutube(youtube_token_session));
-      // dispatch(setRefreshTokenYoutube(youtube_rtoken_session));
       setYoutubeLoggedIn(true);
     }
 
     const access_token = urlParams.get('access_token');
-    // const refresh_token = urlParams.get('refresh_token'); google Oauth doesn't send you a refresh token idk
     const token_type = urlParams.get('token_type');
     const error = urlParams.get('error');
 
-    console.log('youtube OAuth token type: ', token_type);
-
     if (error) {
-      console.log("youtube OAuth error: ", error);
+      console.log(error);
       return;
     } else if (access_token && token_type === 'Bearer') {
       dispatch(setAccessTokenYoutube(access_token));
-      // dispatch(setAccessTokenYoutube(refresh_token));
-      // dispatch(setYoutubeAuthError(error));
 
       sessionStorage.setItem(SESSION_STORAGE_KEYS.youtubeAccessToken, access_token);
-      // sessionStorage.setItem(SESSION_STORAGE_KEYS.youtubeRefreshToken, refresh_token);
 
       setYoutubeLoggedIn(true);
-      console.log('youtube successfully logged in');
 
     } else {
-      console.log("youtube OAuth tokens not found in Uri");
+      console.log("Youtube OAuth tokens not found in Uri");
     }
 
   }, []);
@@ -123,14 +107,11 @@ const LoginPage = () => {
     const access_token = urlParams.get('access_token');
     const refresh_token = urlParams.get('refresh_token');
     const type = urlParams.get('type');
-    // const state = urlParams.get('state');
 
     if (!error) {
-      console.log("not logged in yet.");
-
+      console.log("Not logged in yet.");
     } else if (error === "ERROR_INVALID_TOKEN" && type) {
       console.log("invalid spotify token recieved during OAuth");
-
     } else if (type === "spotify") {
       dispatch(setAccessTokenSpotify(access_token));
       dispatch(setRefreshTokenSpotify(refresh_token));
@@ -140,7 +121,6 @@ const LoginPage = () => {
       sessionStorage.setItem(SESSION_STORAGE_KEYS.spotifyRefreshToken, refresh_token);
 
       setSpotifyLoggedIn(true);
-      console.log('spotify successfully logged in');
 
     } else {
       console.log("spotify OAuth tokens not found in Uri");
@@ -153,7 +133,6 @@ const LoginPage = () => {
     const response = dispatch(spotifyLoginThunk());
 
     response.then((reply) => {
-      console.log(reply.payload);
       window.location.href = reply.payload.redirect_url;
     });
   };
@@ -162,13 +141,12 @@ const LoginPage = () => {
     const response = dispatch(youtubeLoginThunk());
 
     response.then((reply) => {
-      console.log(reply.payload);
       window.location.href = reply.payload.redirect_url;
     });
   };
 
   // ===============================================================================================
-  //                                                                                           
+  //
   // ===============================================================================================
 
   const handleLogin = (event) => {
@@ -222,7 +200,6 @@ const LoginPage = () => {
   const handleCancelCreateAccount = () => {
     setShowCreateAccount(false);
   };
-
 
   const loggedIn = spotifyLoggedIn && youtubeLoggedIn;
 
