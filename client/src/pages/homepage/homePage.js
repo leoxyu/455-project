@@ -71,11 +71,11 @@ const HomePage = () => {
     <div className={`App-header`}>
       <h1>Welcome {userId}!</h1>
       {/* <PlaylistPage /> */}
-      <div style={{display:'flex'}}>
-      <div className='home-preview-list' style={{width:'50rem'}}>
+      <div >
+      <div className='home-preview-list' style={{width:'50vw'}}>
       <ResultsList collection={historySongs} selectedFilter="Recently Played" stopPagination={true}> </ResultsList>
       </div>
-      <div className='home-preview-list'>
+      <div className='home-preview-list'style={{width:'50vw'}}>
       <ResultsList collection={recommendedSongs} selectedFilter="Recommended" stopPagination={true}> </ResultsList>
       </div>
       </div>
