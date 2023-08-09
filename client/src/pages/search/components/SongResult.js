@@ -11,24 +11,18 @@ import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI } from '../../../typeConstants';
 import '../styles/Preview.css'
 import '../styles/YtVideoPreview.css';
 import '../styles/SpSongPreview.css';
-// import { useSelector, useDispatch } from 'react-redux';
 import { setPlaylist } from '../../../components/player/PlayerReducer';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { TYPE_TRACK } from '../../../typeConstants';
 
 const { v4: uuid } = require('uuid');
 
 const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songObject }) => {
-
   const currSongID = useSelector(state => state.currentPlaylistPage.currSongID);
 
   const dispatch = useDispatch();
 
-
-
   const handlePlay = () => {
-
     dispatch(setPlaylist({
       playlist: {
         id: uuid(),
@@ -45,7 +39,6 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
       },
       startFromTop: true,
     }));
-    // Handle play button click
   };
 
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -91,7 +84,7 @@ const SongResult = ({ className,  isFavorited, handleAddClick = () => { }, songO
         <div className="thumbnail-container">
           <img className="thumbnail" src={songObject.imageLink} alt="Track Thumbnail" />
           { isCurrentlyPlaying ?
-          <img className="playing-icon" src={PlayingIcon}/>
+          <img className="playing-icon" src={PlayingIcon} alt=""/>
           :
           <PlayIcon className="play-icon" onClick={handlePlay} />}
         </div>

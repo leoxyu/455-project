@@ -12,7 +12,6 @@ const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 
-
 playlistsRouter.post('/', async (req, res, next) => {
   const pl = {
     playlistID: uuid(),
@@ -34,12 +33,7 @@ playlistsRouter.post('/', async (req, res, next) => {
   }
 });
 
-
 function getTracksHelper(access_token, next, playlist) {
-
-  // console.log("\r\ninside getTrackHelper");
-  // console.log("\r\nplaylist.isAlbum: ", playlist.isAlbum);
-
   // if next link is null, dont do anything
   return next ? fetch(next, {
     method: "GET",
@@ -51,9 +45,7 @@ function getTracksHelper(access_token, next, playlist) {
       return Promise.reject(response);
     }
   }).then(data => {
-    // console.log(data);
     for (const i of data.items) {
-
       if (playlist.isAlbum) {
         // playlist is TYPE_ALBUM
         const parsedTrack = {
@@ -67,7 +59,6 @@ function getTracksHelper(access_token, next, playlist) {
           duration: i.duration_ms,
           releaseDate: playlist.dateCreated,
         };
-        // console.log(parsedTrack);
         playlist.songs.push(parsedTrack);
       } else {
         // playlist is TYPE_PLAYLIST
@@ -82,19 +73,18 @@ function getTracksHelper(access_token, next, playlist) {
           duration: i.track.duration_ms,
           releaseDate: i.track.album.release_date,
         };
-        // console.log(parsedTrack);
         playlist.songs.push(parsedTrack);
       }
-
     }
+
     if (data.next) {
       return getTracksHelper(access_token, data.next, playlist);
     } else {
       return playlist;
     }
   }) // don't catch, let error bubble up to route handler
-    :
-    playlist;
+  :
+  playlist;
 }
 
 // TODO: test to make sure this doesn't get rate-limited on reasonably sized playlists
@@ -103,9 +93,8 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   const { playlists, accessToken, authorID } = req.body;
 
   Promise.allSettled(playlists?.map(playlist => {
-
     const type = playlist.playlistType;
-  
+
     let queryUrl;
 
     if (type === TYPE_PLAYLIST) queryUrl = `https://api.spotify.com/v1/playlists/${playlist.id}`;
@@ -142,7 +131,6 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
       duration: data.tracks?.total,
     })
     ).then(async (playlist) => {
-      // console.log(playlist);
       const result = await playlistsCol.insertOne(playlist);
       console.log(`inserted ${result.insertedId}`);
       return playlist.originId; // useful for frontend retry
@@ -157,7 +145,6 @@ playlistsRouter.post('/importManySpotify', async (req, res, next) => {
   // NOTE: no catch, Promise.allSettled never rejects.
 });
 
-// ?lastId=ObjectId&deep=false&sortField=dateCreated&sortDir=-1
 playlistsRouter.get('/', async (req, res, next) => {
   try {
     let { lastId, isDeep, sortDir, sortField, authorID } = req.query;
@@ -221,9 +208,11 @@ playlistsRouter.put('/:playlistID', async (req, res, next) => {
   try {
     const options = { returnDocument: "after" };
     const result = await playlistsCol.findOneAndUpdate(filter, updateDocument, options);
+
     if (result.lastErrorObject && result.lastErrorObject.updatedExisting === false) {
       return res.status(404).json({ message: "Invalid request body" });
     }
+
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
@@ -232,6 +221,7 @@ playlistsRouter.put('/:playlistID', async (req, res, next) => {
     if (error.codeName === "DocumentValidationFailure") {
       return res.status(400).send(error);
     }
+
     return res.status(500).send(error);
   }
 });
@@ -240,9 +230,11 @@ playlistsRouter.get('/:playlistID', async (req, res, next) => {
   try {
     const { playlistID } = req.params;
     const result = await playlistsCol.findOne({ playlistID });
+
     if (!result) {
       return res.status(404).send('playlist not found');
     }
+
     return res
       .setHeader('Content-Type', 'application/json')
       .status(200)
@@ -271,19 +263,24 @@ playlistsRouter.post('/:playlistID/songs', async (req, res, next) => {
       songID: uuid(),
       ...req.body,
     };
+
     const result = await playlistsCol.updateOne(
       { playlistID },
       { $push: { songs: song } },
     );
+
     if (!result.modifiedCount) {
       return res.status(404).json({ message: `playlist ${playlistID} not found` });
     }
+
     return res.status(200).send({ playlistID, song });
   } catch (e) {
     console.log(e);
+
     if (e.codeName === "DocumentValidationFailure" || e.code === 121) {
       return res.status(400).send(e);
     }
+
     return res.status(500).send(e);
   }
 });
@@ -302,6 +299,7 @@ playlistsRouter.delete('/:playlistID/songs/:songID', async (req, res, next) => {
     } else if (!result.modifiedCount) {
       return res.status(404).json({ message: `song ${songID} not found` });
     }
+
     return res.status(200).send({ playlistID, songID });
   } catch (err) {
     console.log(err);

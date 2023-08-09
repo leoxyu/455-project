@@ -1,23 +1,24 @@
 /* CreateAccount.css */
+
 .create-account {
-    background-color: #121212;
-    color: white;
-    padding: 20px;
-    margin: 20px 0;
-  }
-  
-  .create-account p {
-    font-family: "Abadi", sans-serif;
-    font-weight: normal;
-    font-size: 18px;
-    color: rgba(236, 236, 236, 0.829);
-  }
-  
-  .create-account button {
-    background-color: #78d3ca;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
+  background-color: #121212;
+  color: white;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.create-account p {
+  font-family: "Abadi", sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: rgba(236, 236, 236, 0.829);
+}
+
+.create-account button {
+  background-color: #78d3ca;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}

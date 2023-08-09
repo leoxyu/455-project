@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './PlaylistGrid.css'; // Import the CSS file for styling
+import './PlaylistGrid.css';
 import '../../styles/App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {getPlaylistsAsync} from './redux/thunks';

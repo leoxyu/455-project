@@ -17,8 +17,6 @@ import Options2 from './Options2';
 import Options3 from './Options3';
 import thumbnailImage from '../../../images/album-placeholder.png'
 import { TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_UNIFI, TYPE_PLAYLIST, TYPE_ALBUM } from '../../../typeConstants';
-
-
 import { OPTIONS_TYPE2 } from '../../../typeConstants';
 
 const RESULT_TYPES = {
@@ -26,11 +24,9 @@ const RESULT_TYPES = {
   SPOTIFY_ALBUM:TYPE_SPOTIFY + TYPE_ALBUM,
   YOUTUBE_PLAYLIST:TYPE_YOUTUBE + TYPE_PLAYLIST,
   UNIFI_PLAYLIST:TYPE_UNIFI,
-};  
+};
 
 const PlaylistResult = ({className, songs = [], deleteOnClick, editOnClick, saveOnClick, optionType, playlistObject }) => {
-
-  
   const determineType = () => {
     // no handling required
     if (optionType === OPTIONS_TYPE2) {

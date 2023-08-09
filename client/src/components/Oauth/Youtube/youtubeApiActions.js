@@ -27,9 +27,7 @@ export async function youtubeGetPlaylists(access_token) {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-
   });
 
   return await result.json();
 }
-

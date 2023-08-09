@@ -4,7 +4,7 @@ import {createPlaylistAsync} from '../../../components/home/redux/thunks';
 import '../../../styles/variables.css';
 import '../styles/playlistCreator.css'
 
-import {TYPE_UNIFI, TYPE_SPOTIFY, TYPE_YOUTUBE, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_TRACK, OPTIONS_TYPE3, OPTIONS_TYPE2} from '../../../typeConstants'; 
+import {TYPE_UNIFI, TYPE_PLAYLIST } from '../../../typeConstants';
 
 const PlaylistCreator = ({onClose=()=>{}}) => {
   const [playlistName, setPlaylistName] = useState('');
@@ -36,16 +36,12 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
         type: TYPE_PLAYLIST,
         source: TYPE_UNIFI,
         duration: 0,
-
-
-
     }
     dispatch(createPlaylistAsync(data));
     setPlaylistName('');
     onClose();
     //  redirect to the playlist view page
   };
-
 
   const calculateTextareaHeight = (element) => {
     element.style.height = 'auto';
@@ -62,41 +58,36 @@ const PlaylistCreator = ({onClose=()=>{}}) => {
       <h2 className='playlist-creator-title'>Create New Playlist</h2>
 
       <div className='playlist-creator-body'>
-
-      <div className='playlist-creator-input-container'>
-      <label htmlFor="titleField"
-      className={`placeholder ${playlistName !== '' ? 'active' : ''}`}>
-        Title
-      </label>
-      <input
-        className='playlist-creator-input'
-        type="text"
-        value={playlistName}
-        onChange={handleNameChange}
-        id="titleField"
-        // placeholder="Title"
-      />
-
-      </div>
-      <div className='playlist-creator-input-container'>
-      <label htmlFor="descriptionField"
-      className={`placeholder ${playlistDescription !== '' ? 'active' : ''}`}>
-      Description
-      </label>
-      <textarea
-        className='playlist-creator-input description'
-        // type="text"
-        value={playlistDescription}
-        onChange={handleDescriptionChange}
-        // placeholder="Description"
-        id='descriptionField'
-        onInput={handleInputResize}
-      />
-      </div>
-      <div className='playlist-creator-buttons'>
-      <button className='creator-button' onClick={onClose}>Cancel</button>
-      <button className='creator-button' onClick={createPlaylist}>Create</button>
-      </div>
+        <div className='playlist-creator-input-container'>
+          <label htmlFor="titleField"
+          className={`placeholder ${playlistName !== '' ? 'active' : ''}`}>
+            Title
+          </label>
+          <input
+            className='playlist-creator-input'
+            type="text"
+            value={playlistName}
+            onChange={handleNameChange}
+            id="titleField"
+          />
+        </div>
+        <div className='playlist-creator-input-container'>
+          <label htmlFor="descriptionField"
+          className={`placeholder ${playlistDescription !== '' ? 'active' : ''}`}>
+          Description
+          </label>
+          <textarea
+            className='playlist-creator-input description'
+            value={playlistDescription}
+            onChange={handleDescriptionChange}
+            id='descriptionField'
+            onInput={handleInputResize}
+          />
+        </div>
+        <div className='playlist-creator-buttons'>
+          <button className='creator-button' onClick={onClose}>Cancel</button>
+          <button className='creator-button' onClick={createPlaylist}>Create</button>
+        </div>
       </div>
     </div>
   );

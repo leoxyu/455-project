@@ -3,15 +3,10 @@ var router = express.Router();
 
 const querystring = require('querystring');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 
 const client_id = '27604080756-2btdk60i5tahi5i4687pokqj56bavkcb.apps.googleusercontent.com';
 const client_secret = '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'; // important to protect this one
 const callback_uri = 'http://localhost:3000/login';
-
-let access_token = null;
-let refresh_token = null;
-let youtube_profile = null;
 
 const { MongoClient, ObjectId } = require("mongodb");
 const { DATABASE_NAME, PLAYLIST_COLLECTION_TEST } = require("../shared/mongoConstants");
@@ -22,7 +17,6 @@ const client = new MongoClient(process.env.MONGO_URI);
 const database = client.db(DATABASE_NAME);
 const playlistsCol = database.collection(PLAYLIST_COLLECTION_TEST);
 
-// const querystring = require('querystring');
 require('dotenv').config();
 
 router.use(cors());
@@ -44,7 +38,6 @@ router.get('/login', function (req, res) { // handle login request from the hype
 });
 
 router.get('/playlists', async (req, res) => {
-
   const accessToken = req.headers.authorization;
   if (!accessToken || !accessToken.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'Invalid or missing access token' });
@@ -62,11 +55,11 @@ router.get('/playlists', async (req, res) => {
       } else {
         console.log(`playlist ${playlist.playlistID} already exists in database`);
       }
-
     } catch (error) {
       console.log(error);
     }
   }
+
   return res.send({});
 });
 
@@ -165,6 +158,7 @@ function formatSong(
   releaseDate
 ) {
   const formattedReleaseDate = reformatTime(releaseDate);
+
   return {
     songID: songID,
     artist: artist,
@@ -211,6 +205,4 @@ function formatPlaylist(
   };
 }
 
-
-
-module.exports = router;  
+module.exports = router;

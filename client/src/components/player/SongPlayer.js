@@ -8,7 +8,6 @@ import { Player } from "./Player";
 import { setCurrSongIdPlaylistPage } from "../../pages/current playlist/redux/currentPlaylistReducer";
 
 export default function SongPlayer() {
-
   const dispatch = useDispatch();
 
   const playlist = useSelector(state => state.player.playlist);

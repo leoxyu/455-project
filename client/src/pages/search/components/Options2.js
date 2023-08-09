@@ -9,6 +9,6 @@ const Options2 = ({ open, deleteOnClick, editOnClick, isFavorited, handleSetFavo
         <div className="options-item" onClick={(e) => { e.preventDefault(); deleteOnClick(); }}>Delete</div>
     </div>
   );
-}
+};
 
 export default Options2;

@@ -1,26 +1,26 @@
 .options-container.active {
-    outline: none;
-    position: sticky;
-    z-index: 10;
-    background-color: rgb(49, 49, 49);
-    display: flex;
-    flex-direction: column;
-    border-radius: 2px;
-    max-width: 8rem;
+  outline: none;
+  position: sticky;
+  z-index: 10;
+  background-color: rgb(49, 49, 49);
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  max-width: 8rem;
 }
 
 .options-container.inactive {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-20px);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .options-item {
-    font-size: 14px;
-    padding: 8px 18px;
+  font-size: 14px;
+  padding: 8px 18px;
 }
 
 .options-item:hover {
-    cursor: pointer;
-    background-color: var(--background-tinted-base);
+  cursor: pointer;
+  background-color: var(--background-tinted-base);
 }
