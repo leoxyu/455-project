@@ -14,6 +14,8 @@
     "dotenv": "^16.3.1",
     "express": "~4.16.1",
     "lodash": "^4.17.21",
+    "ml-matrix": "^6.10.4",
+    "ml-pca": "^4.1.1",
     "mongodb": "^5.6.0",
     "morgan": "~1.9.1",
     "scrape-youtube": "^2.4.0",

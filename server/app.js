@@ -166,6 +166,7 @@ var spotifyRouter = require('./routes/spotify');
 var youtubeRouter = require('./routes/youtube');
 var youtubeSearchRouter = require('./routes/ytSearch');
 var spotifySearchRouter = require('./routes/spSearch');
+var historyRouter = require('./routes/history');
 
 var app = express();
 
@@ -190,5 +191,6 @@ app.use('/register', registerRouter);
 
 // search and playlists
 app.use('/playlists', playlistsRouter);
+app.use('/history', historyRouter);
 
 module.exports = app;

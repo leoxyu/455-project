@@ -13,6 +13,10 @@ export const getAuthorID = () => {
   return store.getState().login.authorID;
 };
 
+export const getAccessToken = () => {
+    return store.getState().spotify.access_token;
+}
+
 export const useLazyLoadSongs = (playlist, id, type=null, source=null) => {
   const [loading, setLoading] = useState(true);
   const firstLoad = useRef(true);
